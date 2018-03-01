@@ -53,6 +53,8 @@ void Airplane::land(Airport* airport) {
         cout << callsign << " is landing at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
         cout << callsign << " has landed at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
         cout << callsign << " is taxiing to Gate " << 1 << endl;
+
         cout << callsign << " is standing at Gate " << 1 << endl;
+        status = "Standing at gate";
     }
 }
