@@ -1,0 +1,96 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.cpp
+airplane.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.h
+iostream
+-
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.cpp
+airport.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h
+iostream
+-
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/main.cpp
+iostream
+-
+tinystr.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
+tinyxml.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
+tinyxmlparser.cpp
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.cpp
+runway.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.h
+iostream
+-
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.cpp
+tinystr.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
+assert.h
+-
+string.h
+-
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.cpp
+ctype.h
+-
+sstream
+-
+iostream
+-
+tinyxml.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
+ctype.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+string
+-
+iostream
+-
+sstream
+-
+tinystr.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlerror.cpp
+tinyxml.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
+
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp
+ctype.h
+-
+stddef.h
+-
+tinyxml.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
+windows.h
+-
+

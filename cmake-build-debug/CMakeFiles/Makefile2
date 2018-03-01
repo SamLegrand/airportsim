@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = "/media/sam/Transcend/School/Project Software Engineering/air
 CMakeFiles/airportsim.dir/all:
 	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/depend
 	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target airportsim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9 "Built target airportsim"
 .PHONY : CMakeFiles/airportsim.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/airportsim.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/airportsim.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" 9
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/airportsim.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" 0
 .PHONY : CMakeFiles/airportsim.dir/rule

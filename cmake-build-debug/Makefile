@@ -123,6 +123,60 @@ airportsim/fast:
 	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/build
 .PHONY : airportsim/fast
 
+airplane.o: airplane.cpp.o
+
+.PHONY : airplane.o
+
+# target to build an object file
+airplane.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airplane.cpp.o
+.PHONY : airplane.cpp.o
+
+airplane.i: airplane.cpp.i
+
+.PHONY : airplane.i
+
+# target to preprocess a source file
+airplane.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airplane.cpp.i
+.PHONY : airplane.cpp.i
+
+airplane.s: airplane.cpp.s
+
+.PHONY : airplane.s
+
+# target to generate assembly for a file
+airplane.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airplane.cpp.s
+.PHONY : airplane.cpp.s
+
+airport.o: airport.cpp.o
+
+.PHONY : airport.o
+
+# target to build an object file
+airport.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airport.cpp.o
+.PHONY : airport.cpp.o
+
+airport.i: airport.cpp.i
+
+.PHONY : airport.i
+
+# target to preprocess a source file
+airport.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airport.cpp.i
+.PHONY : airport.cpp.i
+
+airport.s: airport.cpp.s
+
+.PHONY : airport.s
+
+# target to generate assembly for a file
+airport.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/airport.cpp.s
+.PHONY : airport.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -150,6 +204,141 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+runway.o: runway.cpp.o
+
+.PHONY : runway.o
+
+# target to build an object file
+runway.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/runway.cpp.o
+.PHONY : runway.cpp.o
+
+runway.i: runway.cpp.i
+
+.PHONY : runway.i
+
+# target to preprocess a source file
+runway.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/runway.cpp.i
+.PHONY : runway.cpp.i
+
+runway.s: runway.cpp.s
+
+.PHONY : runway.s
+
+# target to generate assembly for a file
+runway.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/runway.cpp.s
+.PHONY : runway.cpp.s
+
+tinystr.o: tinystr.cpp.o
+
+.PHONY : tinystr.o
+
+# target to build an object file
+tinystr.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinystr.cpp.o
+.PHONY : tinystr.cpp.o
+
+tinystr.i: tinystr.cpp.i
+
+.PHONY : tinystr.i
+
+# target to preprocess a source file
+tinystr.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinystr.cpp.i
+.PHONY : tinystr.cpp.i
+
+tinystr.s: tinystr.cpp.s
+
+.PHONY : tinystr.s
+
+# target to generate assembly for a file
+tinystr.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinystr.cpp.s
+.PHONY : tinystr.cpp.s
+
+tinyxml.o: tinyxml.cpp.o
+
+.PHONY : tinyxml.o
+
+# target to build an object file
+tinyxml.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxml.cpp.o
+.PHONY : tinyxml.cpp.o
+
+tinyxml.i: tinyxml.cpp.i
+
+.PHONY : tinyxml.i
+
+# target to preprocess a source file
+tinyxml.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxml.cpp.i
+.PHONY : tinyxml.cpp.i
+
+tinyxml.s: tinyxml.cpp.s
+
+.PHONY : tinyxml.s
+
+# target to generate assembly for a file
+tinyxml.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxml.cpp.s
+.PHONY : tinyxml.cpp.s
+
+tinyxmlerror.o: tinyxmlerror.cpp.o
+
+.PHONY : tinyxmlerror.o
+
+# target to build an object file
+tinyxmlerror.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o
+.PHONY : tinyxmlerror.cpp.o
+
+tinyxmlerror.i: tinyxmlerror.cpp.i
+
+.PHONY : tinyxmlerror.i
+
+# target to preprocess a source file
+tinyxmlerror.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlerror.cpp.i
+.PHONY : tinyxmlerror.cpp.i
+
+tinyxmlerror.s: tinyxmlerror.cpp.s
+
+.PHONY : tinyxmlerror.s
+
+# target to generate assembly for a file
+tinyxmlerror.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlerror.cpp.s
+.PHONY : tinyxmlerror.cpp.s
+
+tinyxmlparser.o: tinyxmlparser.cpp.o
+
+.PHONY : tinyxmlparser.o
+
+# target to build an object file
+tinyxmlparser.cpp.o:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o
+.PHONY : tinyxmlparser.cpp.o
+
+tinyxmlparser.i: tinyxmlparser.cpp.i
+
+.PHONY : tinyxmlparser.i
+
+# target to preprocess a source file
+tinyxmlparser.cpp.i:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.i
+.PHONY : tinyxmlparser.cpp.i
+
+tinyxmlparser.s: tinyxmlparser.cpp.s
+
+.PHONY : tinyxmlparser.s
+
+# target to generate assembly for a file
+tinyxmlparser.cpp.s:
+	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.s
+.PHONY : tinyxmlparser.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +348,30 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... airportsim"
+	@echo "... airplane.o"
+	@echo "... airplane.i"
+	@echo "... airplane.s"
+	@echo "... airport.o"
+	@echo "... airport.i"
+	@echo "... airport.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... runway.o"
+	@echo "... runway.i"
+	@echo "... runway.s"
+	@echo "... tinystr.o"
+	@echo "... tinystr.i"
+	@echo "... tinystr.s"
+	@echo "... tinyxml.o"
+	@echo "... tinyxml.i"
+	@echo "... tinyxml.s"
+	@echo "... tinyxmlerror.o"
+	@echo "... tinyxmlerror.i"
+	@echo "... tinyxmlerror.s"
+	@echo "... tinyxmlparser.o"
+	@echo "... tinyxmlparser.i"
+	@echo "... tinyxmlparser.s"
 .PHONY : help
 
 

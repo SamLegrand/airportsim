@@ -84,7 +84,43 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.h">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h">
+			<Option target="airportsim"/>
+		</Unit>
 		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/main.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.h">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlerror.cpp">
+			<Option target="airportsim"/>
+		</Unit>
+		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp">
 			<Option target="airportsim"/>
 		</Unit>
 		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/CMakeLists.txt">
