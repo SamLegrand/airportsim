@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int stoi(string const s){
+int stoi(string const& s){
     stringstream ss(s);
     int i;
     ss >> i;
