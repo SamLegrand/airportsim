@@ -8,7 +8,10 @@ CMakeFiles/airportsim.dir/airport.cpp.o
  /media/sam/Transcend/School/Project Software Engineering/airportsim/airport.cpp
  /media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h
 CMakeFiles/airportsim.dir/main.cpp.o
+ /media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.h
+ /media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/main.cpp
+ /media/sam/Transcend/School/Project Software Engineering/airportsim/runway.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp
@@ -26,7 +29,3 @@ CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
  /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlerror.cpp
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o
- /media/sam/Transcend/School/Project Software Engineering/airportsim/tinystr.h
- /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
- /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp

@@ -312,33 +312,6 @@ tinyxmlerror.cpp.s:
 	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlerror.cpp.s
 .PHONY : tinyxmlerror.cpp.s
 
-tinyxmlparser.o: tinyxmlparser.cpp.o
-
-.PHONY : tinyxmlparser.o
-
-# target to build an object file
-tinyxmlparser.cpp.o:
-	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o
-.PHONY : tinyxmlparser.cpp.o
-
-tinyxmlparser.i: tinyxmlparser.cpp.i
-
-.PHONY : tinyxmlparser.i
-
-# target to preprocess a source file
-tinyxmlparser.cpp.i:
-	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.i
-.PHONY : tinyxmlparser.cpp.i
-
-tinyxmlparser.s: tinyxmlparser.cpp.s
-
-.PHONY : tinyxmlparser.s
-
-# target to generate assembly for a file
-tinyxmlparser.cpp.s:
-	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.s
-.PHONY : tinyxmlparser.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -369,9 +342,6 @@ help:
 	@echo "... tinyxmlerror.o"
 	@echo "... tinyxmlerror.i"
 	@echo "... tinyxmlerror.s"
-	@echo "... tinyxmlparser.o"
-	@echo "... tinyxmlparser.i"
-	@echo "... tinyxmlparser.s"
 .PHONY : help
 
 

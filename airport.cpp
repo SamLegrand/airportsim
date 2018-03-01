@@ -3,3 +3,31 @@
 //
 
 #include "airport.h"
+
+void Airport::setName(string _name) {
+    name = _name;
+}
+
+void Airport::setIata(string _iata) {
+    iata = _iata;
+}
+
+void Airport::setCallsign(string _callsign) {
+    callsign = _callsign;
+}
+
+void Airport::setGates(int _gates) {
+    gates = _gates;
+}
+
+void Airport::setPassengers(int _passengers) {
+    passengers = _passengers;
+}
+
+void Airport::printInfo(){
+    cout << name << endl;
+    cout << iata << endl;
+    cout << callsign << endl;
+    cout << gates << endl;
+    cout << passengers << endl;
+}

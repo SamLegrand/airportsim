@@ -120,9 +120,6 @@
 		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlerror.cpp">
 			<Option target="airportsim"/>
 		</Unit>
-		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp">
-			<Option target="airportsim"/>
-		</Unit>
 		<Unit filename="/media/sam/Transcend/School/Project Software Engineering/airportsim/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -153,33 +153,9 @@ CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o.provides: CMakeFiles/airportsim.dir
 CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o.provides.build: CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o
 
 
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o: CMakeFiles/airportsim.dir/flags.make
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o: ../tinyxmlparser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o -c "/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp"
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/airportsim.dir/tinyxmlparser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp" > CMakeFiles/airportsim.dir/tinyxmlparser.cpp.i
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/airportsim.dir/tinyxmlparser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp" -o CMakeFiles/airportsim.dir/tinyxmlparser.cpp.s
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.requires:
-
-.PHONY : CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.requires
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.provides: CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.requires
-	$(MAKE) -f CMakeFiles/airportsim.dir/build.make CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.provides.build
-.PHONY : CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.provides
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.provides.build: CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o
-
-
 CMakeFiles/airportsim.dir/airport.cpp.o: CMakeFiles/airportsim.dir/flags.make
 CMakeFiles/airportsim.dir/airport.cpp.o: ../airport.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/airportsim.dir/airport.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/airportsim.dir/airport.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/airportsim.dir/airport.cpp.o -c "/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.cpp"
 
 CMakeFiles/airportsim.dir/airport.cpp.i: cmake_force
@@ -203,7 +179,7 @@ CMakeFiles/airportsim.dir/airport.cpp.o.provides.build: CMakeFiles/airportsim.di
 
 CMakeFiles/airportsim.dir/runway.cpp.o: CMakeFiles/airportsim.dir/flags.make
 CMakeFiles/airportsim.dir/runway.cpp.o: ../runway.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/airportsim.dir/runway.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/airportsim.dir/runway.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/airportsim.dir/runway.cpp.o -c "/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.cpp"
 
 CMakeFiles/airportsim.dir/runway.cpp.i: cmake_force
@@ -227,7 +203,7 @@ CMakeFiles/airportsim.dir/runway.cpp.o.provides.build: CMakeFiles/airportsim.dir
 
 CMakeFiles/airportsim.dir/airplane.cpp.o: CMakeFiles/airportsim.dir/flags.make
 CMakeFiles/airportsim.dir/airplane.cpp.o: ../airplane.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/airportsim.dir/airplane.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/airportsim.dir/airplane.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/airportsim.dir/airplane.cpp.o -c "/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.cpp"
 
 CMakeFiles/airportsim.dir/airplane.cpp.i: cmake_force
@@ -255,7 +231,6 @@ airportsim_OBJECTS = \
 "CMakeFiles/airportsim.dir/tinystr.cpp.o" \
 "CMakeFiles/airportsim.dir/tinyxml.cpp.o" \
 "CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o" \
-"CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o" \
 "CMakeFiles/airportsim.dir/airport.cpp.o" \
 "CMakeFiles/airportsim.dir/runway.cpp.o" \
 "CMakeFiles/airportsim.dir/airplane.cpp.o"
@@ -267,13 +242,12 @@ airportsim: CMakeFiles/airportsim.dir/main.cpp.o
 airportsim: CMakeFiles/airportsim.dir/tinystr.cpp.o
 airportsim: CMakeFiles/airportsim.dir/tinyxml.cpp.o
 airportsim: CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o
-airportsim: CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o
 airportsim: CMakeFiles/airportsim.dir/airport.cpp.o
 airportsim: CMakeFiles/airportsim.dir/runway.cpp.o
 airportsim: CMakeFiles/airportsim.dir/airplane.cpp.o
 airportsim: CMakeFiles/airportsim.dir/build.make
 airportsim: CMakeFiles/airportsim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable airportsim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable airportsim"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/airportsim.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -285,7 +259,6 @@ CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/main.cpp.o.require
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/tinystr.cpp.o.requires
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/tinyxml.cpp.o.requires
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o.requires
-CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o.requires
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/airport.cpp.o.requires
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/runway.cpp.o.requires
 CMakeFiles/airportsim.dir/requires: CMakeFiles/airportsim.dir/airplane.cpp.o.requires

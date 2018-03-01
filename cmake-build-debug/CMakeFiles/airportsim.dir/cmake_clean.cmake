@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/airportsim.dir/tinystr.cpp.o"
   "CMakeFiles/airportsim.dir/tinyxml.cpp.o"
   "CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o"
-  "CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o"
   "CMakeFiles/airportsim.dir/airport.cpp.o"
   "CMakeFiles/airportsim.dir/runway.cpp.o"
   "CMakeFiles/airportsim.dir/airplane.cpp.o"

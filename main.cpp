@@ -2,8 +2,20 @@
 #include "tinystr.h"
 #include "tinyxml.h"
 #include "tinyxmlparser.cpp"
+#include "airport.h"
+#include "airplane.h"
+#include "runway.h"
+#include <vector>
+#include <sstream>
 
 using namespace std;
+
+int stoi(string const s){
+    stringstream ss(s);
+    int i;
+    ss >> i;
+    return i;
+}
 
 int main() {
     TiXmlDocument doc;
@@ -12,57 +24,64 @@ int main() {
         return 1;
     }
     TiXmlElement *root = doc.FirstChildElement();
-    if (root == nullptr) {
+    if (root == NULL) {
         cerr << "Failed to load file: No root element." << endl;
         doc.Clear();
         return 1;
     }
-    for (TiXmlElement *object = root->FirstChildElement(); object != nullptr; object = object->NextSiblingElement()) {
-        for (TiXmlElement *elem = object->FirstChildElement(); elem != nullptr; elem = elem->NextSiblingElement()) {
+    string object = root->Value();
+    if (object == "AIRPORT") {
+        Airport airport;
+        for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
             string elemName = elem->Value();
-            if (elemName == "airport") {
-                title = "";
-                for (TiXmlNode *e = elem->FirstChild(); e != nullptr; e = e->NextSibling()) {
+            if (elemName == "name") {
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
                         cerr << "CD does not contain title." << endl;
                         continue;
                     }
-                    title = text->Value();
+                    airport.setName(text->Value());
                 }
-                if (title == "") {
-                    cerr << "CD does not contain title." << endl;
-                }
-            } else if (elemName == "ARTIST") {
-                for (TiXmlNode *e = elem->FirstChild(); e != nullptr; e = e->NextSibling()) {
+            } else if (elemName == "iata") {
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
                         cerr << "CD does not contain artist." << endl;
                         continue;
                     }
-                    artist = text->Value();
+                    airport.setIata(text->Value());
                 }
-            } else if (elemName == "PRICE") {
-                for (TiXmlNode *e = elem->FirstChild(); e != nullptr; e = e->NextSibling()) {
+            } else if (elemName == "callsign") {
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
                         cerr << "CD does not contain price." << endl;
                         continue;
                     }
-                    price = text->Value();
+                    airport.setCallsign(text->Value());
                 }
-            } else if (elemName == "YEAR") {
-                for (TiXmlNode *e = elem->FirstChild(); e != nullptr; e = e->NextSibling()) {
+            } else if (elemName == "gates") {
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
                         cerr << "CD does not contain year." << endl;
                         continue;
                     }
-                    year = text->Value();
+                    airport.setGates(stoi(text->Value()));
+                }
+            } else if (elemName == "passengers") {
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
+                    TiXmlText *text = e->ToText();
+                    if (text == NULL) {
+                        cerr << "CD does not contain year." << endl;
+                        continue;
+                    }
+                    airport.setPassengers(stoi(text->Value()));
                 }
             }
         }
-        std::cout << "Hello, World!" << std::endl;
-        return 0;
+        airport.printInfo();
     }
+    return 0;
 }

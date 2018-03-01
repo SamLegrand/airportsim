@@ -7,7 +7,10 @@ CMakeFiles/airportsim.dir/airplane.cpp.o: ../airplane.h
 CMakeFiles/airportsim.dir/airport.cpp.o: ../airport.cpp
 CMakeFiles/airportsim.dir/airport.cpp.o: ../airport.h
 
+CMakeFiles/airportsim.dir/main.cpp.o: ../airplane.h
+CMakeFiles/airportsim.dir/main.cpp.o: ../airport.h
 CMakeFiles/airportsim.dir/main.cpp.o: ../main.cpp
+CMakeFiles/airportsim.dir/main.cpp.o: ../runway.h
 CMakeFiles/airportsim.dir/main.cpp.o: ../tinystr.h
 CMakeFiles/airportsim.dir/main.cpp.o: ../tinyxml.h
 CMakeFiles/airportsim.dir/main.cpp.o: ../tinyxmlparser.cpp
@@ -25,8 +28,4 @@ CMakeFiles/airportsim.dir/tinyxml.cpp.o: ../tinyxml.h
 CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o: ../tinystr.h
 CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o: ../tinyxml.h
 CMakeFiles/airportsim.dir/tinyxmlerror.cpp.o: ../tinyxmlerror.cpp
-
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o: ../tinystr.h
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o: ../tinyxml.h
-CMakeFiles/airportsim.dir/tinyxmlparser.cpp.o: ../tinyxmlparser.cpp
 

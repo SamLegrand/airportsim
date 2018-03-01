@@ -14,6 +14,13 @@ class Airport {
     string callsign;
     int gates;
     int passengers;
+public:
+    void setName(string _name);
+    void setIata(string _iata);
+    void setCallsign(string _callsign);
+    void setGates(int _gates);
+    void setPassengers(int _passengers);
+    void printInfo();
 };
 
 

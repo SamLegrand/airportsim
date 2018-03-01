@@ -4,13 +4,3 @@
 	<callsign>Antwerp Tower</callsign>
 	<gates>10</gates>
 </AIRPORT>
-<RUNWAY>
-	<name>11R</name>
-	<airport>ANR</airport>
-</RUNWAY>
-<AIRPLANE>
-	<number>N11842</number>
-	<callsign>Cessna 842</callsign>
-	<model>Cessna 340</model>
-	<status>Approaching</status>
-</AIRPLANE>

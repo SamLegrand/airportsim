@@ -31,6 +31,16 @@ tinyxml.h
 /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxml.h
 tinyxmlparser.cpp
 /media/sam/Transcend/School/Project Software Engineering/airportsim/tinyxmlparser.cpp
+airport.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airport.h
+airplane.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/airplane.h
+runway.h
+/media/sam/Transcend/School/Project Software Engineering/airportsim/runway.h
+vector
+-
+sstream
+-
 
 /media/sam/Transcend/School/Project Software Engineering/airportsim/runway.cpp
 runway.h
