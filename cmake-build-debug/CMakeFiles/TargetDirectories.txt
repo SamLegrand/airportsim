@@ -1,0 +1,3 @@
+/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/sam/Transcend/School/Project Software Engineering/airportsim/cmake-build-debug/CMakeFiles/Project_Software_Engineering.dir
