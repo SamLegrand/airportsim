@@ -11,6 +11,10 @@ using namespace std;
 class Runway {
     string name;
     string airport;
+public:
+    void setName(string _name);
+    void setAirport(string _airport);
+    void printInfo();
 };
 
 

@@ -15,6 +15,14 @@ class Airplane {
     string status;
     int passengers;
     int fuel;
+public:
+    void setNumber(string _number);
+    void setCallsign(string _callsign);
+    void setModel(string _model);
+    void setStatus(string _status);
+    void setPassengers(int _passengers);
+    void setFuel(int _fuel);
+    void printInfo();
 };
 
 

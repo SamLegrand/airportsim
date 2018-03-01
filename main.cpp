@@ -29,59 +29,103 @@ int main() {
         doc.Clear();
         return 1;
     }
-    string object = root->Value();
-    if (object == "AIRPORT") {
-        Airport airport;
-        for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
-            string elemName = elem->Value();
-            if (elemName == "name") {
+    string objectName;
+    for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {
+        objectName = object->Value();
+        if (objectName == "AIRPORT") {
+            Airport airport;
+            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+                string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
-                        cerr << "CD does not contain title." << endl;
+                        cerr << elemName << " does not contain any text." << endl;
                         continue;
                     }
-                    airport.setName(text->Value());
-                }
-            } else if (elemName == "iata") {
-                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
-                    TiXmlText *text = e->ToText();
-                    if (text == NULL) {
-                        cerr << "CD does not contain artist." << endl;
+                    if (elemName == "name") {
+                        airport.setName(text->Value());
                         continue;
                     }
-                    airport.setIata(text->Value());
-                }
-            } else if (elemName == "callsign") {
-                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
-                    TiXmlText *text = e->ToText();
-                    if (text == NULL) {
-                        cerr << "CD does not contain price." << endl;
+                    if (elemName == "iata") {
+                        airport.setIata(text->Value());
                         continue;
                     }
-                    airport.setCallsign(text->Value());
-                }
-            } else if (elemName == "gates") {
-                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
-                    TiXmlText *text = e->ToText();
-                    if (text == NULL) {
-                        cerr << "CD does not contain year." << endl;
+                    if (elemName == "callsign") {
+                        airport.setCallsign(text->Value());
                         continue;
                     }
-                    airport.setGates(stoi(text->Value()));
-                }
-            } else if (elemName == "passengers") {
-                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
-                    TiXmlText *text = e->ToText();
-                    if (text == NULL) {
-                        cerr << "CD does not contain year." << endl;
+                    if (elemName == "gates") {
+                        airport.setGates(stoi(text->Value()));
                         continue;
                     }
-                    airport.setPassengers(stoi(text->Value()));
+                    if (elemName == "passengers") {
+                        airport.setPassengers(stoi(text->Value()));
+                        continue;
+                    }
                 }
             }
+            airport.printInfo();
         }
-        airport.printInfo();
+        else if(objectName == "RUNWAY"){
+            Runway runway;
+            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+                string elemName = elem->Value();
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
+                    TiXmlText *text = e->ToText();
+                    if (text == NULL) {
+                        cerr << elemName << " does not contain any text." << endl;
+                        continue;
+                    }
+                    if (elemName == "name") {
+                        runway.setName(text->Value());
+                        continue;
+                    }
+                    if (elemName == "airport") {
+                        runway.setAirport(text->Value());
+                        continue;
+                    }
+                }
+            }
+            runway.printInfo();
+        }
+        else if(objectName == "AIRPLANE"){
+            Airplane airplane;
+            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+                string elemName = elem->Value();
+                for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
+                    TiXmlText *text = e->ToText();
+                    if (text == NULL) {
+                        cerr << elemName << " does not contain any text." << endl;
+                        continue;
+                    }
+                    if (elemName == "number") {
+                        airplane.setNumber(text->Value());
+                        continue;
+                    }
+                    if (elemName == "callsign") {
+                        airplane.setCallsign(text->Value());
+                        continue;
+                    }
+                    if (elemName == "model") {
+                        airplane.setModel(text->Value());
+                        continue;
+                    }
+                    if (elemName == "status") {
+                        airplane.setStatus(text->Value());
+                        continue;
+                    }
+                    if (elemName == "passengers") {
+                        airplane.setPassengers(stoi(text->Value()));
+                        continue;
+                    }
+                    if (elemName == "fuel") {
+                        airplane.setFuel(stoi(text->Value()));
+                        continue;
+                    }
+                }
+            }
+            airplane.printInfo();
+        }
     }
     return 0;
 }
