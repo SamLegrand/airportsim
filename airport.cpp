@@ -28,7 +28,6 @@ void Airport::addRunway(Runway *_runway) {
     runways.push_back(_runway);
 }
 
-
 void Airport::printInfo(){
     cout << "Airport: " << name << " (" << iata << ")" << endl;
     cout << " -> gates: " << gates << endl;
@@ -41,4 +40,8 @@ void Airport::printTestingInfo(){
     cout << callsign << endl;
     cout << gates << endl;
     cout << passengers << endl;
+}
+
+string Airport::getName() {
+    return name;
 }

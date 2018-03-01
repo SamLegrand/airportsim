@@ -6,6 +6,7 @@ CMakeFiles/airportsim.dir/airplane.cpp.o: ../airplane.h
 
 CMakeFiles/airportsim.dir/airport.cpp.o: ../airport.cpp
 CMakeFiles/airportsim.dir/airport.cpp.o: ../airport.h
+CMakeFiles/airportsim.dir/airport.cpp.o: ../runway.h
 
 CMakeFiles/airportsim.dir/main.cpp.o: ../airplane.h
 CMakeFiles/airportsim.dir/main.cpp.o: ../airport.h

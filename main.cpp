@@ -18,6 +18,7 @@ int stoi(string const s){
 }
 
 int main() {
+    vector<Airport> airports;
     TiXmlDocument doc;
     if (!doc.LoadFile("../input.xml")) {
         cerr << doc.ErrorDesc() << endl;
@@ -34,7 +35,7 @@ int main() {
         objectName = object->Value();
         if (objectName == "AIRPORT") {
             Airport airport;
-            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+            for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
@@ -64,11 +65,12 @@ int main() {
                     }
                 }
             }
+            airports.push_back(airport);
             airport.printInfo();
         }
         else if(objectName == "RUNWAY"){
-            Runway runway;
-            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+            Runway* runway = new Runway();
+            for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
@@ -77,20 +79,25 @@ int main() {
                         continue;
                     }
                     if (elemName == "name") {
-                        runway.setName(text->Value());
+                        runway->setName(text->Value());
                         continue;
                     }
                     if (elemName == "airport") {
-                        runway.setAirport(text->Value());
+                        for (unsigned int i = 0; i < airports.size(); ++i) {
+                            if (airports[i].getName() == text->Value()){
+                                airports[i].addRunway(runway);
+                                break;
+                            }
+                        }
                         continue;
                     }
                 }
             }
-            runway.printInfo();
+            runway->printInfo();
         }
         else if(objectName == "AIRPLANE"){
             Airplane airplane;
-            for (TiXmlElement *elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+            for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();

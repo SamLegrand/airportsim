@@ -23,6 +23,7 @@ public:
     void setCallsign(string _callsign);
     void setGates(int _gates);
     void setPassengers(int _passengers);
+    string getName();
     void addRunway(Runway* _runway);
     void printInfo();
     void printTestingInfo();
