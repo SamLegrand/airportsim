@@ -24,7 +24,18 @@ void Airport::setPassengers(int _passengers) {
     passengers = _passengers;
 }
 
+void Airport::addRunway(Runway *_runway) {
+    runways.push_back(_runway);
+}
+
+
 void Airport::printInfo(){
+    cout << "Airport: " << name << " (" << iata << ")" << endl;
+    cout << " -> gates: " << gates << endl;
+    cout << " -> runways: " << runways.size() << endl;
+}
+
+void Airport::printTestingInfo(){
     cout << name << endl;
     cout << iata << endl;
     cout << callsign << endl;

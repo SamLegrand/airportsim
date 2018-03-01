@@ -6,12 +6,15 @@
 #define AIRPORTSIM_AIRPORT_H
 
 #include <iostream>
+#include "runway.h"
+#include <vector>
 using namespace std;
 
 class Airport {
     string name;
     string iata;
     string callsign;
+    vector<Runway*> runways;
     int gates;
     int passengers;
 public:
@@ -20,7 +23,9 @@ public:
     void setCallsign(string _callsign);
     void setGates(int _gates);
     void setPassengers(int _passengers);
+    void addRunway(Runway* _runway);
     void printInfo();
+    void printTestingInfo();
 };
 
 

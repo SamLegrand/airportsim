@@ -29,6 +29,11 @@ void Airplane::setFuel(int _fuel) {
 }
 
 void Airplane::printInfo() {
+    cout << "Airplane: " << callsign << " (" << number << ")" << endl;
+    cout << " -> model: " << model << endl;
+}
+
+void Airplane::printTestingInfo() {
     cout << number << endl;
     cout << callsign << endl;
     cout << model << endl;

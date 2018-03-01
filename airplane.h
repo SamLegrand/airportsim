@@ -23,6 +23,7 @@ public:
     void setPassengers(int _passengers);
     void setFuel(int _fuel);
     void printInfo();
+    void printTestingInfo();
 };
 
 
