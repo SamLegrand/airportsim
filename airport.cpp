@@ -45,3 +45,7 @@ void Airport::printTestingInfo(){
 string Airport::getName() {
     return name;
 }
+
+string Airport::getIata() {
+    return iata;
+}

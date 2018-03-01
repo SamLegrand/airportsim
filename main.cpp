@@ -18,7 +18,8 @@ int stoi(string const& s){
 }
 
 int main() {
-    vector<Airport> airports;
+    vector<Airport*> airports;
+    vector<Airplane*> airplanes;
     TiXmlDocument doc;
     if (!doc.LoadFile("../input.xml")) {
         cerr << doc.ErrorDesc() << endl;
@@ -34,7 +35,7 @@ int main() {
     for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {
         objectName = object->Value();
         if (objectName == "AIRPORT") {
-            Airport airport;
+            Airport* airport = new Airport();
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
@@ -44,29 +45,29 @@ int main() {
                         continue;
                     }
                     if (elemName == "name") {
-                        airport.setName(text->Value());
+                        airport->setName(text->Value());
                         continue;
                     }
                     if (elemName == "iata") {
-                        airport.setIata(text->Value());
+                        airport->setIata(text->Value());
                         continue;
                     }
                     if (elemName == "callsign") {
-                        airport.setCallsign(text->Value());
+                        airport->setCallsign(text->Value());
                         continue;
                     }
                     if (elemName == "gates") {
-                        airport.setGates(stoi(text->Value()));
+                        airport->setGates(stoi(text->Value()));
                         continue;
                     }
                     if (elemName == "passengers") {
-                        airport.setPassengers(stoi(text->Value()));
+                        airport->setPassengers(stoi(text->Value()));
                         continue;
                     }
                 }
             }
             airports.push_back(airport);
-            airport.printInfo();
+            //airport->printInfo();
         }
         else if(objectName == "RUNWAY"){
             Runway* runway = new Runway();
@@ -84,8 +85,8 @@ int main() {
                     }
                     if (elemName == "airport") {
                         for (unsigned int i = 0; i < airports.size(); ++i) {
-                            if (airports[i].getName() == text->Value()){
-                                airports[i].addRunway(runway);
+                            if (airports[i]->getIata() == text->Value()){
+                                airports[i]->addRunway(runway);
                                 break;
                             }
                         }
@@ -93,10 +94,10 @@ int main() {
                     }
                 }
             }
-            runway->printInfo();
+            //runway->printInfo();
         }
         else if(objectName == "AIRPLANE"){
-            Airplane airplane;
+            Airplane* airplane = new Airplane();
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
@@ -106,33 +107,41 @@ int main() {
                         continue;
                     }
                     if (elemName == "number") {
-                        airplane.setNumber(text->Value());
+                        airplane->setNumber(text->Value());
                         continue;
                     }
                     if (elemName == "callsign") {
-                        airplane.setCallsign(text->Value());
+                        airplane->setCallsign(text->Value());
                         continue;
                     }
                     if (elemName == "model") {
-                        airplane.setModel(text->Value());
+                        airplane->setModel(text->Value());
                         continue;
                     }
                     if (elemName == "status") {
-                        airplane.setStatus(text->Value());
+                        airplane->setStatus(text->Value());
                         continue;
                     }
                     if (elemName == "passengers") {
-                        airplane.setPassengers(stoi(text->Value()));
+                        airplane->setPassengers(stoi(text->Value()));
                         continue;
                     }
                     if (elemName == "fuel") {
-                        airplane.setFuel(stoi(text->Value()));
+                        airplane->setFuel(stoi(text->Value()));
                         continue;
                     }
                 }
             }
-            airplane.printInfo();
+            airplanes.push_back(airplane);
+            //airplane.printTestingInfo();
         }
     }
+    for (unsigned int i=0; i<airports.size(); ++i) {
+        airports[i]->printInfo();
+    }
+    for (unsigned int i=0; i<airplanes.size(); ++i) {
+        airplanes[i]->printInfo();
+    }
+
     return 0;
 }
