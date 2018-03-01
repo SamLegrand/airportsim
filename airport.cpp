@@ -49,3 +49,7 @@ string Airport::getName() {
 string Airport::getIata() {
     return iata;
 }
+
+Runway *Airport::getAvailableRunway() {
+    return runways[0];
+}

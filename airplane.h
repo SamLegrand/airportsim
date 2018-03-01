@@ -6,6 +6,8 @@
 #define AIRPORTSIM_AIRPLANE_H
 
 #include <iostream>
+#include "airport.h"
+
 using namespace std;
 
 class Airplane {
@@ -15,6 +17,7 @@ class Airplane {
     string status;
     int passengers;
     int fuel;
+    int height;
 public:
     void setNumber(string _number);
     void setCallsign(string _callsign);
@@ -24,6 +27,7 @@ public:
     void setFuel(int _fuel);
     void printInfo();
     void printTestingInfo();
+    void land(Airport* airport);
 };
 
 

@@ -25,6 +25,7 @@ public:
     void setPassengers(int _passengers);
     string getName();
     string getIata();
+    Runway* getAvailableRunway();
     void addRunway(Runway* _runway);
     void printInfo();
     void printTestingInfo();

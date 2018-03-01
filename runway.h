@@ -12,6 +12,7 @@ class Runway {
     string name;
 public:
     void setName(string _name);
+    string getName();
     void printInfo();
 };
 

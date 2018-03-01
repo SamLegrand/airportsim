@@ -11,3 +11,7 @@ void Runway::setName(string _name) {
 void Runway::printInfo() {
     cout << name << endl;
 }
+
+string Runway::getName() {
+    return name;
+}

@@ -41,3 +41,18 @@ void Airplane::printTestingInfo() {
     cout << passengers << endl;
     cout << fuel << endl;
 }
+
+void Airplane::land(Airport* airport) {
+    height = 10000;
+    if (status == "Approaching") {
+        cout << callsign << " is approaching " << airport->getName() << " at " << height << " ft." << endl;
+        while (height > 1000) {
+            height = height - 1000;
+            cout << callsign << " descended to " << height << " ft." << endl;
+        }
+        cout << callsign << " is landing at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
+        cout << callsign << " has landed at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
+        cout << callsign << " is taxiing to Gate " << 1 << endl;
+        cout << callsign << " is standing at Gate " << 1 << endl;
+    }
+}

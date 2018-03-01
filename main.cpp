@@ -141,6 +141,7 @@ int main() {
     }
     for (unsigned int i=0; i<airplanes.size(); ++i) {
         airplanes[i]->printInfo();
+        airplanes[i]->land(airports[0]);
     }
 
     return 0;
