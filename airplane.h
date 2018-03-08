@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "airport.h"
 using namespace std;
 
 class Airplane {
@@ -32,6 +33,8 @@ public:
     void descend();
     void land(string airport, string runway);
     void landed(string airport, string runway);
+    void taxi(int gate);
+    void stand(int gate);
 };
 
 

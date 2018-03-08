@@ -25,6 +25,7 @@ public:
     void setIata(string _iata);
     void setCallsign(string _callsign);
     void addGate(Gate* _gate);
+    int getAvailableGate();
     void setPassengers(int _passengers);
     string getName();
     string getIata();

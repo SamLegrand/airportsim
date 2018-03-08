@@ -53,3 +53,12 @@ string Airport::getIata() {
 Runway *Airport::getAvailableRunway() {
     return runways[0];
 }
+
+int Airport::getAvailableGate() {
+    for (int i = 0; i < gates.size(); ++i) {
+        if(gates[i]->isEmpty()){
+            return i + 1;
+        }
+    }
+    return 0;
+}

@@ -208,7 +208,10 @@ void Planelanding(Airplane* airplane, Airport* destination) {
         airplane->landed(destination->getName(), destination->getAvailableRunway()->getName());
     }
     if (airplane->getStatus() == "Awaiting Taxi") {
-
+        airplane->taxi(destination->getAvailableGate());
+    }
+    if (airplane->getStatus() == "Taxiing") {
+        airplane->stand(destination->getAvailableGate());
     }
 
 //        cout << callsign << " is taxiing to Gate " << 1 << endl;

@@ -74,6 +74,15 @@ string Airplane::getStatus() {
     return status;
 }
 
+void Airplane::taxi(int gate) {
+    cout << callsign << " is taxiing to Gate " << gate << "." << endl;
+    status = "Taxiing";
+}
+
+void Airplane::stand(int gate) {
+    cout << callsign << " is standing at Gate " << gate << "." << endl;
+}
+
 
 
 
