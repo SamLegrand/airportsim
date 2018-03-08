@@ -17,6 +17,26 @@ int stoi(string const& s){
     return i;
 }
 
+bool isInt(string const& s){
+    stringstream ss(s);
+    int i;
+    if((ss >> i).fail()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool isString(string const& s){
+    for (int i = 0; i < s.size(); ++i) {
+        if(!(s[i] > 'a' && s[i] < 'z' || s[i] > 'A' && s[i] < 'Z' || s[i] > '0' && s[i] < '9')){
+            return false;
+        }
+    }
+    return true;
+}
+
 int main() {
     vector<Airport*> airports;
     vector<Airplane*> airplanes;
@@ -57,13 +77,23 @@ int main() {
                         continue;
                     }
                     if (elemName == "gates") {
-                        for (int i=0; i<stoi(text->Value()); i++) {
-                            airport->addGate(new Gate);
+                        if(isInt(text->Value())){
+                            for (int i=0; i<stoi(text->Value()); i++) {
+                                airport->addGate(new Gate);
+                            }
+                        }
+                        else{
+                            cerr << elemName << " does not contain a number." << endl;
                         }
                         continue;
                     }
                     if (elemName == "passengers") {
-                        airport->setPassengers(stoi(text->Value()));
+                        if(isInt(text->Value())) {
+                            airport->setPassengers(stoi(text->Value()));
+                        }
+                        else{
+                            cerr << elemName << " does not contain a number." << endl;
+                        }
                         continue;
                     }
                 }
@@ -125,11 +155,21 @@ int main() {
                         continue;
                     }
                     if (elemName == "passengers") {
-                        airplane->setPassengers(stoi(text->Value()));
+                        if(isInt(text->Value())){
+                            airplane->setPassengers(stoi(text->Value()));
+                        }
+                        else{
+                            cerr << elemName << " does not contain a number." << endl;
+                        }
                         continue;
                     }
                     if (elemName == "fuel") {
-                        airplane->setFuel(stoi(text->Value()));
+                        if(isInt(text->Value())){
+                            airplane->setFuel(stoi(text->Value()));
+                        }
+                        else{
+                            cerr << elemName << " does not contain a number." << endl;
+                        }
                         continue;
                     }
                     airplane->setHeight(10000);
