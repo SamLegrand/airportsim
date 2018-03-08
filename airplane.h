@@ -6,7 +6,7 @@
 #define AIRPORTSIM_AIRPLANE_H
 
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
 class Airplane {
@@ -26,7 +26,7 @@ public:
     void setFuel(int _fuel);
     void setHeight(int height);
     string getStatus();
-    void printInfo();
+    void printInfo(ofstream &output);
     void printTestingInfo();
     void approach(string airport);
     void descend();

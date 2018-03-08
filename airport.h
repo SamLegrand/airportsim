@@ -9,7 +9,9 @@
 #include "runway.h"
 #include "gate.h"
 #include <vector>
+#include <fstream>
 using namespace std;
+
 
 class Airport {
     string name;
@@ -28,7 +30,7 @@ public:
     string getIata();
     Runway* getAvailableRunway();
     void addRunway(Runway* _runway);
-    void printInfo();
+    void printInfo(ofstream &output);
     void printTestingInfo();
 };
 

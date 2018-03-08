@@ -182,12 +182,15 @@ int main() {
         }
         cerr << "Invalid element name " << objectName << "." << endl;
     }
+    ofstream output;
+    output.open("output.txt", fstream::out);
     for (unsigned int i=0; i<airports.size(); ++i) {
-        airports[i]->printInfo();
+        airports[i]->printInfo(output);
     }
     for (unsigned int i=0; i<airplanes.size(); ++i) {
-        airplanes[i]->printInfo();
+        airplanes[i]->printInfo(output);
     }
+    output.close();
     return 0;
 }
 

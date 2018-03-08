@@ -28,10 +28,10 @@ void Airport::addRunway(Runway *_runway) {
     runways.push_back(_runway);
 }
 
-void Airport::printInfo(){
-    cout << "Airport: " << name << " (" << iata << ")" << endl;
-    cout << " -> gates: " << gates.size() << endl;
-    cout << " -> runways: " << runways.size() << endl;
+void Airport::printInfo(ofstream &output){
+    output << "Airport: " << name << " (" << iata << ")" << endl;
+    output << " -> gates: " << gates.size() << endl;
+    output << " -> runways: " << runways.size() << endl;
 }
 
 void Airport::printTestingInfo(){

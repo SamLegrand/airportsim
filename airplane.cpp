@@ -32,9 +32,9 @@ void Airplane::setHeight(int _height) {
     height = _height;
 }
 
-void Airplane::printInfo() {
-    cout << "Airplane: " << callsign << " (" << number << ")" << endl;
-    cout << " -> model: " << model << endl;
+void Airplane::printInfo(ofstream &output) {
+    output << "Airplane: " << callsign << " (" << number << ")" << endl;
+    output << " -> model: " << model << endl;
 }
 
 void Airplane::printTestingInfo() {
