@@ -20,7 +20,7 @@ int stoi(string const& s){
 bool isInt(string const& s){
     stringstream ss(s);
     int i;
-    if((ss >> i).fail()){
+    if(!(ss >> i).fail()){
         return true;
     }
     else{
@@ -29,8 +29,8 @@ bool isInt(string const& s){
 }
 
 bool isString(string const& s){
-    for (int i = 0; i < s.size(); ++i) {
-        if(!(s[i] > 'a' && s[i] < 'z' || s[i] > 'A' && s[i] < 'Z' || s[i] > '0' && s[i] < '9')){
+    for (int unsigned i = 0; i < s.size(); ++i) {
+        if(!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || (s[i] == ' '))){
             return false;
         }
     }
@@ -64,6 +64,10 @@ int main() {
                         cerr << elemName << " does not contain any text." << endl;
                         continue;
                     }
+                    if(!isString(text->Value())){
+                        cerr << elemName << " does not contain a string." << endl;
+                        continue;
+                    }
                     if (elemName == "name") {
                         airport->setName(text->Value());
                         continue;
@@ -76,32 +80,27 @@ int main() {
                         airport->setCallsign(text->Value());
                         continue;
                     }
+                    if (!isInt(text->Value())){
+                        cerr << elemName << " does not contain a number." << endl;
+                        continue;
+                    }
                     if (elemName == "gates") {
-                        if(isInt(text->Value())){
-                            for (int i=0; i<stoi(text->Value()); i++) {
-                                airport->addGate(new Gate);
-                            }
-                        }
-                        else{
-                            cerr << elemName << " does not contain a number." << endl;
+                        for (int i=0; i<stoi(text->Value()); i++) {
+                            airport->addGate(new Gate);
                         }
                         continue;
                     }
                     if (elemName == "passengers") {
-                        if(isInt(text->Value())) {
-                            airport->setPassengers(stoi(text->Value()));
-                        }
-                        else{
-                            cerr << elemName << " does not contain a number." << endl;
-                        }
+                        airport->setPassengers(stoi(text->Value()));
                         continue;
                     }
+                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
                 }
             }
             airports.push_back(airport);
-            //airport->printInfo();
+            continue;
         }
-        else if(objectName == "RUNWAY"){
+        if(objectName == "RUNWAY"){
             Runway* runway = new Runway();
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
@@ -109,6 +108,10 @@ int main() {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
                         cerr << elemName << " does not contain any text." << endl;
+                        continue;
+                    }
+                    if(!isString(text->Value())){
+                        cerr << elemName << " does not contain a string." << endl;
                         continue;
                     }
                     if (elemName == "name") {
@@ -124,11 +127,12 @@ int main() {
                         }
                         continue;
                     }
+                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
                 }
             }
-            //runway->printInfo();
+            continue;
         }
-        else if(objectName == "AIRPLANE"){
+        if(objectName == "AIRPLANE"){
             Airplane* airplane = new Airplane();
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
@@ -137,6 +141,9 @@ int main() {
                     if (text == NULL) {
                         cerr << elemName << " does not contain any text." << endl;
                         continue;
+                    }
+                    if(!isString(text->Value())){
+                        cerr << elemName << " does not contain a string." << endl;
                     }
                     if (elemName == "number") {
                         airplane->setNumber(text->Value());
@@ -154,30 +161,26 @@ int main() {
                         airplane->setStatus(text->Value());
                         continue;
                     }
+                    if (!isInt(text->Value())){
+                        cerr << elemName << " does not contain a number." << endl;
+                        continue;
+                    }
                     if (elemName == "passengers") {
-                        if(isInt(text->Value())){
-                            airplane->setPassengers(stoi(text->Value()));
-                        }
-                        else{
-                            cerr << elemName << " does not contain a number." << endl;
-                        }
+                        airplane->setPassengers(stoi(text->Value()));
                         continue;
                     }
                     if (elemName == "fuel") {
-                        if(isInt(text->Value())){
-                            airplane->setFuel(stoi(text->Value()));
-                        }
-                        else{
-                            cerr << elemName << " does not contain a number." << endl;
-                        }
+                        airplane->setFuel(stoi(text->Value()));
                         continue;
                     }
-                    airplane->setHeight(10000);
+                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
                 }
             }
+            airplane->setHeight(10000);
             airplanes.push_back(airplane);
-            //airplane.printTestingInfo();
+            continue;
         }
+        cerr << "Invalid element name " << objectName << "." << endl;
     }
     for (unsigned int i=0; i<airports.size(); ++i) {
         airports[i]->printInfo();
@@ -185,7 +188,6 @@ int main() {
     for (unsigned int i=0; i<airplanes.size(); ++i) {
         airplanes[i]->printInfo();
     }
-
     return 0;
 }
 

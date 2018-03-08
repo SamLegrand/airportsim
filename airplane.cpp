@@ -55,7 +55,7 @@ void Airplane::descend() {
     height = height - 1000;
     cout << callsign << " descended to " << height << " ft." << endl;
     if (height == 1000) {
-        status == "Landing";
+        status = "Landing";
     }
 }
 
