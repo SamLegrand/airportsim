@@ -6,7 +6,6 @@
 #define AIRPORTSIM_AIRPLANE_H
 
 #include <iostream>
-#include "airport.h"
 
 using namespace std;
 
@@ -25,9 +24,14 @@ public:
     void setStatus(string _status);
     void setPassengers(int _passengers);
     void setFuel(int _fuel);
+    void setHeight(int height);
+    string getStatus();
     void printInfo();
     void printTestingInfo();
-    void land(Airport* airport);
+    void approach(string airport);
+    void descend();
+    void land(string airport, string runway);
+    void landed(string airport, string runway);
 };
 
 

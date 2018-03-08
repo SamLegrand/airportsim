@@ -57,7 +57,9 @@ int main() {
                         continue;
                     }
                     if (elemName == "gates") {
-                        airport->setGates(stoi(text->Value()));
+                        for (int i=0; i<stoi(text->Value()); i++) {
+                            airport->addGate(new Gate);
+                        }
                         continue;
                     }
                     if (elemName == "passengers") {
@@ -130,6 +132,7 @@ int main() {
                         airplane->setFuel(stoi(text->Value()));
                         continue;
                     }
+                    airplane->setHeight(10000);
                 }
             }
             airplanes.push_back(airplane);
@@ -141,8 +144,30 @@ int main() {
     }
     for (unsigned int i=0; i<airplanes.size(); ++i) {
         airplanes[i]->printInfo();
-        airplanes[i]->land(airports[0]);
     }
 
     return 0;
+}
+
+void Planelanding(Airplane* airplane, Airport* destination) {
+    if (airplane->getStatus() == "Approaching") {
+        airplane->approach(destination->getName());
+    }
+    if (airplane->getStatus() == "Descending") {
+        airplane->descend();
+    }
+    if (airplane->getStatus() == "Landing") {
+        airplane->land(destination->getName(), destination->getAvailableRunway()->getName());
+    }
+    if (airplane->getStatus() == "Landed") {
+        airplane->landed(destination->getName(), destination->getAvailableRunway()->getName());
+    }
+    if (airplane->getStatus() == "Awaiting Taxi") {
+
+    }
+
+//        cout << callsign << " is taxiing to Gate " << 1 << endl;
+//
+//        cout << callsign << " is standing at Gate " << 1 << endl;
+//        status = "Standing at Gate";
 }

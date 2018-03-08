@@ -28,6 +28,10 @@ void Airplane::setFuel(int _fuel) {
     fuel = _fuel;
 }
 
+void Airplane::setHeight(int _height) {
+    height = _height;
+}
+
 void Airplane::printInfo() {
     cout << "Airplane: " << callsign << " (" << number << ")" << endl;
     cout << " -> model: " << model << endl;
@@ -42,19 +46,34 @@ void Airplane::printTestingInfo() {
     cout << fuel << endl;
 }
 
-void Airplane::land(Airport* airport) {
-    height = 10000;
-    if (status == "Approaching") {
-        cout << callsign << " is approaching " << airport->getName() << " at " << height << " ft." << endl;
-        while (height > 1000) {
-            height = height - 1000;
-            cout << callsign << " descended to " << height << " ft." << endl;
-        }
-        cout << callsign << " is landing at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
-        cout << callsign << " has landed at " << airport->getName() << " on runway " << airport->getAvailableRunway()->getName() << endl;
-        cout << callsign << " is taxiing to Gate " << 1 << endl;
+void Airplane::approach(string airport) {
+    cout << callsign << " is approaching " << airport << " at " << height << " ft." << endl;
+    status = "Descending";
+}
 
-        cout << callsign << " is standing at Gate " << 1 << endl;
-        status = "Standing at gate";
+void Airplane::descend() {
+    height = height - 1000;
+    cout << callsign << " descended to " << height << " ft." << endl;
+    if (height == 1000) {
+        status == "Landing";
     }
 }
+
+void Airplane::land(string airport, string runway) {
+    cout << callsign << " is landing at " << airport << " on runway " << runway << endl;
+    status = "Landed";
+    height = 0;
+}
+
+void Airplane::landed(string airport, string runway) {
+    cout << callsign << " has landed at " << airport << " on runway " << runway << endl;
+    status = "Awaiting Taxi";
+}
+
+string Airplane::getStatus() {
+    return status;
+}
+
+
+
+

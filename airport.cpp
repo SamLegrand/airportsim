@@ -16,8 +16,8 @@ void Airport::setCallsign(string _callsign) {
     callsign = _callsign;
 }
 
-void Airport::setGates(int _gates) {
-    gates = _gates;
+void Airport::addGate(Gate* _gate) {
+    gates.push_back(_gate);
 }
 
 void Airport::setPassengers(int _passengers) {
@@ -30,7 +30,7 @@ void Airport::addRunway(Runway *_runway) {
 
 void Airport::printInfo(){
     cout << "Airport: " << name << " (" << iata << ")" << endl;
-    cout << " -> gates: " << gates << endl;
+    cout << " -> gates: " << gates.size() << endl;
     cout << " -> runways: " << runways.size() << endl;
 }
 
@@ -38,7 +38,7 @@ void Airport::printTestingInfo(){
     cout << name << endl;
     cout << iata << endl;
     cout << callsign << endl;
-    cout << gates << endl;
+    cout << gates.size() << endl;
     cout << passengers << endl;
 }
 

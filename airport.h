@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "runway.h"
+#include "gate.h"
 #include <vector>
 using namespace std;
 
@@ -15,13 +16,13 @@ class Airport {
     string iata;
     string callsign;
     vector<Runway*> runways;
-    int gates;
+    vector<Gate*> gates;
     int passengers;
 public:
     void setName(string _name);
     void setIata(string _iata);
     void setCallsign(string _callsign);
-    void setGates(int _gates);
+    void addGate(Gate* _gate);
     void setPassengers(int _passengers);
     string getName();
     string getIata();
