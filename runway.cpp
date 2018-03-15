@@ -6,6 +6,7 @@
 
 void Runway::setName(string _name) {
     name = _name;
+    available = true;
 }
 
 void Runway::printInfo() {
@@ -14,4 +15,8 @@ void Runway::printInfo() {
 
 string Runway::getName() {
     return name;
+}
+
+bool Runway::isEmpty() {
+    return available;
 }

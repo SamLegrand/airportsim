@@ -16,8 +16,11 @@ void Airport::setCallsign(string _callsign) {
     callsign = _callsign;
 }
 
-void Airport::addGate(Gate* _gate) {
-    gates.push_back(_gate);
+void Airport::setGates(int _gate) {
+    gates.reserve(_gate);
+    for (int i=0; i<_gate; i++) {
+        gates.push_back(NULL);
+    }
 }
 
 void Airport::setPassengers(int _passengers) {
@@ -51,14 +54,31 @@ string Airport::getIata() {
 }
 
 Runway *Airport::getAvailableRunway() {
-    return runways[0];
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if(runways[i]->isEmpty()){
+            return runways[i];
+        }
+    }
+    return NULL;
 }
 
 int Airport::getAvailableGate() {
-    for (int i = 0; i < gates.size(); ++i) {
-        if(gates[i]->isEmpty()){
+    for (unsigned int i = 0; i < gates.size(); ++i) {
+        if(gates[i] != NULL){
             return i + 1;
         }
     }
-    return 0;
+    return -1;
+}
+
+void Airport::addPlane(Airplane *airplane, int gate) {
+    gates[gate] = airplane;
+}
+
+void Airport::removePlane(Airplane *airplane) {
+    for (unsigned int i = 0; i < gates.size(); ++i) {
+        if(gates[i] == airplane){
+            gates[i] = NULL;
+        }
+    }
 }
