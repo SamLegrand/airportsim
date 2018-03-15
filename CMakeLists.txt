@@ -15,7 +15,7 @@ link_directories(gtest/lib)
 set(RELEASE_SOURCE_FILES src/main.cpp src/tinystr.cpp src/tinystr.h src/tinyxml.cpp src/tinyxml.h src/tinyxmlerror.cpp src/airport.cpp src/airport.h src/runway.cpp src/runway.h src/airplane.cpp src/airplane.h src/tests.cpp)
 
 # Set source files for DEBUG target
-set(DEBUG_SOURCE_FILES src/tinystr.cpp src/tinystr.h src/tinyxml.cpp src/tinyxml.h src/tinyxmlerror.cpp src/airport.cpp src/airport.h src/runway.cpp src/runway.h src/airplane.cpp src/airplane.h src/tests.cpp)
+set(DEBUG_SOURCE_FILES src/airport.cpp src/airport.h src/runway.cpp src/runway.h src/airplane.cpp src/airplane.h src/tests.cpp)
 
 
 # Create RELEASE target
