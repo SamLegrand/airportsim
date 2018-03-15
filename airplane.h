@@ -33,8 +33,16 @@ public:
     void descend();
     void land(string airport, string runway);
     void landed(string airport, string runway);
-    void taxi(int gate);
+    void taxiToGate(int gate);
     void stand(int gate);
+    void taxiToRunway(string runway);
+    void takeOff(string airport, string runway);
+    void ascend();
+    void leaveAirport(string airport);
+    void boardPlane(string airport, int gate);
+    void unboardPlane(string airport, int gate);
+    void checkPlane();
+    void refuelPlane();
 };
 
 

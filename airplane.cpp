@@ -74,13 +74,57 @@ string Airplane::getStatus() {
     return status;
 }
 
-void Airplane::taxi(int gate) {
+void Airplane::taxiToGate(int gate) {
     cout << callsign << " is taxiing to Gate " << gate << "." << endl;
-    status = "Taxiing";
+    status = "Taxiing to Gate";
 }
 
 void Airplane::stand(int gate) {
     cout << callsign << " is standing at Gate " << gate << "." << endl;
+    status = "Standing at Gate";
+}
+
+void Airplane::taxiToRunway(string runway) {
+    cout << callsign << " is taxiing to runway " << runway << endl;
+    status = "Taxiing to Runway";
+}
+
+void Airplane::takeOff(string airport, string runway) {
+    cout << callsign << " is taking off at " << airport << " on runway " << runway << endl;
+    status = "Ascending";
+}
+
+void Airplane::ascend() {
+    height = height + 1000;
+    cout << callsign << " ascended to " << height << " ft." << endl;
+    if(height == 5000) {
+        status = "Leaving Airport";
+    }
+}
+
+void Airplane::leaveAirport(string airport) {
+    cout << callsign << " has left " << airport << endl;
+    status = "Left Airport";
+}
+
+void Airplane::boardPlane(string airport, int gate) {
+    cout << passengers << " boarded " << callsign << " at gate " << gate << " of " << airport << endl;
+    status = "Boarded Plane";
+}
+
+void Airplane::unboardPlane(string airport, int gate) {
+    cout << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << endl;
+    status = "Unboarded Plane";
+}
+
+void Airplane::checkPlane() {
+    cout << callsign << " has been checked for technical malfunctions" << endl;
+    status = "Checked Plane";
+}
+
+void Airplane::refuelPlane() {
+    cout << callsign << " has been refueled" << endl;
+    status = "Refueled Plane";
 }
 
 
