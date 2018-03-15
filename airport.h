@@ -7,24 +7,26 @@
 
 #include <iostream>
 #include "runway.h"
-#include "gate.h"
 #include <vector>
 #include <fstream>
+#include "airplane.h"
+
 using namespace std;
 
+class Airplane;
 
 class Airport {
     string name;
     string iata;
     string callsign;
     vector<Runway*> runways;
-    vector<Gate*> gates;
+    vector<Airplane*> gates;
     int passengers;
 public:
     void setName(string _name);
     void setIata(string _iata);
     void setCallsign(string _callsign);
-    void addGate(Gate* _gate);
+    void setGates(int _gate);
     int getAvailableGate();
     void setPassengers(int _passengers);
     string getName();
@@ -32,6 +34,8 @@ public:
     Runway* getAvailableRunway();
     void addRunway(Runway* _runway);
     void printInfo(ofstream &output);
+    void addPlane(Airplane* airplane, int gate);
+    void removePlane(Airplane* airplane);
     void printTestingInfo();
 };
 

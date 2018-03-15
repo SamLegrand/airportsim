@@ -10,10 +10,12 @@ using namespace std;
 
 class Runway {
     string name;
+    bool available;
 public:
     void setName(string _name);
     string getName();
     void printInfo();
+    bool isEmpty();
 };
 
 

@@ -85,9 +85,7 @@ int main() {
                         continue;
                     }
                     if (elemName == "gates") {
-                        for (int i=0; i<stoi(text->Value()); i++) {
-                            airport->addGate(new Gate);
-                        }
+                        airport->setGates(stoi(text->Value()));
                         continue;
                     }
                     if (elemName == "passengers") {
@@ -195,43 +193,52 @@ int main() {
 }
 
 void Planelanding(Airplane* airplane, Airport* destination) {
-    if (airplane->getStatus() == "Approaching") {
-        airplane->approach(destination->getName());
-    }
-    if (airplane->getStatus() == "Descending") {
-        airplane->descend();
-    }
-    if (airplane->getStatus() == "Landing") {
-        airplane->land(destination->getName(), destination->getAvailableRunway()->getName());
-    }
-    if (airplane->getStatus() == "Landed") {
-        airplane->landed(destination->getName(), destination->getAvailableRunway()->getName());
+    if (airplane->getStatus() == "Taxiing to Gate") {
+        int gate = destination->getAvailableGate();
+        if (gate == -1) {
+            return;
+        }
+        destination->addPlane(airplane, gate);
+        airplane->stand(gate);
     }
     if (airplane->getStatus() == "Awaiting Taxi") {
         airplane->taxiToGate(destination->getAvailableGate());
     }
-    if (airplane->getStatus() == "Taxiing to Gate") {
-        airplane->stand(destination->getAvailableGate());
+    if (airplane->getStatus() == "Landed") {
+        airplane->landed(destination->getName(), destination->getAvailableRunway()->getName());
     }
-
-//        cout << callsign << " is taxiing to Gate " << 1 << endl;
-//
-//        cout << callsign << " is standing at Gate " << 1 << endl;
-//        status = "Standing at Gate";
+    if (airplane->getStatus() == "Landing") {
+        airplane->land(destination->getName(), destination->getAvailableRunway()->getName());
+    }
+    if (airplane->getStatus() == "Descending") {
+        airplane->descend();
+    }
+    if (airplane->getStatus() == "Approaching") {
+        airplane->approach(destination->getName());
+    }
 }
 
 void Planetakeoff(Airplane* airplane, Airport* departure){
-    if(airplane->getStatus() == "Standing at Gate"){
-        airplane->taxiToRunway(departure->getAvailableRunway()->getName());
-    }
-    if(airplane->getStatus() == "Taxiing to Runway"){
-        airplane->takeOff(departure->getName(), departure->getAvailableRunway()->getName());
+    if(airplane->getStatus() == "Leaving Airport"){
+        airplane->leaveAirport(departure->getName());
     }
     if(airplane->getStatus() == "Ascending"){
         airplane->ascend();
     }
-    if(airplane->getStatus() == "Leaving Airport"){
-        airplane->leaveAirport(departure->getName());
+    if(airplane->getStatus() == "Taxiing to Runway"){
+        Runway* runway = departure->getAvailableRunway();
+        if (runway == NULL) {
+            return;
+        }
+        airplane->takeOff(departure->getName(), runway->getName());
+    }
+    if(airplane->getStatus() == "Standing at Gate"){
+        Runway* runway = departure->getAvailableRunway();
+        if (runway == NULL) {
+            return;
+        }
+        airplane->taxiToRunway(runway->getName());
+        departure->removePlane(airplane);
     }
 }
 
