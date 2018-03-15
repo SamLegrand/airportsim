@@ -174,7 +174,6 @@ int main() {
                     cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
                 }
             }
-            airplane->setHeight(10000);
             airplanes.push_back(airplane);
             continue;
         }

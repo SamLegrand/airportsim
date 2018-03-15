@@ -20,14 +20,20 @@ class Airplane {
     int fuel;
     int height;
 public:
-    void setNumber(string _number);
-    void setCallsign(string _callsign);
-    void setModel(string _model);
-    void setStatus(string _status);
-    void setPassengers(int _passengers);
-    void setFuel(int _fuel);
+    void setNumber(const string &number);
+    void setCallsign(const string &callsign);
+    void setModel(const string &model);
+    void setStatus(const string &status);
+    void setPassengers(int passengers);
+    void setFuel(int fuel);
     void setHeight(int height);
-    string getStatus();
+    const string &getNumber() const;
+    const string &getModel() const;
+    const string &getStatus() const;
+    int getPassengers() const;
+    int getFuel() const;
+    int getHeight() const;
+    const string &getCallsign() const;
     void printInfo(ofstream &output);
     void printTestingInfo();
     void approach(string airport);

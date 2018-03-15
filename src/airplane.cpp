@@ -4,32 +4,60 @@
 
 #include "airplane.h"
 
-void Airplane::setNumber(string _number) {
-    number = _number;
+void Airplane::setNumber(const string &number) {
+    Airplane::number = number;
 }
 
-void Airplane::setCallsign(string _callsign){
-    callsign = _callsign;
+void Airplane::setCallsign(const string &callsign){
+    Airplane::callsign = callsign;
 }
 
-void Airplane::setModel(string _model) {
-    model = _model;
+void Airplane::setModel(const string &model) {
+    Airplane::model = model;
 }
 
-void Airplane::setStatus(string _status) {
-    status = _status;
+void Airplane::setStatus(const string &status) {
+    Airplane::status = status;
 }
 
-void Airplane::setPassengers(int _passengers) {
-    passengers = _passengers;
+void Airplane::setPassengers(int passengers) {
+    Airplane::passengers = passengers;
 }
 
-void Airplane::setFuel(int _fuel) {
-    fuel = _fuel;
+void Airplane::setFuel(int fuel) {
+    Airplane::fuel = fuel;
 }
 
-void Airplane::setHeight(int _height) {
-    height = _height;
+void Airplane::setHeight(int height) {
+    Airplane::height = height;
+}
+
+const string &Airplane::getNumber() const {
+    return number;
+}
+
+const string &Airplane::getCallsign() const {
+    return callsign;
+}
+
+const string &Airplane::getModel() const {
+    return model;
+}
+
+const string &Airplane::getStatus() const {
+    return status;
+}
+
+int Airplane::getPassengers() const {
+    return passengers;
+}
+
+int Airplane::getFuel() const {
+    return fuel;
+}
+
+int Airplane::getHeight() const {
+    return height;
 }
 
 void Airplane::printInfo(ofstream &output) {
@@ -37,16 +65,8 @@ void Airplane::printInfo(ofstream &output) {
     output << " -> model: " << model << endl;
 }
 
-void Airplane::printTestingInfo() {
-    cout << number << endl;
-    cout << callsign << endl;
-    cout << model << endl;
-    cout << status << endl;
-    cout << passengers << endl;
-    cout << fuel << endl;
-}
-
 void Airplane::approach(string airport) {
+    height = 10000;
     cout << callsign << " is approaching " << airport << " at " << height << " ft." << endl;
     status = "Descending";
 }
@@ -70,16 +90,13 @@ void Airplane::landed(string airport, string runway) {
     status = "Awaiting Taxi";
 }
 
-string Airplane::getStatus() {
-    return status;
-}
-
 void Airplane::taxiToGate(int gate) {
     cout << callsign << " is taxiing to Gate " << gate << "." << endl;
     status = "Taxiing to Gate";
 }
 
 void Airplane::stand(int gate) {
+    height = 0;
     cout << callsign << " is standing at Gate " << gate << "." << endl;
     status = "Standing at Gate";
 }
@@ -104,7 +121,7 @@ void Airplane::ascend() {
 
 void Airplane::leaveAirport(string airport) {
     cout << callsign << " has left " << airport << endl;
-    status = "Left Airport";
+    status = "Travelling";
 }
 
 void Airplane::boardPlane(string airport, int gate) {
@@ -126,7 +143,3 @@ void Airplane::refuelPlane() {
     cout << callsign << " has been refueled" << endl;
     status = "Refueled Plane";
 }
-
-
-
-
