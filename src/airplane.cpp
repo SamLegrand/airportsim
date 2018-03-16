@@ -65,81 +65,81 @@ void Airplane::printInfo(ofstream &output) {
     output << " -> model: " << model << endl;
 }
 
-void Airplane::approach(string airport) {
+void Airplane::approach(ostream &output, const string& airport) {
     height = 10000;
-    cout << callsign << " is approaching " << airport << " at " << height << " ft." << endl;
+    output << callsign << " is approaching " << airport << " at " << height << " ft." << endl;
     status = "Descending";
 }
 
-void Airplane::descend() {
+void Airplane::descend(ostream &output) {
     height = height - 1000;
-    cout << callsign << " descended to " << height << " ft." << endl;
+    output << callsign << " descended to " << height << " ft." << endl;
     if (height == 1000) {
         status = "Landing";
     }
 }
 
-void Airplane::land(string airport, string runway) {
-    cout << callsign << " is landing at " << airport << " on runway " << runway << endl;
+void Airplane::land(ostream &output, const string& airport, const string& runway) {
+    output << callsign << " is landing at " << airport << " on runway " << runway << endl;
     status = "Landed";
     height = 0;
 }
 
-void Airplane::landed(string airport, string runway) {
-    cout << callsign << " has landed at " << airport << " on runway " << runway << endl;
+void Airplane::landed(ostream &output, const string& airport, const string& runway) {
+    output << callsign << " has landed at " << airport << " on runway " << runway << endl;
     status = "Awaiting Taxi";
 }
 
-void Airplane::taxiToGate(int gate) {
-    cout << callsign << " is taxiing to Gate " << gate << "." << endl;
+void Airplane::taxiToGate(ostream &output, int gate) {
+    output << callsign << " is taxiing to Gate " << gate << "." << endl;
     status = "Taxiing to Gate";
 }
 
-void Airplane::stand(int gate) {
+void Airplane::stand(ostream &output, int gate) {
     height = 0;
-    cout << callsign << " is standing at Gate " << gate << "." << endl;
+    output << callsign << " is standing at Gate " << gate << "." << endl;
     status = "Standing at Gate";
 }
 
-void Airplane::unboardPlane(string airport, int gate) {
-    cout << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << endl;
+void Airplane::unboardPlane(ostream &output, const string& airport, int gate) {
+    output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << endl;
     status = "Unboarded Plane";
 }
 
-void Airplane::checkPlane() {
-    cout << callsign << " has been checked for technical malfunctions" << endl;
+void Airplane::checkPlane(ostream &output) {
+    output << callsign << " has been checked for technical malfunctions" << endl;
     status = "Checked Plane";
 }
 
-void Airplane::refuelPlane() {
-    cout << callsign << " has been refueled" << endl;
+void Airplane::refuelPlane(ostream &output) {
+    output << callsign << " has been refueled" << endl;
     status = "Refueled Plane";
 }
 
-void Airplane::boardPlane(string airport, int gate) {
-    cout << passengers << " boarded " << callsign << " at gate " << gate << " of " << airport << endl;
+void Airplane::boardPlane(ostream &output, const string& airport, int gate) {
+    output << passengers << " boarded " << callsign << " at gate " << gate << " of " << airport << endl;
     status = "Boarded Plane";
 }
 
-void Airplane::taxiToRunway(string runway) {
-    cout << callsign << " is taxiing to runway " << runway << endl;
+void Airplane::taxiToRunway(ostream &output, const string& runway) {
+    output << callsign << " is taxiing to runway " << runway << endl;
     status = "Taxiing to Runway";
 }
 
-void Airplane::takeOff(string airport, string runway) {
-    cout << callsign << " is taking off at " << airport << " on runway " << runway << endl;
+void Airplane::takeOff(ostream &output, const string& airport, const string& runway) {
+    output << callsign << " is taking off at " << airport << " on runway " << runway << endl;
     status = "Ascending";
 }
 
-void Airplane::ascend() {
+void Airplane::ascend(ostream &output) {
     height = height + 1000;
-    cout << callsign << " ascended to " << height << " ft." << endl;
+    output << callsign << " ascended to " << height << " ft." << endl;
     if(height == 5000) {
         status = "Leaving Airport";
     }
 }
 
-void Airplane::leaveAirport(string airport) {
-    cout << callsign << " has left " << airport << endl;
+void Airplane::leaveAirport(ostream &output, const string& airport) {
+    output << callsign << " has left " << airport << endl;
     status = "Travelling";
 }

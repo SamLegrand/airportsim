@@ -9,6 +9,6 @@ int main() {
     myfile.open("error.txt");
     importer::importAirport("../input.xml", myfile, simulation);
     myfile.close();
-    simulation.simulate();
+    simulation.simulate(cout);
     return 0;
 }

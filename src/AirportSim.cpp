@@ -20,7 +20,7 @@ void AirportSim::setAirplanes(const vector<Airplane *> &airplanes) {
     AirportSim::airplanes = airplanes;
 }
 
-void AirportSim::simulate() {
+void AirportSim::simulate(std::ostream& SimOutput) {
     Airport* airport = airports[0];
     while (!checkSimEnd()) {
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
@@ -29,11 +29,11 @@ void AirportSim::simulate() {
                 continue;
             }
             if (airplane->getStatus() == "Leaving Airport") {
-                airplane->leaveAirport(airport->getName());
+                airplane->leaveAirport(SimOutput, airport->getName());
                 continue;
             }
             if (airplane->getStatus() == "Ascending") {
-                airplane->ascend();
+                airplane->ascend(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Runway") {
@@ -41,7 +41,7 @@ void AirportSim::simulate() {
                 if (runway == NULL) {
                     break;
                 }
-                airplane->takeOff(airport->getName(), runway->getName());
+                airplane->takeOff(SimOutput, airport->getName(), runway->getName());
                 continue;
             }
             if (airplane->getStatus() == "Boarded Plane") {
@@ -49,28 +49,28 @@ void AirportSim::simulate() {
                 if (runway == NULL) {
                     break;
                 }
-                airplane->taxiToRunway(runway->getName());
+                airplane->taxiToRunway(SimOutput, runway->getName());
                 airport->removePlane(airplane);
                 continue;
             }
             if (airplane->getStatus() == "Refueled Plane") {
-                airplane->boardPlane(airport->getName(), airport->findPlane(airplane));
+                airplane->boardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Checked Plane") {
-                airplane->refuelPlane();
+                airplane->refuelPlane(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Unboarded Plane") {
-                airplane->checkPlane();
+                airplane->checkPlane(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Standing at Gate") {
-                airplane->unboardPlane(airport->getName(), airport->findPlane(airplane));
+                airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
-                airplane->stand(airport->findPlane(airplane));
+                airplane->stand(SimOutput, airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Awaiting Taxi") {
@@ -79,23 +79,23 @@ void AirportSim::simulate() {
                     break;
                 }
                 airport->addPlane(airplane, gate);
-                airplane->taxiToGate(gate);
+                airplane->taxiToGate(SimOutput, gate);
                 continue;
             }
             if (airplane->getStatus() == "Landed") {
-                airplane->landed(airport->getName(), airport->getAvailableRunway()->getName());
+                airplane->landed(SimOutput, airport->getName(), airport->getAvailableRunway()->getName());
                 continue;
             }
             if (airplane->getStatus() == "Landing") {
-                airplane->land(airport->getName(), airport->getAvailableRunway()->getName());
+                airplane->land(SimOutput, airport->getName(), airport->getAvailableRunway()->getName());
                 continue;
             }
             if (airplane->getStatus() == "Descending") {
-                airplane->descend();
+                airplane->descend(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Approaching") {
-                airplane->approach(airport->getName());
+                airplane->approach(SimOutput, airport->getName());
                 continue;
             }
         }

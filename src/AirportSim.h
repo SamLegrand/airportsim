@@ -20,7 +20,7 @@ public:
 
     void setAirplanes(const vector<Airplane *> &airplanes);
 
-    void simulate();
+    void simulate(std::ostream &output);
 
     bool checkSimEnd();
 };
