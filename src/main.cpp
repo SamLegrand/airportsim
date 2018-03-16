@@ -7,6 +7,7 @@
 #include "runway.h"
 #include <vector>
 #include <sstream>
+#include "AirportSim.h"
 
 using namespace std;
 
@@ -188,5 +189,14 @@ int main() {
         airplanes[i]->printInfo(output);
     }
     output.close();
+
+    AirportSim sim;
+
+    sim.setAirplanes(airplanes);
+    sim.setAirports(airports);
+    sim.simulate();
+
+
+
     return 0;
 }

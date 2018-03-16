@@ -66,7 +66,7 @@ void Airport::printInfo(ofstream &output) const {
 }
 
 Runway *Airport::getAvailableRunway() {
-    for (unsigned int i = 0; i < runways.size(); ++i) {
+    for (unsigned int i = 0; i < runways.size(); i++) {
         if(runways[i]->isEmpty()){
             return runways[i];
         }
@@ -75,8 +75,8 @@ Runway *Airport::getAvailableRunway() {
 }
 
 int Airport::getAvailableGate() {
-    for (unsigned int i = 0; i < gates.size(); ++i) {
-        if(gates[i] != NULL){
+    for (unsigned int i = 0; i < gates.size(); i++) {
+        if(gates[i] == NULL){
             return i + 1;
         }
     }
@@ -87,8 +87,17 @@ void Airport::addPlane(Airplane *airplane, int gate) {
     gates[gate] = airplane;
 }
 
-void Airport::removePlane(Airplane *airplane) {
+int Airport::findPlane(Airplane *airplane) {
     for (unsigned int i = 0; i < gates.size(); ++i) {
+        if(gates[i] == airplane){
+            return i;
+        }
+    }
+    return -1;
+}
+
+void Airport::removePlane(Airplane *airplane) {
+    for (unsigned int i = 0; i < gates.size(); i++) {
         if(gates[i] == airplane){
             gates[i] = NULL;
         }

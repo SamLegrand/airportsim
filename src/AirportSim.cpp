@@ -23,7 +23,8 @@ void AirportSim::setAirplanes(const vector<Airplane *> &airplanes) {
 void AirportSim::simulate() {
     Airport* airport = airports[0];
     while (!checkSimEnd()) {
-        for (Airplane *airplane : airplanes) {
+        for (unsigned int i = 0; i<airplanes.size(); ++i) {
+            Airplane* airplane = airplanes[i];
             if (airplane->getStatus() == "Travelling") {
                 continue;
             }
@@ -38,7 +39,7 @@ void AirportSim::simulate() {
             if (airplane->getStatus() == "Taxiing to Runway") {
                 Runway *runway = airport->getAvailableRunway();
                 if (runway == NULL) {
-                    continue;
+                    break;
                 }
                 airplane->takeOff(airport->getName(), runway->getName());
                 continue;
@@ -46,14 +47,14 @@ void AirportSim::simulate() {
             if (airplane->getStatus() == "Boarded Plane") {
                 Runway *runway = airport->getAvailableRunway();
                 if (runway == NULL) {
-                    continue;
+                    break;
                 }
                 airplane->taxiToRunway(runway->getName());
                 airport->removePlane(airplane);
                 continue;
             }
             if (airplane->getStatus() == "Refueled Plane") {
-                airplane->boardPlane(airport->getName(), airport->getAvailableGate());
+                airplane->boardPlane(airport->getName(), airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Checked Plane") {
@@ -65,20 +66,20 @@ void AirportSim::simulate() {
                 continue;
             }
             if (airplane->getStatus() == "Standing at Gate") {
-                airplane->unboardPlane(airport->getName(), airport->getAvailableGate());
+                airplane->unboardPlane(airport->getName(), airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
-                int gate = airport->getAvailableGate();
-                if (gate == -1) {
-                    continue;
-                }
-                airport->addPlane(airplane, gate);
-                airplane->stand(gate);
+                airplane->stand(airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Awaiting Taxi") {
-                airplane->taxiToGate(airport->getAvailableGate());
+                int gate = airport->getAvailableGate();
+                if (gate == -1) {
+                    break;
+                }
+                airport->addPlane(airplane, gate);
+                airplane->taxiToGate(gate);
                 continue;
             }
             if (airplane->getStatus() == "Landed") {
@@ -102,7 +103,8 @@ void AirportSim::simulate() {
 }
 
 bool AirportSim::checkSimEnd() {
-    for(Airplane* airplane : airplanes) {
+    for (unsigned int i = 0; i<airplanes.size(); ++i) {
+        Airplane* airplane = airplanes[i];
         if (airplane->getStatus() != "Travelling") {
             return false;
         }

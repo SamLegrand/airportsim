@@ -41,6 +41,7 @@ public:
     void printInfo(ofstream &output) const;
     void addPlane(Airplane* airplane, int gate);
     void removePlane(Airplane* airplane);
+    int findPlane(Airplane* airplane);
     void setRunways(const vector<Runway *> &runways);
 };
 
