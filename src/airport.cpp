@@ -55,23 +55,10 @@ const int &Airport::getPassengers() const {
     return passengers;
 }
 
-void Airport::addRunway(Runway *_runway) {
-    runways.push_back(_runway);
-}
-
 void Airport::printInfo(ofstream &output) const {
     output << "Airport: " << name << " (" << iata << ")" << endl;
     output << " -> gates: " << gates.size() << endl;
     output << " -> runways: " << runways.size() << endl;
-}
-
-Runway *Airport::getAvailableRunway() {
-    for (unsigned int i = 0; i < runways.size(); i++) {
-        if(runways[i]->isEmpty()){
-            return runways[i];
-        }
-    }
-    return NULL;
 }
 
 int Airport::getAvailableGate() {
@@ -102,4 +89,38 @@ void Airport::removePlaneFromGate(Airplane *airplane) {
             gates[i] = NULL;
         }
     }
+}
+
+void Airport::addRunway(Runway *_runway) {
+    runways.push_back(_runway);
+}
+
+void Airport::addPlaneToRunway(Airplane *airplane, int runway) {
+    runways[runway]->airplane = airplane;
+}
+
+void Airport::removePlaneFromRunway(Airplane *airplane) {
+    for (unsigned int i = 0; i < runways.size(); i++) {
+        if(runways[i]->airplane == airplane){
+            runways[i]->airplane = NULL;
+        }
+    }
+}
+
+Runway *Airport::getAvailableRunway() {
+    for (unsigned int i = 0; i < runways.size(); i++) {
+        if(runways[i]->airplane == NULL){
+            return runways[i];
+        }
+    }
+    return NULL;
+}
+
+Runway *Airport::findPlaneInRunway(Airplane* airplane) {
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if(runways[i]->airplane == airplane){
+            return runways[i];
+        }
+    }
+    return NULL;
 }

@@ -97,7 +97,8 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
             continue;
         }
         if(objectName == "RUNWAY"){
-            Runway* runway = new Runway();
+            Runway* runway = new Runway;
+            runway->airplane = NULL;
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
@@ -111,7 +112,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         return PartialImport;
                     }
                     if (elemName == "name") {
-                        runway->setName(text->Value());
+                        runway->name = text->Value();
                         continue;
                     }
                     if (elemName == "airport") {

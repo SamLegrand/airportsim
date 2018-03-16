@@ -33,24 +33,27 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Ascending") {
+                Runway* runway = airport->findPlaneInRunway(airplane);
                 airplane->ascend(SimOutput);
+                runway->airplane = NULL;
                 continue;
             }
             if (airplane->getStatus() == "Taking Off") {
-                Runway *runway = airport->getAvailableRunway();
+                Runway *runway = airport->findPlaneInRunway(airplane);
                 if (runway == NULL) {
-                    break;
+                    continue;
                 }
-                airplane->takeOff(SimOutput, airport->getName(), runway->getName());
+                airplane->takeOff(SimOutput, airport->getName(), runway->name);
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Runway") {
                 Runway *runway = airport->getAvailableRunway();
                 if (runway == NULL) {
-                    break;
+                    continue;
                 }
-                airplane->taxiToRunway(SimOutput, runway->getName());
+                airplane->taxiToRunway(SimOutput, runway->name);
                 airport->removePlaneFromGate(airplane);
+                runway->airplane = airplane;
                 continue;
             }
             if(airplane->getStatus() == "Standing at Gate"){
@@ -73,20 +76,28 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
+                Runway* runway = airport->findPlaneInRunway(airplane);
                 int gate = airport->getAvailableGate();
                 if (gate == -1) {
-                    break;
+                    continue;
                 }
                 airport->addPlaneToGate(airplane, gate);
                 airplane->taxiToGate(SimOutput, gate);
+                runway->airplane = NULL;
                 continue;
             }
             if (airplane->getStatus() == "Landed") {
-                airplane->landed(SimOutput, airport->getName(), airport->getAvailableRunway()->getName());
+                Runway* runway = airport->findPlaneInRunway(airplane);
+                airplane->landed(SimOutput, airport->getName(), runway->name);
                 continue;
             }
             if (airplane->getStatus() == "Landing") {
-                airplane->land(SimOutput, airport->getName(), airport->getAvailableRunway()->getName());
+                Runway* runway = airport->getAvailableRunway();
+                if (runway == NULL) {
+                    continue;
+                }
+                airplane->land(SimOutput, airport->getName(), runway->name);
+                runway->airplane = airplane;
                 continue;
             }
             if (airplane->getStatus() == "Descending") {

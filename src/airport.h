@@ -6,15 +6,20 @@
 #define AIRPORTSIM_AIRPORT_H
 
 #include <iostream>
-#include "runway.h"
 #include <vector>
 #include <fstream>
+#include <map>
 #include "airplane.h"
 #include "DesignByContract.h"
 
 using namespace std;
 
 class Airplane;
+
+struct Runway {
+    std::string name;
+    Airplane* airplane;
+};
 
 class Airport {
     string name;
@@ -36,13 +41,16 @@ public:
     const vector<Runway *> &getRunways() const;
     const vector<Airplane *> &getGates() const;
     const int &getPassengers() const;
-    Runway* getAvailableRunway();
-    void addRunway(Runway* _runway);
     void printInfo(ofstream &output) const;
     void addPlaneToGate(Airplane *airplane, int gate);
     void removePlaneFromGate(Airplane *airplane);
     int findPlaneInGate(Airplane *airplane);
     void setRunways(const vector<Runway *> &runways);
+    void addRunway(Runway* _runway);
+    void addPlaneToRunway(Airplane* airplane, int runway);
+    void removePlaneFromRunway(Airplane* airplane);
+    Runway* getAvailableRunway();
+    Runway* findPlaneInRunway(Airplane* airplane);
 };
 
 
