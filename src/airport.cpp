@@ -4,53 +4,65 @@
 
 #include "airport.h"
 
-void Airport::setName(string _name) {
-    name = _name;
+void Airport::setName(const string &name) {
+    Airport::name = name;
 }
 
-void Airport::setIata(string _iata) {
-    iata = _iata;
+void Airport::setIata(const string &iata) {
+    Airport::iata = iata;
 }
 
-void Airport::setCallsign(string _callsign) {
-    callsign = _callsign;
+void Airport::setCallsign(const string &callsign) {
+    Airport::callsign = callsign;
 }
 
-void Airport::setGates(int _gate) {
-    gates.reserve(_gate);
-    for (int i=0; i<_gate; i++) {
+void Airport::setRunways(const vector<Runway *> &runways) {
+    Airport::runways = runways;
+}
+
+void Airport::setGates(const unsigned int &gate) {
+    gates.reserve(gate);
+    for (unsigned int i = 0; i < gate; i++) {
         gates.push_back(NULL);
     }
 }
 
-void Airport::setPassengers(int _passengers) {
-    passengers = _passengers;
+void Airport::setPassengers(const int &passengers) {
+    Airport::passengers = passengers;
+}
+
+const string &Airport::getName() const {
+    return name;
+}
+
+const string &Airport::getIata() const {
+    return iata;
+}
+
+const string &Airport::getCallsign() const {
+    return callsign;
+}
+
+const vector<Runway *> &Airport::getRunways() const {
+    return runways;
+}
+
+const vector<Airplane *> &Airport::getGates() const {
+    return gates;
+}
+
+const int &Airport::getPassengers() const {
+    return passengers;
 }
 
 void Airport::addRunway(Runway *_runway) {
     runways.push_back(_runway);
 }
 
-void Airport::printInfo(ofstream &output){
+void Airport::printInfo(ofstream &output) const {
     output << "Airport: " << name << " (" << iata << ")" << endl;
     output << " -> gates: " << gates.size() << endl;
     output << " -> runways: " << runways.size() << endl;
-}
-
-void Airport::printTestingInfo(){
-    cout << name << endl;
-    cout << iata << endl;
-    cout << callsign << endl;
-    cout << gates.size() << endl;
-    cout << passengers << endl;
-}
-
-string Airport::getName() {
-    return name;
-}
-
-string Airport::getIata() {
-    return iata;
 }
 
 Runway *Airport::getAvailableRunway() {

@@ -4,19 +4,15 @@
 
 #include "runway.h"
 
-void Runway::setName(string _name) {
-    name = _name;
+void Runway::setName(const string &name) {
+    Runway::name = name;
     available = true;
 }
 
-void Runway::printInfo() {
-    cout << name << endl;
-}
-
-string Runway::getName() {
+const string Runway::getName() const {
     return name;
 }
 
-bool Runway::isEmpty() {
+bool Runway::isEmpty() const {
     return available;
 }

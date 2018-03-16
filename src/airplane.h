@@ -35,7 +35,6 @@ public:
     int getHeight() const;
     const string &getCallsign() const;
     void printInfo(ofstream &output);
-    void printTestingInfo();
 
     /**
      \n REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");

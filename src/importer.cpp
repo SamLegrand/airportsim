@@ -1,45 +1,10 @@
-#include <iostream>
-#include "tinystr.h"
-#include "tinyxml.h"
-#include "tinyxmlparser.cpp"
-#include "airport.h"
-#include "airplane.h"
-#include "runway.h"
-#include <vector>
-#include <sstream>
+//
+// Created by sam on 16.03.18.
+//
 
-using namespace std;
+#include "importer.h"
 
-int stoi(string const& s){
-    stringstream ss(s);
-    int i;
-    ss >> i;
-    return i;
-}
-
-bool isInt(string const& s){
-    stringstream ss(s);
-    int i;
-    if(!(ss >> i).fail()){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-bool isString(string const& s){
-    for (int unsigned i = 0; i < s.size(); ++i) {
-        if(!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || (s[i] == ' '))){
-            return false;
-        }
-    }
-    return true;
-}
-
-int main() {
-    vector<Airport*> airports;
-    vector<Airplane*> airplanes;
+SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, airportsim &simulation) {
     TiXmlDocument doc;
     if (!doc.LoadFile("../input.xml")) {
         cerr << doc.ErrorDesc() << endl;
@@ -189,69 +154,4 @@ int main() {
     }
     output.close();
     return 0;
-}
-
-void Planelanding(Airplane* airplane, Airport* destination) {
-    if (airplane->getStatus() == "Taxiing to Gate") {
-        int gate = destination->getAvailableGate();
-        if (gate == -1) {
-            return;
-        }
-        destination->addPlane(airplane, gate);
-        airplane->stand(gate);
-    }
-    if (airplane->getStatus() == "Awaiting Taxi") {
-        airplane->taxiToGate(destination->getAvailableGate());
-    }
-    if (airplane->getStatus() == "Landed") {
-        airplane->landed(destination->getName(), destination->getAvailableRunway()->getName());
-    }
-    if (airplane->getStatus() == "Landing") {
-        airplane->land(destination->getName(), destination->getAvailableRunway()->getName());
-    }
-    if (airplane->getStatus() == "Descending") {
-        airplane->descend();
-    }
-    if (airplane->getStatus() == "Approaching") {
-        airplane->approach(destination->getName());
-    }
-}
-
-void Planetakeoff(Airplane* airplane, Airport* departure){
-    if(airplane->getStatus() == "Leaving Airport"){
-        airplane->leaveAirport(departure->getName());
-    }
-    if(airplane->getStatus() == "Ascending"){
-        airplane->ascend();
-    }
-    if(airplane->getStatus() == "Taxiing to Runway"){
-        Runway* runway = departure->getAvailableRunway();
-        if (runway == NULL) {
-            return;
-        }
-        airplane->takeOff(departure->getName(), runway->getName());
-    }
-    if(airplane->getStatus() == "Boarded Plane"){
-        Runway* runway = departure->getAvailableRunway();
-        if (runway == NULL) {
-            return;
-        }
-        airplane->taxiToRunway(runway->getName());
-        departure->removePlane(airplane);
-    }
-}
-
-void Planeatgate(Airplane* airplane, Airport* airport){
-    if(airplane->getStatus() == "Landed"){
-        airplane->unboardPlane(airport->getName(), airport->getAvailableGate());
-    }
-    if(airplane->getStatus() == "Unboarded Plane"){
-        airplane->checkPlane();
-    }
-    if(airplane->getStatus() == "Checked Plane"){
-        airplane->refuelPlane();
-    }
-    if(airplane->getStatus() == "Refueled Plane"){
-        airplane->boardPlane(airport->getName(), airport->getAvailableGate());
-    }
 }

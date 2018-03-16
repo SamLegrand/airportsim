@@ -24,20 +24,24 @@ class Airport {
     vector<Airplane*> gates;
     int passengers;
 public:
-    void setName(string _name);
-    void setIata(string _iata);
-    void setCallsign(string _callsign);
-    void setGates(int _gate);
+    void setName(const string &name);
+    void setIata(const string &iata);
+    void setCallsign(const string &callsign);
+    void setGates(const unsigned int &gate);
+    void setPassengers(const int &passengers);
     int getAvailableGate();
-    void setPassengers(int _passengers);
-    string getName();
-    string getIata();
+    const string &getName() const;
+    const string &getIata() const;
+    const string &getCallsign() const;
+    const vector<Runway *> &getRunways() const;
+    const vector<Airplane *> &getGates() const;
+    const int &getPassengers() const;
     Runway* getAvailableRunway();
     void addRunway(Runway* _runway);
-    void printInfo(ofstream &output);
+    void printInfo(ofstream &output) const;
     void addPlane(Airplane* airplane, int gate);
     void removePlane(Airplane* airplane);
-    void printTestingInfo();
+    void setRunways(const vector<Runway *> &runways);
 };
 
 
