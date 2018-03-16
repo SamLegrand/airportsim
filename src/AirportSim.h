@@ -21,6 +21,8 @@ public:
     void setAirplanes(const vector<Airplane *> &airplanes);
 
     void simulate();
+
+    bool checkSimEnd();
 };
 
 
