@@ -87,43 +87,43 @@ void Airplane::land(ostream &output, const string& airport, const string& runway
 
 void Airplane::landed(ostream &output, const string& airport, const string& runway) {
     output << callsign << " has landed at " << airport << " on runway " << runway << endl;
-    status = "Awaiting Taxi";
-}
-
-void Airplane::taxiToGate(ostream &output, int gate) {
-    output << callsign << " is taxiing to Gate " << gate << "." << endl;
     status = "Taxiing to Gate";
 }
 
-void Airplane::stand(ostream &output, int gate) {
-    height = 0;
-    output << callsign << " is standing at Gate " << gate << "." << endl;
-    status = "Standing at Gate";
+void Airplane::taxiToGate(ostream &output, int gate) {
+    output << callsign << " is taxiing to Gate " << gate << endl;
+    status = "Unboarded Plane";
 }
 
 void Airplane::unboardPlane(ostream &output, const string& airport, int gate) {
     output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << endl;
-    status = "Unboarded Plane";
+    status = "Checked Plane";
 }
 
 void Airplane::checkPlane(ostream &output) {
     output << callsign << " has been checked for technical malfunctions" << endl;
-    status = "Checked Plane";
+    status = "Refueled Plane";
 }
 
 void Airplane::refuelPlane(ostream &output) {
     output << callsign << " has been refueled" << endl;
-    status = "Refueled Plane";
+    status = "Boarded Plane";
 }
 
 void Airplane::boardPlane(ostream &output, const string& airport, int gate) {
     output << passengers << " boarded " << callsign << " at gate " << gate << " of " << airport << endl;
-    status = "Boarded Plane";
+    status = "Standing at Gate";
+}
+
+void Airplane::stand(ostream &output, int gate) {
+    height = 0;
+    output << callsign << " is standing at Gate " << gate << endl;
+    status = "Taxiing to Runway";
 }
 
 void Airplane::taxiToRunway(ostream &output, const string& runway) {
     output << callsign << " is taxiing to runway " << runway << endl;
-    status = "Taxiing to Runway";
+    status = "Taking Off";
 }
 
 void Airplane::takeOff(ostream &output, const string& airport, const string& runway) {

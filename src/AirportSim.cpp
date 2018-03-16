@@ -36,7 +36,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airplane->ascend(SimOutput);
                 continue;
             }
-            if (airplane->getStatus() == "Taxiing to Runway") {
+            if (airplane->getStatus() == "Taking Off") {
                 Runway *runway = airport->getAvailableRunway();
                 if (runway == NULL) {
                     break;
@@ -44,7 +44,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airplane->takeOff(SimOutput, airport->getName(), runway->getName());
                 continue;
             }
-            if (airplane->getStatus() == "Boarded Plane") {
+            if (airplane->getStatus() == "Taxiing to Runway") {
                 Runway *runway = airport->getAvailableRunway();
                 if (runway == NULL) {
                     break;
@@ -53,27 +53,26 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airport->removePlane(airplane);
                 continue;
             }
-            if (airplane->getStatus() == "Refueled Plane") {
+            if(airplane->getStatus() == "Standing at Gate"){
+                airplane->stand(SimOutput, airport->findPlane(airplane));
+            }
+            if (airplane->getStatus() == "Boarded Plane") {
                 airplane->boardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
-            if (airplane->getStatus() == "Checked Plane") {
+            if (airplane->getStatus() == "Refueled Plane") {
                 airplane->refuelPlane(SimOutput);
                 continue;
             }
-            if (airplane->getStatus() == "Unboarded Plane") {
+            if (airplane->getStatus() == "Checked Plane") {
                 airplane->checkPlane(SimOutput);
                 continue;
             }
-            if (airplane->getStatus() == "Standing at Gate") {
+            if (airplane->getStatus() == "Unboarded Plane") {
                 airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
-                airplane->stand(SimOutput, airport->findPlane(airplane));
-                continue;
-            }
-            if (airplane->getStatus() == "Awaiting Taxi") {
                 int gate = airport->getAvailableGate();
                 if (gate == -1) {
                     break;
