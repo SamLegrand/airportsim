@@ -34,8 +34,10 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             }
             if (airplane->getStatus() == "Ascending") {
                 Runway* runway = airport->findPlaneInRunway(airplane);
+                if (runway != NULL) {
+                    runway->airplane = NULL;
+                }
                 airplane->ascend(SimOutput);
-                runway->airplane = NULL;
                 continue;
             }
             if (airplane->getStatus() == "Taking Off") {
