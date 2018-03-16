@@ -21,25 +21,21 @@ protected:
     Runway runway_;
 };
 
-TEST_F(AirportSimTest, AirplaneGettersSetters){
+TEST_F(AirportSimTest, AirplaneFunctions){
     airplane_.setNumber("N11842");
     airplane_.setCallsign("Cessna 842");
     airplane_.setModel("Cessna 340");
     airplane_.setStatus("Approaching");
     airplane_.setPassengers(60);
     airplane_.setFuel(20);
-    airplane_.setHeight(5000);
-    EXPECT_EQ("N11842", airplane_.getNumber());
-    EXPECT_EQ("Cessna 842", airplane_.getCallsign());
-    EXPECT_EQ("Cessna 340", airplane_.getModel());
-    EXPECT_EQ("Approaching", airplane_.getStatus());
-    EXPECT_EQ(60, airplane_.getPassengers());
-    EXPECT_EQ(20, airplane_.getFuel());
-    EXPECT_EQ(5000, airplane_.getHeight());
-}
-
-TEST_F(AirportSimTest, AirplaneFunctions){
-    
+    testing::internal::CaptureStdout();
+    airplane_.approach("Antwerp International Airport");
+    EXPECT_EQ(testing::internal::GetCapturedStdout(), "Cessna 842 is approaching Antwerp International Airport at 10000 ft.\n");
+    EXPECT_EQ(10000, airplane_.getHeight());
+    testing::internal::CaptureStdout();
+    airplane_.descend();
+    EXPECT_EQ(testing::internal::GetCapturedStdout(), "Cessna 842 descended to 9000 ft.\n");
+    EXPECT_EQ(9000, airplane_.getHeight());
 }
 
 int main(int argc, char **argv){
