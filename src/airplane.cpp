@@ -128,7 +128,7 @@ void Airplane::refuelPlane(ostream &output) {
 
 void Airplane::boardPlane(ostream &output, const string& airport, int gate) {
     REQUIRE(this->getStatus() == "Boarding Plane", "Plane wasn't in correct state.");
-    output << passengers << " boarded " << callsign << " at gate " << gate << " of " << airport << endl;
+    output << passengers << " passengers boarded " << callsign << " at gate " << gate << " of " << airport << endl;
     status = "Standing at Gate";
     ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
 }

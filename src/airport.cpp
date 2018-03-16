@@ -47,8 +47,8 @@ const vector<Runway *> &Airport::getRunways() const {
     return runways;
 }
 
-const vector<Airplane *> &Airport::getGates() const {
-    return gates;
+const int Airport::getGates() const {
+    return (int)gates.size();
 }
 
 const int &Airport::getPassengers() const {
