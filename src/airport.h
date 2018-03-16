@@ -10,6 +10,7 @@
 #include <vector>
 #include <fstream>
 #include "airplane.h"
+#include "DesignByContract.h"
 
 using namespace std;
 

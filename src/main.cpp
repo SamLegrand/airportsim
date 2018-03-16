@@ -231,7 +231,7 @@ void Planetakeoff(Airplane* airplane, Airport* departure){
         }
         airplane->takeOff(departure->getName(), runway->getName());
     }
-    if(airplane->getStatus() == "Standing at Gate"){
+    if(airplane->getStatus() == "Boarded Plane"){
         Runway* runway = departure->getAvailableRunway();
         if (runway == NULL) {
             return;
