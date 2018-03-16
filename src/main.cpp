@@ -191,6 +191,19 @@ int main() {
     return 0;
 }
 
+
+
+
+
+
+
+
+void Airportsim(vector<Airport*> airports, vector<Airplane*> airplanes) {
+    for (Airplane* plane : airplanes) {
+
+    }
+}
+
 void Planelanding(Airplane* airplane, Airport* destination) {
     if (airplane->getStatus() == "Taxiing to Gate") {
         int gate = destination->getAvailableGate();
@@ -242,7 +255,7 @@ void Planetakeoff(Airplane* airplane, Airport* departure){
 }
 
 void Planeatgate(Airplane* airplane, Airport* airport){
-    if(airplane->getStatus() == "Landed"){
+    if(airplane->getStatus() == "Standing at Gate"){
         airplane->unboardPlane(airport->getName(), airport->getAvailableGate());
     }
     if(airplane->getStatus() == "Unboarded Plane"){
