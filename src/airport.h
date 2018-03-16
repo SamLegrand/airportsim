@@ -39,7 +39,7 @@ public:
     const string &getIata() const;
     const string &getCallsign() const;
     const vector<Runway *> &getRunways() const;
-    const vector<Airplane *> &getGates() const;
+    const int getGates() const;
     const int &getPassengers() const;
     void printInfo(ofstream &output) const;
 
