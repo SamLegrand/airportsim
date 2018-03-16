@@ -83,11 +83,11 @@ int Airport::getAvailableGate() {
     return -1;
 }
 
-void Airport::addPlane(Airplane *airplane, int gate) {
+void Airport::addPlaneToGate(Airplane *airplane, int gate) {
     gates[gate] = airplane;
 }
 
-int Airport::findPlane(Airplane *airplane) {
+int Airport::findPlaneInGate(Airplane *airplane) {
     for (unsigned int i = 0; i < gates.size(); ++i) {
         if(gates[i] == airplane){
             return i;
@@ -96,7 +96,7 @@ int Airport::findPlane(Airplane *airplane) {
     return -1;
 }
 
-void Airport::removePlane(Airplane *airplane) {
+void Airport::removePlaneFromGate(Airplane *airplane) {
     for (unsigned int i = 0; i < gates.size(); i++) {
         if(gates[i] == airplane){
             gates[i] = NULL;

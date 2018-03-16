@@ -50,14 +50,14 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     break;
                 }
                 airplane->taxiToRunway(SimOutput, runway->getName());
-                airport->removePlane(airplane);
+                airport->removePlaneFromGate(airplane);
                 continue;
             }
             if(airplane->getStatus() == "Standing at Gate"){
-                airplane->stand(SimOutput, airport->findPlane(airplane));
+                airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
             }
             if (airplane->getStatus() == "Boarding Plane") {
-                airplane->boardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
+                airplane->boardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Refueling Plane") {
@@ -69,7 +69,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Unboarding Plane") {
-                airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
+                airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
@@ -77,7 +77,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 if (gate == -1) {
                     break;
                 }
-                airport->addPlane(airplane, gate);
+                airport->addPlaneToGate(airplane, gate);
                 airplane->taxiToGate(SimOutput, gate);
                 continue;
             }

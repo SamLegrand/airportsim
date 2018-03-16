@@ -39,9 +39,9 @@ public:
     Runway* getAvailableRunway();
     void addRunway(Runway* _runway);
     void printInfo(ofstream &output) const;
-    void addPlane(Airplane* airplane, int gate);
-    void removePlane(Airplane* airplane);
-    int findPlane(Airplane* airplane);
+    void addPlaneToGate(Airplane *airplane, int gate);
+    void removePlaneFromGate(Airplane *airplane);
+    int findPlaneInGate(Airplane *airplane);
     void setRunways(const vector<Runway *> &runways);
 };
 
