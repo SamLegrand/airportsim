@@ -6,12 +6,13 @@
 #define AIRPORTSIM_IMPORTER_H
 
 #include <iostream>
+#include "AirportSim.h"
 
 enum SuccessEnum {ImportAborted, PartialImport, Success};
 
 class importer {
 public:
-    static SuccesEnum importAirport(const char* inputfilename, std::ostream& errstream, airportsim& simulation);
+    static SuccessEnum importAirport(const char* inputfilename, std::ostream& errstream, AirportSim& simulation);
 };
 
 

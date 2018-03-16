@@ -3,18 +3,50 @@
 //
 
 #include "importer.h"
+#include "tinystr.h"
+#include "tinyxml.h"
+#include <sstream>
 
-SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, airportsim &simulation) {
+int stoi(string const& s){
+    stringstream ss(s);
+    int i;
+    ss >> i;
+    return i;
+}
+
+bool isInt(string const& s){
+    stringstream ss(s);
+    int i;
+    if(!(ss >> i).fail()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool isString(string const& s){
+    for (int unsigned i = 0; i < s.size(); ++i) {
+        if(!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || (s[i] == ' '))){
+            return false;
+        }
+    }
+    return true;
+}
+
+SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, AirportSim &simulation) {
+    vector<Airport*> airports;
+    vector<Airplane*> airplanes;
     TiXmlDocument doc;
-    if (!doc.LoadFile("../input.xml")) {
-        cerr << doc.ErrorDesc() << endl;
-        return 1;
+    if (!doc.LoadFile(inputfilename)) {
+        errstream << doc.ErrorDesc() << endl;
+        return ImportAborted;
     }
     TiXmlElement *root = doc.FirstChildElement();
     if (root == NULL) {
-        cerr << "Failed to load file: No root element." << endl;
+        errstream << "Failed to load file: No root element." << endl;
         doc.Clear();
-        return 1;
+        return PartialImport;
     }
     string objectName;
     for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {
@@ -26,12 +58,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
-                        cerr << elemName << " does not contain any text." << endl;
-                        continue;
+                        errstream << elemName << " does not contain any text." << endl;
+                        return PartialImport;
                     }
                     if(!isString(text->Value())){
-                        cerr << elemName << " does not contain a string." << endl;
-                        continue;
+                        errstream << elemName << " does not contain a string." << endl;
+                        return PartialImport;
                     }
                     if (elemName == "name") {
                         airport->setName(text->Value());
@@ -47,7 +79,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (!isInt(text->Value())){
                         cerr << elemName << " does not contain a number." << endl;
-                        continue;
+                        return PartialImport;
                     }
                     if (elemName == "gates") {
                         airport->setGates(stoi(text->Value()));
@@ -57,7 +89,8 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         airport->setPassengers(stoi(text->Value()));
                         continue;
                     }
-                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    return PartialImport;
                 }
             }
             airports.push_back(airport);
@@ -70,12 +103,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
-                        cerr << elemName << " does not contain any text." << endl;
-                        continue;
+                        errstream << elemName << " does not contain any text." << endl;
+                        return PartialImport;
                     }
                     if(!isString(text->Value())){
-                        cerr << elemName << " does not contain a string." << endl;
-                        continue;
+                        errstream << elemName << " does not contain a string." << endl;
+                        return PartialImport;
                     }
                     if (elemName == "name") {
                         runway->setName(text->Value());
@@ -90,7 +123,8 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         }
                         continue;
                     }
-                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    return PartialImport;
                 }
             }
             continue;
@@ -102,11 +136,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {
-                        cerr << elemName << " does not contain any text." << endl;
-                        continue;
+                        errstream << elemName << " does not contain any text." << endl;
+                        return PartialImport;
                     }
                     if(!isString(text->Value())){
-                        cerr << elemName << " does not contain a string." << endl;
+                        errstream << elemName << " does not contain a string." << endl;
+                        return PartialImport;
                     }
                     if (elemName == "number") {
                         airplane->setNumber(text->Value());
@@ -125,8 +160,8 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     if (!isInt(text->Value())){
-                        cerr << elemName << " does not contain a number." << endl;
-                        continue;
+                        errstream << elemName << " does not contain a number." << endl;
+                        return PartialImport;
                     }
                     if (elemName == "passengers") {
                         airplane->setPassengers(stoi(text->Value()));
@@ -136,13 +171,15 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         airplane->setFuel(stoi(text->Value()));
                         continue;
                     }
-                    cerr << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
+                    return PartialImport;
                 }
             }
             airplanes.push_back(airplane);
             continue;
         }
-        cerr << "Invalid element name " << objectName << "." << endl;
+        errstream << "Invalid element name " << objectName << "." << endl;
+        return PartialImport;
     }
     ofstream output;
     output.open("output.txt", fstream::out);
@@ -153,5 +190,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
-    return 0;
+    simulation.setAirplanes(airplanes);
+    simulation.setAirports(airports);
+    return Success;
 }
