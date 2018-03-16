@@ -117,7 +117,7 @@ public:
 
     /**
      \n REQUIRE(this->getStatus() == "Leaving Airport", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Traveling", "Plane hasn't been set to the correct state.");
+     \n ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
      */
     void leaveAirport(string airport);
 };
