@@ -92,22 +92,22 @@ void Airplane::landed(ostream &output, const string& airport, const string& runw
 
 void Airplane::taxiToGate(ostream &output, int gate) {
     output << callsign << " is taxiing to Gate " << gate << endl;
-    status = "Unboarded Plane";
+    status = "Unboarding Plane";
 }
 
 void Airplane::unboardPlane(ostream &output, const string& airport, int gate) {
     output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << endl;
-    status = "Checked Plane";
+    status = "Checking Plane";
 }
 
 void Airplane::checkPlane(ostream &output) {
     output << callsign << " has been checked for technical malfunctions" << endl;
-    status = "Refueled Plane";
+    status = "Refueling Plane";
 }
 
 void Airplane::refuelPlane(ostream &output) {
     output << callsign << " has been refueled" << endl;
-    status = "Boarded Plane";
+    status = "Boarding Plane";
 }
 
 void Airplane::boardPlane(ostream &output, const string& airport, int gate) {

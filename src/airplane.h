@@ -56,54 +56,54 @@ public:
 
     /**
      \n REQUIRE(this->getStatus() == "Landed", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Awaiting Taxi", "Plane hasn't been set to the correct state.");
+     \n ENSURE(this->getStatus() == "Taxiing to Gate", "Plane hasn't been set to the correct state.");
      */
     void landed(ostream &output, const string& airport, const string& runway);
 
     /**
-     \n REQUIRE(this->getStatus() == "Awaiting Taxi", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Taxiing to Gate", "Plane hasn't been set to the correct state.");
+     \n REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
      */
     void taxiToGate(ostream &output, int gate);
 
     /**
-     \n REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
-     */
-    void stand(ostream &output, int gate);
-
-    /**
-     \n REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Unboarded Plane", "Plane hasn't been set to the correct state.");
+     \n REQUIRE(this->getStatus() == "Unboarding Plane", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Checking Plane", "Plane hasn't been set to the correct state.");
      */
     void unboardPlane(ostream &output, const string& airport, int gate);
 
     /**
-     \n REQUIRE(this->getStatus() == "Unboarded Plane", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Checked Plane", "Plane hasn't been set to the correct state.");
+     \n REQUIRE(this->getStatus() == "Checking Plane", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Refueling Plane", "Plane hasn't been set to the correct state.");
      */
     void checkPlane(ostream &output);
 
     /**
-     \n REQUIRE(this->getStatus() == "Checked Plane", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Refueled Plane", "Plane hasn't been set to the correct state.");
+     \n REQUIRE(this->getStatus() == "Refueling Plane", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Boarding Plane", "Plane hasn't been set to the correct state.");
      */
     void refuelPlane(ostream &output);
 
     /**
-     \n REQUIRE(this->getStatus() == "Refueled Plane", "Plane wasn't in correct state.");
-     \n ENSURE(this->getStatus() == "Boarded Plane", "Plane hasn't been set to the correct state.");
+     \n REQUIRE(this->getStatus() == "Boarding Plane", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
      */
     void boardPlane(ostream &output, const string& airport, int gate);
 
     /**
-     \n REQUIRE(this->getStatus() == "Boarded Plane", "Plane wasn't in correct state.");
+     \n REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
      \n ENSURE(this->getStatus() == "Taxiing to Runway", "Plane hasn't been set to the correct state.");
+     */
+    void stand(ostream &output, int gate);
+
+    /**
+     \n REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
+     \n ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
      */
     void taxiToRunway(ostream &output, const string& runway);
 
     /**
-     \n REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
+     \n REQUIRE(this->getStatus() == "Taking Off", "Plane wasn't in correct state.");
      \n ENSURE(this->getStatus() == "Ascending", "Plane hasn't been set to the correct state.");
      */
     void takeOff(ostream &output, const string& airport, const string& runway);

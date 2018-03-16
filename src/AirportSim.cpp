@@ -56,19 +56,19 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             if(airplane->getStatus() == "Standing at Gate"){
                 airplane->stand(SimOutput, airport->findPlane(airplane));
             }
-            if (airplane->getStatus() == "Boarded Plane") {
+            if (airplane->getStatus() == "Boarding Plane") {
                 airplane->boardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
-            if (airplane->getStatus() == "Refueled Plane") {
+            if (airplane->getStatus() == "Refueling Plane") {
                 airplane->refuelPlane(SimOutput);
                 continue;
             }
-            if (airplane->getStatus() == "Checked Plane") {
+            if (airplane->getStatus() == "Checking Plane") {
                 airplane->checkPlane(SimOutput);
                 continue;
             }
-            if (airplane->getStatus() == "Unboarded Plane") {
+            if (airplane->getStatus() == "Unboarding Plane") {
                 airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlane(airplane));
                 continue;
             }
