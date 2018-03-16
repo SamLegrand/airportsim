@@ -42,14 +42,29 @@ public:
     const vector<Airplane *> &getGates() const;
     const int &getPassengers() const;
     void printInfo(ofstream &output) const;
+
+    /**
+     \n REQUIRE(gate > 0 || gate < this->gates.size(), "Gate should be a valid value.");
+     */
     void addPlaneToGate(Airplane *airplane, int gate);
+
     void removePlaneFromGate(Airplane *airplane);
+
     int findPlaneInGate(Airplane *airplane);
+
     void setRunways(const vector<Runway *> &runways);
+
     void addRunway(Runway* _runway);
+
+    /**
+     \n REQUIRE(runway > 0 || runway < this->runways.size(), "Runway should be a valid value.");
+     */
     void addPlaneToRunway(Airplane* airplane, int runway);
+
     void removePlaneFromRunway(Airplane* airplane);
+
     Runway* getAvailableRunway();
+
     Runway* findPlaneInRunway(Airplane* airplane);
 };
 
