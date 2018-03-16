@@ -5,6 +5,7 @@
 #include "importer.h"
 #include "tinystr.h"
 #include "tinyxml.h"
+#include "tinyxmlparser.cpp"
 #include <sstream>
 
 int stoi(string const& s){
