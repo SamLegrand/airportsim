@@ -72,7 +72,7 @@ int Airport::getAvailableGate() {
 
 void Airport::addPlaneToGate(Airplane *airplane, int gate) {
     REQUIRE(gate > 0 || (unsigned)gate < this->gates.size(), "Gate should be a valid value.");
-    gates[gate] = airplane;
+    gates[gate - 1] = airplane;
 }
 
 int Airport::findPlaneInGate(Airplane *airplane) {
@@ -97,7 +97,6 @@ void Airport::addRunway(Runway *_runway) {
 }
 
 void Airport::addPlaneToRunway(Airplane *airplane, int runway) {
-    REQUIRE(runway > 0 || (unsigned)runway < this->runways.size(), "Runway should be a valid value.");
     runways[runway]->airplane = airplane;
 }
 
