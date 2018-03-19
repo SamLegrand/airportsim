@@ -62,7 +62,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         return PartialImport;
                     }
                     if(!isString(text->Value())){
-                        errstream << elemName << " does not contain a string." << endl;
+                        errstream << elemName << " does not contain a valid string." << endl;
                         return PartialImport;
                     }
                     if (elemName == "name") {
@@ -78,7 +78,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     if (!isInt(text->Value())){
-                        cerr << elemName << " does not contain a number." << endl;
+                        errstream << elemName << " does not contain a valid number." << endl;
                         return PartialImport;
                     }
                     if (elemName == "gates") {
