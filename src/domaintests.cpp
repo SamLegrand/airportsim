@@ -147,8 +147,8 @@ TEST_F(AirportSimDomainTest, AirportOccupation){
     Runway* r = new Runway;
     r->name = "11R";
     airport_.addRunway(r);
-    //EXPECT_EQ(airport_.getAvailableRunway()->name, "11R");
+    EXPECT_EQ(airport_.getAvailableRunway()->name, "11R");
     r->airplane = &airplane_;
-    //EXPECT_EQ(airport_.getAvailableRunway(), NULL);
+    EXPECT_TRUE(airport_.getAvailableRunway() == NULL);
     EXPECT_EQ(airport_.findPlaneInRunway(&airplane_)->name, "11R");
 }

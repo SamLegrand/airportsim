@@ -17,6 +17,10 @@ using namespace std;
 class Airplane;
 
 struct Runway {
+    Runway(){
+      Runway::name = "";
+        Runway::airplane = NULL;
+    };
     std::string name;
     Airplane* airplane;
 };
