@@ -115,7 +115,7 @@ TEST_F(AirportSimDomainTest, TakeOffScenario){
 }
 
 TEST_F(AirportSimDomainTest, ContractViolations){
-    airport_.setGates(0);
+    airport_.setGates(0);   //set gate amount to 0
     EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 1), "Assertion.*failed");
     airport_.setGates(1);
     EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 0), "Assertion.*failed");
