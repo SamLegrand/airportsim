@@ -53,7 +53,7 @@ public:
     int getAvailableGate();
 
     /**
-     * REQUIRE(gate > 0 && gate < this->gates.size(), "Gate should be a valid value.");
+     * REQUIRE(gate > 0 && gate <= this->gates.size(), "Gate should be a valid value.");
      * ENSURE(gates[gate - 1] == airplane, "Plane wasn't added to correct gate.");
      */
     void addPlaneToGate(Airplane *airplane, int gate);

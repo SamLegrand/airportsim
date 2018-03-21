@@ -14,6 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/airport.cpp" afterPath="$PROJECT_DIR$/src/airport.cpp" />
+      <change beforePath="$PROJECT_DIR$/src/airport.h" afterPath="$PROJECT_DIR$/src/airport.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,7 +37,7 @@
       <file leaf-file-name="AirportSim.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirportSim.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="360">
               <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
               <folding />
             </state>
@@ -45,7 +47,7 @@
       <file leaf-file-name="AirportSim.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AirportSim.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
+            <state relative-caret-position="1944">
               <caret line="108" column="53" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="53" />
               <folding />
             </state>
@@ -55,7 +57,7 @@
       <file leaf-file-name="airplane.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/airplane.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
+            <state relative-caret-position="-1062">
               <caret line="39" column="49" lean-forward="false" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
               <folding />
             </state>
@@ -65,7 +67,7 @@
       <file leaf-file-name="airplane.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/airplane.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1041">
+            <state relative-caret-position="756">
               <caret line="102" column="65" lean-forward="false" selection-start-line="102" selection-start-column="65" selection-end-line="102" selection-end-column="65" />
               <folding />
             </state>
@@ -75,8 +77,8 @@
       <file leaf-file-name="airport.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/airport.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-418">
-              <caret line="80" column="50" lean-forward="true" selection-start-line="80" selection-start-column="50" selection-end-line="80" selection-end-column="50" />
+            <state relative-caret-position="414">
+              <caret line="74" column="95" lean-forward="true" selection-start-line="74" selection-start-column="95" selection-end-line="74" selection-end-column="95" />
               <folding />
             </state>
           </provider>
@@ -85,8 +87,8 @@
       <file leaf-file-name="airport.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/airport.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="70" column="7" lean-forward="true" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+            <state relative-caret-position="177">
+              <caret line="58" column="54" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
               <folding>
                 <element signature="e#97#116#0" expanded="true" />
               </folding>
@@ -97,7 +99,7 @@
       <file leaf-file-name="importer.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/importer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-867">
+            <state relative-caret-position="1836">
               <caret line="105" column="39" lean-forward="false" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
               <folding />
             </state>
@@ -375,7 +377,7 @@
       <workItem from="1521128315349" duration="2000000" />
       <workItem from="1521196479691" duration="5845000" />
       <workItem from="1521204011494" duration="1503000" />
-      <workItem from="1521660270383" duration="2876000" />
+      <workItem from="1521660270383" duration="3986000" />
     </task>
     <task id="LOCAL-00001" summary="Add gitignore, add 2.1">
       <created>1519919486798</created>
@@ -517,11 +519,25 @@
       <option name="project" value="LOCAL" />
       <updated>1521663126888</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Added Requires/Unsures">
+      <created>1521663155781</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1521663155781</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Added Requires/Unsures">
+      <created>1521663920448</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1521663920448</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49371000" />
+    <option name="totallyTimeSpent" value="50481000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -538,11 +554,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12282551" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838154" sideWeight="0.49182922" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.49182922" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33229086" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5102794" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13744588" sideWeight="0.4897206" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13636364" sideWeight="0.4897206" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -690,14 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="208" lean-forward="false" selection-start-line="14" selection-start-column="208" selection-end-line="14" selection-end-column="208" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/error.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -717,6 +725,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#19#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -772,43 +783,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirportSim.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/runway.cpp" />
     <entry file="file://$PROJECT_DIR$/src/runway.h" />
     <entry file="file://$PROJECT_DIR$/src/importer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-867">
+        <state relative-caret-position="1836">
           <caret line="105" column="39" lean-forward="false" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AirportSim.cpp">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="108" column="53" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="53" />
+        <state relative-caret-position="252">
+          <caret line="14" column="208" lean-forward="false" selection-start-line="14" selection-start-column="208" selection-end-line="14" selection-end-column="208" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/airplane.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
+        <state relative-caret-position="-1062">
           <caret line="39" column="49" lean-forward="false" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirportSim.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1944">
+          <caret line="108" column="53" lean-forward="false" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AirportSim.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/airplane.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1041">
+        <state relative-caret-position="756">
           <caret line="102" column="65" lean-forward="false" selection-start-line="102" selection-start-column="65" selection-end-line="102" selection-end-column="65" />
           <folding />
         </state>
@@ -816,8 +835,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/airport.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="70" column="7" lean-forward="true" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
+        <state relative-caret-position="177">
+          <caret line="58" column="54" lean-forward="true" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
           <folding>
             <element signature="e#97#116#0" expanded="true" />
           </folding>
@@ -826,8 +845,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/airport.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-418">
-          <caret line="80" column="50" lean-forward="true" selection-start-line="80" selection-start-column="50" selection-end-line="80" selection-end-column="50" />
+        <state relative-caret-position="414">
+          <caret line="74" column="95" lean-forward="true" selection-start-line="74" selection-start-column="95" selection-end-line="74" selection-end-column="95" />
           <folding />
         </state>
       </provider>
