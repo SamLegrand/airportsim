@@ -37,8 +37,8 @@ public:
     void setIata(const string &iata);
     void setCallsign(const string &callsign);
     void setGates(const unsigned int &gate);
+    void setRunways(const vector<Runway *> &runways);
     void setPassengers(const int &passengers);
-    int getAvailableGate();
     const string &getName() const;
     const string &getIata() const;
     const string &getCallsign() const;
@@ -48,27 +48,53 @@ public:
     void printInfo(ofstream &output) const;
 
     /**
-     \n REQUIRE(gate > 0 || gate < this->gates.size(), "Gate should be a valid value.");
+     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
+     * ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
+     */
+    int getAvailableGate();
+
+    /**
+     * REQUIRE(gate > 0 && gate < this->gates.size(), "Gate should be a valid value.");
+     * ENSURE(gates[gate - 1] == airplane, "Plane wasn't added to correct gate.");
      */
     void addPlaneToGate(Airplane *airplane, int gate);
 
+    /**
+     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
+     * ENSURE(gates[i] == NULL, "Plane wasn't correctly removed from gate.");
+     */
     void removePlaneFromGate(Airplane *airplane);
 
+    /**
+     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
+     * ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
+     */
     int findPlaneInGate(Airplane *airplane);
 
-    void setRunways(const vector<Runway *> &runways);
-
+    /**
+     * REQUIRE(_runway->airplane == NULL, "Runway isn't properly initialised.");
+     */
     void addRunway(Runway* _runway);
 
     /**
-     \n REQUIRE(runway > 0 || runway < this->runways.size(), "Runway should be a valid value.");
+     * REQUIRE(runway > 0 && runway < this->runways.size(), "Runway should be a valid value.");
      */
     void addPlaneToRunway(Airplane* airplane, int runway);
 
+    /**
+     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
+     * ENSURE(runways[i] == NULL, "Plane wasn't correctly removed from runway.");
+     */
     void removePlaneFromRunway(Airplane* airplane);
 
+    /**
+     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
+     */
     Runway* getAvailableRunway();
 
+    /**
+     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
+     */
     Runway* findPlaneInRunway(Airplane* airplane);
 };
 
