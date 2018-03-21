@@ -12,10 +12,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="Added Requires/Unsures">
+    <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/airport.cpp" afterPath="$PROJECT_DIR$/src/airport.cpp" />
-      <change beforePath="$PROJECT_DIR$/src/airport.h" afterPath="$PROJECT_DIR$/src/airport.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/src/airport.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="213">
-              <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+              <caret line="70" column="7" lean-forward="true" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
               <folding>
                 <element signature="e#97#116#0" expanded="true" />
               </folding>
@@ -228,7 +226,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/airport.h</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/domaintests.cpp</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
@@ -377,7 +375,7 @@
       <workItem from="1521128315349" duration="2000000" />
       <workItem from="1521196479691" duration="5845000" />
       <workItem from="1521204011494" duration="1503000" />
-      <workItem from="1521660270383" duration="2844000" />
+      <workItem from="1521660270383" duration="2876000" />
     </task>
     <task id="LOCAL-00001" summary="Add gitignore, add 2.1">
       <created>1519919486798</created>
@@ -512,11 +510,18 @@
       <option name="project" value="LOCAL" />
       <updated>1521229174991</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added Requires/Unsures">
+      <created>1521663126888</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1521663126888</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49339000" />
+    <option name="totallyTimeSpent" value="49371000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -575,7 +580,8 @@
     <MESSAGE value="renamed functions" />
     <MESSAGE value="fixed runway" />
     <MESSAGE value="Added checks for int" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added checks for int" />
+    <MESSAGE value="Added Requires/Unsures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Requires/Unsures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -811,7 +817,7 @@
     <entry file="file://$PROJECT_DIR$/src/airport.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
-          <caret line="66" column="7" lean-forward="true" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+          <caret line="70" column="7" lean-forward="true" selection-start-line="70" selection-start-column="7" selection-end-line="70" selection-end-column="7" />
           <folding>
             <element signature="e#97#116#0" expanded="true" />
           </folding>
