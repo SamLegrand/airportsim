@@ -78,7 +78,7 @@ void Airport::addPlaneToGate(Airplane *airplane, int gate) {
 int Airport::findPlaneInGate(Airplane *airplane) {
     for (unsigned int i = 0; i < gates.size(); ++i) {
         if(gates[i] == airplane){
-            return i;
+            return i + 1;
         }
     }
     return -1;

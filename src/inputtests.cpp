@@ -20,31 +20,19 @@ protected:
     }
 
     AirportSim simulator;
-    Airplane airplane_;
-    Airport airport_;
-    Runway runway_;
 };
 
-//    TEST_F(AirportSimInputTest, InputLegal){
-//        ofstream filestream;
-//        SuccessEnum  result;
-//        int counter = 1;
-//        string filename = "../testInput/inputlegal" + to_string(counter) + ".xml";
-//        string errorfilename;
-//
-//        while(FileExists(filename)){
-//            filestream.open("../testInput/Error.txt");
-//            result = importer::importAirport(filename.c_str(), filestream, simulator);
-//            filestream.close();
-//            EXPECT_TRUE(result == Success);
-//            EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));
-//
-//            counter++;
-//            filename = "../testInput/inputlegal" + to_string(counter) + ".xml";
-//        };
-//
-//        EXPECT_TRUE(counter == 12);
-//    }
+TEST_F(AirportSimInputTest, InputLegal){
+    ofstream filestream;
+    SuccessEnum  result;
+
+    filestream.open("../testInput/Error.txt");
+    result = importer::importAirport("../testInput/inputlegal.xml", filestream, simulator);
+    filestream.close();
+    EXPECT_TRUE(result == Success);
+    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));
+}
+
 TEST_F(AirportSimInputTest, InputSyntaxErrors){
     ofstream filestream;
     SuccessEnum  result;
