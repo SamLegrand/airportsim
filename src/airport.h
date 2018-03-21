@@ -49,7 +49,6 @@ public:
 
     /**
      * REQUIRE(!gates.empty(), "There haven't been any gates added.");
-     * ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
      */
     int getAvailableGate();
 
@@ -67,7 +66,6 @@ public:
 
     /**
      * REQUIRE(!gates.empty(), "There haven't been any gates added.");
-     * ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
      */
     int findPlaneInGate(Airplane *airplane);
 
