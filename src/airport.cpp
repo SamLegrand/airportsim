@@ -65,7 +65,6 @@ int Airport::getAvailableGate() {
     REQUIRE(!gates.empty(), "There haven't been any gates added.");
     for (unsigned int i = 0; i < gates.size(); i++) {
         if(gates[i] == NULL){
-            ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
             return i + 1;
         }
     }
@@ -82,7 +81,6 @@ int Airport::findPlaneInGate(Airplane *airplane) {
     REQUIRE(!gates.empty(), "There haven't been any gates added.");
     for (unsigned int i = 0; i < gates.size(); ++i) {
         if(gates[i] == airplane){
-            ENSURE(i > 0 && i < gates.size(), "Invalid return value for gate.");
             return i + 1;
         }
     }
