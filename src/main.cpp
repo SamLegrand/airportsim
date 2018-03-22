@@ -5,11 +5,11 @@
 using namespace std;
 
 int main() {
-    AirportSim simulation;
-    ofstream myfile;
+    AirportSim simulation;      //Create simulation
+    ofstream myfile;        //Create filestream
     myfile.open("error.txt");
-    importer::importAirport("../input.xml", myfile, simulation);
+    importer::importAirport("../input.xml", myfile, simulation);        //Import from xml file
     myfile.close();
-    simulation.simulate(cout);
+    simulation.simulate(cout);      //Simulate airport
     return 0;
 }

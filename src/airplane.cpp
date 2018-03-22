@@ -150,6 +150,7 @@ void Airplane::taxiToRunway(ostream &output, const string& runway) {
 
 void Airplane::takeOff(ostream &output, const string& airport, const string& runway) {
     REQUIRE(this->getStatus() == "Taking Off", "Plane wasn't in correct state.");
+    height = 0;
     output << callsign << " is taking off at " << airport << " on runway " << runway << endl;
     status = "Ascending";
     ENSURE(this->getStatus() == "Ascending", "Plane hasn't been set to the correct state.");

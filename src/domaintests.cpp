@@ -19,7 +19,7 @@ protected:
     Airport airport_;
 };
 
-TEST_F(AirportSimDomainTest, LandingScenario){
+TEST_F(AirportSimDomainTest, LandingScenario){      //Testing landin scenario
     airplane_.setNumber("N11842");
     airplane_.setCallsign("Cessna 842");
     airplane_.setModel("Cessna 340");
@@ -27,7 +27,7 @@ TEST_F(AirportSimDomainTest, LandingScenario){
     airplane_.setPassengers(60);
     airplane_.setFuel(20);
     EXPECT_EQ(airplane_.getStatus(), "Approaching");
-    std::ostringstream stream;
+    std::ostringstream stream;      //Using stream to check output
     airplane_.approach(stream, "Antwerp International Airport");    //Check for correct output for approach
     EXPECT_EQ(stream.str(), "Cessna 842 is approaching Antwerp International Airport at 10000 ft.\n");
     EXPECT_EQ(airplane_.getStatus(), "Descending");
@@ -55,7 +55,7 @@ TEST_F(AirportSimDomainTest, LandingScenario){
     EXPECT_EQ(airplane_.getStatus(), "Unboarding Plane");
 }
 
-TEST_F(AirportSimDomainTest, ArrivalAtGateScenario){
+TEST_F(AirportSimDomainTest, ArrivalAtGateScenario){        //Testing arrival at gate scenario
     airplane_.setNumber("N11842");
     airplane_.setCallsign("Cessna 842");
     airplane_.setModel("Cessna 340");
@@ -81,7 +81,7 @@ TEST_F(AirportSimDomainTest, ArrivalAtGateScenario){
     EXPECT_EQ(airplane_.getStatus(), "Standing at Gate");
 }
 
-TEST_F(AirportSimDomainTest, TakeOffScenario){
+TEST_F(AirportSimDomainTest, TakeOffScenario){      //Testing takeoff scenario
     airplane_.setNumber("N11842");
     airplane_.setCallsign("Cessna 842");
     airplane_.setModel("Cessna 340");
@@ -114,14 +114,14 @@ TEST_F(AirportSimDomainTest, TakeOffScenario){
     EXPECT_EQ(airplane_.getStatus(), "Travelling");
 }
 
-TEST_F(AirportSimDomainTest, ContractViolations){
+TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various contract violations
     airport_.setGates(0);   //set gate amount to 0
-    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 1), "Assertion.*failed");
+    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 1), "Assertion.*failed");      //Impossible to add because there are no gates
     airport_.setGates(1);
-    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 0), "Assertion.*failed");
+    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 0), "Assertion.*failed");      //Impossible to add (gates start at 1)
     airplane_.setStatus("Unknown");
     std::ostringstream stream;
-    EXPECT_DEATH(airplane_.approach(stream, ""), "Assertion.*failed");
+    EXPECT_DEATH(airplane_.approach(stream, ""), "Assertion.*failed");      //Checking for current state violations for all airplane functions
     EXPECT_DEATH(airplane_.descend(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane_.land(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane_.landed(stream, "", ""), "Assertion.*failed");
@@ -137,18 +137,18 @@ TEST_F(AirportSimDomainTest, ContractViolations){
     EXPECT_DEATH(airplane_.leaveAirport(stream, ""), "Assertion.*failed");
 }
 
-TEST_F(AirportSimDomainTest, AirportOccupation){
+TEST_F(AirportSimDomainTest, AirportOccupation){        //Testing specific airport functions for gates and runways
     airport_.setGates(1);
-    EXPECT_EQ(airport_.getGates(), 1);
+    EXPECT_EQ(airport_.getGates(), 1);      //Expect that there is one gate in airport
     airport_.addPlaneToGate(&airplane_, 1);
-    EXPECT_EQ(airport_.getAvailableGate(), -1);
+    EXPECT_EQ(airport_.getAvailableGate(), -1);     //There are no gates available, expect -1
     airport_.removePlaneFromGate(&airplane_);
-    EXPECT_EQ(airport_.getAvailableGate(), 1);
+    EXPECT_EQ(airport_.getAvailableGate(), 1);      //Expect that gate 1 is now available
     Runway* r = new Runway;
     r->name = "11R";
     airport_.addRunway(r);
-    EXPECT_EQ(airport_.getAvailableRunway()->name, "11R");
+    EXPECT_EQ(airport_.getAvailableRunway()->name, "11R");      //Expect that runway 11R is available
     r->airplane = &airplane_;
-    EXPECT_TRUE(airport_.getAvailableRunway() == NULL);
-    EXPECT_EQ(airport_.findPlaneInRunway(&airplane_)->name, "11R");
+    EXPECT_TRUE(airport_.getAvailableRunway() == NULL);     //Expect that there is no runway available
+    EXPECT_EQ(airport_.findPlaneInRunway(&airplane_)->name, "11R");     //Expect that airplane is currently using runway 11R
 }

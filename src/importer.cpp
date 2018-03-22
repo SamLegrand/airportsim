@@ -7,6 +7,7 @@
 #include "tinyxml.h"
 #include <sstream>
 
+//Help functions for importer, need to be moved to utils
 int stoi(string const& s){
     stringstream ss(s);
     int i;
@@ -35,33 +36,33 @@ bool isString(string const& s){
 }
 
 SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, AirportSim &simulation) {
-    vector<Airport*> airports;
+    vector<Airport*> airports;      //Initialise airports and airplanes containers
     vector<Airplane*> airplanes;
-    TiXmlDocument doc;
-    if (!doc.LoadFile(inputfilename)) {
+    TiXmlDocument doc;      //Initalise parser document
+    if (!doc.LoadFile(inputfilename)) {     //Check for failed loading of file
         errstream << doc.ErrorDesc() << endl;
         return ImportAborted;
     }
     TiXmlElement *root = doc.FirstChildElement();
-    if (root == NULL) {
+    if (root == NULL) {     //Check if file contains root element
         errstream << "Failed to load file: No root element." << endl;
         doc.Clear();
         return PartialImport;
     }
     string objectName;
-    for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {
+    for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {       //Loop over elements
         objectName = object->Value();
         if (objectName == "AIRPORT") {
-            Airport* airport = new Airport();
-            for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
+            Airport* airport = new Airport();       //Initialise airport
+            for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {       //Loop over attributes
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
-                    if (text == NULL) {
+                    if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << endl;
                         return PartialImport;
                     }
-                    if(!isString(text->Value())){
+                    if(!isString(text->Value())){   //Check if input is of type string
                         errstream << elemName << " does not contain a valid string." << endl;
                         return PartialImport;
                     }
@@ -77,7 +78,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         airport->setCallsign(text->Value());
                         continue;
                     }
-                    if (!isInt(text->Value())){
+                    if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << endl;
                         return PartialImport;
                     }
@@ -97,17 +98,17 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
             continue;
         }
         if(objectName == "RUNWAY"){
-            Runway* runway = new Runway;
+            Runway* runway = new Runway;        //Initialise runway
             runway->airplane = NULL;
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
-                    if (text == NULL) {
+                    if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << endl;
                         return PartialImport;
                     }
-                    if(!isString(text->Value())){
+                    if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << endl;
                         return PartialImport;
                     }
@@ -131,16 +132,16 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
             continue;
         }
         if(objectName == "AIRPLANE"){
-            Airplane* airplane = new Airplane();
+            Airplane* airplane = new Airplane();        //Initalise airplane
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     TiXmlText *text = e->ToText();
-                    if (text == NULL) {
+                    if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << endl;
                         return PartialImport;
                     }
-                    if(!isString(text->Value())){
+                    if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << endl;
                         return PartialImport;
                     }
@@ -160,7 +161,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         airplane->setStatus(text->Value());
                         continue;
                     }
-                    if (!isInt(text->Value())){
+                    if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a number." << endl;
                         return PartialImport;
                     }
@@ -183,7 +184,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         return PartialImport;
     }
     ofstream output;
-    output.open("output.txt", fstream::out);
+    output.open("../output.txt", fstream::out);        //Write simple output to stream
     for (unsigned int i=0; i<airports.size(); ++i) {
         airports[i]->printInfo(output);
     }
@@ -191,7 +192,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
-    simulation.setAirplanes(airplanes);
+    simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
     return Success;
 }
