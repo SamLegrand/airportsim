@@ -9,21 +9,9 @@
 #include <vector>
 #include <fstream>
 #include <map>
-#include "airplane.h"
-#include "DesignByContract.h"
+#include "runway.h"
 
 using namespace std;
-
-class Airplane;
-
-struct Runway {
-    Runway(){
-      Runway::name = "";
-        Runway::airplane = NULL;
-    };
-    std::string name;
-    Airplane* airplane;
-};
 
 class Airport {
     string name;
@@ -48,24 +36,24 @@ public:
     void printInfo(ofstream &output) const;
 
     /**
-     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
      */
     int getAvailableGate();
 
     /**
-     * REQUIRE(gate > 0 && gate <= this->gates.size(), "Gate should be a valid value.");
-     * ENSURE(gates[gate - 1] == airplane, "Plane wasn't added to correct gate.");
+     * REQUIRE(gate > 0 && gate <= this->getGates(), "Gate should be a valid value.");
+     * ENSURE(this->findPlaneInGate(airplane) == gate, "Plane wasn't added to correct gate.");
      */
     void addPlaneToGate(Airplane *airplane, int gate);
 
     /**
-     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
-     * ENSURE(gates[i] == NULL, "Plane wasn't correctly removed from gate.");
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     * ENSURE(this->findPlaneInGate(airplane) == -1, "Plane wasn't correctly removed from gate.");
      */
     void removePlaneFromGate(Airplane *airplane);
 
     /**
-     * REQUIRE(!gates.empty(), "There haven't been any gates added.");
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
      */
     int findPlaneInGate(Airplane *airplane);
 
@@ -75,23 +63,23 @@ public:
     void addRunway(Runway* _runway);
 
     /**
-     * REQUIRE(runway > 0 && runway < this->runways.size(), "Runway should be a valid value.");
+     * REQUIRE(runway > 0 && (unsigned)runway < this->getRunways().size(), "Runway should be a valid value.");
      */
     void addPlaneToRunway(Airplane* airplane, int runway);
 
     /**
-     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
-     * ENSURE(runways[i] == NULL, "Plane wasn't correctly removed from runway.");
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+     * ENSURE(this->findPlaneInRunway(airplane) == NULL, "Plane wasn't correctly removed from runway.");
      */
     void removePlaneFromRunway(Airplane* airplane);
 
     /**
-     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
      */
     Runway* getAvailableRunway();
 
     /**
-     * REQUIRE(!runways.empty(), "There haven't been any runways added.");
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
      */
     Runway* findPlaneInRunway(Airplane* airplane);
 };
