@@ -145,10 +145,10 @@ TEST_F(AirportSimDomainTest, AirportOccupation){        //Testing specific airpo
     airport_.removePlaneFromGate(&airplane_);
     EXPECT_EQ(airport_.getAvailableGate(), 1);      //Expect that gate 1 is now available
     Runway* r = new Runway;
-    r->name = "11R";
+    r->setName("11R");
     airport_.addRunway(r);
-    EXPECT_EQ(airport_.getAvailableRunway()->name, "11R");      //Expect that runway 11R is available
-    r->airplane = &airplane_;
+    EXPECT_EQ(airport_.getAvailableRunway()->getName(), "11R");      //Expect that runway 11R is available
+    r->setAirplane(&airplane_);
     EXPECT_TRUE(airport_.getAvailableRunway() == NULL);     //Expect that there is no runway available
-    EXPECT_EQ(airport_.findPlaneInRunway(&airplane_)->name, "11R");     //Expect that airplane is currently using runway 11R
+    EXPECT_EQ(airport_.findPlaneInRunway(&airplane_)->getName(), "11R");     //Expect that airplane is currently using runway 11R
 }
