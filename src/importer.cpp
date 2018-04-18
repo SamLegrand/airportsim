@@ -228,6 +228,51 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
+
+    output.open("../graphicaloutput.txt", fstream::out);
+    int currentsize = 0;
+    Runway* currentrunway;
+    for (int i = 0; i < airports.size(); ++i) {
+        for (int j = 0; j < airports[i]->getRunways().size(); ++j) {
+            if (airports[i]->getRunways()[j]->getTaxipoints().size() > currentsize){
+                currentsize = airports[i]->getRunways()[j]->getTaxipoints().size();
+                currentrunway = airports[i]->getRunways()[j];
+            }
+        }
+        output << currentrunway->getName() << " | ";
+        if (currentrunway->getAirplane() != NULL){
+            output << "====V=====" << endl;
+        }
+        else{
+            output << "==========" << endl;
+        }
+        for (int j = 0; j < currentrunway->getTaxipoints().size();) {
+            if (j%2 == 0){
+                output << currentrunway->getTaxipoints()[j] << " | " << endl;
+                ++j;
+            }
+            else{
+                output << currentrunway->getCrossings()[j-1] << " | ";
+                if (airports[i]->findRunway(currentrunway->getCrossings()[j-1])->getAirplane() != NULL){
+                    output << "====V=====" << endl;
+                }
+                else{
+                    output << "==========" << endl;
+                }
+            }
+        }
+        output << "Gates [";
+        for (int j = 0; j < airports[i]->getGates(); ++j) {
+            if(airports[i]->getGatesVector()[j] != NULL){
+                output << "V";
+            }
+            else{
+                output << " ";
+            }
+        }
+        output << "]" << endl << endl;
+    }
+    output.close();
     simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
     return Success;

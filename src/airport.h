@@ -31,9 +31,11 @@ public:
     const string &getIata() const;
     const string &getCallsign() const;
     const vector<Runway *> &getRunways() const;
+    const vector<Airplane*> &getGatesVector() const;
     const int getGates() const;
     const int &getPassengers() const;
     void printInfo(ofstream &output) const;
+    Runway* findRunway(string runwayName);
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");

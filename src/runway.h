@@ -38,6 +38,10 @@ public:
     void addTaxipoint(string taxipoint);
 
     void addCrossing(string crossing);
+
+    const vector<string> &getTaxipoints() const;
+
+    const vector<string> &getCrossings() const;
 };
 
 

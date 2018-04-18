@@ -47,6 +47,10 @@ const vector<Runway *> &Airport::getRunways() const {
     return runways;
 }
 
+const vector<Airplane*> &Airport::getGatesVector() const {
+    return gates;
+}
+
 const int Airport::getGates() const {
     return (int)gates.size();
 }
@@ -135,4 +139,12 @@ Runway *Airport::findPlaneInRunway(Airplane* airplane) {
         }
     }
     return NULL;
+}
+
+Runway *Airport::findRunway(string runwayName) {
+    for (int i = 0; i < getRunways().size(); ++i) {
+        if (getRunways()[i]->getName() == runwayName){
+            return getRunways()[i];
+        }
+    }
 }

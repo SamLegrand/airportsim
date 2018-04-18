@@ -48,3 +48,11 @@ void Runway::addTaxipoint(string taxipoint) {
 void Runway::addCrossing(string crossing){
     Runway::crossings.push_back(crossing);
 }
+
+const vector<string> &Runway::getTaxipoints() const {
+    return taxipoints;
+}
+
+const vector<string> &Runway::getCrossings() const {
+    return crossings;
+}
