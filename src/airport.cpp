@@ -4,19 +4,19 @@
 
 #include "airport.h"
 
-void Airport::setName(const string &name) {
+void Airport::setName(const std::string &name) {
     Airport::name = name;
 }
 
-void Airport::setIata(const string &iata) {
+void Airport::setIata(const std::string &iata) {
     Airport::iata = iata;
 }
 
-void Airport::setCallsign(const string &callsign) {
+void Airport::setCallsign(const std::string &callsign) {
     Airport::callsign = callsign;
 }
 
-void Airport::setRunways(const vector<Runway *> &runways) {
+void Airport::setRunways(const std::vector<Runway *> &runways) {
     Airport::runways = runways;
 }
 
@@ -31,19 +31,19 @@ void Airport::setPassengers(const int &passengers) {
     Airport::passengers = passengers;
 }
 
-const string &Airport::getName() const {
+const std::string &Airport::getName() const {
     return name;
 }
 
-const string &Airport::getIata() const {
+const std::string &Airport::getIata() const {
     return iata;
 }
 
-const string &Airport::getCallsign() const {
+const std::string &Airport::getCallsign() const {
     return callsign;
 }
 
-const vector<Runway *> &Airport::getRunways() const {
+const std::vector<Runway *> &Airport::getRunways() const {
     return runways;
 }
 
@@ -55,10 +55,10 @@ const int &Airport::getPassengers() const {
     return passengers;
 }
 
-void Airport::printInfo(ofstream &output) const {
-    output << "Airport: " << name << " (" << iata << ")" << endl;
-    output << " -> gates: " << gates.size() << endl;
-    output << " -> runways: " << runways.size() << endl;
+void Airport::printInfo(std::ofstream &output) const {
+    output << "Airport: " << name << " (" << iata << ")" << std::endl;
+    output << " -> gates: " << gates.size() << std::endl;
+    output << " -> runways: " << runways.size() << std::endl;
 }
 
 int Airport::getAvailableGate() {

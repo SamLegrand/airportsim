@@ -11,29 +11,28 @@
 #include <map>
 #include "runway.h"
 
-using namespace std;
 
 class Airport {
-    string name;
-    string iata;
-    string callsign;
-    vector<Runway*> runways;
-    vector<Airplane*> gates;
+    std::string name;
+    std::string iata;
+    std::string callsign;
+    std::vector<Runway*> runways;
+    std::vector<Airplane*> gates;
     int passengers;
 public:
-    void setName(const string &name);
-    void setIata(const string &iata);
-    void setCallsign(const string &callsign);
+    void setName(const std::string &name);
+    void setIata(const std::string &iata);
+    void setCallsign(const std::string &callsign);
     void setGates(const unsigned int &gate);
-    void setRunways(const vector<Runway *> &runways);
+    void setRunways(const std::vector<Runway *> &runways);
     void setPassengers(const int &passengers);
-    const string &getName() const;
-    const string &getIata() const;
-    const string &getCallsign() const;
-    const vector<Runway *> &getRunways() const;
+    const std::string &getName() const;
+    const std::string &getIata() const;
+    const std::string &getCallsign() const;
+    const std::vector<Runway *> &getRunways() const;
     const int getGates() const;
     const int &getPassengers() const;
-    void printInfo(ofstream &output) const;
+    void printInfo(std::ofstream &output) const;
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");

@@ -9,11 +9,11 @@ Runway::Runway() {
     Runway::airplane = NULL;
 }
 
-const string &Runway::getName() const {
+const std::string &Runway::getName() const {
     return name;
 }
 
-void Runway::setName(const string &name) {
+void Runway::setName(const std::string &name) {
     Runway::name = name;
 }
 
@@ -25,11 +25,11 @@ void Runway::setAirplane(Airplane *airplane) {
     Runway::airplane = airplane;
 }
 
-const string &Runway::getType() const {
+const std::string &Runway::getType() const {
     return type;
 }
 
-void Runway::setType(const string &type) {
+void Runway::setType(const std::string &type) {
     Runway::type = type;
 }
 
@@ -41,10 +41,10 @@ void Runway::setLength(int length) {
     Runway::length = length;
 }
 
-void Runway::addTaxipoint(string taxipoint) {
+void Runway::addTaxipoint(std::string taxipoint) {
     Runway::taxipoints.push_back(taxipoint);
 }
 
-void Runway::addCrossing(string crossing){
+void Runway::addCrossing(std::string crossing){
     Runway::crossings.push_back(crossing);
 }
