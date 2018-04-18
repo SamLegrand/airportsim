@@ -107,6 +107,24 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         errstream << elemName << " does not contain any text." << endl;
                         return PartialImport;
                     }
+                    if (elemName == "TAXIROUTE"){
+                        for (TiXmlElement *elem2 = elem->FirstChildElement(); elem2 != NULL; elem2 = elem2->NextSiblingElement()) {
+                            string elemName2 = elem2->Value();
+                            for (TiXmlNode *e2 = elem2->FirstChild(); e2 != NULL; e2 = e2->NextSibling()) {
+                                TiXmlText *text2 = e2->ToText();
+                                if(!isString(text2->Value())){       //Check if input is of type string
+                                    errstream << elemName2 << " does not contain a string." << endl;
+                                    return PartialImport;
+                                }
+                                if (elemName2 == "taxipoint"){
+                                    runway->addTaxipoint(text2->Value());
+                                }
+                                if (elemName2 == "crossing"){
+                                    runway->addCrossing(text2->Value());
+                                }
+                            }
+                        }
+                    }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << endl;
                         return PartialImport;
@@ -123,6 +141,16 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                             }
                         }
                         continue;
+                    }
+                    if (elemName == "type"){
+                        runway->setType(text->Value());
+                    }
+                    if (!isInt(text->Value())){     //Check if input is of type int
+                        errstream << elemName << " does not contain a valid number." << endl;
+                        return PartialImport;
+                    }
+                    if (elemName == "length"){
+                        runway->setLength(stoi(text->Value()));
                     }
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << endl;
                     return PartialImport;
@@ -159,6 +187,15 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (elemName == "status") {
                         airplane->setStatus(text->Value());
                         continue;
+                    }
+                    if(elemName == "type"){
+                        airplane->setType(text->Value());
+                    }
+                    if(elemName == "engine"){
+                        airplane->setEngine(text->Value());
+                    }
+                    if(elemName == "size"){
+                        airplane->setSize(text->Value());
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a number." << endl;

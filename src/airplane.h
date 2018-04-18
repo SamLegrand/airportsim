@@ -16,6 +16,9 @@ class Airplane {
     string callsign;
     string model;
     string status;
+    string type;
+    string engine;
+    string size;
     int passengers;
     int fuel;
     int height;
@@ -35,6 +38,12 @@ public:
     int getHeight() const;
     const string &getCallsign() const;
     void printInfo(ofstream &output);
+    const string &getType() const;
+    void setType(const string &type);
+    const string &getEngine() const;
+    void setEngine(const string &engine);
+    const string &getSize() const;
+    void setSize(const string &size);
 
     /**
      * REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");

@@ -172,3 +172,27 @@ void Airplane::leaveAirport(ostream &output, const string& airport) {
     status = "Travelling";
     ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
 }
+
+const string &Airplane::getType() const {
+    return type;
+}
+
+void Airplane::setType(const string &type) {
+    Airplane::type = type;
+}
+
+const string &Airplane::getEngine() const {
+    return engine;
+}
+
+void Airplane::setEngine(const string &engine) {
+    Airplane::engine = engine;
+}
+
+const string &Airplane::getSize() const {
+    return size;
+}
+
+void Airplane::setSize(const string &size) {
+    Airplane::size = size;
+}

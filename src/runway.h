@@ -7,10 +7,15 @@
 
 #include "airplane.h"
 #include <string>
+#include <vector>
 
 class Runway {
     std::string name;
+    std::string type;
+    int length;
     Airplane* airplane;
+    vector<string> taxipoints;
+    vector<string> crossings;
 public:
     Runway();
 
@@ -21,6 +26,18 @@ public:
     Airplane *getAirplane() const;
 
     void setAirplane(Airplane *airplane);
+
+    const string &getType() const;
+
+    void setType(const string &type);
+
+    int getLength() const;
+
+    void setLength(int length);
+
+    void addTaxipoint(string taxipoint);
+
+    void addCrossing(string crossing);
 };
 
 
