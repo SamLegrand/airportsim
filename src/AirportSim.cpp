@@ -4,19 +4,19 @@
 
 #include "AirportSim.h"
 
-const vector<Airport *> &AirportSim::getAirports() const {
+const std::vector<Airport *> &AirportSim::getAirports() const {
     return airports;
 }
 
-void AirportSim::setAirports(const vector<Airport *> &airports) {
+void AirportSim::setAirports(const std::vector<Airport *> &airports) {
     AirportSim::airports = airports;
 }
 
-const vector<Airplane *> &AirportSim::getAirplanes() const {
+const std::vector<Airplane *> &AirportSim::getAirplanes() const {
     return airplanes;
 }
 
-void AirportSim::setAirplanes(const vector<Airplane *> &airplanes) {
+void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
     AirportSim::airplanes = airplanes;
 }
 
@@ -94,12 +94,22 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Landing") {
-                Runway* runway = airport->getAvailableRunway();
-                if (runway == NULL) {
-                    continue;
-                }
+                Runway* runway = airport->findPlaneInRunway(airplane);
                 airplane->land(SimOutput, airport->getName(), runway->getName());
-                runway->setAirplane(airplane);
+                continue;
+            }
+            if (airplane->getStatus() == "Final Approach") {
+                Runway* runway = airport->findPlaneInRunway(airplane);
+                if (runway == NULL) {
+                    runway = airport->getAvailableRunway();
+                    if (runway == NULL) {
+                        airplane->finalapproach(SimOutput, airport->getName(), "");
+                        continue;
+                    } else {
+                        runway->setAirplane(airplane);
+                    }
+                }
+                airplane->finalapproach(SimOutput, airport->getName(), runway->getName());
                 continue;
             }
             if (airplane->getStatus() == "Descending") {

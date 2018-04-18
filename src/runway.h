@@ -14,8 +14,8 @@ class Runway {
     std::string type;
     int length;
     Airplane* airplane;
-    vector<string> taxipoints;
-    vector<string> crossings;
+    std::vector<std::string> taxipoints;
+    std::vector<std::string> crossings;
 public:
     Runway();
 
@@ -27,17 +27,17 @@ public:
 
     void setAirplane(Airplane *airplane);
 
-    const string &getType() const;
+    const std::string &getType() const;
 
-    void setType(const string &type);
+    void setType(const std::string &type);
 
     int getLength() const;
 
     void setLength(int length);
 
-    void addTaxipoint(string taxipoint);
+    void addTaxipoint(std::string taxipoint);
 
-    void addCrossing(string crossing);
+    void addCrossing(std::string crossing);
 
     const vector<string> &getTaxipoints() const;
 
