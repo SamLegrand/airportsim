@@ -141,7 +141,7 @@ Runway *Airport::findPlaneInRunway(Airplane* airplane) {
     return NULL;
 }
 
-Runway *Airport::findRunway(string runwayName) {
+Runway *Airport::findRunway(std::string runwayName) {
     for (int i = 0; i < getRunways().size(); ++i) {
         if (getRunways()[i]->getName() == runwayName){
             return getRunways()[i];

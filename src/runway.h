@@ -39,9 +39,9 @@ public:
 
     void addCrossing(std::string crossing);
 
-    const vector<string> &getTaxipoints() const;
+    const std::vector<std::string> &getTaxipoints() const;
 
-    const vector<string> &getCrossings() const;
+    const std::vector<std::string> &getCrossings() const;
 };
 
 

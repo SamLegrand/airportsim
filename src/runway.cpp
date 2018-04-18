@@ -49,10 +49,10 @@ void Runway::addCrossing(std::string crossing){
     Runway::crossings.push_back(crossing);
 }
 
-const vector<string> &Runway::getTaxipoints() const {
+const std::vector<std::string> &Runway::getTaxipoints() const {
     return taxipoints;
 }
 
-const vector<string> &Runway::getCrossings() const {
+const std::vector<std::string> &Runway::getCrossings() const {
     return crossings;
 }

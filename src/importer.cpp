@@ -229,7 +229,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     }
     output.close();
 
-    output.open("../graphicaloutput.txt", fstream::out);
+    output.open("../graphicaloutput.txt", std::fstream::out);
     int currentsize = 0;
     Runway* currentrunway;
     for (int i = 0; i < airports.size(); ++i) {
@@ -241,23 +241,23 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         }
         output << currentrunway->getName() << " | ";
         if (currentrunway->getAirplane() != NULL){
-            output << "====V=====" << endl;
+            output << "====V=====" << std::endl;
         }
         else{
-            output << "==========" << endl;
+            output << "==========" << std::endl;
         }
         for (int j = 0; j < currentrunway->getTaxipoints().size();) {
             if (j%2 == 0){
-                output << currentrunway->getTaxipoints()[j] << " | " << endl;
+                output << currentrunway->getTaxipoints()[j] << " | " << std::endl;
                 ++j;
             }
             else{
                 output << currentrunway->getCrossings()[j-1] << " | ";
                 if (airports[i]->findRunway(currentrunway->getCrossings()[j-1])->getAirplane() != NULL){
-                    output << "====V=====" << endl;
+                    output << "====V=====" << std::endl;
                 }
                 else{
-                    output << "==========" << endl;
+                    output << "==========" << std::endl;
                 }
             }
         }
@@ -270,7 +270,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 output << " ";
             }
         }
-        output << "]" << endl << endl;
+        output << "]" << std::endl << std::endl;
     }
     output.close();
     simulation.setAirplanes(airplanes);     //Set simulation variables

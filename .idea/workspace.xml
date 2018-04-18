@@ -14,6 +14,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/airport.cpp" afterPath="$PROJECT_DIR$/src/airport.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/airport.h" afterPath="$PROJECT_DIR$/src/airport.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/importer.cpp" afterPath="$PROJECT_DIR$/src/importer.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/runway.cpp" afterPath="$PROJECT_DIR$/src/runway.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/runway.h" afterPath="$PROJECT_DIR$/src/runway.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -45,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="importer.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="importer.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/importer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="277" column="19" lean-forward="true" selection-start-line="277" selection-start-column="19" selection-end-line="277" selection-end-column="19" />
+            <state relative-caret-position="520">
+              <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
               <folding>
                 <element signature="e#38#59#0" expanded="true" />
               </folding>
@@ -60,32 +65,19 @@
       <file leaf-file-name="airport.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/airport.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
-              <folding>
-                <marker date="1524048512123" expanded="true" signature="1063:1152" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="1186:1379" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="1440:1628" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="1684:1773" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="1824:1916" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="1959:2081" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="2146:2348" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="2406:2503" ph="/**...*/" />
-                <marker date="1524048512123" expanded="true" signature="2543:2640" ph="/**...*/" />
-              </folding>
+            <state relative-caret-position="676">
+              <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="runway.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="runway.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/runway.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="776">
               <caret line="56" column="21" lean-forward="true" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-              <folding>
-                <marker date="1524048315699" expanded="true" signature="932:958" ph="{...}" />
-                <marker date="1524048315699" expanded="true" signature="1011:1036" ph="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,25 +94,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/output.txt">
+      <file leaf-file-name="runway.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/runway.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="646">
+              <caret line="43" column="57" lean-forward="true" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
+              <folding>
+                <element signature="e#97#118#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="runway.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/runway.h">
+      <file leaf-file-name="airplane.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/airplane.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="44" column="2" lean-forward="false" selection-start-line="44" selection-start-column="2" selection-end-line="44" selection-end-column="2" />
-              <folding>
-                <element signature="e#97#118#0" expanded="true" />
-                <marker date="1524048558641" expanded="true" signature="169:860" ph="{...}" />
-              </folding>
+            <state relative-caret-position="-208">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -148,20 +139,9 @@
       <file leaf-file-name="airport.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/airport.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="140" column="16" lean-forward="true" selection-start-line="140" selection-start-column="16" selection-end-line="140" selection-end-column="16" />
-              <folding>
-                <marker date="1524048315706" expanded="true" signature="1456:1675" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="1736:1947" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="1998:2221" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="2277:2592" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="2635:2753" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="2818:2973" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="3031:3393" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="3433:3686" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="3743:4000" ph="{...}" />
-                <marker date="1524048315706" expanded="true" signature="4049:4211" ph="{...}" />
-              </folding>
+            <state relative-caret-position="672">
+              <caret line="148" column="5" lean-forward="true" selection-start-line="148" selection-start-column="5" selection-end-line="148" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -205,11 +185,11 @@
         <option value="$PROJECT_DIR$/src/domaintests.cpp" />
         <option value="$PROJECT_DIR$/src/airplane.cpp" />
         <option value="$PROJECT_DIR$/src/airplane.h" />
+        <option value="$PROJECT_DIR$/src/importer.cpp" />
+        <option value="$PROJECT_DIR$/src/airport.cpp" />
+        <option value="$PROJECT_DIR$/src/airport.h" />
         <option value="$PROJECT_DIR$/src/runway.h" />
         <option value="$PROJECT_DIR$/src/runway.cpp" />
-        <option value="$PROJECT_DIR$/src/airport.h" />
-        <option value="$PROJECT_DIR$/src/airport.cpp" />
-        <option value="$PROJECT_DIR$/src/importer.cpp" />
       </list>
     </option>
   </component>
@@ -353,7 +333,7 @@
       <workItem from="1522226889703" duration="15000" />
       <workItem from="1523281806501" duration="7000" />
       <workItem from="1524037651730" duration="4711000" />
-      <workItem from="1524042653585" duration="5910000" />
+      <workItem from="1524042653585" duration="6044000" />
     </task>
     <task id="LOCAL-00001" summary="Add gitignore, add 2.1">
       <created>1519919486798</created>
@@ -558,11 +538,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524048296403</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Implemented 2.3">
+      <created>1524048572396</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1524048572396</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77269000" />
+    <option name="totallyTimeSpent" value="77403000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -742,14 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/airplane.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="445">
@@ -790,42 +769,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/airplane.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AirportSim.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="130" column="25" lean-forward="true" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
           <folding>
             <marker date="1524048315690" expanded="true" signature="4483:4851" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/runway.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="44" column="2" lean-forward="false" selection-start-line="44" selection-start-column="2" selection-end-line="44" selection-end-column="2" />
-          <folding>
-            <element signature="e#97#118#0" expanded="true" />
-            <marker date="1524048558641" expanded="true" signature="169:860" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/runway.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="776">
-          <caret line="56" column="21" lean-forward="true" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
-          <folding>
-            <marker date="1524048315699" expanded="true" signature="932:958" ph="{...}" />
-            <marker date="1524048315699" expanded="true" signature="1011:1036" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -838,24 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/airport.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="35" column="48" lean-forward="false" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
-          <folding>
-            <marker date="1524048512123" expanded="true" signature="1063:1152" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="1186:1379" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="1440:1628" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="1684:1773" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="1824:1916" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="1959:2081" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="2146:2348" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="2406:2503" ph="/**...*/" />
-            <marker date="1524048512123" expanded="true" signature="2543:2640" ph="/**...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/importer.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -864,32 +795,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/airport.cpp">
+    <entry file="file://$PROJECT_DIR$/src/importer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="140" column="16" lean-forward="true" selection-start-line="140" selection-start-column="16" selection-end-line="140" selection-end-column="16" />
+        <state relative-caret-position="520">
+          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
-            <marker date="1524048315706" expanded="true" signature="1456:1675" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="1736:1947" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="1998:2221" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="2277:2592" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="2635:2753" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="2818:2973" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="3031:3393" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="3433:3686" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="3743:4000" ph="{...}" />
-            <marker date="1524048315706" expanded="true" signature="4049:4211" ph="{...}" />
+            <element signature="e#38#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/importer.cpp">
+    <entry file="file://$PROJECT_DIR$/src/airplane.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/airplane.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-208">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/airport.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
-          <caret line="277" column="19" lean-forward="true" selection-start-line="277" selection-start-column="19" selection-end-line="277" selection-end-column="19" />
+          <caret line="148" column="5" lean-forward="true" selection-start-line="148" selection-start-column="5" selection-end-line="148" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/airport.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/runway.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="43" column="57" lean-forward="true" selection-start-line="43" selection-start-column="57" selection-end-line="43" selection-end-column="57" />
           <folding>
-            <element signature="e#38#59#0" expanded="true" />
+            <element signature="e#97#118#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/runway.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="776">
+          <caret line="56" column="21" lean-forward="true" selection-start-line="56" selection-start-column="21" selection-end-line="56" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
