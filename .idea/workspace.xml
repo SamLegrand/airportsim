@@ -12,10 +12,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="Added updated xml files">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/input_system1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/input_system2.xml" />
+    <list default="true" id="bb94d3ae-478a-4bfe-9412-20b8c6d26f59" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/importer.cpp" afterPath="$PROJECT_DIR$/src/importer.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/importer.h" afterPath="$PROJECT_DIR$/src/importer.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,8 +50,8 @@
       <file leaf-file-name="importer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/importer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="260" column="48" lean-forward="true" selection-start-line="260" selection-start-column="48" selection-end-line="260" selection-end-column="48" />
+            <state relative-caret-position="316">
+              <caret line="236" column="90" lean-forward="false" selection-start-line="236" selection-start-column="90" selection-end-line="236" selection-end-column="90" />
               <folding>
                 <element signature="e#38#59#0" expanded="true" />
               </folding>
@@ -124,8 +124,8 @@
       <file leaf-file-name="importer.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/importer.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+            <state relative-caret-position="390">
+              <caret line="16" column="165" lean-forward="false" selection-start-line="16" selection-start-column="165" selection-end-line="16" selection-end-column="165" />
               <folding />
             </state>
           </provider>
@@ -142,6 +142,11 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>cout</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -182,9 +187,9 @@
         <option value="$PROJECT_DIR$/src/airport.h" />
         <option value="$PROJECT_DIR$/src/runway.h" />
         <option value="$PROJECT_DIR$/src/runway.cpp" />
-        <option value="$PROJECT_DIR$/src/importer.h" />
         <option value="$PROJECT_DIR$/src/airport.cpp" />
         <option value="$PROJECT_DIR$/src/main.cpp" />
+        <option value="$PROJECT_DIR$/src/importer.h" />
         <option value="$PROJECT_DIR$/src/importer.cpp" />
       </list>
     </option>
@@ -196,10 +201,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="45" />
     <option name="y" value="27" />
-    <option name="width" value="1225" />
-    <option name="height" value="1003" />
+    <option name="width" value="1280" />
+    <option name="height" value="1413" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -330,7 +334,7 @@
       <workItem from="1523281806501" duration="7000" />
       <workItem from="1524037651730" duration="4711000" />
       <workItem from="1524042653585" duration="6701000" />
-      <workItem from="1524120222647" duration="7503000" />
+      <workItem from="1524120222647" duration="11439000" />
     </task>
     <task id="LOCAL-00001" summary="Add gitignore, add 2.1">
       <created>1519919486798</created>
@@ -556,11 +560,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524127666455</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Added updated xml files">
+      <created>1524127747868</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1524127747868</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85563000" />
+    <option name="totallyTimeSpent" value="89499000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,14 +583,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="27" width="2560" height="1413" extended-state="6" />
+    <frame x="0" y="27" width="2560" height="1413" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1515625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3086516" sideWeight="0.49182922" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3086516" sideWeight="0.49182922" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33081082" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5102794" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41465315" sideWeight="0.4897206" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41465315" sideWeight="0.4897206" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -830,14 +842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/importer.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="15" column="11" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/airport.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
@@ -854,10 +858,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/importer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="16" column="165" lean-forward="false" selection-start-line="16" selection-start-column="165" selection-end-line="16" selection-end-column="165" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/importer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="260" column="48" lean-forward="true" selection-start-line="260" selection-start-column="48" selection-end-line="260" selection-end-column="48" />
+        <state relative-caret-position="316">
+          <caret line="236" column="90" lean-forward="false" selection-start-line="236" selection-start-column="90" selection-end-line="236" selection-end-column="90" />
           <folding>
             <element signature="e#38#59#0" expanded="true" />
           </folding>

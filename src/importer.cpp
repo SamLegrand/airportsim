@@ -38,6 +38,7 @@ bool isString(std::string const& s){
 SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, AirportSim &simulation) {
     std::vector<Airport*> airports;      //Initialise airports and airplanes containers
     std::vector<Airplane*> airplanes;
+    std::vector<Runway*> runwaysNotAddedToPlane;
     TiXmlDocument doc;      //Initalise parser document
     if (!doc.LoadFile(inputfilename)) {     //Check for failed loading of file
         errstream << doc.ErrorDesc() << std::endl;
@@ -99,6 +100,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         }
         if(objectName == "RUNWAY"){
             Runway* runway = new Runway;        //Initialise runway
+            bool addedRunwayToPlane = false;
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
@@ -140,6 +142,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         for (unsigned int i = 0; i < airports.size(); ++i) {
                             if (airports[i]->getIata() == text->Value()){
                                 airports[i]->addRunway(runway);
+                                addedRunwayToPlane = true;
                                 break;
                             }
                         }
@@ -160,6 +163,9 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << std::endl;
                     return PartialImport;
                 }
+            }
+            if (addedRunwayToPlane == false){
+                runwaysNotAddedToPlane.push_back(runway);
             }
             continue;
         }
@@ -227,6 +233,13 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         errstream << "Invalid element name " << objectName << "." << std::endl;
         return PartialImport;
     }
+    if (properlyInitialized(airports, runwaysNotAddedToPlane, airplanes)){
+        std::cout << "Simulation has been properly initialized, simulation will start now." << std::endl;
+    }
+    else{
+        errstream << "Simulation has not been properly initialized." << std::endl;
+        return PartialImport;
+    }
     std::ofstream output;
     output.open("../output.txt", std::fstream::out);        //Write simple output to stream
     for (unsigned int i=0; i<airports.size(); ++i) {
@@ -241,6 +254,66 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
     return Success;
+}
+
+bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
+    if (!runwaysNotAddedToPlane.empty()){
+        return false;
+    }
+    for (unsigned int i = 0; i < airplanes.size(); ++i) {
+        if ((airplanes[i]->getType() == "private" &&
+            airplanes[i]->getSize() == "small" &&
+                (airplanes[i]->getEngine() == "propeller" ||
+                airplanes[i]->getEngine() == "jet"))){
+            continue;
+        }
+        if ((airplanes[i]->getType() == "private" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "jet")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "jet")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "large" &&
+             airplanes[i]->getEngine() == "jet")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "military" &&
+             airplanes[i]->getSize() == "small" &&
+             airplanes[i]->getEngine() == "jet")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "military" &&
+             airplanes[i]->getSize() == "large" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            continue;
+        }
+        if ((airplanes[i]->getType() == "emergency" &&
+             airplanes[i]->getSize() == "small" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            continue;
+        }
+        return false;
+    }
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
+            for (unsigned int k = 0; k < airports[i]->getRunways()[j]->getCrossings().size(); ++k) {
+                if(airports[i]->findRunway(airports[i]->getRunways()[j]->getCrossings()[k]) == NULL){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 void importer::writeGraphicalOutput(const std::vector<Airport*> &airports, std::ofstream &output){
@@ -276,7 +349,6 @@ void importer::writeGraphicalOutput(const std::vector<Airport*> &airports, std::
             }
             --j;
         }
-        std::cout << "Test" << std::endl;
         output << "Gates [";
         for (int j = 0; j < airports[i]->getGates(); ++j) {
             if(airports[i]->getGatesVector()[j] != NULL){
