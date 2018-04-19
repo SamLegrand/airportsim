@@ -79,6 +79,15 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
                 Runway* runway = airport->findPlaneInRunway(airplane);
+                for (int j = runway->getCrossings().size() - 1; j >= 0; --j) {
+                    if (airport->findRunway(runway->getCrossings()[j])->getAirplane() != NULL){ //If runway is occupied
+                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j] << " via " << runway->getTaxipoints()[j + 1] << std::endl;
+                        break;
+                    }
+                    else{
+                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getCrossings()[j] << " via " << runway->getTaxipoints()[j + 1] << std::endl;
+                    }
+                }
                 int gate = airport->getAvailableGate();
                 if (gate == -1) {
                     continue;
