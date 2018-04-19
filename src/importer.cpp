@@ -102,11 +102,6 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
-                    TiXmlText *text = e->ToText();
-                    if (text == NULL) {     //Check for empty text container
-                        errstream << elemName << " does not contain any text." << std::endl;
-                        return PartialImport;
-                    }
                     if (elemName == "TAXIROUTE"){
                         for (TiXmlElement *elem2 = elem->FirstChildElement(); elem2 != NULL; elem2 = elem2->NextSiblingElement()) {
                             std::string elemName2 = elem2->Value();
@@ -118,12 +113,20 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 }
                                 if (elemName2 == "taxipoint"){
                                     runway->addTaxipoint(text2->Value());
+                                    continue;
                                 }
                                 if (elemName2 == "crossing"){
                                     runway->addCrossing(text2->Value());
+                                    continue;
                                 }
                             }
                         }
+                        break;
+                    }
+                    TiXmlText *text = e->ToText();
+                    if (text == NULL) {     //Check for empty text container
+                        errstream << elemName << " does not contain any text." << std::endl;
+                        return PartialImport;
                     }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << std::endl;
@@ -144,6 +147,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (elemName == "type"){
                         runway->setType(text->Value());
+                        continue;
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << std::endl;
@@ -151,6 +155,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (elemName == "length"){
                         runway->setLength(stoi(text->Value()));
+                        continue;
                     }
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << std::endl;
                     return PartialImport;
@@ -190,12 +195,15 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if(elemName == "type"){
                         airplane->setType(text->Value());
+                        continue;
                     }
                     if(elemName == "engine"){
                         airplane->setEngine(text->Value());
+                        continue;
                     }
                     if(elemName == "size"){
                         airplane->setSize(text->Value());
+                        continue;
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a number." << std::endl;
@@ -228,13 +236,19 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
-
     output.open("../graphicaloutput.txt", std::fstream::out);
+    importer::writeGraphicalOutput(airports, output);
+    simulation.setAirplanes(airplanes);     //Set simulation variables
+    simulation.setAirports(airports);
+    return Success;
+}
+
+void importer::writeGraphicalOutput(const std::vector<Airport*> &airports, std::ofstream &output){
     int currentsize = 0;
     Runway* currentrunway;
-    for (int i = 0; i < airports.size(); ++i) {
-        for (int j = 0; j < airports[i]->getRunways().size(); ++j) {
-            if (airports[i]->getRunways()[j]->getTaxipoints().size() > currentsize){
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
+            if ((int)airports[i]->getRunways()[j]->getTaxipoints().size() > currentsize){
                 currentsize = airports[i]->getRunways()[j]->getTaxipoints().size();
                 currentrunway = airports[i]->getRunways()[j];
             }
@@ -246,21 +260,23 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         else{
             output << "==========" << std::endl;
         }
-        for (int j = 0; j < currentrunway->getTaxipoints().size();) {
+        int j = currentrunway->getTaxipoints().size() + currentrunway->getCrossings().size() - 1;
+        while (j >= 0) {
             if (j%2 == 0){
-                output << currentrunway->getTaxipoints()[j] << " | " << std::endl;
-                ++j;
+                output << "TP" << currentrunway->getTaxipoints()[j/2][0] << " | " << std::endl;
             }
             else{
-                output << currentrunway->getCrossings()[j-1] << " | ";
-                if (airports[i]->findRunway(currentrunway->getCrossings()[j-1])->getAirplane() != NULL){
+                output << currentrunway->getCrossings()[j/2] << " | ";
+                if (airports[i]->findRunway(currentrunway->getCrossings()[j/2])->getAirplane() != NULL){
                     output << "====V=====" << std::endl;
                 }
                 else{
                     output << "==========" << std::endl;
                 }
             }
+            --j;
         }
+        std::cout << "Test" << std::endl;
         output << "Gates [";
         for (int j = 0; j < airports[i]->getGates(); ++j) {
             if(airports[i]->getGatesVector()[j] != NULL){
@@ -273,7 +289,4 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         output << "]" << std::endl << std::endl;
     }
     output.close();
-    simulation.setAirplanes(airplanes);     //Set simulation variables
-    simulation.setAirports(airports);
-    return Success;
 }
