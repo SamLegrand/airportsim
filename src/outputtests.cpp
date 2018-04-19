@@ -23,8 +23,8 @@ protected:
 };
 
 TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for simple scenario (only one plane)
-    ofstream filestream;
-    ofstream errstream;
+    std::ofstream filestream;
+    std::ofstream errstream;
     filestream.open("../testOutput/simplescenario.txt");
     importer::importAirport("../testInput/inputlegal.xml", errstream, simulator);
     simulator.simulate(filestream);
@@ -33,8 +33,8 @@ TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for sim
 }
 
 TEST_F(AirportSimOutputTest, OutputComplexScenario){    //Testing correct output for more complex scenario (multiple planes in different states)
-    ofstream filestream;
-    ofstream errstream;
+    std::ofstream filestream;
+    std::ofstream errstream;
     filestream.open("../testOutput/complexscenario.txt");
     importer::importAirport("../testInput/inputlegalcomplex.xml", errstream, simulator);
     simulator.simulate(filestream);

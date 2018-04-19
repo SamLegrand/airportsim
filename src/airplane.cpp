@@ -184,6 +184,7 @@ void Airplane::ascend(std::ostream &output) {
 void Airplane::leaveAirport(std::ostream &output, const std::string& airport) {
     REQUIRE(this->getStatus() == "Leaving Airport", "Plane wasn't in correct state.");
     output << callsign << " has left " << airport << std::endl;
+    height = 10000;
     status = "Travelling";
     ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
 }

@@ -23,7 +23,7 @@ protected:
 };
 
 TEST_F(AirportSimInputTest, InputLegal){        //Testing correct import for legal input
-    ofstream filestream;
+    std::ofstream filestream;
     SuccessEnum  result;
 
     filestream.open("../testInput/Error.txt");
@@ -34,7 +34,7 @@ TEST_F(AirportSimInputTest, InputLegal){        //Testing correct import for leg
 }
 
 TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import for legal input (more complex)
-    ofstream filestream;
+    std::ofstream filestream;
     SuccessEnum  result;
 
     filestream.open("../testInput/Error.txt");
@@ -45,11 +45,11 @@ TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import
 }
 
 TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
-    ofstream filestream;
+    std::ofstream filestream;
     SuccessEnum  result;
     int counter = 1;        //Counter for looping over different files
-    string filename = "../testInput/inputsyntaxerror" + to_string(counter) + ".xml";
-    string errorfilename;
+    std::string filename = "../testInput/inputsyntaxerror" + to_string(counter) + ".xml";
+    std::string errorfilename;
 
     while(FileExists(filename)){        //Loop over different files
         filestream.open("../testInput/Error.txt");
@@ -69,11 +69,11 @@ TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
 TEST_F(AirportSimInputTest, InputIllegal){      //Testing illegal input
     ASSERT_TRUE(DirectoryExists("../testInput"));
 
-    ofstream filestream;
+    std::ofstream filestream;
     SuccessEnum  result;
     int counter = 1;        //Counter for looping over different files
-    string filename = "../testInput/inputillegal" + to_string(counter) + ".xml";
-    string errorfilename;
+    std::string filename = "../testInput/inputillegal" + to_string(counter) + ".xml";
+    std::string errorfilename;
 
     while(FileExists(filename)){        //Loop over different files
         filestream.open("../testInput/Error.txt");
