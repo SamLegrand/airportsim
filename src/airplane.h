@@ -10,6 +10,7 @@
 #include "DesignByContract.h"
 #include "runway.h"
 
+class Runway;
 
 class Airplane {
     std::string number;

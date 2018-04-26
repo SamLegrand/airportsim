@@ -63,7 +63,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     Runway* runway = airplane->getEndpoint();
                     if (!runway->getCrossings().empty()){
                         Runway* runway2 = airport->findPlaneInCrossing(airplane);
-                        for (int j = 0; j < runway->getCrossings().size(); ++j) {
+                        for (unsigned int j = 0; j < runway->getCrossings().size(); ++j) {
                             if (airport->findRunway(runway->getCrossings()[j]) == runway2){
                                 SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j - 1] << " via " << runway->getTaxipoints()[j] << std::endl;
                                 runway->setAirplaneCrossing(NULL);

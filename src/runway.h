@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+class Airplane;
+
 class Runway {
     std::string name;
     std::string type;
