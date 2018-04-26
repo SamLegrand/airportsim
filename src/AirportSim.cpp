@@ -56,15 +56,23 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     if (runway == NULL) {
                         continue;
                     }
-                    SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().front() << " via " << runway->getTaxipoints().front() << std::endl;
-                    airplane->setCrossing(airport->findRunway(runway->getCrossings().front()));
+                    if (runway->getCrossings().size() > 0){
+                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().front() << " via " << runway->getTaxipoints().front() << std::endl;
+                        airplane->setCrossing(airport->findRunway(runway->getCrossings().front()));
+                    }
+                    else{
+                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back() << std::endl;
+                        runway->setAirplaneCrossing(NULL);
+                        airplane->taxiToRunway(SimOutput, runway->getName());
+                        runway->setAirplane(airplane);
+                    }
                 }
                 else if (airplane->getCrossing() == NULL){
                     Runway* runway = airplane->getEndpoint();
                     if (!runway->getCrossings().empty()){
                         Runway* runway2 = airport->findPlaneInCrossing(airplane);
                         for (unsigned int j = 0; j < runway->getCrossings().size(); ++j) {
-                            if (airport->findRunway(runway->getCrossings()[j]) == runway2){
+                            if (airport->findRunway(runway->getCrossings()[j]) == runway2 && j - 1 >= 0){
                                 SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j - 1] << " via " << runway->getTaxipoints()[j] << std::endl;
                                 runway->setAirplaneCrossing(NULL);
                                 airplane->setCrossing(airport->findRunway(runway->getCrossings()[j - 1]));
