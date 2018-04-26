@@ -56,3 +56,11 @@ const std::vector<std::string> &Runway::getTaxipoints() const {
 const std::vector<std::string> &Runway::getCrossings() const {
     return crossings;
 }
+
+Airplane *Runway::getAirplaneCrossing() const {
+    return airplaneCrossing;
+}
+
+void Runway::setAirplaneCrossing(Airplane *airplaneCrossing) {
+    Runway::airplaneCrossing = airplaneCrossing;
+}

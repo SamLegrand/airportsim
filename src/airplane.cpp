@@ -212,3 +212,19 @@ const std::string &Airplane::getSize() const {
 void Airplane::setSize(const std::string &size) {
     Airplane::size = size;
 }
+
+Runway *Airplane::getCrossing() const {
+    return crossing;
+}
+
+void Airplane::setCrossing(Runway *crossing) {
+    Airplane::crossing = crossing;
+}
+
+Runway *Airplane::getEndpoint() const {
+    return endpoint;
+}
+
+void Airplane::setEndpoint(Runway *endpoint) {
+    Airplane::endpoint = endpoint;
+}

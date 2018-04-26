@@ -83,6 +83,8 @@ public:
      * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
      */
     Runway* findPlaneInRunway(Airplane* airplane);
+
+    Runway* findPlaneInCrossing(Airplane* airplane);
 };
 
 

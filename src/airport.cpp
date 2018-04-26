@@ -149,3 +149,13 @@ Runway *Airport::findRunway(std::string runwayName) {
     }
     return NULL;
 }
+
+Runway *Airport::findPlaneInCrossing(Airplane *airplane) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if(runways[i]->getAirplaneCrossing() == airplane){
+            return runways[i];
+        }
+    }
+    return NULL;
+}

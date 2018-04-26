@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include "DesignByContract.h"
+#include "runway.h"
 
 
 class Airplane {
@@ -18,6 +19,8 @@ class Airplane {
     std::string type;
     std::string engine;
     std::string size;
+    Runway* crossing;
+    Runway* endpoint;
     int passengers;
     int fuel;
     int height;
@@ -43,6 +46,10 @@ public:
     void setEngine(const std::string &engine);
     const std::string &getSize() const;
     void setSize(const std::string &size);
+    Runway *getCrossing() const;
+    void setCrossing(Runway *crossing);
+    Runway *getEndpoint() const;
+    void setEndpoint(Runway *endpoint);
 
     /**
      * REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");
