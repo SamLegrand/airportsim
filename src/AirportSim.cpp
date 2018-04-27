@@ -3,6 +3,7 @@
 //
 
 #include "AirportSim.h"
+#include "utils.h"
 
 const std::vector<Airport *> &AirportSim::getAirports() const {
     return airports;
@@ -21,6 +22,8 @@ void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
 }
 
 void AirportSim::simulate(std::ostream& SimOutput) {
+    unsigned int time = 0;
+    AirLeader leader;
     Airport* airport = airports[0];
     while (!checkSimEnd()) {
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
@@ -121,6 +124,8 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             if (airplane->getStatus() == "Taxiing to Gate") {
                 if (airport->findPlaneInRunway(airplane) != NULL) { //Remove plane from the runway that it landed on
                     Runway *runway = airport->findPlaneInRunway(airplane);
+                    leader.printMessage(time, "AIR", airport->getCallsign() + ", " + airplane->getCallsign() + ",  runway " + runway->getName() + " vacated.");
+                    leader.printMessage(time, "ATC", "TODO: Instructions for taxiing");
                     runway->setAirplane(NULL);
                     runway->setAirplaneCrossing(airplane);
                 }
@@ -169,12 +174,16 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     runway = airport->getAvailableRunway();
                     if (runway == NULL) {
                         airplane->finalapproach(SimOutput, airport->getName(), "");
+                        leader.printMessage(time, "ATC", airplane->getCallsign() + ", hold south on the one eighty radial, expect further clearance at " + to_string(time));
+                        leader.printMessage(time, "AIR", "Holding south on the one eighty radial, " + airplane->getCallsign());
                         continue;
                     } else {
                         runway->setAirplane(airplane);
                     }
                 }
                 airplane->finalapproach(SimOutput, airport->getName(), runway->getName());
+                leader.printMessage(time, "ATC", airplane->getCallsign() + ", cleared ILS approach runway " + runway->getName());
+                leader.printMessage(time, "AIR", "Cleared ILS approach runway " + runway->getName() + ", " + airplane->getCallsign());
                 continue;
             }
             if (airplane->getStatus() == "Descending") {
@@ -183,9 +192,13 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             }
             if (airplane->getStatus() == "Approaching") {
                 airplane->approach(SimOutput, airport->getName());
+                leader.printMessage(time, "AIR", airport->getCallsign()+ ", " + airplane->getCallsign() + ", arriving at " + airport->getName());
+                leader.printMessage(time, "ATC", airplane->getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + airplane->getType());
+                leader.printMessage(time, "AIR", "Descend and maintain five thousand feet, squawking " + airplane->getType() + ", " + airplane->getCallsign());
                 continue;
             }
         }
+        time += 1;
     }
 }
 
