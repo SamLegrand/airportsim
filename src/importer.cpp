@@ -100,7 +100,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         }
         if(objectName == "RUNWAY"){
             Runway* runway = new Runway;        //Initialise runway
-            bool addedRunwayToPlane = false;
+            bool addedRunwayToAirport = false;
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
@@ -142,7 +142,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         for (unsigned int i = 0; i < airports.size(); ++i) {
                             if (airports[i]->getIata() == text->Value()){
                                 airports[i]->addRunway(runway);
-                                addedRunwayToPlane = true;
+                                addedRunwayToAirport = true;
                                 break;
                             }
                         }
@@ -164,7 +164,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     return PartialImport;
                 }
             }
-            if (addedRunwayToPlane == false){
+            if (addedRunwayToAirport == false){
                 runwaysNotAddedToPlane.push_back(runway);
             }
             continue;
@@ -336,7 +336,7 @@ void importer::writeGraphicalOutput(const std::vector<Airport*> &airports, std::
         int j = currentrunway->getTaxipoints().size() + currentrunway->getCrossings().size() - 1;
         while (j >= 0) {
             if (j%2 == 0){
-                output << "TP" << currentrunway->getTaxipoints()[j/2][0] << " | " << std::endl;
+                output << "TP" << currentrunway->getTaxipoints()[j/2]->getName()[0] << " | " << std::endl;
             }
             else{
                 output << currentrunway->getCrossings()[j/2] << " | ";

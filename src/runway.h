@@ -6,10 +6,12 @@
 #define AIRPORTSIM_RUNWAY_H
 
 #include "airplane.h"
+#include "Taxipoint.h"
 #include <string>
 #include <vector>
 
 class Airplane;
+class Taxipoint;
 
 class Runway {
     std::string name;
@@ -17,7 +19,7 @@ class Runway {
     int length;
     Airplane* airplane;
     Airplane* airplaneCrossing;
-    std::vector<std::string> taxipoints;
+    std::vector<Taxipoint*> taxipoints;
     std::vector<std::string> crossings;
 public:
     Runway();
@@ -42,13 +44,15 @@ public:
 
     void addCrossing(std::string crossing);
 
-    const std::vector<std::string> &getTaxipoints() const;
+    const std::vector<Taxipoint*> &getTaxipoints() const;
 
     const std::vector<std::string> &getCrossings() const;
 
     Airplane *getAirplaneCrossing() const;
 
     void setAirplaneCrossing(Airplane *airplaneCrossing);
+
+    void removePlaneFromTaxipoint(Airplane* airplane);
 };
 
 

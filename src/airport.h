@@ -35,6 +35,7 @@ public:
     const int &getPassengers() const;
     void printInfo(std::ofstream &output) const;
     Runway* findRunway(std::string runwayName);
+    Runway* getFarthestRunway();
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");

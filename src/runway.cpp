@@ -41,16 +41,21 @@ void Runway::setLength(int length) {
     Runway::length = length;
 }
 
-void Runway::addTaxipoint(std::string taxipoint) {
+void Runway::addTaxipoint(std::string name) {
+    Taxipoint* taxipoint = new Taxipoint(name);
     Runway::taxipoints.push_back(taxipoint);
+}
+
+void Runway::removePlaneFromTaxipoint(Airplane *airplane) {
+    for (unsigned int i = 0; i < Runway::taxipoints.size(); ++i) {
+        if (taxipoints[i]->getPlaneToGate() ==  airplane || taxipoints[i]->getPlaneToRunway() == airplane){
+            taxipoints[i] = NULL;
+        }
+    }
 }
 
 void Runway::addCrossing(std::string crossing){
     Runway::crossings.push_back(crossing);
-}
-
-const std::vector<std::string> &Runway::getTaxipoints() const {
-    return taxipoints;
 }
 
 const std::vector<std::string> &Runway::getCrossings() const {
@@ -63,4 +68,8 @@ Airplane *Runway::getAirplaneCrossing() const {
 
 void Runway::setAirplaneCrossing(Airplane *airplaneCrossing) {
     Runway::airplaneCrossing = airplaneCrossing;
+}
+
+const std::vector<Taxipoint *> &Runway::getTaxipoints() const {
+    return taxipoints;
 }

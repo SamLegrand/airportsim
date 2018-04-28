@@ -159,3 +159,13 @@ Runway *Airport::findPlaneInCrossing(Airplane *airplane) {
     }
     return NULL;
 }
+
+Runway *Airport::getFarthestRunway() {
+    Runway* farthestRunway = runways[0];
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if (runways[i]->getCrossings().size() > farthestRunway->getCrossings().size()){
+            farthestRunway = runways[i];
+        }
+    }
+    return farthestRunway;
+}

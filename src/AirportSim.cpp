@@ -2,6 +2,7 @@
 // Created by lena on 3/16/18.
 //
 
+#include <sstream>
 #include "AirportSim.h"
 #include "utils.h"
 
@@ -60,11 +61,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                         continue;
                     }
                     if (runway->getCrossings().size() > 0){
-                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().front() << " via " << runway->getTaxipoints().front() << std::endl;
+                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().front() << " via " << runway->getTaxipoints().front()->getName() << std::endl;
                         airplane->setCrossing(airport->findRunway(runway->getCrossings().front()));
+                        runway->getTaxipoints().back()->setPlaneToRunway(airplane);
                     }
                     else{
-                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back() << std::endl;
+                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
                         runway->setAirplaneCrossing(NULL);
                         airplane->taxiToRunway(SimOutput, runway->getName());
                         runway->setAirplane(airplane);
@@ -76,14 +78,15 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                         Runway* runway2 = airport->findPlaneInCrossing(airplane);
                         for (unsigned int j = 0; j < runway->getCrossings().size(); ++j) {
                             if (airport->findRunway(runway->getCrossings()[j]) == runway2 && j - 1 >= 0){
-                                SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j - 1] << " via " << runway->getTaxipoints()[j] << std::endl;
+                                SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j - 1] << " via " << runway->getTaxipoints()[j]->getName() << std::endl;
+                                runway->getTaxipoints().back()->setPlaneToRunway(airplane);
                                 runway->setAirplaneCrossing(NULL);
                                 airplane->setCrossing(airport->findRunway(runway->getCrossings()[j - 1]));
                             }
                         }
                     }
-                    if (airport->findPlaneInCrossing(airplane) != NULL){
-                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back() << std::endl;
+                    if (airport->findPlaneInCrossing(airplane) != NULL && airplane->getEndpoint()->getAirplane() == NULL){
+                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
                         runway->setAirplaneCrossing(NULL);
                         airplane->taxiToRunway(SimOutput, runway->getName());
                         runway->setAirplane(airplane);
@@ -91,8 +94,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 }
                 else{
                     Runway* runway = airplane->getCrossing();
+                    if (runway->getTaxipoints().back()->getPlaneToRunway() != NULL){   //Check if next taxipoint is occupied
+                        continue;
+                    }
                     if (runway->getAirplane() == NULL){   //If runway is not occupied
                         SimOutput << airplane->getCallsign() << " is crossing " << runway->getName() << std::endl;
+                        runway->removePlaneFromTaxipoint(airplane);
                         airplane->setCrossing(NULL);
                         runway->setAirplaneCrossing(airplane);
                     }
@@ -132,8 +139,9 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 if (airplane->getCrossing() == NULL){
                     Runway *runway = airport->findPlaneInCrossing(airplane);
                     if (!runway->getCrossings().empty()){
-                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().back() << " via " << runway->getTaxipoints().back() << std::endl;
+                        SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().back() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
                         runway->setAirplaneCrossing(NULL);
+                        runway->getTaxipoints().back()->setPlaneToGate(airplane);
                         airplane->setCrossing(airport->findRunway(runway->getCrossings().back()));
                     }
                     else{
@@ -147,8 +155,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 }
                 else{
                     Runway* runway = airplane->getCrossing();
+                    if (runway->getTaxipoints().size() > 1 && runway->getTaxipoints()[runway->getTaxipoints().size()-2]->getPlaneToGate() != NULL){   //Check if next taxipoint is occupied
+                        continue;
+                    }
                     if (runway->getAirplane() == NULL){   //If runway is not occupied
                         SimOutput << airplane->getCallsign() << " is crossing " << runway->getName() << std::endl;
+                        runway->removePlaneFromTaxipoint(airplane);
                         runway->setAirplaneCrossing(airplane);
                         airplane->setCrossing(NULL);
                     }
@@ -210,4 +222,82 @@ bool AirportSim::checkSimEnd() {
         }
     }
     return true;
+}
+
+void AirportSim::writeEngineIni() {
+    std::ofstream output("../AirportGraphics.ini");
+    std::string initinfo = "[General]\n"
+            "size = 1024\n"
+            "backgroundcolor = (0, 0.749, 1)\n"
+            "type = \"LightedZBuffering\"\n"
+            "nrLights = 1\n"
+            "eye = (-100, 0, 75)\n";
+    std::string cubeinfo = "type = \"Cube\"\n"
+            "scale = 1\n"
+            "rotateX = 0\n"
+            "rotateY = 0\n"
+            "rotateZ = 0\n";
+    std::string coneinfo = "type = \"Cone\"\n"
+            "height = 5\n"
+            "n = 360\n"
+            "scale = 0.25";
+    std::string reflectionrunway = "ambientReflection = (0.00, 0.50, 0.00)\n"
+            "diffuseReflection = (0.00, 0.50, 0.00)\n"
+            "specularReflection = (0.4, 0.4, 0.4)\n"
+            "reflectionCoefficient = 20\n";
+    std::string reflectiontaxipoint = "ambientReflection = (0.00, 0.00, 0.50)\n"
+            "diffuseReflection = (0.00, 0.00, 0.50)\n"
+            "specularReflection = (0.4, 0.4, 0.4)\n"
+            "reflectionCoefficient = 20\n";
+    std::string reflectiongate = "ambientReflection = (0.50, 0.50, 0.00)\n"
+            "diffuseReflection = (0.50, 0.50, 0.00)\n"
+            "specularReflection = (0.4, 0.4, 0.4)\n"
+            "reflectionCoefficient = 20\n";
+    std::string reflectionairplane = "ambientReflection = (0.50, 0.00, 0.00)\n"
+            "diffuseReflection = (0.50, 0.00, 0.00)\n"
+            "specularReflection = (0.4, 0.4, 0.4)\n"
+            "reflectionCoefficient = 20";
+    std::string light = "[Light0]\n"
+            "infinity = TRUE\n"
+            "direction = (-1, -1, -1)\n"
+            "ambientLight = (1, 1, 1)\n"
+            "diffuseLight = (1, 1, 1)\n"
+            "specularLight = (1, 1, 1)\n";
+    std::string airplaneoccupied = "rotateX = -90\n"
+            "rotateY = 0\n"
+            "rotateZ = 0\n"
+            "center = (0, -0.5, 1)\n";
+    std::string airplanestanding = "rotateX = -90\n"
+            "rotateY = 0\n"
+            "rotateZ = 0\n";
+
+    //Write to ini
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        std::stringstream figureinfo;
+        figureinfo << light << std::endl;
+        int gatesoffset = airports[i]->getRunways().size();
+        int figNum = 0;
+        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
+            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*j << ", 0, 0)\n" << reflectionrunway << std::endl;
+            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*j << ", 2, 0)\n" << reflectionrunway << std::endl;
+            figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << -4*j << ", 4, 0)\n" << reflectionrunway << std::endl;
+            figNum += 3;
+            if (airports[i]->getRunways()[j]->getAirplane() != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << -4*j << ", -0.5, 1)\n" << reflectionairplane << std::endl;
+                figNum += 1;
+            }
+        }
+        for (unsigned int j = 0; j < airports[i]->getFarthestRunway()->getTaxipoints().size(); ++j) {
+            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*j-2 << ", 2, 0)\n" << reflectiontaxipoint << std::endl;
+            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*j-2 << ", 4, 0)\n" << reflectiontaxipoint << std::endl;
+            figNum += 2;
+        }
+        for (int j = 0; j < airports[i]->getGates(); j +=2) {
+            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*gatesoffset << ", " << j << ", 0)\n" << reflectiongate << std::endl;
+            figNum += 1;
+        }
+        output << initinfo << "nrFigures = " << figNum << std::endl << std::endl;
+        output << figureinfo.rdbuf();
+    }
+    output.close();
 }

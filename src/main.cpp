@@ -10,6 +10,9 @@ int main() {
     myfile.open("error.txt");
     importer::importAirport("../input_system2.xml", myfile, simulation);        //Import from xml file
     myfile.close();
+    myfile.open("../EngineTest.ini");
+    simulation.writeEngineIni();
+    myfile.close();
     simulation.simulate(cout);      //Simulate airport
     return 0;
 }
