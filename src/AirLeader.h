@@ -12,7 +12,6 @@ class AirLeader {
     std::ofstream output;
 public:
     AirLeader();
-
     void printMessage(int time, std::string source, std::string message);
 };
 

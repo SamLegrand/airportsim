@@ -5,6 +5,7 @@
 #include "importer.h"
 #include "tinystr.h"
 #include "tinyxml.h"
+#include "Exporter.h"
 #include <sstream>
 
 //Help functions for importer, need to be moved to utils
@@ -39,6 +40,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     std::vector<Airport*> airports;      //Initialise airports and airplanes containers
     std::vector<Airplane*> airplanes;
     std::vector<Runway*> runwaysNotAddedToPlane;
+    SuccessEnum endResult = Success;
     TiXmlDocument doc;      //Initalise parser document
     if (!doc.LoadFile(inputfilename)) {     //Check for failed loading of file
         errstream << doc.ErrorDesc() << std::endl;
@@ -48,7 +50,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     if (root == NULL) {     //Check if file contains root element
         errstream << "Failed to load file: No root element." << std::endl;
         doc.Clear();
-        return PartialImport;
+        endResult = PartialImport;
     }
     std::string objectName;
     for (TiXmlElement *object = doc.FirstChildElement(); object != NULL; object = object->NextSiblingElement()) {       //Loop over elements
@@ -61,11 +63,11 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if(!isString(text->Value())){   //Check if input is of type string
                         errstream << elemName << " does not contain a valid string." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "name") {
                         airport->setName(text->Value());
@@ -81,7 +83,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "gates") {
                         airport->setGates(stoi(text->Value()));
@@ -92,7 +94,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << std::endl;
-                    return PartialImport;
+                    endResult = PartialImport;
                 }
             }
             airports.push_back(airport);
@@ -111,7 +113,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 TiXmlText *text2 = e2->ToText();
                                 if(!isString(text2->Value())){       //Check if input is of type string
                                     errstream << elemName2 << " does not contain a string." << std::endl;
-                                    return PartialImport;
+                                    endResult = PartialImport;
                                 }
                                 if (elemName2 == "taxipoint"){
                                     runway->addTaxipoint(text2->Value());
@@ -128,11 +130,11 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "name") {
                         runway->setName(text->Value());
@@ -154,14 +156,14 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "length"){
                         runway->setLength(stoi(text->Value()));
                         continue;
                     }
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << std::endl;
-                    return PartialImport;
+                    endResult = PartialImport;
                 }
             }
             if (addedRunwayToAirport == false){
@@ -177,11 +179,11 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "number") {
                         airplane->setNumber(text->Value());
@@ -213,7 +215,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a number." << std::endl;
-                        return PartialImport;
+                        endResult = PartialImport;
                     }
                     if (elemName == "passengers") {
                         airplane->setPassengers(stoi(text->Value()));
@@ -224,21 +226,21 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     errstream << "Invalid attribute type '" << elemName << "' in element " << objectName << "." << std::endl;
-                    return PartialImport;
+                    endResult = PartialImport;
                 }
             }
             airplanes.push_back(airplane);
             continue;
         }
         errstream << "Invalid element name " << objectName << "." << std::endl;
-        return PartialImport;
+        endResult = PartialImport;
     }
     if (properlyInitialized(airports, runwaysNotAddedToPlane, airplanes)){
         std::cout << "Simulation has been properly initialized, simulation will start now." << std::endl;
     }
     else{
         errstream << "Simulation has not been properly initialized." << std::endl;
-        return PartialImport;
+        endResult = PartialImport;
     }
     std::ofstream output;
     output.open("../output.txt", std::fstream::out);        //Write simple output to stream
@@ -249,11 +251,13 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
-    output.open("../graphicaloutput.txt", std::fstream::out);
-    importer::writeGraphicalOutput(airports, output);
+    Exporter* exporter = new Exporter();
+    output.open("../GraphicalImpression.txt", std::fstream::out);
+    exporter->exportGraphicalImpression(output, airports);
+    output.close();
     simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
-    return Success;
+    return endResult;
 }
 
 bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
@@ -314,51 +318,4 @@ bool importer::properlyInitialized(const std::vector<Airport*> &airports, const 
         }
     }
     return true;
-}
-
-void importer::writeGraphicalOutput(const std::vector<Airport*> &airports, std::ofstream &output){
-    int currentsize = 0;
-    Runway* currentrunway;
-    for (unsigned int i = 0; i < airports.size(); ++i) {
-        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
-            if ((int)airports[i]->getRunways()[j]->getTaxipoints().size() > currentsize){
-                currentsize = airports[i]->getRunways()[j]->getTaxipoints().size();
-                currentrunway = airports[i]->getRunways()[j];
-            }
-        }
-        output << currentrunway->getName() << " | ";
-        if (currentrunway->getAirplane() != NULL){
-            output << "====V=====" << std::endl;
-        }
-        else{
-            output << "==========" << std::endl;
-        }
-        int j = currentrunway->getTaxipoints().size() + currentrunway->getCrossings().size() - 1;
-        while (j >= 0) {
-            if (j%2 == 0){
-                output << "TP" << currentrunway->getTaxipoints()[j/2]->getName()[0] << " | " << std::endl;
-            }
-            else{
-                output << currentrunway->getCrossings()[j/2] << " | ";
-                if (airports[i]->findRunway(currentrunway->getCrossings()[j/2])->getAirplane() != NULL){
-                    output << "====V=====" << std::endl;
-                }
-                else{
-                    output << "==========" << std::endl;
-                }
-            }
-            --j;
-        }
-        output << "Gates [";
-        for (int j = 0; j < airports[i]->getGates(); ++j) {
-            if(airports[i]->getGatesVector()[j] != NULL){
-                output << "V";
-            }
-            else{
-                output << " ";
-            }
-        }
-        output << "]" << std::endl << std::endl;
-    }
-    output.close();
 }

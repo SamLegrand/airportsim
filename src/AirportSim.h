@@ -24,8 +24,6 @@ public:
     void simulate(std::ostream &output);
 
     bool checkSimEnd();
-
-    void writeEngineIni();
 };
 
 
