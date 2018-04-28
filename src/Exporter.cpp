@@ -87,7 +87,7 @@ void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airpo
     std::string coneinfo = "type = \"Cone\"\n"
             "height = 5\n"
             "n = 360\n"
-            "scale = 0.25";
+            "scale = 0.25\n";
     std::string reflectionrunway = "ambientReflection = (0.00, 0.50, 0.00)\n"
             "diffuseReflection = (0.00, 0.50, 0.00)\n"
             "specularReflection = (0.4, 0.4, 0.4)\n"
@@ -103,7 +103,7 @@ void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airpo
     std::string reflectionairplane = "ambientReflection = (0.50, 0.00, 0.00)\n"
             "diffuseReflection = (0.50, 0.00, 0.00)\n"
             "specularReflection = (0.4, 0.4, 0.4)\n"
-            "reflectionCoefficient = 20";
+            "reflectionCoefficient = 20\n";
     std::string light = "[Light0]\n"
             "infinity = TRUE\n"
             "direction = (-1, -1, -1)\n"
@@ -117,6 +117,12 @@ void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airpo
     std::string airplanestanding = "rotateX = -90\n"
             "rotateY = 0\n"
             "rotateZ = 0\n";
+    std::string airplanetogate = "rotateX = 0\n"
+            "rotateY = -90\n"
+            "rotateZ = 0\n";
+    std::string airplanetorunway = "rotateX = 0\n"
+            "rotateY = 90\n"
+            "rotateZ = 0\n";
 
     //Write to ini
     for (unsigned int i = 0; i < airports.size(); ++i) {
@@ -124,20 +130,36 @@ void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airpo
         figureinfo << light << std::endl;
         int gatesoffset = airports[i]->getRunways().size();
         int figNum = 0;
-        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
-            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*j << ", 0, 0)\n" << reflectionrunway << std::endl;
-            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*j << ", 2, 0)\n" << reflectionrunway << std::endl;
-            figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << -4*j << ", 4, 0)\n" << reflectionrunway << std::endl;
+        figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << 0 << ", 0, 0)\n" << reflectionrunway << std::endl;
+        figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << 0 << ", 2, 0)\n" << reflectionrunway << std::endl;
+        figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << 0 << ", 4, 0)\n" << reflectionrunway << std::endl;
+        figNum += 3;
+        if (airports[i]->getFarthestRunway()->getAirplane() != NULL){
+            figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << 0 << ", -0.5, 1)\n" << reflectionairplane << std::endl;
+            figNum += 1;
+        }
+        for (unsigned int j = 1; j <= airports[i]->getFarthestRunway()->getCrossings().size(); ++j) {
+            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 0, 0)\n" << reflectionrunway << std::endl;
+            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 2, 0)\n" << reflectionrunway << std::endl;
+            figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 4, 0)\n" << reflectionrunway << std::endl;
             figNum += 3;
-            if (airports[i]->getRunways()[j]->getAirplane() != NULL){
-                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << -4*j << ", -0.5, 1)\n" << reflectionairplane << std::endl;
+            if (airports[i]->findRunway(airports[i]->getFarthestRunway()->getCrossings()[j-1])->getAirplane() != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << -4*(int)j << ", -0.5, 1)\n" << reflectionairplane << std::endl;
                 figNum += 1;
             }
         }
         for (unsigned int j = 0; j < airports[i]->getFarthestRunway()->getTaxipoints().size(); ++j) {
-            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*j-2 << ", 2, 0)\n" << reflectiontaxipoint << std::endl;
-            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*j-2 << ", 4, 0)\n" << reflectiontaxipoint << std::endl;
+            figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*(int)j-2 << ", 2, 0)\n" << reflectiontaxipoint << std::endl;
+            figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*(int)j-2 << ", 4, 0)\n" << reflectiontaxipoint << std::endl;
             figNum += 2;
+            if (airports[i]->getFarthestRunway()->getTaxipoints()[j]->getPlaneToRunway() != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*(int)j-2.5 << ", 2, 1)\n" << reflectionairplane << std::endl;
+                figNum += 1;
+            }
+            if (airports[i]->getFarthestRunway()->getTaxipoints()[j]->getPlaneToGate() != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetogate << "center = (" << -4*(int)j-1.5 << ", 4, 1)\n" << reflectionairplane << std::endl;
+                figNum += 1;
+            }
         }
         for (int j = 0; j < airports[i]->getGates(); j +=2) {
             figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*gatesoffset << ", " << j << ", 0)\n" << reflectiongate << std::endl;

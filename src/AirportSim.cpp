@@ -5,6 +5,7 @@
 #include <sstream>
 #include "AirportSim.h"
 #include "utils.h"
+#include "Exporter.h"
 
 const std::vector<Airport *> &AirportSim::getAirports() const {
     return airports;
@@ -53,6 +54,10 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Runway") {
+                std::ofstream myfile;
+                myfile.open("../EngineTest.ini");
+                EngineIniExporter* exporter = new EngineIniExporter();
+                exporter->exportIni(myfile, airports);
                 if (airport->findPlaneInGate(airplane) != -1){
                     airport->removePlaneFromGate(airplane);
                     airplane->setEndpoint(airport->getAvailableRunway());
@@ -67,6 +72,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     }
                     else{
                         SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
+                        runway->removePlaneFromTaxipoint(airplane);
                         runway->setAirplaneCrossing(NULL);
                         airplane->taxiToRunway(SimOutput, runway->getName());
                         runway->setAirplane(airplane);
@@ -88,6 +94,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     if (airport->findPlaneInCrossing(airplane) != NULL && airplane->getEndpoint()->getAirplane() == NULL){
                         SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
                         runway->setAirplaneCrossing(NULL);
+                        runway->removePlaneFromTaxipoint(airplane);
                         airplane->taxiToRunway(SimOutput, runway->getName());
                         runway->setAirplane(airplane);
                     }
@@ -145,6 +152,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                         airplane->setCrossing(airport->findRunway(runway->getCrossings().back()));
                     }
                     else{
+                        runway->removePlaneFromTaxipoint(airplane);
                         int gate = airport->getAvailableGate();
                         if (gate == -1) {
                             continue;
