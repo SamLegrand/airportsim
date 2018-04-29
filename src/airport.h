@@ -18,8 +18,20 @@ class Airport {
     std::string callsign;
     std::vector<Runway*> runways;
     std::vector<Airplane*> gates;
+    Airplane* h3000;
+    Airplane* h5000;
     int passengers;
 public:
+    Airport();
+
+    Airplane *getH3000() const;
+
+    void setH3000(Airplane *h3000);
+
+    Airplane *getH5000() const;
+
+    void setH5000(Airplane *h5000);
+
     void setName(const std::string &name);
     void setIata(const std::string &iata);
     void setCallsign(const std::string &callsign);

@@ -169,3 +169,24 @@ Runway *Airport::getFarthestRunway() {
     }
     return farthestRunway;
 }
+
+Airplane *Airport::getH3000() const {
+    return h3000;
+}
+
+void Airport::setH3000(Airplane *h3000) {
+    Airport::h3000 = h3000;
+}
+
+Airplane *Airport::getH5000() const {
+    return h5000;
+}
+
+void Airport::setH5000(Airplane *h5000) {
+    Airport::h5000 = h5000;
+}
+
+Airport::Airport() {
+    h3000 = NULL;
+    h5000 = NULL;
+}
