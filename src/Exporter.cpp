@@ -7,23 +7,11 @@
 
 Exporter::Exporter() {
     initCheck = this;
-    docStarted = false;
+    airleaderOutput.open("../AirControlOutput.txt");
 }
 
 bool Exporter::properlyInitizalized() {
     return initCheck == this;
-}
-
-bool Exporter::documentStarted() {
-    return docStarted;
-}
-
-void Exporter::documentStart(std::ofstream &file) {
-    docStarted = true;
-}
-
-void Exporter::documentEnd(std::ofstream &file) {
-    docStarted = false;
 }
 
 void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vector<Airport*> &airports){
@@ -72,7 +60,7 @@ void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vecto
     }
 }
 
-void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airport *> &airports){
+void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &airports){
     std::string initinfo = "[General]\n"
             "size = 1024\n"
             "backgroundcolor = (0, 0.749, 1)\n"
@@ -170,6 +158,6 @@ void EngineIniExporter::exportIni(std::ofstream &output, const std::vector<Airpo
     }
 }
 
-void AirleaderExporter::printMessage(std::ofstream &output, int time, std::string source, std::string message) {
-    output << "[" << time << "][" << source << "]" << std::endl << "$ " << message << std::endl;
+void Exporter::printAirleaderMessage(int time, std::string source, std::string message) {
+    airleaderOutput << "[" << time << "][" << source << "]" << std::endl << "$ " << message << std::endl;
 }

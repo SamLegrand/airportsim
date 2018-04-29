@@ -48,8 +48,11 @@ void Runway::addTaxipoint(std::string name) {
 
 void Runway::removePlaneFromTaxipoint(Airplane *airplane) {
     for (unsigned int i = 0; i < Runway::taxipoints.size(); ++i) {
-        if (taxipoints[i]->getPlaneToGate() ==  airplane || taxipoints[i]->getPlaneToRunway() == airplane){
-            taxipoints[i] = NULL;
+        if (taxipoints[i]->getPlaneToGate() ==  airplane){
+            taxipoints[i]->setPlaneToGate(NULL);
+        }
+        else if(taxipoints[i]->getPlaneToRunway() == airplane){
+            taxipoints[i]->setPlaneToRunway(NULL);
         }
     }
 }
