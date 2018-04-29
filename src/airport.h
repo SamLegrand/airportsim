@@ -48,6 +48,8 @@ public:
     void printInfo(std::ofstream &output) const;
     Runway* findRunway(std::string runwayName);
     Runway* getFarthestRunway();
+    void setPlaneToGate(const Taxipoint *taxipoint, Airplane* &airplane);
+    void setPlaneToRunway(const Taxipoint *taxipoint, Airplane* &airplane);
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");

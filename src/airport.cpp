@@ -190,3 +190,19 @@ Airport::Airport() {
     h3000 = NULL;
     h5000 = NULL;
 }
+
+void Airport::setPlaneToGate(const Taxipoint *taxipoint, Airplane* &airplane) {
+    for (unsigned int i = 0; i < getFarthestRunway()->getTaxipoints().size(); ++i) {
+        if (getFarthestRunway()->getTaxipoints()[i]->getName() == taxipoint->getName()){
+            getFarthestRunway()->getTaxipoints()[i]->setPlaneToGate(airplane);
+        }
+    }
+}
+
+void Airport::setPlaneToRunway(const Taxipoint *taxipoint, Airplane* &airplane) {
+    for (unsigned int i = 0; i < getFarthestRunway()->getTaxipoints().size(); ++i) {
+        if (getFarthestRunway()->getTaxipoints()[i]->getName() == taxipoint->getName()){
+            getFarthestRunway()->getTaxipoints()[i]->setPlaneToRunway(airplane);
+        }
+    }
+}

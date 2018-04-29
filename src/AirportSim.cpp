@@ -67,6 +67,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Taxiing to Runway") {
+                if (airport->findPlaneInRunway(airplane) != NULL){
+                    airport->getFarthestRunway()->removePlaneFromTaxipoint(airplane);     //Remove plane from taxipoint
+                    Runway* runway = airport->findPlaneInRunway(airplane);
+                    airplane->taxiToRunway(SimOutput, runway->getName());
+                    continue;
+                }
                 if (airport->findPlaneInGate(airplane) != -1){
                     airport->removePlaneFromGate(airplane);
                     airplane->setEndpoint(airport->getAvailableRunway());
@@ -77,13 +83,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     if (runway->getCrossings().size() > 0){
                         SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().front() << " via " << runway->getTaxipoints().front()->getName() << std::endl;
                         airplane->setCrossing(airport->findRunway(runway->getCrossings().front()));
-                        runway->getTaxipoints().front()->setPlaneToRunway(airplane);
+                        airport->setPlaneToRunway(runway->getTaxipoints().front(), airplane);
                     }
                     else{
                         SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
-                        runway->removePlaneFromTaxipoint(airplane);
+                        airport->setPlaneToRunway(runway->getTaxipoints().back(), airplane);
                         runway->setAirplaneCrossing(NULL);
-                        airplane->taxiToRunway(SimOutput, runway->getName());
                         runway->setAirplane(airplane);
                     }
                 }
@@ -94,7 +99,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                         for (unsigned int j = 0; j < runway->getCrossings().size(); ++j) {
                             if (airport->findRunway(runway->getCrossings()[j]) == runway2 && j - 1 >= 0){
                                 SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings()[j - 1] << " via " << runway->getTaxipoints()[j]->getName() << std::endl;
-                                runway->getTaxipoints()[j]->setPlaneToRunway(airplane);
+                                airport->setPlaneToRunway(runway->getTaxipoints()[i], airplane);
                                 runway->setAirplaneCrossing(NULL);
                                 airplane->setCrossing(airport->findRunway(runway->getCrossings()[j - 1]));
                             }
@@ -166,7 +171,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     if (!runway->getCrossings().empty()){
                         SimOutput << airplane->getCallsign() << " is taxiing to holding point " << runway->getCrossings().back() << " via " << runway->getTaxipoints().back()->getName() << std::endl;
                         runway->setAirplaneCrossing(NULL);
-                        runway->getTaxipoints().back()->setPlaneToGate(airplane);   //Set taxipoint
+                        airport->setPlaneToGate(runway->getTaxipoints().back(), airplane);
                         airplane->setCrossing(airport->findRunway(runway->getCrossings().back()));
                     }
                     else{
@@ -186,7 +191,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     }
                     if (runway->getAirplane() == NULL){   //If runway is not occupied
                         SimOutput << airplane->getCallsign() << " is crossing " << runway->getName() << std::endl;
-                        runway->removePlaneFromTaxipoint(airplane);     //Remove plane from taxipoint
+                        airport->getFarthestRunway()->removePlaneFromTaxipoint(airplane);     //Remove plane from taxipoint
                         runway->setAirplaneCrossing(airplane);
                         airplane->setCrossing(NULL);
                     }

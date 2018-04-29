@@ -205,7 +205,7 @@ void Airplane::stand(std::ostream &output, int gate) {
 
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
     REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
-    output << callsign << " is taxiing to runway " << runway << std::endl;
+    output << callsign << " is waiting at runway " << runway << std::endl;
     status = "Taking Off";
     ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
 }
