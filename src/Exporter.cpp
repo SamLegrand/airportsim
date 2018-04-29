@@ -3,6 +3,7 @@
 //
 
 #include <sstream>
+#include <cstdlib>
 #include "Exporter.h"
 
 Exporter::Exporter() {
@@ -76,6 +77,18 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
             "height = 5\n"
             "n = 360\n"
             "scale = 0.25\n";
+    std::string buckyballinfo = "type = \"BuckyBall\"\n"
+            "scale = 0.25\n"
+            "rotateX = 0\n"
+            "rotateY = 0\n"
+            "rotateZ = 0\n";
+    std::string cylinderinfo = "type = \"Cylinder\"\n"
+            "height = 3.5\n"
+            "scale = 0.10\n"
+            "rotateX = -90\n"
+            "rotateY = 0\n"
+            "rotateZ = 0\n"
+            "n = 30\n";
     std::string reflectionrunway = "ambientReflection = (0.00, 0.50, 0.00)\n"
             "diffuseReflection = (0.00, 0.50, 0.00)\n"
             "specularReflection = (0.4, 0.4, 0.4)\n"
@@ -90,6 +103,10 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
             "reflectionCoefficient = 20\n";
     std::string reflectionairplane = "ambientReflection = (0.50, 0.00, 0.00)\n"
             "diffuseReflection = (0.50, 0.00, 0.00)\n"
+            "specularReflection = (0.4, 0.4, 0.4)\n"
+            "reflectionCoefficient = 20\n";
+    std::string reflectiondome = "ambientReflection = (0.00, 0.25, 0.50)\n"
+            "diffuseReflection = (0.00, 0.25, 0.50)\n"
             "specularReflection = (0.4, 0.4, 0.4)\n"
             "reflectionCoefficient = 20\n";
     std::string light = "[Light0]\n"
@@ -151,7 +168,19 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
         }
         for (int j = 0; j < airports[i]->getGates(); j +=2) {
             figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*gatesoffset << ", " << j << ", 0)\n" << reflectiongate << std::endl;
-            figNum += 1;
+            figureinfo << "[Figure" << figNum + 1 << "]\n" << buckyballinfo << "center = (" << -4*gatesoffset-0.5 << ", " << j-0.5 << ", 1)\n" << reflectiondome << std::endl;
+            figureinfo << "[Figure" << figNum + 2 << "]\n" << buckyballinfo << "center = (" << -4*gatesoffset-0.5 << ", " << j+0.5 << ", 1)\n" << reflectiondome << std::endl;
+            figNum += 3;
+            if (airports[i]->getGatesVector()[j] != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*gatesoffset-0.75 << ", " << j << ", 1)\n" << reflectionairplane << std::endl;
+                figureinfo << "[Figure" << figNum + 1 << "]\n" << cylinderinfo << "center = (" << -4*gatesoffset-0.5 << ", " << j-0.5 << ", 1)\n" << reflectiondome << std::endl;
+                figNum += 2;
+            }
+            if (airports[i]->getGatesVector()[j+1] != NULL){
+                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*gatesoffset-0.75 << ", " << j+1 << ", 1)\n" << reflectionairplane << std::endl;
+                figureinfo << "[Figure" << figNum + 1 << "]\n" << cylinderinfo << "center = (" << -4*gatesoffset-0.5 << ", " << j+0.5 << ", 1)\n" << reflectiondome << std::endl;
+                figNum += 2;
+            }
         }
         output << initinfo << "nrFigures = " << figNum << std::endl << std::endl;
         output << figureinfo.rdbuf();
@@ -160,4 +189,9 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
 
 void Exporter::printAirleaderMessage(int time, std::string source, std::string message) {
     airleaderOutput << "[" << time << "][" << source << "]" << std::endl << "$ " << message << std::endl;
+}
+
+void Exporter::generateImg(std::string filename) {
+    std::string command = "../Engine/engine " + filename;
+    system(command.c_str());
 }

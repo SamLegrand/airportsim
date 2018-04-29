@@ -18,6 +18,7 @@ public:
     bool properlyInitizalized();
     void exportGraphicalImpression(std::ofstream &output, const std::vector<Airport*> &airports);
     void exportIni(std::ofstream &output, const std::vector<Airport*> &airports);
+    void generateImg(std::string filename);
     void printAirleaderMessage(int time, std::string source, std::string message);
 };
 
