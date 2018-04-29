@@ -33,11 +33,11 @@ TEST_F(AirportSimDomainTest, LandingScenario){      //Testing landin scenario
     EXPECT_EQ(airplane_.getStatus(), "Descending");
     EXPECT_EQ(airplane_.getHeight(), 10000);
     stream.str(std::string());      //Clear stream
-    airplane_.descend(stream);      //Check for correct output for descend
+    airplane_.descendTo5k(stream);      //Check for correct output for descendTo5k
     EXPECT_EQ(stream.str(), "Cessna 842 descended to 9000 ft.\n");
     EXPECT_EQ(airplane_.getHeight(), 9000);
     while(airplane_.getHeight() >= 2000){
-        airplane_.descend(stream);
+        airplane_.descendTo5k(stream);
     }
     stream.str(std::string());
     EXPECT_EQ(airplane_.getStatus(), "Landing");
@@ -122,7 +122,7 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     airplane_.setStatus("Unknown");
     std::ostringstream stream;
     EXPECT_DEATH(airplane_.approach(stream, ""), "Assertion.*failed");      //Checking for current state violations for all airplane functions
-    EXPECT_DEATH(airplane_.descend(stream), "Assertion.*failed");
+    EXPECT_DEATH(airplane_.descendTo5k(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane_.land(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane_.landed(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane_.taxiToGate(stream, 1), "Assertion.*failed");

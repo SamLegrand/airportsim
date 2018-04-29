@@ -25,7 +25,9 @@ class Airplane {
     int passengers;
     int fuel;
     int height;
+    int time;
 public:
+    Airplane() {time = 0;};
     void setNumber(const std::string &number);
     void setCallsign(const std::string &callsign);
     void setModel(const std::string &model);
@@ -54,18 +56,30 @@ public:
 
     /**
      * REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Descending", "Plane hasn't been set to the correct state.");
+     * ENSURE(this->getStatus() == "Descending to 5k", "Plane hasn't been set to the correct state.");
      */
     void approach(std::ostream &output, const std::string& airport);
 
     /**
-     * REQUIRE(this->getStatus() == "Descending", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Descending to 5k", "Plane wasn't in correct state.");
+     * ENSURE(this->getStatus() == "Descending to 3k" || this->getStatus() == "Descending to 5k" || this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
      */
-    void descend(std::ostream &output);
+    void descendTo5k(std::ostream &output);
 
     /**
-     * REQUIRE(this->getStatus() == "Final Approach", "Plane wasn't in correct state.");
+     * REQUIRE(this->getStatus() == "Descending to 3k" || this->getStatus() == "Flying wait pattern", "Plane wasn't in correct state.");
+     * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending to 3k" || this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
+     */
+    void descendTo3k(std::ostream &output);
+
+    /**
+     * REQUIRE(this->getStatus() == "Flying wait pattern, "Plane wasn't in correct state.");
+     * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending to 5k" || this->getStatus() == "Descending to 3k", "Plane hasn't been set to the correct state.");
+     */
+    void flyWaitPattern(std::ostream &output);
+
+    /**
+     * REQUIRE(this->getStatus() == "Final Approach" || this->getStatus() == "Flying wait pattern", "Plane wasn't in correct state.");
      * ENSURE(this->getStatus() == "Landing" || this->getStatus() == "Final Approach", "Plane hasn't been set to the correct state.");
      */
     void finalapproach(std::ostream &output, const std::string& airport, const std::string& runway);

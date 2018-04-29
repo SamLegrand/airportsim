@@ -199,31 +199,48 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             }
             if (airplane->getStatus() == "Final Approach") {
                 Runway* runway = airport->findPlaneInRunway(airplane);
-                if (runway == NULL) {
-                    runway = airport->getAvailableRunway();
-                    if (runway == NULL) {
-                        airplane->finalapproach(SimOutput, airport->getName(), "");
-                        leader.printMessage(time, "ATC", airplane->getCallsign() + ", hold south on the one eighty radial, expect further clearance at " + to_string(time));
-                        leader.printMessage(time, "AIR", "Holding south on the one eighty radial, " + airplane->getCallsign());
-                        continue;
-                    } else {
-                        runway->setAirplane(airplane);
-                    }
-                }
                 airplane->finalapproach(SimOutput, airport->getName(), runway->getName());
                 leader.printMessage(time, "ATC", airplane->getCallsign() + ", cleared ILS approach runway " + runway->getName());
                 leader.printMessage(time, "AIR", "Cleared ILS approach runway " + runway->getName() + ", " + airplane->getCallsign());
                 continue;
             }
-            if (airplane->getStatus() == "Descending") {
-                airplane->descend(SimOutput);
+            if (airplane->getStatus() == "Flying wait pattern") {
+                if (airplane->getHeight() == 5000 && airport->getH3000() == NULL) {
+                    airport->setH5000(NULL);
+                    airport->setH3000(airplane);
+                    airplane->setStatus("Descending to 3k");
+                    airplane->descendTo3k(SimOutput);
+                    continue;
+                }
+                else if (airplane->getHeight() == 3000 && airport->getAvailableRunway()) {
+                    Runway* runway = airport->getAvailableRunway();
+                    airport->setH3000(NULL);
+                    airplane->setStatus("Final Approach");
+                    airplane->finalapproach(SimOutput, airport->getName(), runway->getName());
+                    runway->setAirplane(airplane);
+                    continue;
+                }
+                airplane->flyWaitPattern(SimOutput);
+                leader.printMessage(time, "ATC", airplane->getCallsign() + ", hold south on the one eighty radial, expect further clearance at " + to_string(time));
+                leader.printMessage(time, "AIR", "Holding south on the one eighty radial, " + airplane->getCallsign());
+                continue;
+            }
+            if (airplane->getStatus() == "Descending to 3k") {
+                airplane->descendTo3k(SimOutput);
+                continue;
+            }
+            if (airplane->getStatus() == "Descending to 5k") {
+                airplane->descendTo5k(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Approaching") {
-                airplane->approach(SimOutput, airport->getName());
-                leader.printMessage(time, "AIR", airport->getCallsign()+ ", " + airplane->getCallsign() + ", arriving at " + airport->getName());
-                leader.printMessage(time, "ATC", airplane->getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + airplane->getType());
-                leader.printMessage(time, "AIR", "Descend and maintain five thousand feet, squawking " + airplane->getType() + ", " + airplane->getCallsign());
+                if (airport->getH5000() == NULL) {
+                    airport->setH5000(airplane);
+                    airplane->approach(SimOutput, airport->getName());
+                    leader.printMessage(time, "AIR", airport->getCallsign()+ ", " + airplane->getCallsign() + ", arriving at " + airport->getName());
+                    leader.printMessage(time, "ATC", airplane->getCallsign() + ", radar contact, descendTo5k and maintain five thousand feet, squawk " + airplane->getType());
+                    leader.printMessage(time, "AIR", "Descend and maintain five thousand feet, squawking " + airplane->getType() + ", " + airplane->getCallsign());
+                }
                 continue;
             }
         }
