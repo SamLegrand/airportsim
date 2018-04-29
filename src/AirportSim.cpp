@@ -27,19 +27,19 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     unsigned int time = 0;
     AirLeader leader;
     Airport* airport = airports[0];
-    int filecounter = -1;
+//    int filecounter = -1;
     while (!checkSimEnd()) {
-        filecounter++;
-        std::stringstream iniFileNameStream;
-        std::stringstream fileNameStream;
-        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
-        fileNameStream << "EngineTest" << filecounter << ".ini";
-        std::string iniFileName = iniFileNameStream.str();
-        std::string fileName = iniFileNameStream.str();
-        std::ofstream myfile;
-        myfile.open(iniFileName.c_str());
-        Exporter* exporter = new Exporter();
-        exporter->exportIni(myfile, airports);
+//        filecounter++;
+//        std::stringstream iniFileNameStream;
+//        std::stringstream fileNameStream;
+//        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
+//        fileNameStream << "EngineTest" << filecounter << ".ini";
+//        std::string iniFileName = iniFileNameStream.str();
+//        std::string fileName = iniFileNameStream.str();
+//        std::ofstream myfile;
+//        myfile.open(iniFileName.c_str());
+//        Exporter* exporter = new Exporter();
+//        exporter->exportIni(myfile, airports);
 //        exporter->generateImg(fileName.c_str());
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
             Airplane* airplane = airplanes[i];

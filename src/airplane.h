@@ -27,7 +27,7 @@ class Airplane {
     int height;
     int time;
 public:
-    Airplane() {time = 0;};
+    Airplane() {time = 0, crossing = NULL, endpoint = NULL;};
     void setNumber(const std::string &number);
     void setCallsign(const std::string &callsign);
     void setModel(const std::string &model);
