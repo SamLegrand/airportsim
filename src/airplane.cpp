@@ -144,7 +144,7 @@ void Airplane::landed(std::ostream &output, const std::string& airport, const st
 
 void Airplane::taxiToGate(std::ostream &output, int gate) {
     REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane wasn't in correct state.");
-    output << callsign << " is taxiing to Gate " << gate << std::endl;
+    output << callsign << " is standing at gate " << gate << "." << std::endl;
     status = "Unboarding Plane";
     ENSURE(this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
 }
