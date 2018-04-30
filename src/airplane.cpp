@@ -308,7 +308,8 @@ bool Airplane::isAtGate() {
 
 bool Airplane::isAtRunway() {
     return Airplane::status == "Landed" ||
-           Airplane::status == "Taxiing to Gate";
+           Airplane::status == "Taxiing to Gate" ||
+           Airplane::status == "Ready for Takeoff";
 }
 
 void Airplane::readyForTakeoff(std::ostream &output, const std::string &airport, const std::string &runway) {
