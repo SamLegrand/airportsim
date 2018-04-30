@@ -128,7 +128,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 }
                             }
                             for (unsigned int i = 0; i < airports.size(); ++i) {
-                                for (int j = 0; j < airports[i]->getRunways().size(); ++j) {
+                                for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
                                     if (airports[i]->getRunways()[j] == runway){
                                         if (taxipoints.size() > airports[i]->getTaxipoints().size()){
                                             airports[i]->setTaxipoints(taxipoints);
