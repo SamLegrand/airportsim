@@ -54,10 +54,14 @@ public:
     const int getGates() const;
     const int &getPassengers() const;
     void printInfo(std::ofstream &output) const;
-    Runway* findRunway(std::string runwayName);
-    Runway* getFarthestRunway();
-    void setPlaneToGate(const Taxipoint *taxipoint, Airplane* &airplane);
-    void setPlaneToRunway(const Taxipoint *taxipoint, Airplane* &airplane);
+    Runway* findRunwayByRunwayName(std::string runwayName);
+    Runway* findRunwayByTaxiName(std::string taxipoint);
+    Runway* findNextRunwayToGate(Runway* runway);
+    Runway* findNextRunwayToRunway(Runway* runway);
+    Runway* findRunwayByTaxipointToGate(Airplane* airplane);
+    Runway* findRunwayByTaxipointToRunway(Airplane* airplane);
+    void sortRunways();
+
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");

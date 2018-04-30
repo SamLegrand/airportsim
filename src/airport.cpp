@@ -141,10 +141,10 @@ Runway *Airport::findPlaneInRunway(Airplane* airplane) {
     return NULL;
 }
 
-Runway *Airport::findRunway(std::string runwayName) {
-    for (unsigned int i = 0; i < getRunways().size(); ++i) {
-        if (getRunways()[i]->getName() == runwayName){
-            return getRunways()[i];
+Runway *Airport::findRunwayByRunwayName(std::string runwayName) {
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if (runways[i]->getName() == runwayName){
+            return runways[i];
         }
     }
     return NULL;
@@ -158,16 +158,6 @@ Runway *Airport::findPlaneInCrossing(Airplane *airplane) {
         }
     }
     return NULL;
-}
-
-Runway *Airport::getFarthestRunway() {
-    Runway* farthestRunway = runways[0];
-    for (unsigned int i = 0; i < runways.size(); ++i) {
-        if (runways[i]->getCrossings().size() > farthestRunway->getCrossings().size()){
-            farthestRunway = runways[i];
-        }
-    }
-    return farthestRunway;
 }
 
 Airplane *Airport::getH3000() const {
@@ -196,26 +186,63 @@ bool Airport::properlyInitialized(){
     return initCheck == this;
 }
 
-void Airport::setPlaneToGate(const Taxipoint *taxipoint, Airplane* &airplane) {
-    for (unsigned int i = 0; i < getFarthestRunway()->getTaxipoints().size(); ++i) {
-        if (getFarthestRunway()->getTaxipoints()[i]->getName() == taxipoint->getName()){
-            getFarthestRunway()->getTaxipoints()[i]->setPlaneToGate(airplane);
-        }
-    }
-}
-
-void Airport::setPlaneToRunway(const Taxipoint *taxipoint, Airplane* &airplane) {
-    for (unsigned int i = 0; i < getFarthestRunway()->getTaxipoints().size(); ++i) {
-        if (getFarthestRunway()->getTaxipoints()[i]->getName() == taxipoint->getName()){
-            getFarthestRunway()->getTaxipoints()[i]->setPlaneToRunway(airplane);
-        }
-    }
-}
-
 const std::vector<std::string> &Airport::getTaxipoints() const {
     return taxipoints;
 }
 
 void Airport::setTaxipoints(const std::vector<std::string> &taxipoints) {
     Airport::taxipoints = taxipoints;
+}
+
+Runway *Airport::findRunwayByTaxiName(std::string taxipoint) {
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if (runways[i]->getTaxipoint() == taxipoint){
+            return runways[i];
+        }
+    }
+    return NULL;
+}
+
+Runway *Airport::findNextRunwayToGate(Runway *runway) {
+    for (unsigned int i = 0; i < runways.size()-1; ++i) {
+        if (runways[i] == runway){
+            return runways[i+1];
+        }
+    }
+    return NULL;
+}
+
+Runway *Airport::findNextRunwayToRunway(Runway *runway) {
+    for (unsigned int i = 1; i < runways.size(); ++i) {
+        if (runways[i] == runway){
+            return runways[i-1];
+        }
+    }
+    return NULL;
+}
+
+Runway *Airport::findRunwayByTaxipointToGate(Airplane *airplane) {
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if (runways[i]->getTaxipointToGate() == airplane){
+            return runways[i];
+        }
+    }
+    return NULL;
+}
+
+Runway *Airport::findRunwayByTaxipointToRunway(Airplane *airplane) {
+    for (unsigned int i = 0; i < runways.size(); ++i) {
+        if (runways[i]->getTaxipointToRunway() == airplane){
+            return runways[i];
+        }
+    }
+    return NULL;
+}
+
+void Airport::sortRunways() {
+    std::vector<Runway*> sortedRunways;
+    for (int i = taxipoints.size()-1; i>-1; i--) {
+        sortedRunways.push_back(findRunwayByTaxiName(taxipoints[i]));
+    }
+    runways = sortedRunways;
 }

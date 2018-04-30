@@ -316,3 +316,11 @@ void Airplane::readyForTakeoff(std::ostream &output, const std::string &airport,
     output << callsign << " is ready for takeoff at " << airport << " on runway " << runway << std::endl;
     status = "Taking Off";
 }
+
+int Airplane::getTime() const {
+    return time;
+}
+
+void Airplane::setTime(int time) {
+    Airplane::time = time;
+}

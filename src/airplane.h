@@ -28,6 +28,11 @@ class Airplane {
     int height;
     int time;
 public:
+    int getTime() const;
+
+    void setTime(int time);
+
+public:
     Airplane();
     bool properlyInitialized();
     void setNumber(const std::string &number);

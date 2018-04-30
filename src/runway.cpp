@@ -51,7 +51,7 @@ void Runway::setLength(int length) {
 }
 
 bool Runway::ableToCross() {
-    return !airplane || airplane->getStatus() == "Ready for Takeoff" || airplane->getStatus() == "Taxiing" || airplane->getStatus() == "Crashlanding";
+    return (!airplane || airplane->getStatus() == "Ready for Takeoff" || airplane->getStatus() == "Taxiing" || airplane->getStatus() == "Crashlanding") && !crossing;
 }
 
 Airplane *Runway::getTaxipointToRunway() const {
@@ -70,20 +70,12 @@ void Runway::setTaxipointToGate(Airplane *taxipointToGate) {
     Runway::taxipointToGate = taxipointToGate;
 }
 
-Airplane *Runway::getCrossingToRunway() const {
-    return crossingToRunway;
+Airplane *Runway::getAirplaneCrossing() const {
+    return crossing;
 }
 
-void Runway::setCrossingToRunway(Airplane *crossingToRunway) {
-    Runway::crossingToRunway = crossingToRunway;
-}
-
-Airplane *Runway::getCrossingToGate() const {
-    return crossingToGate;
-}
-
-void Runway::setCrossingToGate(Airplane *crossingToGate) {
-    Runway::crossingToGate = crossingToGate;
+void Runway::setAirplaneCrossing(Airplane *crossing){
+    Runway::crossing = crossing;
 }
 
 const std::string &Runway::getTaxipoint() const {

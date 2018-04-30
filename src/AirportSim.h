@@ -28,8 +28,6 @@ public:
     void simulate(std::ostream &output);
 
     bool checkSimEnd();
-
-    void taxiToGate(Airport* &airport, Airplane* &airplane, std::ostream &SimOutput);
 };
 
 
