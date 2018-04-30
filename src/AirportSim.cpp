@@ -8,8 +8,6 @@
 #include "Exporter.h"
 
 AirportSim::AirportSim() {
-    AirportSim::airports = {};
-    AirportSim::airplanes = {};
     initCheck = this;
 }
 

@@ -4,6 +4,13 @@
 
 #include "airplane.h"
 
+Airplane::Airplane(){
+    time = 0;
+    crossing = NULL;
+    endpoint = NULL;
+    initCheck = this;
+}
+
 bool Airplane::properlyInitialized(){
     return initCheck == this;
 }
