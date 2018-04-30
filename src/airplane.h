@@ -159,6 +159,8 @@ public:
      * ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
      */
     void leaveAirport(std::ostream &output, const std::string& airport);
+
+    void readyForTakeoff(std::ostream &output, const std::string& airport, const std::string& runway);
 };
 
 

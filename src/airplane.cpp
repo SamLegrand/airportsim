@@ -217,8 +217,8 @@ void Airplane::stand(std::ostream &output, int gate) {
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
     REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
     output << callsign << " is waiting at runway " << runway << std::endl;
-    status = "Taking Off";
-    ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
+    status = "Ready for Takeoff";
+    ENSURE(this->getStatus() == "Ready for Takeoff", "Plane hasn't been set to the correct state.");
 }
 
 void Airplane::takeOff(std::ostream &output, const std::string& airport, const std::string& runway) {
@@ -302,10 +302,16 @@ bool Airplane::isAtGate() {
            Airplane::status == "Checking Plane" ||
            Airplane::status == "Refueling Plane" ||
            Airplane::status == "Boarding Plane" ||
-           Airplane::status == "Standing at Gate";
+           Airplane::status == "Standing at Gate" ||
+           Airplane::status == "Taxiing to Runway";
 }
 
 bool Airplane::isAtRunway() {
     return Airplane::status == "Landed" ||
            Airplane::status == "Taxiing to Gate";
+}
+
+void Airplane::readyForTakeoff(std::ostream &output, const std::string &airport, const std::string &runway) {
+    output << callsign << " is ready for takeoff at " << airport << " on runway " << runway << std::endl;
+    status = "Taking Off";
 }
