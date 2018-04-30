@@ -14,6 +14,7 @@ class Airplane;
 class Taxipoint;
 
 class Runway {
+    Runway* initCheck;
     std::string name;
     std::string type;
     int length;
@@ -23,6 +24,8 @@ class Runway {
     std::vector<std::string> crossings;
 public:
     Runway();
+
+    bool properlyInitialized();
 
     const std::string &getName() const;
 

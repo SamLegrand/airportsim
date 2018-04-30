@@ -4,6 +4,10 @@
 
 #include "airplane.h"
 
+bool Airplane::properlyInitialized(){
+    return initCheck == this;
+}
+
 void Airplane::setNumber(const std::string &number) {
     Airplane::number = number;
 }

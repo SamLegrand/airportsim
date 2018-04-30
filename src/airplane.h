@@ -13,6 +13,7 @@
 class Runway;
 
 class Airplane {
+    Airplane* initCheck;
     std::string number;
     std::string callsign;
     std::string model;
@@ -27,7 +28,8 @@ class Airplane {
     int height;
     int time;
 public:
-    Airplane() {time = 0, crossing = NULL, endpoint = NULL;};
+    Airplane() {time = 0, crossing = NULL, endpoint = NULL, initCheck = this;};
+    bool properlyInitialized();
     void setNumber(const std::string &number);
     void setCallsign(const std::string &callsign);
     void setModel(const std::string &model);

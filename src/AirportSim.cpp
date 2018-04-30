@@ -7,6 +7,16 @@
 #include "utils.h"
 #include "Exporter.h"
 
+AirportSim::AirportSim() {
+    AirportSim::airports = {};
+    AirportSim::airplanes = {};
+    initCheck = this;
+}
+
+bool AirportSim::properlyInitialized() {
+    return initCheck == this;
+}
+
 const std::vector<Airport *> &AirportSim::getAirports() const {
     return airports;
 }

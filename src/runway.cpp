@@ -8,6 +8,11 @@ Runway::Runway() {
     Runway::name = "";
     Runway::airplane = NULL;
     Runway::airplaneCrossing = NULL;
+    Runway::initCheck = this;
+}
+
+bool Runway::properlyInitialized(){
+    return Runway::initCheck == this;
 }
 
 const std::string &Runway::getName() const {

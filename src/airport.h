@@ -13,6 +13,7 @@
 
 
 class Airport {
+    Airport* initCheck;
     std::string name;
     std::string iata;
     std::string callsign;
@@ -23,6 +24,8 @@ class Airport {
     int passengers;
 public:
     Airport();
+
+    bool properlyInitialized();
 
     Airplane *getH3000() const;
 

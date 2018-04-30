@@ -189,6 +189,11 @@ void Airport::setH5000(Airplane *h5000) {
 Airport::Airport() {
     h3000 = NULL;
     h5000 = NULL;
+    initCheck = this;
+}
+
+bool Airport::properlyInitialized(){
+    return initCheck == this;
 }
 
 void Airport::setPlaneToGate(const Taxipoint *taxipoint, Airplane* &airplane) {

@@ -8,6 +8,11 @@ Taxipoint::Taxipoint(const std::string &name) {
     Taxipoint::name = name;
     planeToGate = NULL;
     planeToRunway = NULL;
+    initCheck = this;
+}
+
+bool Taxipoint::properlyInitialized(){
+    return initCheck == this;
 }
 
 const std::string &Taxipoint::getName() const {
