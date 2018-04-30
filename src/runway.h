@@ -19,11 +19,33 @@ class Runway {
     std::string type;
     int length;
     Airplane* airplane;
-    Airplane* airplaneCrossing;
-    std::vector<Taxipoint*> taxipoints;
-    std::vector<std::string> crossings;
+    Airplane* taxipointToRunway;
+    Airplane* taxipointToGate;
+    Airplane* crossingToRunway;
+    Airplane* crossingToGate;
+    std::string taxipoint;
 public:
     Runway();
+
+    Airplane *getTaxipointToRunway() const;
+
+    void setTaxipointToRunway(Airplane *taxipointToRunway);
+
+    Airplane *getTaxipointToGate() const;
+
+    void setTaxipointToGate(Airplane *taxipointToGate);
+
+    Airplane *getCrossingToRunway() const;
+
+    void setCrossingToRunway(Airplane *crossingToRunway);
+
+    Airplane *getCrossingToGate() const;
+
+    void setCrossingToGate(Airplane *crossingToGate);
+
+    const std::string &getTaxipoint() const;
+
+    void setTaxipoint(const std::string &taxipoint);
 
     bool properlyInitialized();
 
@@ -43,19 +65,7 @@ public:
 
     void setLength(int length);
 
-    void addTaxipoint(std::string taxipoint);
-
-    void addCrossing(std::string crossing);
-
-    const std::vector<Taxipoint*> &getTaxipoints() const;
-
-    const std::vector<std::string> &getCrossings() const;
-
-    Airplane *getAirplaneCrossing() const;
-
-    void setAirplaneCrossing(Airplane *airplaneCrossing);
-
-    void removePlaneFromTaxipoint(Airplane* airplane);
+    bool ableToCross();
 };
 
 

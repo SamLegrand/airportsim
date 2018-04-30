@@ -245,3 +245,7 @@ void Exporter::generateImg(std::string filename) {
     std::string command = "../Engine/engine " + filename;
     system(command.c_str());
 }
+
+void Exporter::closeAirleaderOutput() {
+    airleaderOutput.close();
+}

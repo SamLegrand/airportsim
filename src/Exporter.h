@@ -20,6 +20,7 @@ public:
     void exportIni(std::ofstream &output, const std::vector<Airport*> &airports);
     void generateImg(std::string filename);
     void printAirleaderMessage(int time, std::string source, std::string message);
+    void closeAirleaderOutput();
 };
 
 #endif //AIRPORTSIM_EXPORTER_H

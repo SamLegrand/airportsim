@@ -173,6 +173,9 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airplane->unboardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
                 continue;
             }
+
+
+
             if (airplane->getStatus() == "Taxiing to Gate") {
                 //Remove plane from the runway that it landed on
                 if (airport->findPlaneInRunway(airplane) != NULL) { //Check if plane just landed
@@ -234,6 +237,13 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             if (airplane->getStatus() == "Landed") {
                 Runway* runway = airport->findPlaneInRunway(airplane);
                 airplane->landed(SimOutput, airport->getName(), runway->getName());
+                exporter.printAirleaderMessage(time, "AIR", airport->getCallsign() + ", " + airplane->getCallsign() + ",  runway " + runway->getName() + " vacated.");
+                exporter.printAirleaderMessage(time, "ATC", "TODO: Instructions for taxiing");
+                if (runway->getTaxipointToGate() == NULL) {
+                    runway->setTaxipointToGate(airplane);
+                    runway->setAirplane(NULL);
+                    airplane->setStatus("Taxiing to gate")
+                }
                 continue;
             }
             if (airplane->getStatus() == "Landing") {
@@ -256,7 +266,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     airplane->descendTo3k(SimOutput);
                     continue;
                 }
-                else if (airplane->getHeight() == 3000 && airport->getAvailableRunway()) {
+                if (airplane->getHeight() == 3000 && airport->getAvailableRunway()) {
                     Runway* runway = airport->getAvailableRunway();
                     airport->setH3000(NULL);
                     airplane->setStatus("Final Approach");
@@ -290,6 +300,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
         }
         time += 1;
     }
+    exporter.closeAirleaderOutput();
 }
 
 bool AirportSim::checkSimEnd() {

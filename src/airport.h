@@ -17,12 +17,17 @@ class Airport {
     std::string name;
     std::string iata;
     std::string callsign;
+    std::vector<std::string> taxipoints;
     std::vector<Runway*> runways;
     std::vector<Airplane*> gates;
     Airplane* h3000;
     Airplane* h5000;
     int passengers;
 public:
+    const std::vector<std::string> &getTaxipoints() const;
+
+    void setTaxipoints(const std::vector<std::string> &taxipoints);
+
     Airport();
 
     bool properlyInitialized();

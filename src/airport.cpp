@@ -211,3 +211,11 @@ void Airport::setPlaneToRunway(const Taxipoint *taxipoint, Airplane* &airplane) 
         }
     }
 }
+
+const std::vector<std::string> &Airport::getTaxipoints() const {
+    return taxipoints;
+}
+
+void Airport::setTaxipoints(const std::vector<std::string> &taxipoints) {
+    Airport::taxipoints = taxipoints;
+}

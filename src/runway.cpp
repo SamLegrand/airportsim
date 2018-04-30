@@ -7,7 +7,10 @@
 Runway::Runway() {
     Runway::name = "";
     Runway::airplane = NULL;
-    Runway::airplaneCrossing = NULL;
+    Runway::crossingToGate = NULL;
+    Runway::crossingToRunway = NULL;
+    Runway::taxipointToGate = NULL;
+    Runway::taxipointToRunway = NULL;
     Runway::initCheck = this;
 }
 
@@ -47,38 +50,46 @@ void Runway::setLength(int length) {
     Runway::length = length;
 }
 
-void Runway::addTaxipoint(std::string name) {
-    Taxipoint* taxipoint = new Taxipoint(name);
-    Runway::taxipoints.push_back(taxipoint);
+bool Runway::ableToCross() {
+    return !airplane || airplane->getStatus() == "Ready for Takeoff" || airplane->getStatus() == "Taxiing" || airplane->getStatus() == "Crashlanding";
 }
 
-void Runway::removePlaneFromTaxipoint(Airplane *airplane) {
-    for (unsigned int i = 0; i < Runway::taxipoints.size(); ++i) {
-        if (taxipoints[i]->getPlaneToGate() ==  airplane){
-            taxipoints[i]->setPlaneToGate(NULL);
-        }
-        else if(taxipoints[i]->getPlaneToRunway() == airplane){
-            taxipoints[i]->setPlaneToRunway(NULL);
-        }
-    }
+Airplane *Runway::getTaxipointToRunway() const {
+    return taxipointToRunway;
 }
 
-void Runway::addCrossing(std::string crossing){
-    Runway::crossings.push_back(crossing);
+void Runway::setTaxipointToRunway(Airplane *taxipointToRunway) {
+    Runway::taxipointToRunway = taxipointToRunway;
 }
 
-const std::vector<std::string> &Runway::getCrossings() const {
-    return crossings;
+Airplane *Runway::getTaxipointToGate() const {
+    return taxipointToGate;
 }
 
-Airplane *Runway::getAirplaneCrossing() const {
-    return airplaneCrossing;
+void Runway::setTaxipointToGate(Airplane *taxipointToGate) {
+    Runway::taxipointToGate = taxipointToGate;
 }
 
-void Runway::setAirplaneCrossing(Airplane *airplaneCrossing) {
-    Runway::airplaneCrossing = airplaneCrossing;
+Airplane *Runway::getCrossingToRunway() const {
+    return crossingToRunway;
 }
 
-const std::vector<Taxipoint *> &Runway::getTaxipoints() const {
-    return taxipoints;
+void Runway::setCrossingToRunway(Airplane *crossingToRunway) {
+    Runway::crossingToRunway = crossingToRunway;
+}
+
+Airplane *Runway::getCrossingToGate() const {
+    return crossingToGate;
+}
+
+void Runway::setCrossingToGate(Airplane *crossingToGate) {
+    Runway::crossingToGate = crossingToGate;
+}
+
+const std::string &Runway::getTaxipoint() const {
+    return taxipoint;
+}
+
+void Runway::setTaxipoint(const std::string &taxipoint) {
+    Runway::taxipoint = taxipoint;
 }
