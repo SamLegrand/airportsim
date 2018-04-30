@@ -12,11 +12,13 @@ class Airplane;
 
 class Taxipoint {
 private:
+    Taxipoint* initCheck;
     std::string name;
     Airplane* planeToGate;
     Airplane* planeToRunway;
 public:
     explicit Taxipoint(const std::string &name);
+    bool properlyInitialized();
     const std::string &getName() const;
     void setName(const std::string &name);
     Airplane *getPlaneToGate() const;

@@ -11,6 +11,8 @@
 enum SuccessEnum {ImportAborted, PartialImport, Success};
 
 class importer {
+private:
+    importer* initCheck;
 public:
     static SuccessEnum importAirport(const char* inputfilename, std::ostream& errstream, AirportSim& simulation);
     static bool properlyInitialized(const std::vector<Airport*> &airports, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes);

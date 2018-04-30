@@ -10,9 +10,14 @@
 #include "AirLeader.h"
 
 class AirportSim {
+    AirportSim* initCheck;
     std::vector<Airport*> airports;
     std::vector<Airplane*> airplanes;
 public:
+    AirportSim();
+
+    bool properlyInitialized();
+
     const std::vector<Airport *> &getAirports() const;
 
     void setAirports(const std::vector<Airport *> &airports);
