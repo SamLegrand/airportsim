@@ -40,6 +40,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     std::vector<Airport*> airports;      //Initialise airports and airplanes containers
     std::vector<Airplane*> airplanes;
     std::vector<Runway*> runwaysNotAddedToPlane;
+    std::vector<std::string> crossings;
     SuccessEnum endResult = Success;
     TiXmlDocument doc;      //Initalise parser document
     if (!doc.LoadFile(inputfilename)) {     //Check for failed loading of file
@@ -107,6 +108,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     if (elemName == "TAXIROUTE"){
+                        std::vector<std::string> taxipoints;
                         for (TiXmlElement *elem2 = elem->FirstChildElement(); elem2 != NULL; elem2 = elem2->NextSiblingElement()) {
                             std::string elemName2 = elem2->Value();
                             for (TiXmlNode *e2 = elem2->FirstChild(); e2 != NULL; e2 = e2->NextSibling()) {
@@ -116,14 +118,26 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                     endResult = PartialImport;
                                 }
                                 if (elemName2 == "taxipoint"){
-                                    runway->addTaxipoint(text2->Value());
+                                    taxipoints.push_back(text2->Value());
                                     continue;
                                 }
                                 if (elemName2 == "crossing"){
-                                    runway->addCrossing(text2->Value());
+                                    crossings.push_back(text2->Value());
+//                                    runway->addCrossing(text2->Value());
                                     continue;
                                 }
                             }
+                            for (unsigned int i = 0; i < airports.size(); ++i) {
+                                for (int j = 0; j < airports[i]->getRunways().size(); ++j) {
+                                    if (airports[i]->getRunways()[j] == runway){
+                                        if (taxipoints.size() > airports[i]->getTaxipoints().size()){
+                                            airports[i]->setTaxipoints(taxipoints);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            runway->setTaxipoint(taxipoints.back());
                         }
                         break;
                     }
@@ -235,10 +249,10 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         errstream << "Invalid element name " << objectName << "." << std::endl;
         endResult = PartialImport;
     }
-    if (properlyInitialized(airports, runwaysNotAddedToPlane, airplanes)){
+    if (endResult != PartialImport && properlyInitialized(airports, crossings, runwaysNotAddedToPlane, airplanes)){
         std::cout << "Simulation has been properly initialized, simulation will start now." << std::endl;
     }
-    else{
+    else if (endResult != PartialImport){
         errstream << "Simulation has not been properly initialized." << std::endl;
         endResult = PartialImport;
     }
@@ -251,16 +265,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         airplanes[i]->printInfo(output);
     }
     output.close();
-    Exporter* exporter = new Exporter();
-    output.open("../GraphicalImpression.txt", std::fstream::out);
-    exporter->exportGraphicalImpression(output, airports);
-    output.close();
     simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
     return endResult;
 }
 
-bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
+bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
     if (!runwaysNotAddedToPlane.empty()){
         return false;
     }
@@ -310,8 +320,8 @@ bool importer::properlyInitialized(const std::vector<Airport*> &airports, const 
     }
     for (unsigned int i = 0; i < airports.size(); ++i) {
         for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
-            for (unsigned int k = 0; k < airports[i]->getRunways()[j]->getCrossings().size(); ++k) {
-                if(airports[i]->findRunwayByRunwayName(airports[i]->getRunways()[j]->getCrossings()[k]) == NULL){
+            for (unsigned int k = 0; k < crossings.size(); ++k) {
+                if(airports[i]->findRunway(crossings[k]) == NULL){
                     return false;
                 }
             }

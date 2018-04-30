@@ -22,7 +22,7 @@ protected:
     AirportSim simulator;
 };
 
-TEST_F(AirportSimInputTest, InputLegal){        //Testing correct import for legal input
+TEST_F(AirportSimInputTest, InputLegal){         //Testing correct import for legal input
     std::ofstream filestream;
     SuccessEnum  result;
 
@@ -33,16 +33,16 @@ TEST_F(AirportSimInputTest, InputLegal){        //Testing correct import for leg
     EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
 }
 
-TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import for legal input (more complex)
-    std::ofstream filestream;
-    SuccessEnum  result;
-
-    filestream.open("../testInput/Error.txt");
-    result = importer::importAirport("../testInput/inputlegalcomplex.xml", filestream, simulator);
-    filestream.close();
-    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
-    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
-}
+//TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import for legal input (more complex)
+//    std::ofstream filestream;
+//    SuccessEnum  result;
+//
+//    filestream.open("../testInput/Error.txt");
+//    result = importer::importAirport("../testInput/inputlegalcomplex.xml", filestream, simulator);
+//    filestream.close();
+//    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
+//    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
+//}
 
 TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
     std::ofstream filestream;
@@ -88,4 +88,15 @@ TEST_F(AirportSimInputTest, InputIllegal){      //Testing illegal input
     };
 
     EXPECT_TRUE(counter == 5);      //Expect that all files have been tested
+}
+
+TEST_F(AirportSimInputTest, InputNoPlaneWithType){        //Testing correct import for legal input
+    std::ofstream filestream;
+    SuccessEnum  result;
+
+    filestream.open("../testInput/Error.txt");
+    result = importer::importAirport("../testInput/inputnotype.xml", filestream, simulator);
+    filestream.close();
+    EXPECT_TRUE(result == PartialImport);     //Input is expected to be imported successfully
+    EXPECT_TRUE(FileCompare("../testInput/Error.txt", "../testInput/inputnotypeerror.txt"));     //It's expected that no errors will occur
 }

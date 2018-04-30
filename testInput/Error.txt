@@ -1,1 +1,1 @@
-Invalid element name SPACESHIP.
+Simulation has not been properly initialized.

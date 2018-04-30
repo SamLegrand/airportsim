@@ -15,7 +15,7 @@ private:
     importer* initCheck;
 public:
     static SuccessEnum importAirport(const char* inputfilename, std::ostream& errstream, AirportSim& simulation);
-    static bool properlyInitialized(const std::vector<Airport*> &airports, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes);
+    static bool properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes);
 };
 
 
