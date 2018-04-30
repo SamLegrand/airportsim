@@ -7,7 +7,6 @@
 
 
 #include "airport.h"
-#include "AirLeader.h"
 
 class AirportSim {
     AirportSim* initCheck;
