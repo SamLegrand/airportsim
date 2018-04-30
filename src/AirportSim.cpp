@@ -107,15 +107,6 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     Runway *runway = airport->findRunwayByTaxipointToRunway(airplane);
                     Runway* nextrunway = airport->findNextRunwayToRunway(runway);
 
-                    if (runway == NULL) {
-                        nextrunway = airport->getRunways()[-1];
-                        airport->removePlaneFromGate(airplane);
-                        nextrunway->setAirplaneCrossing(airplane);
-                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << nextrunway->getTaxipoint() << std::endl;
-                        airplane->setTime(0);
-                        airplane->setStatus("Crossing to Runway");
-                        continue;
-                    }
                     if (runway->getAirplane() == airplane) {
                         runway->setTaxipointToRunway(NULL);
                         airplane->setTime(0);
@@ -199,6 +190,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
 //            }
             if(airplane->getStatus() == "Standing at Gate"){
                 airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
+                Runway* dest = airport->getAvailableRunway();
+                dest->setAirplane(airplane);
+                Runway* runway = airport->getRunways().back();
+                airport->removePlaneFromGate(airplane);
+                runway->setTaxipointToRunway(airplane);
+                continue;
             }
             if (airplane->getStatus() == "Boarding Plane") {
                 airplane->boardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
@@ -226,7 +223,6 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             }
             if (airplane->getStatus() == "Taxiing to Gate") {
                 airplane->setTime(airplane->getTime() + 1);
-                std::cout << "test" << std::endl;
                 if (airplane->getTime() >= 5) {
                     Runway *runway = airport->findRunwayByTaxipointToGate(airplane);
                     Runway *nextrunway = airport->findNextRunwayToGate(runway);
