@@ -321,7 +321,7 @@ bool importer::properlyInitialized(const std::vector<Airport*> &airports, const 
     for (unsigned int i = 0; i < airports.size(); ++i) {
         for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
             for (unsigned int k = 0; k < crossings.size(); ++k) {
-                if(airports[i]->findRunway(crossings[k]) == NULL){
+                if(airports[i]->findRunwayByRunwayName(crossings[k]) == NULL){
                     return false;
                 }
             }

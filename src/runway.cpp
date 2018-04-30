@@ -7,8 +7,6 @@
 Runway::Runway() {
     Runway::name = "";
     Runway::airplane = NULL;
-    Runway::crossingToGate = NULL;
-    Runway::crossingToRunway = NULL;
     Runway::taxipointToGate = NULL;
     Runway::taxipointToRunway = NULL;
     Runway::initCheck = this;

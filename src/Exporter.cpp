@@ -23,7 +23,7 @@ void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vecto
 //                currentrunway = airports[i]->getRunways()[j];
 //            }
 //        }
-        for (int j = 0; j < airports[i]->getRunways().size(); ++j) {
+        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
             if (airports[i]->getRunways()[j]->getAirplane() != NULL){
                 output << "====V=====" << std::endl;
             }
@@ -129,25 +129,25 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
         figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << 0 << ", 2, 0)\n" << reflectionrunway << std::endl;
         figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << 0 << ", 4, 0)\n" << reflectionrunway << std::endl;
         figNum += 3;
-        if (airports[i]->getFarthestRunway()->getAirplane() != NULL){
-            if (airports[i]->getFarthestRunway()->getAirplane()->isAtRunway()){
-                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << 0 << ", -0.5, 1)\n" << reflectionairplane << std::endl;
-                figNum += 1;
-            }
-            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Landing"){
-                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanelanding << "center = (" << 0 << ", 6, 2)\n" << reflectionairplane << std::endl;
-                figNum += 1;
-            }
-            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Taking Off"){
-                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetakingoff << "center = (" << 0 << ", 2, 2)\n" << reflectionairplane << std::endl;
-                figNum += 1;
-            }
-            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Ascending"){
-                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetakingoff << "center = (" << 0 << ", 4, 3)\n" << reflectionairplane << std::endl;
-                figNum += 1;
-            }
-        }
-        for (unsigned int j = 1; j <= airports[i]->getFarthestRunway()->getCrossings().size(); ++j) {
+//        if (airports[i]->getFarthestRunway()->getAirplane() != NULL){
+//            if (airports[i]->getFarthestRunway()->getAirplane()->isAtRunway()){
+//                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanestanding << "center = (" << 0 << ", -0.5, 1)\n" << reflectionairplane << std::endl;
+//                figNum += 1;
+//            }
+//            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Landing"){
+//                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanelanding << "center = (" << 0 << ", 6, 2)\n" << reflectionairplane << std::endl;
+//                figNum += 1;
+//            }
+//            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Taking Off"){
+//                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetakingoff << "center = (" << 0 << ", 2, 2)\n" << reflectionairplane << std::endl;
+//                figNum += 1;
+//            }
+//            else if(airports[i]->getFarthestRunway()->getAirplane()->getStatus() == "Ascending"){
+//                figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetakingoff << "center = (" << 0 << ", 4, 3)\n" << reflectionairplane << std::endl;
+//                figNum += 1;
+//            }
+//        }
+        for (unsigned int j = 0; j <= airports[i]->getRunways().size(); ++j) {
             figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 0, 0)\n" << reflectionrunway << std::endl;
             figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 2, 0)\n" << reflectionrunway << std::endl;
             figureinfo << "[Figure" << figNum + 2 << "]\n" << cubeinfo << "center = (" << -4*(int)j << ", 4, 0)\n" << reflectionrunway << std::endl;
@@ -171,11 +171,11 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
                 }
             }
             if (airports[i]->getRunways()[j-1]->getAirplaneCrossing() != NULL){
-                if (airports[i]->getRunways()[j-1]->getAirplane()->getAirplaneCrossing()->getStatus() == "Taxiing to Runway"){
+                if (airports[i]->getRunways()[j-1]->getAirplaneCrossing()->getStatus() == "Taxiing to Runway"){
                     figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*(int)j-0.5 << ", 2, 1)\n" << reflectionairplane << std::endl;
                     figNum += 1;
                 }
-                if (airports[i]->getRunways()[j-1]->getAirplane()->getAirplaneCrossing()->getStatus() == "Taxiing to Gate"){
+                if (airports[i]->getRunways()[j-1]->getAirplaneCrossing()->getStatus() == "Taxiing to Gate"){
                     figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetogate << "center = (" << -4*(int)j+0.5 << ", 4, 1)\n" << reflectionairplane << std::endl;
                     figNum += 1;
                 }

@@ -35,7 +35,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     unsigned int time = 0;
     Exporter exporter;
     Airport* airport = airports[0];
-    int filecounter = -1;
+//    int filecounter = -1;
     while (!checkSimEnd()) {
 
         // Graphics implementation
