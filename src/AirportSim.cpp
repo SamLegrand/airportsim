@@ -39,19 +39,19 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     while (!checkSimEnd()) {
 
         // Graphics implementation
-        filecounter++;
-        std::stringstream iniFileNameStream;
-        std::stringstream fileNameStream;
-        std::stringstream prevFileNameStream;
-        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
-        fileNameStream << "EngineTest" << filecounter << ".ini";
-        prevFileNameStream << "../Engine/EngineTest" << filecounter-1 << ".ini";
-        std::string iniFileName = iniFileNameStream.str();
-        std::string fileName = iniFileNameStream.str();
-        std::string prevFileName = prevFileNameStream.str();
-        std::ofstream myfile;
-        myfile.open(iniFileName.c_str());
-        exporter.exportIni(myfile, airports);
+//        filecounter++;
+//        std::stringstream iniFileNameStream;
+//        std::stringstream fileNameStream;
+//        std::stringstream prevFileNameStream;
+//        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
+//        fileNameStream << "EngineTest" << filecounter << ".ini";
+//        prevFileNameStream << "../Engine/EngineTest" << filecounter-1 << ".ini";
+//        std::string iniFileName = iniFileNameStream.str();
+//        std::string fileName = iniFileNameStream.str();
+//        std::string prevFileName = prevFileNameStream.str();
+//        std::ofstream myfile;
+//        myfile.open(iniFileName.c_str());
+//        exporter.exportIni(myfile, airports);
 //        if (!FileCompare(prevFileName, fileName)){
 //            exporter.generateImg(fileName.c_str());
 //        }

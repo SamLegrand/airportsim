@@ -12,7 +12,7 @@ include_directories(gtest/include)
 link_directories(gtest/lib)
 
 # Set source files for RELEASE target
-set(RELEASE_SOURCE_FILES src/main.cpp src/tinystr.cpp src/tinyxml.cpp src/tinyxmlerror.cpp src/tinyxmlparser.cpp src/airport.cpp src/airport.h src/airplane.cpp src/airplane.h src/DesignByContract.h src/utils.cpp src/utils.h src/AirportSim.cpp src/AirportSim.h src/importer.cpp src/importer.h src/runway.cpp src/runway.h src/Taxipoint.cpp src/Taxipoint.h src/Exporter.cpp src/Exporter.h)
+set(RELEASE_SOURCE_FILES src/main.cpp src/tinystr.cpp src/tinyxml.cpp src/tinyxmlerror.cpp src/tinyxmlparser.cpp src/airport.cpp src/airport.h src/airplane.cpp src/airplane.h src/DesignByContract.h src/utils.cpp src/utils.h src/AirportSim.cpp src/AirportSim.h src/importer.cpp src/importer.h src/runway.cpp src/runway.h src/Exporter.cpp src/Exporter.h)
 
 # Set source files for DEBUG target
 set(DEBUG_SOURCE_FILES src/tinystr.cpp src/tinyxml.cpp src/tinyxmlerror.cpp src/tinyxmlparser.cpp src/airport.cpp src/airplane.cpp src/AirportSim.cpp src/importer.cpp src/tests.cpp src/domaintests.cpp src/inputtests.cpp src/outputtests.cpp src/utils.cpp src/runway.cpp src/runway.h)
