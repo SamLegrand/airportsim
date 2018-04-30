@@ -7,6 +7,7 @@
 Runway::Runway() {
     Runway::name = "";
     Runway::airplane = NULL;
+    Runway::airplaneCrossing = NULL;
 }
 
 const std::string &Runway::getName() const {

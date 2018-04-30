@@ -285,3 +285,16 @@ Runway *Airplane::getEndpoint() const {
 void Airplane::setEndpoint(Runway *endpoint) {
     Airplane::endpoint = endpoint;
 }
+
+bool Airplane::isAtGate() {
+    return Airplane::status == "Unboarding Plane" ||
+           Airplane::status == "Checking Plane" ||
+           Airplane::status == "Refueling Plane" ||
+           Airplane::status == "Boarding Plane" ||
+           Airplane::status == "Standing at Gate";
+}
+
+bool Airplane::isAtRunway() {
+    return Airplane::status == "Landed" ||
+           Airplane::status == "Taxiing to Gate";
+}

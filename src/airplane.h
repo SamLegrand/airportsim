@@ -53,6 +53,8 @@ public:
     void setCrossing(Runway *crossing);
     Runway *getEndpoint() const;
     void setEndpoint(Runway *endpoint);
+    bool isAtGate();
+    bool isAtRunway();
 
     /**
      * REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");
