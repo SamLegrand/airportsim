@@ -191,10 +191,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
             if(airplane->getStatus() == "Standing at Gate"){
                 airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
                 Runway* dest = airport->getAvailableRunway();
-                dest->setAirplane(airplane);
-                Runway* runway = airport->getRunways().back();
-                airport->removePlaneFromGate(airplane);
-                runway->setTaxipointToRunway(airplane);
+                if (dest) {
+                    dest->setAirplane(airplane);
+                    Runway* runway = airport->getRunways().back();
+                    airport->removePlaneFromGate(airplane);
+                    runway->setTaxipointToRunway(airplane);
+                }
                 continue;
             }
             if (airplane->getStatus() == "Boarding Plane") {
