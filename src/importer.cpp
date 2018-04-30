@@ -119,6 +119,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 }
                                 if (elemName2 == "taxipoint"){
                                     taxipoints.push_back(text2->Value());
+                                    runway->setTaxipoint(text2->Value());
                                     continue;
                                 }
                                 if (elemName2 == "crossing"){
@@ -180,7 +181,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     endResult = PartialImport;
                 }
             }
-            if (addedRunwayToAirport == false){
+            if (!addedRunwayToAirport){
                 runwaysNotAddedToPlane.push_back(runway);
             }
             continue;

@@ -11,10 +11,10 @@ int main() {
     myfile.open("error.txt");
     importer::importAirport("../input_system2.xml", myfile, simulation);        //Import from xml file
     myfile.close();
-    myfile.open("../EngineTest.ini");
-    Exporter* exporter = new Exporter();
-    exporter->exportIni(myfile, simulation.getAirports());
-    myfile.close();
+//    myfile.open("../EngineTest.ini");
+//    Exporter* exporter = new Exporter();
+//    exporter->exportIni(myfile, simulation.getAirports());
+//    myfile.close();
     simulation.simulate(cout);      //Simulate airport
     return 0;
 }

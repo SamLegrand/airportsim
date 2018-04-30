@@ -1,11 +1,7 @@
 Airport: Antwerp International Airport (ANR)
  -> gates: 10
- -> runways: 3
+ -> runways: 2
 Airplane: Cessna 842 (N11842)
  -> model: Cessna 340
-Airplane: ABG 740 (N11843)
- -> model: ABG 240
-Airplane: Pearl 250 (N11844)
- -> model: Pearl 145
-Airplane: Aeroecom 905 (N11845)
- -> model: Aeroecom 15
+Airplane: Speedbird 466 (BAW466)
+ -> model: Boeing 747
