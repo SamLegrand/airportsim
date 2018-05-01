@@ -65,31 +65,32 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 continue;
             }
             if (airplane->getStatus() == "Leaving Airport") {
+                airport->removePlaneFromRunway(airplane);
                 airplane->leaveAirport(SimOutput, airport->getName());
                 continue;
             }
             if (airplane->getStatus() == "Ascending") {
-                Runway* runway = airport->findPlaneInRunway(airplane);
-                if (runway != NULL) {
-                    runway->setAirplane(NULL);
-                }
                 airplane->ascend(SimOutput);
                 continue;
             }
             if (airplane->getStatus() == "Taking Off") {
                 Runway *runway = airport->findPlaneInRunway(airplane);
-                if (runway == NULL) {
-                    continue;
-                }
+//                if (runway == NULL) {
+//                    continue;
+//                }
                 airplane->takeOff(SimOutput, airport->getName(), runway->getName());
                 continue;
             }
             if (airplane->getStatus() == "Ready for Takeoff"){
+                airplane->setTime(airplane->getTime() + 1);
                 Runway *runway = airport->findPlaneInRunway(airplane);
-                if (runway == NULL) {
+                if (airplane->getTime() == 1) {
+                    exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", runway "+ runway->getName() + " cleared for take-off.");
                     continue;
                 }
+                exporter.printAirleaderMessage(time, "AIR", "Runway " + runway->getName() + " cleared for take-off, " + airplane->getCallsign() + ".");
                 airplane->readyForTakeoff(SimOutput, airport->getName(), runway->getName());
+                airplane->setTime(0);
                 continue;
             }
 
@@ -102,43 +103,126 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airplane->setStatus("Taxiing to Runway");
                 continue;
             }
+            if (airplane->getStatus() == "Waiting to cross to Runway") {
+                airplane->setTime(airplane->getTime() + 1);
+                Runway *runway = airport->findRunwayByTaxipointToRunway(airplane);
+                Runway *nextrunway = airport->findNextRunwayToRunway(runway);
+                if (airplane->getTime() == 1) {
+                    exporter.printAirleaderMessage(time, "AIR", airport->getCallsign() + ", " + airplane->getCallsign() + ", holding short at " + runway->getName() + ".");
+                    continue;
+                }
+                if (airplane->getTime() == 3) {
+                    runway = airport->findPlaneInCrossing(airplane);
+                    nextrunway = airport->findNextRunwayToRunway(runway);
+                    //SimOutput << airplane->getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
+                    exporter.printAirleaderMessage(time, "AIR", "Cleared to cross " + runway->getName() + " to holding point " + nextrunway->getTaxipoint() + ".");
+                    airplane->setTime(0);
+                    airplane->setStatus("Crossing to Runway");
+                    continue;
+                }
+                if (airplane->getTime() == 4) {
+                    runway = airport->findPlaneInRunway(airplane);
+                    exporter.printAirleaderMessage(time, "AIR", "Lining up runway " + runway->getName() + " and wait, " + airplane->getCallsign() + ".");
+                    airplane->setTime(0);
+                    airplane->setStatus("Ready for Takeoff");
+                    continue;
+                }
+                if (airplane->getTime() == 6) {
+                    exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", hold position.");
+                    continue;
+                }
+                if (airplane->getTime() == 7) {
+                    exporter.printAirleaderMessage(time, "AIR", "Holding position, " + airplane->getCallsign() + ".");
+                    continue;
+                }
+                if (runway->getAirplane() == airplane) {
+                    runway->setTaxipointToRunway(NULL);
+                    exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", line-up runway " + runway->getName() + " and wait.");
+                    airplane->setTime(3);
+                    continue;
+                }
+                if (runway->ableToCross() && !nextrunway->getTaxipointToRunway()) {
+                    runway->setTaxipointToRunway(NULL);
+                    runway->setAirplaneCrossing(airplane);
+                    exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", cleared to cross " + runway->getName() + ", to holding point " + nextrunway->getTaxipoint() + ".");
+                    airplane->setTime(2);
+                    continue;
+                }
+                airplane->setTime(5);
+                continue;
+            }
             if (airplane->getStatus() == "Taxiing to Runway") {
                 airplane->setTime(airplane->getTime() + 1);
-                if (airplane->getTime() >= 5) {
-                    Runway *runway = airport->findRunwayByTaxipointToRunway(airplane);
-                    Runway* nextrunway = airport->findNextRunwayToRunway(runway);
-
-                    if (runway->getAirplane() == airplane) {
-                        runway->setTaxipointToRunway(NULL);
-                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoint() << std::endl;
-                        airplane->setTime(0);
-                        airplane->setStatus("Ready for Takeoff");
+                Runway *runway = airport->findRunwayByTaxipointToRunway(airplane);
+                if (airplane->isCommunicating()) {
+                    if (airplane->getTime() == 1) {
+                        exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", taxi to holding point " + runway->getName() + " via " + runway->getTaxipoint() + ".");
                         continue;
                     }
-                    if (runway->ableToCross() && nextrunway->getTaxipointToRunway() == NULL) {
-                        runway->setTaxipointToRunway(NULL);
-                        runway->setAirplaneCrossing(airplane);
-                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoint() << std::endl;
-                        airplane->setTime(0);
-                        airplane->setStatus("Crossing to Runway");
-                    }
+                    exporter.printAirleaderMessage(time, "AIR", "Taxi to holding point " + runway->getName() + " via " + runway->getTaxipoint() + ", " + airplane->getCallsign() + ".");
+                    airplane->setTime(0);
+                    airplane->setCommunication(false);
+                    continue;
+                }
+                if (airplane->getTime() == 5) {
+                    airplane->setStatus("Waiting to cross to Runway");
+                    airplane->setTime(0);
+                    airplane->setCommunication(true);
                 }
                 continue;
             }
             if (airplane->getStatus() == "Pushing back") {
+                if (airplane->isCommunicating()) {
+                    airplane->setTime(airplane->getTime() + 1);
+                    if (airplane->getTime() == 1) {
+                        exporter.printAirleaderMessage(time, "AIR", airport->getCallsign() + ", " + airplane->getCallsign() + " at gate " + to_string(airport->findPlaneInGate(airplane)) + ", requesting pushback.");
+                        continue;
+                    }
+                    if (airplane->getTime() == 2) {
+                        exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", " + airport->getCallsign() + ", pushback approved.");
+                        continue;
+                    }
+                    exporter.printAirleaderMessage(time, "AIR", "Pushback approved, " + airplane->getCallsign() + ".");
+                    airport->removePlaneFromGate(airplane);
+                    airplane->setCommunication(false);
+                    airplane->setTime(0);
+                    continue;
+                }
                 airplane->pushBack(SimOutput);
+                if (airplane->getStatus() == "Taxiing to Runway") {
+                    exporter.printAirleaderMessage(time, "AIR", airplane->getCallsign() + ", ready to taxi.");
+                    airplane->setCommunication(true);
+                }
                 continue;
             }
             if(airplane->getStatus() == "Standing at Gate") {
-                airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
+                airplane->setTime(airplane->getTime() + 1);
                 Runway* dest = airport->getRunwayByAirplane(airplane);
-                if (dest) {
-                    dest->setAirplane(airplane);
-                    Runway* runway = airport->getRunways().back();
-                    airport->removePlaneFromGate(airplane);
-                    runway->setTaxipointToRunway(airplane);
-                    airplane->setStatus("Pushing back");
+                Runway* runway = airport->getRunways().back();
+                if (airplane->getTime() == 1) {
+                    airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
                 }
+                if (airplane->getTime() == 2) {
+                    dest = airport->findPlaneInRunway(airplane);
+                    exporter.printAirleaderMessage(time, "ATC", airplane->getCallsign() + ", " + airport->getCallsign() + ", cleared to " + dest->getName() + ", maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk " + to_string(airplane->getSquawk()) + ".");
+                    continue;
+                }
+                if (airplane->getTime() == 3) {
+                    dest = airport->findPlaneInRunway(airplane);
+                    exporter.printAirleaderMessage(time, "AIR", "Cleared to " + dest->getName() + ", initial altitude five thousand, expecting one zero zero in ten, squawking " + to_string(airplane->getSquawk()) + ", " + airplane->getCallsign() + ".");
+                    airplane->setStatus("Pushing back");
+                    airplane->setCommunication(true);
+                    airplane->setTime(0);
+                    continue;
+                }
+                if (dest && !runway->getTaxipointToRunway()) {
+                    dest->setAirplane(airplane);
+                    exporter.printAirleaderMessage(time, "AIR", airport->getCallsign() + ", " + airplane->getCallsign() + ", requesting IFR clearancy to " + dest->getName() + ".");
+                    runway->setTaxipointToRunway(airplane);
+                    airplane->setTime(1);
+                    continue;
+                }
+                airplane->setTime(5);
                 continue;
             }
             if (airplane->getStatus() == "Boarding Plane") {
@@ -175,7 +259,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     continue;
                 }
                 if (airplane->getTime() == 3) {
-                    Runway* runway = airport->findPlaneInCrossing(airplane);
+                    runway = airport->findPlaneInCrossing(airplane);
                     //SimOutput << airplane->getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
                     exporter.printAirleaderMessage(time, "AIR", "Cleared to cross " + runway->getName() + " to holding point " + runway->getTaxipoint() + ".");
                     airplane->setTime(0);
@@ -287,7 +371,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     continue;
                 }
                 if (airplane->getTime() == 1 && airplane->getHeight() == 3000 && airport->getRunwayByAirplane(airplane)) {
-                    Runway* runway = airport->getRunwayByAirplane(airplane);
+                    Runway* runway = airport->findNearestAvailableRunway(airplane);
                     airport->setH3000(NULL);
                     runway->setAirplane(airplane);
                     airplane->setStatus("Final Approach");

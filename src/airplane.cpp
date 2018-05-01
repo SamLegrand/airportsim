@@ -221,8 +221,8 @@ void Airplane::pushBack(std::ostream &output) {
     if (size == "small" || (time == 2 && size == "medium") || time == 3) {
         time = 0;
         status = "Taxiing to Runway";
-        ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
     }
+    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
 }
 
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {

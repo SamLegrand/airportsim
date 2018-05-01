@@ -113,6 +113,8 @@ public:
     Runway* findPlaneInRunway(Airplane* airplane);
 
     Runway* findPlaneInCrossing(Airplane* airplane);
+
+    Runway* findNearestAvailableRunway(Airplane* airplane);
 };
 
 

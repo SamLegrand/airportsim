@@ -9,7 +9,7 @@ int main() {
     AirportSim simulation;      //Create simulation
     ofstream myfile;        //Create filestream
     myfile.open("error.txt");
-    importer::importAirport("../input_system2.xml", myfile, simulation);        //Import from xml file
+    importer::importAirport("../input_system3.xml", myfile, simulation);        //Import from xml file
     myfile.close();
     myfile.open("../EngineTest.ini");
     Exporter* exporter = new Exporter();

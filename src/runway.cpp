@@ -50,7 +50,7 @@ void Runway::setLength(int length) {
 }
 
 bool Runway::ableToCross() {
-    return (!airplane || airplane->getStatus() == "Ready for Takeoff" || airplane->getStatus() == "Taxiing" || airplane->getStatus() == "Crashlanding") && !crossing;
+    return (!airplane || airplane->getStatus() == "Ready for Takeoff" || airplane->getStatus() == "Taxiing to Runway" || airplane->getStatus() == "Waiting to cross to Runway" || airplane->getStatus() == "Crossing to Runway" || airplane->getStatus() == "Crashlanding") && !crossing;
 }
 
 Airplane *Runway::getTaxipointToRunway() const {
