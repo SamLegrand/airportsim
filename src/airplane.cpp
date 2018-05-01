@@ -214,6 +214,9 @@ void Airplane::stand(std::ostream &output, int gate) {
 void Airplane::pushBack(std::ostream &output) {
     REQUIRE(this->getStatus() == "Pushing back", "Plane wasn't in correct state.");
     time += 1;
+    if (time == 1) {
+        output << callsign << " starting pushback" << std::endl;
+    }
     if (size == "small" || (time == 2 && size == "medium") || time == 3) {
         time = 0;
         status = "Taxiing to Runway";

@@ -110,6 +110,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
 
                     if (runway->getAirplane() == airplane) {
                         runway->setTaxipointToRunway(NULL);
+                        SimOutput << airplane->getCallsign() << " is taxiing to runway " << runway->getName() << " via " << runway->getTaxipoint() << std::endl;
                         airplane->setTime(0);
                         airplane->setStatus("Ready for Takeoff");
                         continue;
