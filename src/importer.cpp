@@ -164,7 +164,6 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (elemName == "airport") {
                         for (unsigned int i = 0; i < airports.size(); ++i) {
                             if (airports[i]->getIata() == text->Value()){
-                                std::cout << "TEST" << std::endl;
                                 airports[i]->addRunway(runway);
                                 addedRunwayToAirport = true;
                                 break;
@@ -223,6 +222,9 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     if (elemName == "status") {
+                        if (strcmp(text->Value(), "Standing at Gate") == 0){
+                            airports[0]->addPlaneToGate(airplane, airports[0]->getAvailableGate());
+                        }
                         airplane->setStatus(text->Value());
                         continue;
                     }
@@ -283,6 +285,11 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
 }
 
 bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        if (airports[i]->getRunways().size() != airports[i]->getTaxipoints().size()){
+            return false;
+        }
+    }
     bool canLand = true;
     for (unsigned int i = 0; i < airports.size(); ++i) {
         for (unsigned int k = 0; k < airplanes.size(); ++k) {
