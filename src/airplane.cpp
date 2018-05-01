@@ -6,8 +6,6 @@
 
 Airplane::Airplane(){
     time = 0;
-    crossing = NULL;
-    endpoint = NULL;
     initCheck = this;
 }
 
@@ -209,8 +207,18 @@ void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
     height = 0;
     output << callsign << " is standing at Gate " << gate << std::endl;
-    status = "Taxiing to Runway";
-    ENSURE(this->getStatus() == "Taxiing to Runway", "Plane hasn't been set to the correct state.");
+    status = "Pushing back";
+    ENSURE(this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
+}
+
+void Airplane::pushBack(std::ostream &output) {
+    REQUIRE(this->getStatus() == "Pushing back", "Plane wasn't in correct state.");
+    time += 1;
+    if (size == "small" || (time == 2 && size == "medium") || time == 3) {
+        time = 0;
+        status = "Taxiing to Runway";
+        ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
+    }
 }
 
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
@@ -278,22 +286,6 @@ const std::string &Airplane::getSize() const {
 
 void Airplane::setSize(const std::string &size) {
     Airplane::size = size;
-}
-
-Runway *Airplane::getCrossing() const {
-    return crossing;
-}
-
-void Airplane::setCrossing(Runway *crossing) {
-    Airplane::crossing = crossing;
-}
-
-Runway *Airplane::getEndpoint() const {
-    return endpoint;
-}
-
-void Airplane::setEndpoint(Runway *endpoint) {
-    Airplane::endpoint = endpoint;
 }
 
 bool Airplane::isAtGate() {

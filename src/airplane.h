@@ -21,8 +21,6 @@ class Airplane {
     std::string type;
     std::string engine;
     std::string size;
-    Runway* crossing;
-    Runway* endpoint;
     int passengers;
     int fuel;
     int height;
@@ -56,10 +54,6 @@ public:
     void setEngine(const std::string &engine);
     const std::string &getSize() const;
     void setSize(const std::string &size);
-    Runway *getCrossing() const;
-    void setCrossing(Runway *crossing);
-    Runway *getEndpoint() const;
-    void setEndpoint(Runway *endpoint);
     bool isAtGate();
     bool isAtRunway();
 
@@ -140,6 +134,8 @@ public:
      * ENSURE(this->getStatus() == "Taxiing to Runway", "Plane hasn't been set to the correct state.");
      */
     void stand(std::ostream &output, int gate);
+
+    void pushBack(std::ostream &output);
 
     /**
      * REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
