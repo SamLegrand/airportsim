@@ -9,14 +9,35 @@
 <RUNWAY>
 	<name>11R</name>
 	<airport>ANR</airport>
+	<type>grass</type>
+	<length>510</length>
+	<TAXIROUTE>
+		<taxipoint>Alpha</taxipoint>
+		<crossing>13T</crossing>
+		<taxipoint>Bravo</taxipoint>
+		<crossing>12S</crossing>
+		<taxipoint>Charlie</taxipoint>
+	</TAXIROUTE>
 </RUNWAY>
 <RUNWAY>
 	<name>12S</name>
 	<airport>ANR</airport>
+	<type>asphalt</type>
+	<length>2010</length>
+	<TAXIROUTE>
+		<taxipoint>Alpha</taxipoint>
+		<crossing>13T</crossing>
+		<taxipoint>Bravo</taxipoint>
+	</TAXIROUTE>
 </RUNWAY>
 <RUNWAY>
 	<name>13T</name>
 	<airport>ANR</airport>
+	<type>asphalt</type>
+	<length>3010</length>
+	<TAXIROUTE>
+		<taxipoint>Alpha</taxipoint>
+	</TAXIROUTE>
 </RUNWAY>
 
 <AIRPLANE>
@@ -26,6 +47,9 @@
 	<status>Approaching</status>
 	<passengers>60</passengers>
 	<fuel>20</fuel>
+	<type>private</type>
+	<size>small</size>
+	<engine>propeller</engine>
 </AIRPLANE>
 <AIRPLANE>
 	<number>N11843</number>
@@ -34,20 +58,29 @@
 	<status>Approaching</status>
 	<passengers>60</passengers>
 	<fuel>20</fuel>
+	<type>airline</type>
+	<size>medium</size>
+	<engine>propeller</engine>
 </AIRPLANE>
 <AIRPLANE>
 	<number>N11844</number>
 	<callsign>Pearl 250</callsign>
 	<model>Pearl 145</model>
-	<status>Landing</status>
+	<status>Approaching</status>
 	<passengers>60</passengers>
 	<fuel>20</fuel>
+	<type>private</type>
+	<size>medium</size>
+	<engine>jet</engine>
 </AIRPLANE>
 <AIRPLANE>
 	<number>N11845</number>
 	<callsign>Aeroecom 905</callsign>
 	<model>Aeroecom 15</model>
-	<status>Taxiing to Runway</status>
+	<status>Standing at Gate</status>
 	<passengers>60</passengers>
 	<fuel>20</fuel>
+	<type>airline</type>
+	<size>large</size>
+	<engine>jet</engine>
 </AIRPLANE>

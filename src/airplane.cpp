@@ -208,7 +208,7 @@ void Airplane::boardPlane(std::ostream &output, const std::string& airport, int 
 void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
     height = 0;
-    output << callsign << " is standing at Gate " << gate << std::endl;
+    output << callsign << " is standing at gate " << gate << std::endl;
     ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
 }
 

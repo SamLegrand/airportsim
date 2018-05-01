@@ -32,18 +32,18 @@ protected:
 //    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
 //    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
 //}
-//
-////TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import for legal input (more complex)
-////    std::ofstream filestream;
-////    SuccessEnum  result;
-////
-////    filestream.open("../testInput/Error.txt");
-////    result = importer::importAirport("../testInput/inputlegalcomplex.xml", filestream, simulator);
-////    filestream.close();
-////    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
-////    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
-////}
-//
+
+TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import for legal input (more complex)
+    std::ofstream filestream;
+    SuccessEnum  result;
+
+    filestream.open("../testInput/Error.txt");
+    result = importer::importAirport("../testInput/inputlegalcomplex.xml", filestream, simulator);
+    filestream.close();
+    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
+    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
+}
+
 //TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
 //    std::ofstream filestream;
 //    SuccessEnum  result;
