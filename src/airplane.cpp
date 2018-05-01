@@ -6,6 +6,8 @@
 
 Airplane::Airplane(){
     time = 0;
+    communicating = true;
+    squawk = 0;
     initCheck = this;
 }
 
@@ -207,8 +209,7 @@ void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
     height = 0;
     output << callsign << " is standing at Gate " << gate << std::endl;
-    status = "Pushing back";
-    ENSURE(this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
 }
 
 void Airplane::pushBack(std::ostream &output) {
@@ -317,4 +318,20 @@ int Airplane::getTime() const {
 
 void Airplane::setTime(int time) {
     Airplane::time = time;
+}
+
+bool Airplane::isCommunicating() const {
+    return communicating;
+}
+
+void Airplane::setCommunication(bool communication) {
+    Airplane::communicating = communication;
+}
+
+int Airplane::getSquawk() const {
+    return squawk;
+}
+
+void Airplane::setSquawk(int squawk) {
+    Airplane::squawk = squawk;
 }

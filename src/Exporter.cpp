@@ -5,6 +5,7 @@
 #include <sstream>
 #include <cstdlib>
 #include "Exporter.h"
+#include "utils.h"
 
 Exporter::Exporter() {
     initCheck = this;
@@ -220,7 +221,8 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
 }
 
 void Exporter::printAirleaderMessage(int time, std::string source, std::string message) {
-    airleaderOutput << "[" << time << "][" << source << "]" << std::endl << "$ " << message << std::endl;
+    std::string min = "0" + to_string(time%60);
+    airleaderOutput << "[" << time/60 << ":" << min.substr(min.size()-2) << "] [" << source << "]" << std::endl << "$ " << message << std::endl << std::endl;
 }
 
 void Exporter::generateImg(std::string filename) {

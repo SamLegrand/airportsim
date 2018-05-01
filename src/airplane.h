@@ -25,12 +25,21 @@ class Airplane {
     int fuel;
     int height;
     int time;
+    int squawk;
+    bool communicating;
 public:
+    int getSquawk() const;
+
+    void setSquawk(int squawk);
+
+    bool isCommunicating() const;
+
+    void setCommunication(bool communication);
+
     int getTime() const;
 
     void setTime(int time);
 
-public:
     Airplane();
     bool properlyInitialized();
     void setNumber(const std::string &number);
