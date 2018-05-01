@@ -65,10 +65,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if(!isString(text->Value())){   //Check if input is of type string
                         errstream << elemName << " does not contain a valid string." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "name") {
                         airport->setName(text->Value());
@@ -85,6 +87,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "gates") {
                         airport->setGates(stoi(text->Value()));
@@ -116,6 +119,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 if(!isString(text2->Value())){       //Check if input is of type string
                                     errstream << elemName2 << " does not contain a string." << std::endl;
                                     endResult = PartialImport;
+                                    continue;
                                 }
                                 if (elemName2 == "taxipoint"){
                                     taxipoints.push_back(text2->Value());
@@ -146,10 +150,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "name") {
                         runway->setName(text->Value());
@@ -158,6 +164,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (elemName == "airport") {
                         for (unsigned int i = 0; i < airports.size(); ++i) {
                             if (airports[i]->getIata() == text->Value()){
+                                std::cout << "TEST" << std::endl;
                                 airports[i]->addRunway(runway);
                                 addedRunwayToAirport = true;
                                 break;
@@ -172,6 +179,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a valid number." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "length"){
                         runway->setLength(stoi(text->Value()));
@@ -195,10 +203,12 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if(!isString(text->Value())){       //Check if input is of type string
                         errstream << elemName << " does not contain a string." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "number") {
                         airplane->setNumber(text->Value());
@@ -231,6 +241,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                     if (!isInt(text->Value())){     //Check if input is of type int
                         errstream << elemName << " does not contain a number." << std::endl;
                         endResult = PartialImport;
+                        continue;
                     }
                     if (elemName == "passengers") {
                         airplane->setPassengers(stoi(text->Value()));
@@ -259,10 +270,10 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     }
     std::ofstream output;
     output.open("../output.txt", std::fstream::out);        //Write simple output to stream
-    for (unsigned int i=0; i<airports.size(); ++i) {
+    for (unsigned int i=0; i< airports.size(); ++i) {
         airports[i]->printInfo(output);
     }
-    for (unsigned int i=0; i<airplanes.size(); ++i) {
+    for (unsigned int i=0; i< airplanes.size(); ++i) {
         airplanes[i]->printInfo(output);
     }
     output.close();
