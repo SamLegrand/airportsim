@@ -272,6 +272,18 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
 }
 
 bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
+    bool canLand = true;
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        for (unsigned int k = 0; k < airplanes.size(); ++k) {
+            if (airports[i]->getRunwayByAirplane(airplanes[k])){
+                continue;
+            }
+            canLand = false;
+        }
+    }
+    if (!canLand){
+        return false;
+    }
     if (!runwaysNotAddedToPlane.empty()){
         return false;
     }

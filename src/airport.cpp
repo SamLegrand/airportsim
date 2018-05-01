@@ -131,6 +131,54 @@ Runway *Airport::getAvailableRunway() {
     return NULL;
 }
 
+Runway *Airport::getRunwayByAirplane(Airplane* airplane) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+    for (unsigned int i = 0; i < runways.size(); i++) {
+        if(runways[i]->getAirplane() == NULL){
+            if (airplane->getSize() == "small" && airplane->getEngine() == "propeller"){
+                if (runways[i]->getLength() >= 500){
+                    return runways[i];
+                }
+            }
+            else{
+                if (runways[i]->getType() == "grass"){
+                    continue;
+                }
+                if (airplane->getSize() == "small"){
+                    if (runways[i]->getLength() >= 1000){
+                        return runways[i];
+                    }
+                }
+                if (airplane->getSize() == "medium"){
+                    if (airplane->getEngine() == "propeller"){
+                        if (runways[i]->getLength() >= 1000){
+                            return runways[i];
+                        }
+                    }
+                    if (airplane->getEngine() == "jet"){
+                        if (runways[i]->getLength() >= 2000){
+                            return runways[i];
+                        }
+                    }
+                }
+                if (airplane->getSize() == "large"){
+                    if (airplane->getEngine() == "propeller"){
+                        if (runways[i]->getLength() >= 1500){
+                            return runways[i];
+                        }
+                    }
+                    if (airplane->getEngine() == "jet"){
+                        if (runways[i]->getLength() >= 3000){
+                            return runways[i];
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
 Runway *Airport::findPlaneInRunway(Airplane* airplane) {
     REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size(); ++i) {

@@ -36,26 +36,26 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     Exporter exporter;
     Airport* airport = airports[0];
     airport->sortRunways();
-    int filecounter = -1;
+//    int filecounter = -1;
     while (!checkSimEnd()) {
 
         // Graphics implementation
-        filecounter++;
-        std::stringstream iniFileNameStream;
-        std::stringstream fileNameStream;
-        std::stringstream prevFileNameStream;
-        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
-        fileNameStream << "EngineTest" << filecounter << ".ini";
-        prevFileNameStream << "../Engine/EngineTest" << filecounter-1 << ".ini";
-        std::string iniFileName = iniFileNameStream.str();
-        std::string fileName = iniFileNameStream.str();
-        std::string prevFileName = prevFileNameStream.str();
-        std::ofstream myfile;
-        myfile.open(iniFileName.c_str());
-        exporter.exportIni(myfile, airports);
-        if (!FileCompare(prevFileName, fileName)){
-            exporter.generateImg(fileName.c_str());
-        }
+//        filecounter++;
+//        std::stringstream iniFileNameStream;
+//        std::stringstream fileNameStream;
+//        std::stringstream prevFileNameStream;
+//        iniFileNameStream << "../Engine/EngineTest" << filecounter << ".ini";
+//        fileNameStream << "EngineTest" << filecounter << ".ini";
+//        prevFileNameStream << "../Engine/EngineTest" << filecounter-1 << ".ini";
+//        std::string iniFileName = iniFileNameStream.str();
+//        std::string fileName = iniFileNameStream.str();
+//        std::string prevFileName = prevFileNameStream.str();
+//        std::ofstream myfile;
+//        myfile.open(iniFileName.c_str());
+//        exporter.exportIni(myfile, airports);
+//        if (!FileCompare(prevFileName, fileName)){
+//            exporter.generateImg(fileName.c_str());
+//        }
 
 
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
@@ -190,7 +190,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
 //            }
             if(airplane->getStatus() == "Standing at Gate"){
                 airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
-                Runway* dest = airport->getAvailableRunway();
+                Runway* dest = airport->getRunwayByAirplane(airplane);
                 if (dest) {
                     dest->setAirplane(airplane);
                     Runway* runway = airport->getRunways().back();
@@ -339,8 +339,8 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                     airplane->descendTo3k(SimOutput);
                     continue;
                 }
-                if (airplane->getHeight() == 3000 && airport->getAvailableRunway()) {
-                    Runway* runway = airport->getAvailableRunway();
+                if (airplane->getHeight() == 3000 && airport->getRunwayByAirplane(airplane)) {
+                    Runway* runway = airport->getRunwayByAirplane(airplane);
                     airport->setH3000(NULL);
                     airplane->setStatus("Final Approach");
                     airplane->finalapproach(SimOutput, airport->getName(), runway->getName());

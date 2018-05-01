@@ -61,6 +61,7 @@ public:
     Runway* findRunwayByTaxipointToGate(Airplane* airplane);
     Runway* findRunwayByTaxipointToRunway(Airplane* airplane);
     void sortRunways();
+    Runway* getRunwayByAirplane(Airplane* airplane);
 
 
     /**
