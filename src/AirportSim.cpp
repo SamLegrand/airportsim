@@ -32,13 +32,14 @@ void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
 }
 
 void AirportSim::simulate(std::ostream& SimOutput) {
-    unsigned int time = 0;
+    unsigned int time = 720;
     Exporter exporter;
     Airport* airport = airports[0];
     airport->sortRunways();
 //    int filecounter = -1;
     while (!checkSimEnd()) {
-        std::cout << time << std::endl;
+        std::string min = "0" + to_string(time%60);
+        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
         // Graphics implementation
 //        filecounter++;
 //        std::stringstream iniFileNameStream;
