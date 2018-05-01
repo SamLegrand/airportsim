@@ -38,7 +38,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     airport->sortRunways();
 //    int filecounter = -1;
     while (!checkSimEnd()) {
-
+        std::cout << time << std::endl;
         // Graphics implementation
 //        filecounter++;
 //        std::stringstream iniFileNameStream;
@@ -188,6 +188,10 @@ void AirportSim::simulate(std::ostream& SimOutput) {
 //                }
 //                continue;
 //            }
+            if (airplane->getStatus() == "Pushing back") {
+                airplane->pushBack(SimOutput);
+                continue;
+            }
             if(airplane->getStatus() == "Standing at Gate"){
                 airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
                 Runway* dest = airport->getRunwayByAirplane(airplane);
