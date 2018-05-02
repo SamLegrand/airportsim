@@ -23,7 +23,7 @@ protected:
 };
 
 TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for simple scenario (only two planes plane)
-    AirportSim simulator("../testOutput/airleadersimplescenario.txt");
+    AirportSim simulator;
     //Make sure testInput directory exists, if not, no need to continue with test
     ASSERT_TRUE(DirectoryExists("../testInput/"));
     ASSERT_TRUE(DirectoryExists("../testOutput/"));
@@ -44,9 +44,6 @@ TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for sim
     filestream.close();
     EXPECT_TRUE(FileCompare("../testOutput/simplescenarioexpected.txt", "../testOutput/simplescenario.txt"));
 
-    //Test for correct airleader output
-    EXPECT_TRUE(FileCompare("../testOutput/airleadersimplescenario.txt", "../testOutput/airleadersimplescenarioexpected.txt"));
-
     //Test simple output
     filestream.open("../testOutput/simplescenariosimpleoutput.txt");
     exporter.exportSimpleOutput(filestream, simulator.getAirports(), simulator.getAirplanes());
@@ -54,34 +51,45 @@ TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for sim
     EXPECT_TRUE(FileCompare("../testOutput/simplescenariosimpleoutputexpected.txt", "../testOutput/simplescenariosimpleoutput.txt"));
 }
 
-TEST_F(AirportSimOutputTest, OutputComplexScenario){    //Testing correct output for more complex scenario (multiple planes in different states)
-    AirportSim simulator("../testOutput/airleadercomplexscenario.txt");
+TEST_F(AirportSimOutputTest, OutputComplexScenarios){    //Testing correct output for more complex scenario (multiple planes in different states)
+    AirportSim simulator;
     //Make sure testInput directory exists, if not, no need to continue with test
     ASSERT_TRUE(DirectoryExists("../testInput/"));
     ASSERT_TRUE(DirectoryExists("../testOutput/"));
 
     std::ofstream filestream;
     std::ofstream errstream;
-    importer::importAirport("../testInput/inputlegalcomplex.xml", errstream, simulator);
+    ASSERT_TRUE(DirectoryExists("../testInput/"));
+    int counter = 1;        //Counter for looping over different files
+    std::string filename = "../testInput/inputlegalcomplex" + to_string(counter) + ".xml";
 
-    //Test graphical impression
-    filestream.open("../testOutput/complexscenariographicalimpression.txt");
-    exporter.exportGraphicalImpression(filestream, simulator.getAirports());
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/complexscenariographicalimpressionexpected.txt", "../testOutput/complexscenariographicalimpression.txt"));
+    while(FileExists(filename)){        //Loop over different files
+        importer::importAirport(filename.c_str(), errstream, simulator);
 
-    //Test simulation output
-    filestream.open("../testOutput/complexscenario.txt");
-    simulator.simulate(filestream);
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/complexscenarioexpected.txt", "../testOutput/complexscenario.txt"));
+        //Test graphical impression
+        std::string output = "../testOutput/complexscenario" + to_string(counter) + "graphicalimpression.txt";
+        filestream.open(output.c_str());
+        exporter.exportGraphicalImpression(filestream, simulator.getAirports());
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/complexscenario" + to_string(counter) + "graphicalimpressionexpected.txt", "../testOutput/complexscenario" + to_string(counter) + "graphicalimpression.txt"));
 
-    //Test for correct airleader output
-    EXPECT_TRUE(FileCompare("../testOutput/airleadercomplexscenarioexpected.txt", "../testOutput/airleadercomplexscenario.txt"));
+        //Test simulation output
+        output = "../testOutput/complexscenario" + to_string(counter) + ".txt";
+        filestream.open(output.c_str());
+        simulator.simulate(filestream);
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/complexscenario" + to_string(counter) + "expected.txt", "../testOutput/complexscenario" + to_string(counter) + ".txt"));
 
-    //Test simple output
-    filestream.open("../testOutput/complexscenariosimpleoutput.txt");
-    exporter.exportSimpleOutput(filestream, simulator.getAirports(), simulator.getAirplanes());
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/complexscenariosimpleoutputexpected.txt", "../testOutput/complexscenariosimpleoutput.txt"));
+        //Test simple output
+        output = "../testOutput/complexscenario" + to_string(counter) + "simpleoutput.txt";
+        filestream.open(output.c_str());
+        exporter.exportSimpleOutput(filestream, simulator.getAirports(), simulator.getAirplanes());
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/complexscenario" + to_string(counter) + "simpleoutputexpected.txt", "../testOutput/complexscenario" + to_string(counter) + "simpleoutput.txt"));
+
+        counter++;
+        filename = "../testInput/inputlegalcomplex" + to_string(counter) + ".xml";
+    };
+
+    EXPECT_TRUE(counter == 3);      //Expect that all files have been tested
 }

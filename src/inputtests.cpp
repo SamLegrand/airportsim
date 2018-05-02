@@ -37,11 +37,22 @@ TEST_F(AirportSimInputTest, InputLegalComplex){         //Testing correct import
     std::ofstream filestream;
     SuccessEnum  result;
     ASSERT_TRUE(DirectoryExists("../testInput/"));
-    filestream.open("../testInput/Error.txt");
-    result = importer::importAirport("../testInput/inputlegalcomplex.xml", filestream, simulator);
-    filestream.close();
-    EXPECT_TRUE(result == Success);     //Input is expected to be imported successfully
-    EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
+    int counter = 1;        //Counter for looping over different files
+    std::string filename = "../testInput/inputlegalcomplex" + to_string(counter) + ".xml";
+    std::string errorfilename;
+
+    while(FileExists(filename)){        //Loop over different files
+        filestream.open("../testInput/Error.txt");
+        result = importer::importAirport(filename.c_str(), filestream, simulator);
+        filestream.close();
+        EXPECT_TRUE(result == Success);       //Import should be aborted
+        EXPECT_TRUE(FileIsEmpty("../testInput/Error.txt"));     //It's expected that no errors will occur
+
+        counter++;
+        filename = "../testInput/inputlegalcomplex" + to_string(counter) + ".xml";
+    };
+
+    EXPECT_TRUE(counter == 3);      //Expect that all files have been tested
 }
 
 TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
@@ -68,8 +79,6 @@ TEST_F(AirportSimInputTest, InputSyntaxErrors){     //Testing errors in syntax
 }
 
 TEST_F(AirportSimInputTest, InputIllegal){      //Testing illegal input
-    ASSERT_TRUE(DirectoryExists("../testInput"));
-
     std::ofstream filestream;
     SuccessEnum  result;
     ASSERT_TRUE(DirectoryExists("../testInput/"));

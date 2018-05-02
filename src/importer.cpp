@@ -7,6 +7,7 @@
 #include "tinyxml.h"
 #include "Exporter.h"
 #include <sstream>
+#include <cstdlib>
 
 //Help functions for importer, need to be moved to utils
 int stoi(std::string const& s){
@@ -306,41 +307,65 @@ bool importer::properlyInitialized(const std::vector<Airport*> &airports, const 
             airplanes[i]->getSize() == "small" &&
                 (airplanes[i]->getEngine() == "propeller" ||
                 airplanes[i]->getEngine() == "jet"))){
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 1;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "private" &&
              airplanes[i]->getSize() == "medium" &&
              airplanes[i]->getEngine() == "jet")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 1001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
              airplanes[i]->getSize() == "medium" &&
              airplanes[i]->getEngine() == "propeller")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 2001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
              airplanes[i]->getSize() == "medium" &&
              airplanes[i]->getEngine() == "jet")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 3001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
              airplanes[i]->getSize() == "large" &&
              airplanes[i]->getEngine() == "jet")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 4001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "military" &&
              airplanes[i]->getSize() == "small" &&
              airplanes[i]->getEngine() == "jet")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 5001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "military" &&
              airplanes[i]->getSize() == "large" &&
              airplanes[i]->getEngine() == "propeller")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 5001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         if ((airplanes[i]->getType() == "emergency" &&
              airplanes[i]->getSize() == "small" &&
              airplanes[i]->getEngine() == "propeller")) {
+            srand(time(NULL));
+            int random_number = std::rand() % 777 + 6001;
+            airplanes[i]->setSquawk(random_number);
             continue;
         }
         return false;
