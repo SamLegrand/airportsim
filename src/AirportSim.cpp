@@ -43,6 +43,14 @@ void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
     AirportSim::airplanes = airplanes;
 }
 
+const std::string &AirportSim::getAirleaderoutput() const {
+    return airleaderoutput;
+}
+
+void AirportSim::setAirleaderoutput(const std::string &airleaderoutput) {
+    AirportSim::airleaderoutput = airleaderoutput;
+}
+
 void AirportSim::simulate(std::ostream& SimOutput) {
     REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     unsigned int time = 720;

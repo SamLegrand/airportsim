@@ -51,6 +51,10 @@ public:
      */
     void setAirplanes(const std::vector<Airplane *> &airplanes);
 
+    const std::string &getAirleaderoutput() const;
+
+    void setAirleaderoutput(const std::string &airleaderoutput);
+
     /**
      * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param output
