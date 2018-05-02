@@ -18,13 +18,37 @@ public:
     AirportSim(const std::string &airleaderoutput);
     bool properlyInitialized();
 
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @return
+     */
     const std::vector<Airport *> &getAirports();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @param airports
+     */
     void setAirports(const std::vector<Airport *> &airports);
 
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @return
+     */
     const std::vector<Airplane *> &getAirplanes();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @param airplanes
+     */
     void setAirplanes(const std::vector<Airplane *> &airplanes);
 
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @param output
+     */
     void simulate(std::ostream &output);
+    /**
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @return
+     */
     bool checkSimEnd();
 };
 
