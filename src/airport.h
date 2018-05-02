@@ -24,45 +24,78 @@ class Airport {
     Airplane* h5000;
     int passengers;
 public:
-    const std::vector<std::string> &getTaxipoints() const;
+    Airport();
+    bool properlyInitialized();
+    void printInfo(std::ofstream &output) const;
 
+    const std::string &getName() const;
+    void setName(const std::string &name);
+
+    const std::string &getIata() const;
+    void setIata(const std::string &iata);
+
+    const std::string &getCallsign() const;
+    void setCallsign(const std::string &callsign);
+
+    const std::vector<std::string> &getTaxipoints() const;
     void setTaxipoints(const std::vector<std::string> &taxipoints);
 
-    Airport();
+    const std::vector<Runway *> &getRunways() const;
+    void setRunways(const std::vector<Runway *> &runways);
 
-    bool properlyInitialized();
+    const std::vector<Airplane*> &getGatesVector() const;
+    const int getGates() const;
+    void setGates(const unsigned int &gate);
 
     Airplane *getH3000() const;
-
     void setH3000(Airplane *h3000);
 
     Airplane *getH5000() const;
-
     void setH5000(Airplane *h5000);
 
-    void setName(const std::string &name);
-    void setIata(const std::string &iata);
-    void setCallsign(const std::string &callsign);
-    void setGates(const unsigned int &gate);
-    void setRunways(const std::vector<Runway *> &runways);
-    void setPassengers(const int &passengers);
-    const std::string &getName() const;
-    const std::string &getIata() const;
-    const std::string &getCallsign() const;
-    const std::vector<Runway *> &getRunways() const;
-    const std::vector<Airplane*> &getGatesVector() const;
-    const int getGates() const;
     const int &getPassengers() const;
-    void printInfo(std::ofstream &output) const;
-    Runway* findRunwayByRunwayName(std::string runwayName);
-    Runway* findRunwayByTaxiName(std::string taxipoint);
-    Runway* findNextRunwayToGate(Runway* runway);
-    Runway* findNextRunwayToRunway(Runway* runway);
-    Runway* findRunwayByTaxipointToGate(Airplane* airplane);
-    Runway* findRunwayByTaxipointToRunway(Airplane* airplane);
-    void sortRunways();
-    Runway* getRunwayByAirplane(Airplane* airplane);
+    void setPassengers(const int &passengers);
 
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findRunwayByRunwayName(std::string runwayName);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findRunwayByTaxiName(std::string taxipoint);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findNextRunwayToGate(Runway* runway);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findNextRunwayToRunway(Runway* runway);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findRunwayByTaxipointToGate(Airplane* airplane);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* findRunwayByTaxipointToRunway(Airplane* airplane);
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    void sortRunways();
+
+    /**
+     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
+     */
+    Runway* getRunwayByAirplane(Airplane* airplane);
 
     /**
      * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
@@ -112,8 +145,14 @@ public:
      */
     Runway* findPlaneInRunway(Airplane* airplane);
 
+    /**
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+     */
     Runway* findPlaneInCrossing(Airplane* airplane);
 
+    /**
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+     */
     Runway* findNearestAvailableRunway(Airplane* airplane);
 };
 

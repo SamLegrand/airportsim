@@ -14,19 +14,15 @@ class AirportSim {
     std::vector<Airplane*> airplanes;
 public:
     AirportSim();
-
     bool properlyInitialized();
 
     const std::vector<Airport *> &getAirports() const;
-
     void setAirports(const std::vector<Airport *> &airports);
 
     const std::vector<Airplane *> &getAirplanes() const;
-
     void setAirplanes(const std::vector<Airplane *> &airplanes);
 
     void simulate(std::ostream &output);
-
     bool checkSimEnd();
 };
 

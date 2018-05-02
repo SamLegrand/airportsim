@@ -24,45 +24,53 @@ class Airplane {
     int passengers;
     int fuel;
     int height;
-    int time;
     int squawk;
+    int time;
     bool communicating;
 public:
-    int getSquawk() const;
+    Airplane();
+    bool properlyInitialized();
+    void printInfo(std::ofstream &output);
 
+    int getSquawk() const;
     void setSquawk(int squawk);
 
     bool isCommunicating() const;
-
     void setCommunication(bool communication);
 
     int getTime() const;
-
     void setTime(int time);
 
-    Airplane();
-    bool properlyInitialized();
-    void setNumber(const std::string &number);
-    void setCallsign(const std::string &callsign);
-    void setModel(const std::string &model);
-    void setStatus(const std::string &status);
-    void setPassengers(int passengers);
-    void setFuel(int fuel);
-    void setHeight(int height);
-    const std::string &getNumber() const;
-    const std::string &getModel() const;
-    const std::string &getStatus() const;
-    int getPassengers() const;
-    int getFuel() const;
-    int getHeight() const;
     const std::string &getCallsign() const;
-    void printInfo(std::ofstream &output);
+    void setCallsign(const std::string &callsign);
+
+    const std::string &getNumber() const;
+    void setNumber(const std::string &number);
+
+    const std::string &getModel() const;
+    void setModel(const std::string &model);
+
+    const std::string &getStatus() const;
+    void setStatus(const std::string &status);
+
+    int getPassengers() const;
+    void setPassengers(int passengers);
+
+    int getFuel() const;
+    void setFuel(int fuel);
+
+    int getHeight() const;
+    void setHeight(int height);
+
     const std::string &getType() const;
     void setType(const std::string &type);
+
     const std::string &getEngine() const;
     void setEngine(const std::string &engine);
+
     const std::string &getSize() const;
     void setSize(const std::string &size);
+
     bool isAtGate();
     bool isAtRunway();
 
@@ -71,6 +79,12 @@ public:
      * ENSURE(this->getStatus() == "Descending to 5k", "Plane hasn't been set to the correct state.");
      */
     void approach(std::ostream &output, const std::string& airport);
+
+    /**
+     * REQUIRE(this->getStatus() == "Flying wait pattern, "Plane wasn't in correct state.");
+     * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending to 5k" || this->getStatus() == "Descending to 3k", "Plane hasn't been set to the correct state.");
+     */
+    void flyWaitPattern(std::ostream &output);
 
     /**
      * REQUIRE(this->getStatus() == "Descending to 5k", "Plane wasn't in correct state.");
@@ -83,12 +97,6 @@ public:
      * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending to 3k" || this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
      */
     void descendTo3k(std::ostream &output);
-
-    /**
-     * REQUIRE(this->getStatus() == "Flying wait pattern, "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Descending to 5k" || this->getStatus() == "Descending to 3k", "Plane hasn't been set to the correct state.");
-     */
-    void flyWaitPattern(std::ostream &output);
 
     /**
      * REQUIRE(this->getStatus() == "Final Approach" || this->getStatus() == "Flying wait pattern", "Plane wasn't in correct state.");
@@ -140,10 +148,14 @@ public:
 
     /**
      * REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Taxiing to Runway", "Plane hasn't been set to the correct state.");
+     * ENSURE(this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
      */
     void stand(std::ostream &output, int gate);
 
+    /**
+     * REQUIRE(this->getStatus() == "Pushing back", "Plane wasn't in correct state.");
+     * ENSURE(this->getStatus() == "Taxiing to Runway", "Plane hasn't been set to the correct state.");
+     */
     void pushBack(std::ostream &output);
 
     /**
@@ -151,6 +163,8 @@ public:
      * ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
      */
     void taxiToRunway(std::ostream &output, const std::string& runway);
+
+    void readyForTakeoff(std::ostream &output, const std::string& airport, const std::string& runway);
 
     /**
      * REQUIRE(this->getStatus() == "Taking Off", "Plane wasn't in correct state.");
@@ -169,8 +183,6 @@ public:
      * ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
      */
     void leaveAirport(std::ostream &output, const std::string& airport);
-
-    void readyForTakeoff(std::ostream &output, const std::string& airport, const std::string& runway);
 };
 
 

@@ -243,6 +243,7 @@ void Airport::setTaxipoints(const std::vector<std::string> &taxipoints) {
 }
 
 Runway *Airport::findRunwayByTaxiName(std::string taxipoint) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size(); ++i) {
         if (runways[i]->getTaxipoint() == taxipoint){
             return runways[i];
@@ -252,6 +253,7 @@ Runway *Airport::findRunwayByTaxiName(std::string taxipoint) {
 }
 
 Runway *Airport::findNextRunwayToGate(Runway *runway) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size()-1; ++i) {
         if (runways[i] == runway){
             return runways[i+1];
@@ -261,6 +263,7 @@ Runway *Airport::findNextRunwayToGate(Runway *runway) {
 }
 
 Runway *Airport::findNextRunwayToRunway(Runway *runway) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 1; i < runways.size(); ++i) {
         if (runways[i] == runway){
             return runways[i-1];
@@ -270,6 +273,7 @@ Runway *Airport::findNextRunwayToRunway(Runway *runway) {
 }
 
 Runway *Airport::findRunwayByTaxipointToGate(Airplane *airplane) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size(); ++i) {
         if (runways[i]->getTaxipointToGate() == airplane){
             return runways[i];
@@ -279,6 +283,7 @@ Runway *Airport::findRunwayByTaxipointToGate(Airplane *airplane) {
 }
 
 Runway *Airport::findRunwayByTaxipointToRunway(Airplane *airplane) {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size(); ++i) {
         if (runways[i]->getTaxipointToRunway() == airplane){
             return runways[i];
@@ -288,6 +293,7 @@ Runway *Airport::findRunwayByTaxipointToRunway(Airplane *airplane) {
 }
 
 void Airport::sortRunways() {
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     std::vector<Runway*> sortedRunways;
     for (int i = taxipoints.size()-1; i>-1; i--) {
         sortedRunways.push_back(findRunwayByTaxiName(taxipoints[i]));
