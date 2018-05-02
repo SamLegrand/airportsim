@@ -125,12 +125,29 @@ TEST_F(AirportSimDomainTest, DefaultConstructorExporter){
 TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various contract violations
     airport.setGates(0);   //set gate amount to 0
     EXPECT_DEATH(airport.addPlaneToGate(&airplane, 1), "Assertion.*failed");      //Impossible to add because there are no gates
+    EXPECT_DEATH(airport.findPlaneInGate(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.getAvailableGate(), "Assertion.*failed");
+    EXPECT_DEATH(airport.removePlaneFromGate(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findPlaneInRunway(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findPlaneInCrossing(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.getRunwayByAirplane(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNextRunwayToRunway(&runway), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNextRunwayToGate(&runway), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxipointToRunway(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxipointToGate(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNearestAvailableRunway(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.getRunwayByAirplane(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxiName(""), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByRunwayName(""), "Assertion.*failed");
     airport.setGates(1);
     EXPECT_DEATH(airport.addPlaneToGate(&airplane, 0), "Assertion.*failed");      //Impossible to add (gates start at 1)
     airplane.setStatus("Unknown");
     std::ostringstream stream;
     EXPECT_DEATH(airplane.approach(stream, ""), "Assertion.*failed");      //Checking for current state violations for all airplane functions
+    EXPECT_DEATH(airplane.flyWaitPattern(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.descendTo5k(stream), "Assertion.*failed");
+    EXPECT_DEATH(airplane.descendTo3k(stream), "Assertion.*failed");
+    EXPECT_DEATH(airplane.finalapproach(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.land(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.landed(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToGate(stream, 1), "Assertion.*failed");
@@ -139,10 +156,13 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airplane.refuelPlane(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.boardPlane(stream, "", 1), "Assertion.*failed");
     EXPECT_DEATH(airplane.stand(stream, 1), "Assertion.*failed");
+    EXPECT_DEATH(airplane.pushBack(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToRunway(stream, ""), "Assertion.*failed");
+    EXPECT_DEATH(airplane.readyForTakeoff(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.takeOff(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.ascend(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.leaveAirport(stream, ""), "Assertion.*failed");
+
 }
 
 //TEST_F(AirportSimDomainTest, LandingScenario){      //Testing landing scenario
