@@ -10,11 +10,13 @@
 AirportSim::AirportSim() {
     initCheck = this;
     airleaderoutput = "../AirControlOutput.txt";
+    ENSURE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
 }
 
 AirportSim::AirportSim(const std::string &output){
     initCheck = this;
     airleaderoutput = output;
+    ENSURE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
 }
 
 bool AirportSim::properlyInitialized() {

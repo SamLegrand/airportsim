@@ -14,7 +14,14 @@ private:
     Exporter* initCheck;
     std::ofstream airleaderOutput;
 public:
+    /**
+     * ENSURE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+     */
     Exporter();
+    /**
+     * ENSURE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+     * @param filename
+     */
     Exporter(const std::string &filename);
     /**
      *

@@ -28,6 +28,9 @@ class Airplane {
     int time;
     bool communicating;
 public:
+    /**
+     * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+     */
     Airplane();
     /**
      *
@@ -196,8 +199,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Descending to 5k", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Approaching", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Descending to 5k", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      */
@@ -205,32 +208,32 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Flying wait pattern, "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Flying wait pattern, "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Flying wait pattern", "Plane should be set to the correct state.");
      * @param output
      */
     void flyWaitPattern(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Descending to 5k", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Descending to 5k" || this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Descending to 5k", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Descending to 5k" || this->getStatus() == "Flying wait pattern", "Plane should be set to the correct state.");
      * @param output
      */
     void descendTo5k(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Descending to 3k", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Descending to 3k" || this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Descending to 3k", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Descending to 3k" || this->getStatus() == "Flying wait pattern", "Plane should be set to the correct state.");
      * @param output
      */
     void descendTo3k(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Final Approach", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Landing" || this->getStatus() == "Final Approach", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Final Approach", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Landing" || this->getStatus() == "Final Approach", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param runway
@@ -239,8 +242,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Landing", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Landing", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Landing", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Landing", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param runway
@@ -249,8 +252,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Landed", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Landed", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Landed", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Landed", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param runway
@@ -259,8 +262,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
      * @param output
      * @param gate
      */
@@ -268,8 +271,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Unboarding Plane", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Unboarding Plane", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param gate
@@ -278,24 +281,24 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Checking Plane", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Checking Plane", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane should be set to the correct state.");
      * @param output
      */
     void checkPlane(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Refueling Plane", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Boarding Plane", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
      * @param output
      */
     void refuelPlane(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Boarding Plane", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Boarding Plane", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param gate
@@ -304,8 +307,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Standing at Gate", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Standing at Gate", "Plane should be set to the correct state.");
      * @param output
      * @param gate
      */
@@ -313,16 +316,16 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Pushing back", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Pushing back", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
      * @param output
      */
     void pushBack(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Ready for Takeoff", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Ready for Takeoff", "Plane should be set to the correct state.");
      * @param output
      * @param runway
      */
@@ -330,8 +333,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Ready for Takeoff", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Ready for Takeoff", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Taking Off", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param runway
@@ -340,8 +343,8 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Taking Off", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Ascending" || this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Taking Off", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Ascending" || this->getStatus() == "Taking Off", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      * @param runway
@@ -350,16 +353,16 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Ascending", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Leaving Airport" || this->getStatus() == "Ascending", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Ascending", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Leaving Airport" || this->getStatus() == "Ascending", "Plane should be set to the correct state.");
      * @param output
      */
     void ascend(std::ostream &output);
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * REQUIRE(this->getStatus() == "Leaving Airport", "Plane wasn't in correct state.");
-     * ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
+     * REQUIRE(this->getStatus() == "Leaving Airport", "Plane has to the be in correct state.");
+     * ENSURE(this->getStatus() == "Travelling", "Plane should be set to the correct state.");
      * @param output
      * @param airport
      */

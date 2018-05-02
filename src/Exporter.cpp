@@ -10,11 +10,13 @@
 Exporter::Exporter() {
     initCheck = this;
     airleaderOutput.open("../AirControlOutput.txt");
+    ENSURE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
 }
 
 Exporter::Exporter(const std::string &filename){
     initCheck = this;
     airleaderOutput.open(filename.c_str());
+    ENSURE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
 }
 
 bool Exporter::properlyInitialized() {

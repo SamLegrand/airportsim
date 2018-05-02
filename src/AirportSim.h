@@ -14,8 +14,19 @@ class AirportSim {
     std::vector<Airplane*> airplanes;
     std::string airleaderoutput;
 public:
+    /**
+     * ENSURE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     */
     AirportSim();
+    /**
+     * ENSURE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
+     * @param airleaderoutput
+     */
     AirportSim(const std::string &airleaderoutput);
+    /**
+     *
+     * @return
+     */
     bool properlyInitialized();
 
     /**

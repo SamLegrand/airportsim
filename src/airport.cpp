@@ -259,6 +259,7 @@ Airport::Airport() {
     h3000 = NULL;
     h5000 = NULL;
     initCheck = this;
+    ENSURE(this->properlyInitialized(), "Airport wasn't properly initialized.");
 }
 
 bool Airport::properlyInitialized(){
