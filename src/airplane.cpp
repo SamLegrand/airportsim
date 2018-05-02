@@ -93,23 +93,23 @@ void Airplane::printInfo(std::ofstream &output) {
 
 void Airplane::approach(std::ostream &output, const std::string& airport) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Approaching", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Approaching", "Plane has to the be in correct state.");
     height = 10000;
     output << callsign << " is approaching " << airport << " at " << height << " ft." << std::endl;
     status = "Descending to 5k";
-    ENSURE(this->getStatus() == "Descending to 5k", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Descending to 5k", "Plane should be set to the correct state.");
 }
 
 void Airplane::flyWaitPattern(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Flying wait pattern", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Flying wait pattern", "Plane has to the be in correct state.");
     output << callsign << " is flying wait pattern at " << height << " ft." << std::endl;
-    ENSURE(this->getStatus() == "Flying wait pattern", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Flying wait pattern", "Plane should be set to the correct state.");
 }
 
 void Airplane::descendTo5k(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Descending to 5k", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Descending to 5k", "Plane has to the be in correct state.");
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -119,12 +119,12 @@ void Airplane::descendTo5k(std::ostream &output) {
     if (height == 5000) {
         status = "Flying wait pattern";
     }
-    ENSURE(this->getStatus() == "Flying wait pattern" || this->getStatus() == "Descending to 5k", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Flying wait pattern" || this->getStatus() == "Descending to 5k", "Plane should be set to the correct state.");
 }
 
 void Airplane::descendTo3k(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Descending to 3k", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Descending to 3k", "Plane has to the be in correct state.");
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -134,12 +134,12 @@ void Airplane::descendTo3k(std::ostream &output) {
     if (height == 3000) {
         status = "Flying wait pattern";
     }
-    ENSURE(this->getStatus() == "Flying wait pattern" || this->getStatus() == "Descending to 3k", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Flying wait pattern" || this->getStatus() == "Descending to 3k", "Plane should be set to the correct state.");
 }
 
 void Airplane::finalapproach(std::ostream &output, const std::string &airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Final Approach", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Final Approach", "Plane has to the be in correct state.");
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -149,12 +149,12 @@ void Airplane::finalapproach(std::ostream &output, const std::string &airport, c
     if (height == 1000) {
         status = "Landing";
     }
-    ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Landing", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Final Approach" || this->getStatus() == "Landing", "Plane should be set to the correct state.");
 }
 
 void Airplane::land(std::ostream &output, const std::string& airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Landing", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Landing", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " is landing at " << airport << " on runway " << runway << std::endl;
@@ -164,27 +164,27 @@ void Airplane::land(std::ostream &output, const std::string& airport, const std:
         height = 0;
         time = 0;
     }
-    ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Landing", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Landing", "Plane should be set to the correct state.");
 }
 
 void Airplane::landed(std::ostream &output, const std::string& airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Landed", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Landed", "Plane has to the be in correct state.");
     output << callsign << " has landed at " << airport << " on runway " << runway << std::endl;
-    ENSURE(this->getStatus() == "Landed", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Landed", "Plane should be set to the correct state.");
 }
 
 void Airplane::taxiToGate(std::ostream &output, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Taxiing to Gate", "Plane has to the be in correct state.");
     output << callsign << " is standing at gate " << gate << "." << std::endl;
     status = "Unboarding Plane";
-    ENSURE(this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
 }
 
 void Airplane::unboardPlane(std::ostream &output, const std::string& airport, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Unboarding Plane", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Unboarding Plane", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << std::endl;
@@ -193,12 +193,12 @@ void Airplane::unboardPlane(std::ostream &output, const std::string& airport, in
         status = "Checking Plane";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
 }
 
 void Airplane::checkPlane(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Checking Plane", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Checking Plane", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " has been checked for technical malfunctions" << std::endl;
@@ -207,20 +207,20 @@ void Airplane::checkPlane(std::ostream &output) {
         status = "Refueling Plane";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane should be set to the correct state.");
 }
 
 void Airplane::refuelPlane(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Refueling Plane", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
     output << callsign << " has been refueled" << std::endl;
     status = "Boarding Plane";
-    ENSURE(this->getStatus() == "Boarding Plane", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
 }
 
 void Airplane::boardPlane(std::ostream &output, const std::string& airport, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Boarding Plane", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Boarding Plane", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << passengers << " passengers boarded " << callsign << " at gate " << gate << " of " << airport << std::endl;
@@ -229,20 +229,20 @@ void Airplane::boardPlane(std::ostream &output, const std::string& airport, int 
         status = "Standing at Gate";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
 }
 
 void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Standing at Gate", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Standing at Gate", "Plane has to the be in correct state.");
     height = 0;
     output << callsign << " is standing at gate " << gate << std::endl;
-    ENSURE(this->getStatus() == "Standing at Gate", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Standing at Gate", "Plane should be set to the correct state.");
 }
 
 void Airplane::pushBack(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Pushing back", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Pushing back", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " starting pushback" << std::endl;
@@ -251,28 +251,28 @@ void Airplane::pushBack(std::ostream &output) {
         time = 0;
         status = "Taxiing to Runway";
     }
-    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
 }
 
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane has to the be in correct state.");
     output << callsign << " is waiting at runway " << runway << std::endl;
     status = "Ready for Takeoff";
-    ENSURE(this->getStatus() == "Ready for Takeoff", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Ready for Takeoff", "Plane should be set to the correct state.");
 }
 
 void Airplane::readyForTakeoff(std::ostream &output, const std::string &airport, const std::string &runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Ready for Takeoff", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Ready for Takeoff", "Plane has to the be in correct state.");
     output << callsign << " is ready for takeoff at " << airport << " on runway " << runway << std::endl;
     status = "Taking Off";
-    ENSURE(this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Taking Off", "Plane should be set to the correct state.");
 }
 
 void Airplane::takeOff(std::ostream &output, const std::string& airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Taking Off", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Taking Off", "Plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         height = 0;
@@ -282,12 +282,12 @@ void Airplane::takeOff(std::ostream &output, const std::string& airport, const s
         status = "Ascending";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Ascending" || this->getStatus() == "Taking Off", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Ascending" || this->getStatus() == "Taking Off", "Plane should be set to the correct state.");
 }
 
 void Airplane::ascend(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Ascending", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Ascending", "Plane has to the be in correct state.");
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height + 1000;
@@ -297,16 +297,16 @@ void Airplane::ascend(std::ostream &output) {
     if(height == 5000) {
         status = "Leaving Airport";
     }
-    ENSURE(this->getStatus() == "Leaving Airport" || this->getStatus() == "Ascending", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Leaving Airport" || this->getStatus() == "Ascending", "Plane should be set to the correct state.");
 }
 
 void Airplane::leaveAirport(std::ostream &output, const std::string& airport) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Leaving Airport", "Plane wasn't in correct state.");
+    REQUIRE(this->getStatus() == "Leaving Airport", "Plane has to the be in correct state.");
     output << callsign << " has left " << airport << std::endl;
     height = 10000;
     status = "Travelling";
-    ENSURE(this->getStatus() == "Travelling", "Plane hasn't been set to the correct state.");
+    ENSURE(this->getStatus() == "Travelling", "Plane should be set to the correct state.");
 }
 
 const std::string &Airplane::getType() {
