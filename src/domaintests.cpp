@@ -131,6 +131,14 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airport.findPlaneInRunway(&airplane), "Assertion.*failed");
     EXPECT_DEATH(airport.findPlaneInCrossing(&airplane), "Assertion.*failed");
     EXPECT_DEATH(airport.getRunwayByAirplane(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNextRunwayToRunway(&runway), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNextRunwayToGate(&runway), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxipointToRunway(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxipointToGate(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findNearestAvailableRunway(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.getRunwayByAirplane(&airplane), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByTaxiName(""), "Assertion.*failed");
+    EXPECT_DEATH(airport.findRunwayByRunwayName(""), "Assertion.*failed");
     airport.setGates(1);
     EXPECT_DEATH(airport.addPlaneToGate(&airplane, 0), "Assertion.*failed");      //Impossible to add (gates start at 1)
     airplane.setStatus("Unknown");
