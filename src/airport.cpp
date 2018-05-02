@@ -125,11 +125,11 @@ void Airport::addRunway(Runway *_runway) {
     runways.push_back(_runway);
 }
 
-void Airport::addPlaneToRunway(Airplane *airplane, int runway) {
-    REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
-    REQUIRE(runway > 0 && (unsigned)runway < this->getRunways().size(), "Runway should be a valid value.");
-    runways[runway]->setAirplane(airplane);
-}
+//void Airport::addPlaneToRunway(Airplane *airplane, int runway) {
+//    REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
+//    REQUIRE(runway > 0 && (unsigned)runway < this->getRunways().size(), "Runway should be a valid value.");
+//    runways[runway]->setAirplane(airplane);
+//}
 
 void Airport::removePlaneFromRunway(Airplane *airplane) {
     REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
@@ -142,16 +142,16 @@ void Airport::removePlaneFromRunway(Airplane *airplane) {
     }
 }
 
-Runway *Airport::getAvailableRunway() {
-    REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
-    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
-    for (unsigned int i = 0; i < runways.size(); i++) {
-        if(runways[i]->getAirplane() == NULL){
-            return runways[i];
-        }
-    }
-    return NULL;
-}
+//Runway *Airport::getAvailableRunway() {
+//    REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
+//    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
+//    for (unsigned int i = 0; i < runways.size(); i++) {
+//        if(runways[i]->getAirplane() == NULL){
+//            return runways[i];
+//        }
+//    }
+//    return NULL;
+//}
 
 Runway *Airport::getRunwayByAirplane(Airplane* airplane) {
     REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");

@@ -20,7 +20,7 @@ public:
      *
      * @return
      */
-    bool properlyInitizalized();
+    bool properlyInitialized();
     /**
      * REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
      * @param output

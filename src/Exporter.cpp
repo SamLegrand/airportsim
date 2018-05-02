@@ -17,12 +17,12 @@ Exporter::Exporter(const std::string &filename){
     airleaderOutput.open(filename.c_str());
 }
 
-bool Exporter::properlyInitizalized() {
+bool Exporter::properlyInitialized() {
     return initCheck == this;
 }
 
 void Exporter::exportSimpleOutput(std::ofstream &output, const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes){
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     for (unsigned int i = 0; i < airports.size(); ++i) {
         airports[i]->printInfo(output);
     }
@@ -32,7 +32,7 @@ void Exporter::exportSimpleOutput(std::ofstream &output, const std::vector<Airpo
 }
 
 void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vector<Airport*> &airports){
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     for (unsigned int i = 0; i < airports.size(); ++i) {
         airports[i]->sortRunways();
         for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
@@ -59,7 +59,7 @@ void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vecto
 }
 
 void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &airports){
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     std::string initinfo = "[General]\n"
             "size = 1024\n"
             "backgroundcolor = (0, 0.749, 1)\n"
@@ -234,18 +234,18 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
 }
 
 void Exporter::printAirleaderMessage(int time, std::string source, std::string message) {
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     std::string min = "0" + to_string(time%60);
     airleaderOutput << "[" << time/60 << ":" << min.substr(min.size()-2) << "] [" << source << "]" << std::endl << "$ " << message << std::endl << std::endl;
 }
 
 void Exporter::generateImg(std::string filename) {
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     std::string command = "../Engine/engine " + filename;
     system(command.c_str());
 }
 
 void Exporter::closeAirleaderOutput() {
-    REQUIRE(this->properlyInitizalized(), "Exporter wasn't properly initialised.");
+    REQUIRE(this->properlyInitialized(), "Exporter wasn't properly initialised.");
     airleaderOutput.close();
 }
