@@ -28,6 +28,9 @@ class Airplane {
     int time;
     bool communicating;
 public:
+    /**
+     * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+     */
     Airplane();
     /**
      *

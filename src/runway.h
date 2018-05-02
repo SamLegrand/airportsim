@@ -22,6 +22,9 @@ class Runway {
     Airplane* crossing;
     std::string taxipoint;
 public:
+    /**
+     * ENSURE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     */
     Runway();
     /**
      *

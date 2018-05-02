@@ -11,6 +11,7 @@ Runway::Runway() {
     Runway::taxipointToGate = NULL;
     Runway::taxipointToRunway = NULL;
     Runway::initCheck = this;
+    ENSURE(this->properlyInitialized(), "Runway wasn't properly initialized.");
 }
 
 bool Runway::properlyInitialized(){

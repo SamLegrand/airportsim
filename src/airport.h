@@ -24,6 +24,9 @@ class Airport {
     Airplane* h5000;
     int passengers;
 public:
+    /**
+     * ENSURE(this->properlyInitialized(), "Airport wasn't properly initialized.");
+     */
     Airport();
     /**
      *

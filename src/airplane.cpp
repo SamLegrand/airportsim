@@ -9,6 +9,7 @@ Airplane::Airplane(){
     communicating = true;
     squawk = 0;
     initCheck = this;
+    ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
 }
 
 bool Airplane::properlyInitialized(){
