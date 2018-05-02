@@ -194,7 +194,6 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
-     * REQUIRE(this->getGates() != 0, "There haven't been any gates added.");
      */
     void sortRunways();
 
@@ -247,26 +246,11 @@ public:
 
     /**
      * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
-     * REQUIRE(runway > 0 && (unsigned)runway < this->getRunways().size(), "Runway should be a valid value.");
-     * @param airplane
-     * @param runway
-     */
-    void addPlaneToRunway(Airplane* airplane, int runway);
-
-    /**
-     * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
      * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
      * ENSURE(this->findPlaneInRunway(airplane) == NULL, "Plane wasn't correctly removed from runway.");
      * @param airplane
      */
     void removePlaneFromRunway(Airplane* airplane);
-
-    /**
-     * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
-     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
-     * @return
-     */
-    Runway* getAvailableRunway();
 
     /**
      * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
