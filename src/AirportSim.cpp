@@ -21,23 +21,28 @@ bool AirportSim::properlyInitialized() {
     return initCheck == this;
 }
 
-const std::vector<Airport *> &AirportSim::getAirports() const {
+const std::vector<Airport *> &AirportSim::getAirports() {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     return airports;
 }
 
 void AirportSim::setAirports(const std::vector<Airport *> &airports) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     AirportSim::airports = airports;
 }
 
-const std::vector<Airplane *> &AirportSim::getAirplanes() const {
+const std::vector<Airplane *> &AirportSim::getAirplanes() {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     return airplanes;
 }
 
 void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     AirportSim::airplanes = airplanes;
 }
 
 void AirportSim::simulate(std::ostream& SimOutput) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     unsigned int time = 720;
     Exporter exporter(airleaderoutput);
     Airport* airport = airports[0];
@@ -439,6 +444,7 @@ void AirportSim::simulate(std::ostream& SimOutput) {
 }
 
 bool AirportSim::checkSimEnd() {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     for (unsigned int i = 0; i<airplanes.size(); ++i) {
         Airplane* airplane = airplanes[i];
         if (airplane->getStatus() != "Travelling") {

@@ -18,10 +18,10 @@ public:
     AirportSim(const std::string &airleaderoutput);
     bool properlyInitialized();
 
-    const std::vector<Airport *> &getAirports() const;
+    const std::vector<Airport *> &getAirports();
     void setAirports(const std::vector<Airport *> &airports);
 
-    const std::vector<Airplane *> &getAirplanes() const;
+    const std::vector<Airplane *> &getAirplanes();
     void setAirplanes(const std::vector<Airplane *> &airplanes);
 
     void simulate(std::ostream &output);

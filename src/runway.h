@@ -10,7 +10,6 @@
 #include <vector>
 
 class Airplane;
-class Taxipoint;
 
 class Runway {
     Runway* initCheck;
@@ -24,41 +23,108 @@ class Runway {
     std::string taxipoint;
 public:
     Runway();
-
-    Airplane *getTaxipointToRunway() const;
-
-    void setTaxipointToRunway(Airplane *taxipointToRunway);
-
-    Airplane *getTaxipointToGate() const;
-
-    void setTaxipointToGate(Airplane *taxipointToGate);
-
-    Airplane *getAirplaneCrossing() const;
-
-    void setAirplaneCrossing(Airplane *crossing);
-
-    const std::string &getTaxipoint() const;
-
-    void setTaxipoint(const std::string &taxipoint);
-
+    /**
+     *
+     * @return
+     */
     bool properlyInitialized();
 
-    const std::string &getName() const;
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * ENSURE(this->getTaxipointToRunway() == taxipointToRunway, "Plane wasn't correctly added to taxipointToRunway");
+     * @return
+     */
+    Airplane *getTaxipointToRunway();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @param taxipointToRunway
+     */
+    void setTaxipointToRunway(Airplane *taxipointToRunway);
 
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    Airplane *getTaxipointToGate();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * ENSURE(this->getTaxipointToGate() == taxipointToGate, "Plane wasn't correctly added to taxipointToGate");
+     * @param taxipointToGate
+     */
+    void setTaxipointToGate(Airplane *taxipointToGate);
+
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    Airplane *getAirplaneCrossing();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * ENSURE(this->getAirplaneCrossing() == crossing, "Plane wasn't correctly added to crossing");
+     * @param crossing
+     */
+    void setAirplaneCrossing(Airplane *crossing);
+
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    const std::string &getTaxipoint();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * ENSURE(this->getTaxipoint() == taxipoint, "Taxipoint name wasn't set properly.");
+     * @param taxipoint
+     */
+    void setTaxipoint(const std::string &taxipoint);
+
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    const std::string &getName();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @param name
+     */
     void setName(const std::string &name);
 
-    Airplane *getAirplane() const;
-
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    Airplane *getAirplane();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @param airplane
+     */
     void setAirplane(Airplane *airplane);
 
-    const std::string &getType() const;
-
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    const std::string &getType();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @param type
+     */
     void setType(const std::string &type);
 
-    int getLength() const;
-
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
+    int getLength();
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @param length
+     */
     void setLength(int length);
 
+    /**
+     * REQUIRE(this->properlyInitialized(), "Runway wasn't properly initialized.");
+     * @return
+     */
     bool ableToCross();
 };
 
