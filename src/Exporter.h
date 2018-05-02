@@ -15,7 +15,9 @@ private:
     std::ofstream airleaderOutput;
 public:
     Exporter();
+    Exporter(const std::string &filename);
     bool properlyInitizalized();
+    void exportSimpleOutput(std::ofstream &output, const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes);
     void exportGraphicalImpression(std::ofstream &output, const std::vector<Airport*> &airports);
     void exportIni(std::ofstream &output, const std::vector<Airport*> &airports);
     void generateImg(std::string filename);

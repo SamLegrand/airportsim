@@ -9,6 +9,12 @@
 
 AirportSim::AirportSim() {
     initCheck = this;
+    airleaderoutput = "../AirControlOutput.txt";
+}
+
+AirportSim::AirportSim(const std::string &output){
+    initCheck = this;
+    airleaderoutput = output;
 }
 
 bool AirportSim::properlyInitialized() {
@@ -33,7 +39,7 @@ void AirportSim::setAirplanes(const std::vector<Airplane *> &airplanes) {
 
 void AirportSim::simulate(std::ostream& SimOutput) {
     unsigned int time = 720;
-    Exporter exporter;
+    Exporter exporter(airleaderoutput);
     Airport* airport = airports[0];
     airport->sortRunways();
 //    int filecounter = -1;

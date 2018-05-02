@@ -12,20 +12,30 @@ Exporter::Exporter() {
     airleaderOutput.open("../AirControlOutput.txt");
 }
 
+Exporter::Exporter(const std::string &filename){
+    initCheck = this;
+    airleaderOutput.open(filename.c_str());
+}
+
 bool Exporter::properlyInitizalized() {
     return initCheck == this;
 }
 
+void Exporter::exportSimpleOutput(std::ofstream &output, const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes){
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        airports[i]->printInfo(output);
+    }
+    for (unsigned int i=0; i< airplanes.size(); ++i) {
+        airplanes[i]->printInfo(output);
+    }
+}
+
 void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vector<Airport*> &airports){
     for (unsigned int i = 0; i < airports.size(); ++i) {
-//        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
-//            if ((int)airports[i]->getRunways()[j]->getTaxipoints().size() > currentsize){
-//                currentsize = airports[i]->getRunways()[j]->getTaxipoints().size();
-//                currentrunway = airports[i]->getRunways()[j];
-//            }
-//        }
+        airports[i]->sortRunways();
         for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
-            if (airports[i]->getRunways()[j]->getAirplane() != NULL){
+            output << airports[i]->getRunways()[j]->getName() << " | ";
+            if (airports[i]->getRunways()[j]->getAirplane()){
                 output << "====V=====" << std::endl;
             }
             else{
@@ -35,7 +45,7 @@ void Exporter::exportGraphicalImpression(std::ofstream &output, const std::vecto
         }
         output << "Gates [";
         for (int j = 0; j < airports[i]->getGates(); ++j) {
-            if(airports[i]->getGatesVector()[j] != NULL){
+            if(airports[i]->getGatesVector()[j]){
                 output << "V";
             }
             else{

@@ -12,8 +12,10 @@ class AirportSim {
     AirportSim* initCheck;
     std::vector<Airport*> airports;
     std::vector<Airplane*> airplanes;
+    std::string airleaderoutput;
 public:
     AirportSim();
+    AirportSim(const std::string &airleaderoutput);
     bool properlyInitialized();
 
     const std::vector<Airport *> &getAirports() const;

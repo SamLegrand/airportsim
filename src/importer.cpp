@@ -272,12 +272,8 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     }
     std::ofstream output;
     output.open("../output.txt", std::fstream::out);        //Write simple output to stream
-    for (unsigned int i=0; i< airports.size(); ++i) {
-        airports[i]->printInfo(output);
-    }
-    for (unsigned int i=0; i< airplanes.size(); ++i) {
-        airplanes[i]->printInfo(output);
-    }
+    Exporter exporter;
+    exporter.exportSimpleOutput(output, airports, airplanes);
     output.close();
     simulation.setAirplanes(airplanes);     //Set simulation variables
     simulation.setAirports(airports);
