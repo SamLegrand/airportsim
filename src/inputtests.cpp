@@ -92,9 +92,6 @@ TEST_F(AirportSimInputTest, InputIllegal){      //Testing illegal input
         filestream.close();
         EXPECT_TRUE(result == PartialImport);       //Input should be partially imported
         errorfilename = "../testInput/inputillegal" + to_string(counter) + ".txt";
-        if (!FileCompare("../testInput/Error.txt", errorfilename)){
-            std::cout << counter << std::endl;
-        }
         EXPECT_TRUE(FileCompare("../testInput/Error.txt", errorfilename));      //Compare error output with the expected error output
 
         counter++;

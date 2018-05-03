@@ -11,7 +11,7 @@ $ Antwerp Tower, Pearl 250, arriving at Antwerp International Airport.
 $ Antwerp Tower, Aeroecom 905, requesting IFR clearancy to 13T.
 
 [12:01] [ANR]
-$ Cessna 842, radar contact, descend and maintain five thousand feet, squawk 687.
+$ Cessna 842, radar contact, descend and maintain five thousand feet, squawk 666.
 
 [12:01] [ANR]
 $ ABG 740, hold south on the one eighty radial, expect further clearance at TODO
@@ -20,10 +20,10 @@ $ ABG 740, hold south on the one eighty radial, expect further clearance at TODO
 $ Pearl 250, hold south on the one eighty radial, expect further clearance at TODO
 
 [12:01] [ANR]
-$ Aeroecom 905, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 4687.
+$ Aeroecom 905, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 4666.
 
 [12:02] [N11842]
-$ Descend and maintain five thousand feet, squawking 687, Cessna 842.
+$ Descend and maintain five thousand feet, squawking 666, Cessna 842.
 
 [12:02] [N11843]
 $ Holding south on the one eighty radial, ABG 740.
@@ -32,7 +32,7 @@ $ Holding south on the one eighty radial, ABG 740.
 $ Holding south on the one eighty radial, Pearl 250.
 
 [12:02] [N11845]
-$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 4687, Aeroecom 905.
+$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 4666, Aeroecom 905.
 
 [12:03] [ANR]
 $ ABG 740, hold south on the one eighty radial, expect further clearance at TODO
@@ -116,7 +116,7 @@ $ Holding south on the one eighty radial, Pearl 250.
 $ Cessna 842, descend and maintain three thousand feet.
 
 [12:13] [ANR]
-$ ABG 740, radar contact, descend and maintain five thousand feet, squawk 2687.
+$ ABG 740, radar contact, descend and maintain five thousand feet, squawk 2666.
 
 [12:13] [ANR]
 $ Pearl 250, hold south on the one eighty radial, expect further clearance at TODO
@@ -125,7 +125,7 @@ $ Pearl 250, hold south on the one eighty radial, expect further clearance at TO
 $ Descend and maintain three thousand feet, Cessna 842.
 
 [12:14] [N11843]
-$ Descend and maintain five thousand feet, squawking 2687, ABG 740.
+$ Descend and maintain five thousand feet, squawking 2666, ABG 740.
 
 [12:14] [N11844]
 $ Holding south on the one eighty radial, Pearl 250.
@@ -155,7 +155,7 @@ $ Holding south on the one eighty radial, Pearl 250.
 $ Lining up runway 13T and wait, Aeroecom 905.
 
 [12:18] [ANR]
-$ Fokker 50, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2687.
+$ Fokker 50, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2321.
 
 [12:19] [ANR]
 $ Cessna 842, cleared ILS approach runway 11R.
@@ -167,7 +167,7 @@ $ Pearl 250, hold south on the one eighty radial, expect further clearance at TO
 $ Aeroecom 905, runway 13T cleared for take-off.
 
 [12:19] [N11846]
-$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 2687, Fokker 50.
+$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 2321, Fokker 50.
 
 [12:20] [N11842]
 $ Cleared ILS approach runway 11R, Cessna 842.
@@ -206,7 +206,7 @@ $ Fokker 50, ready to taxi.
 $ ABG 740, descend and maintain three thousand feet.
 
 [12:25] [ANR]
-$ Pearl 250, radar contact, descend and maintain five thousand feet, squawk 1687.
+$ Pearl 250, radar contact, descend and maintain five thousand feet, squawk 1666.
 
 [12:25] [ANR]
 $ Fokker 50, taxi to holding point 13T via Alpha.
@@ -215,7 +215,7 @@ $ Fokker 50, taxi to holding point 13T via Alpha.
 $ Descend and maintain three thousand feet, ABG 740.
 
 [12:26] [N11844]
-$ Descend and maintain five thousand feet, squawking 1687, Pearl 250.
+$ Descend and maintain five thousand feet, squawking 1666, Pearl 250.
 
 [12:26] [N11846]
 $ Taxi to holding point 13T via Alpha, Fokker 50.
@@ -302,7 +302,7 @@ $ Pearl 250, hold south on the one eighty radial, expect further clearance at TO
 $ Cleared to cross 13T to holding point Bravo.
 
 [12:40] [ANR]
-$ F16, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 5687.
+$ F16, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 5321.
 
 [12:41] [N11843]
 $ Taxi to gate 2 via Alpha, ABG 740.
@@ -311,7 +311,7 @@ $ Taxi to gate 2 via Alpha, ABG 740.
 $ Holding south on the one eighty radial, Pearl 250.
 
 [12:41] [N11847]
-$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 5687, F16.
+$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 5321, F16.
 
 [12:42] [ANR]
 $ Pearl 250, hold south on the one eighty radial, expect further clearance at TODO
@@ -464,10 +464,10 @@ $ Cleared ILS approach runway 13T, Pearl 250.
 $ Antwerp Tower, Cessna 842, requesting IFR clearancy to 11R.
 
 [13:10] [ANR]
-$ Cessna 842, Antwerp Tower, cleared to 11R, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 687.
+$ Cessna 842, Antwerp Tower, cleared to 11R, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 666.
 
 [13:11] [N11842]
-$ Cleared to 11R, initial altitude five thousand, expecting one zero zero in ten, squawking 687, Cessna 842.
+$ Cleared to 11R, initial altitude five thousand, expecting one zero zero in ten, squawking 666, Cessna 842.
 
 [13:12] [N11842]
 $ Antwerp Tower, Cessna 842 at gate 1, requesting pushback.
@@ -509,10 +509,10 @@ $ Antwerp Tower, ABG 740, requesting IFR clearancy to 12S.
 $ Cleared to cross 13T to holding point Bravo.
 
 [13:25] [ANR]
-$ ABG 740, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2687.
+$ ABG 740, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2666.
 
 [13:26] [N11843]
-$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 2687, ABG 740.
+$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 2666, ABG 740.
 
 [13:27] [ANR]
 $ Cessna 842, taxi to holding point 12S via Bravo.
@@ -572,13 +572,13 @@ $ Antwerp Tower, Pearl 250, requesting IFR clearancy to 13T.
 $ Taxi to holding point 12S via Bravo, ABG 740.
 
 [13:44] [ANR]
-$ Pearl 250, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 1687.
+$ Pearl 250, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 1666.
 
 [13:45] [N11842]
 $ Antwerp Tower, Cessna 842, holding short at 11R.
 
 [13:45] [N11844]
-$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 1687, Pearl 250.
+$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 1666, Pearl 250.
 
 [13:46] [ANR]
 $ Cessna 842, line-up runway 11R and wait.

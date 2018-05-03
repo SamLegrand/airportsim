@@ -1,1 +1,1 @@
-Error document empty.
+Not all iata's are unique.

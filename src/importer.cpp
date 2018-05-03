@@ -325,6 +325,7 @@ int importer::namesAreUnique(const std::vector<Airport*> &airports, const std::v
         }
         iatas.push_back(airports[i]->getIata());
     }
+    iatas.clear();
 
     // Verify unique airplane numbers
     std::vector<std::string> numbers;
@@ -334,6 +335,7 @@ int importer::namesAreUnique(const std::vector<Airport*> &airports, const std::v
         }
         numbers.push_back(airplanes[i]->getNumber());
     }
+    numbers.clear();
 
     // Verify unique runway names per airport
     std::vector<std::string> runwayidentifiers;
@@ -346,6 +348,7 @@ int importer::namesAreUnique(const std::vector<Airport*> &airports, const std::v
         }
         runwayidentifiers.clear();
     }
+    runwayidentifiers.clear();
     return 0;
 }
 
