@@ -1,3 +1,4 @@
+#Duplicate airplane numbers
 <AIRPORT>
 	<name>Antwerp International Airport</name>
 	<iata>ANR</iata>
@@ -9,10 +10,21 @@
 <RUNWAY>
 	<name>11R</name>
 	<airport>ANR</airport>
+	<type>asphalt</type>
+	<length>3010</length>
+	<TAXIROUTE>
+		<taxipoint>Alpha</taxipoint>
+	</TAXIROUTE>
+</RUNWAY>
+
+<RUNWAY>
+	<name>11L</name>
+	<airport>ANR</airport>
 	<type>grass</type>
 	<length>1010</length>
 	<TAXIROUTE>
 		<taxipoint>Alpha</taxipoint>
+		<crossing>11R</crossing>
 		<taxipoint>Bravo</taxipoint>
 	</TAXIROUTE>
 </RUNWAY>
@@ -25,6 +37,18 @@
 	<passengers>60</passengers>
 	<fuel>20</fuel>
 	<type>private</type>
-	<engine>jet</engine>
+	<engine>propeller</engine>
 	<size>small</size>
+</AIRPLANE>
+
+<AIRPLANE>
+	<number>N11842</number>
+	<callsign>Speedbird 466</callsign>
+	<model>Boeing 747</model>
+	<status>Approaching</status>
+	<passengers>60</passengers>
+	<fuel>20</fuel>
+	<type>airline</type>
+	<engine>jet</engine>
+	<size>large</size>
 </AIRPLANE>

@@ -1,1 +1,1 @@
-Simulation has not been properly initialized.
+Not all planes can land on a runway.

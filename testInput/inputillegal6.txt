@@ -1,1 +1,1 @@
-Simulation has not been properly initialized.
+One or more airplanes do not contain a possible combination of properties.

@@ -1,1 +1,1 @@
-Simulation has not been properly initialized.
+Error document empty.

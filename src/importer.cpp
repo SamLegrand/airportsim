@@ -8,6 +8,7 @@
 #include "Exporter.h"
 #include <sstream>
 #include <cstdlib>
+#include <algorithm>
 
 //Help functions for importer, need to be moved to utils
 int stoi(std::string const& s){
@@ -40,7 +41,7 @@ bool isString(std::string const& s){
 SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &errstream, AirportSim &simulation) {
     std::vector<Airport*> airports;      //Initialise airports and airplanes containers
     std::vector<Airplane*> airplanes;
-    std::vector<Runway*> runwaysNotAddedToPlane;
+    std::vector<Runway*> runwaysNotAddedToAirport;
     std::vector<std::string> crossings;
     SuccessEnum endResult = Success;
     TiXmlDocument doc;      //Initalise parser document
@@ -190,7 +191,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 }
             }
             if (!addedRunwayToAirport){
-                runwaysNotAddedToPlane.push_back(runway);
+                runwaysNotAddedToAirport.push_back(runway);
             }
             continue;
         }
@@ -264,12 +265,46 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
         errstream << "Invalid element name " << objectName << "." << std::endl;
         endResult = PartialImport;
     }
-    if (endResult != PartialImport && properlyInitialized(airports, crossings, runwaysNotAddedToPlane, airplanes)){
-        std::cout << "Simulation has been properly initialized, simulation will start now." << std::endl;
+    int unique = namesAreUnique(airports, airplanes);
+    if (endResult != PartialImport && unique != 0){
+        switch(unique){
+            case 1:
+                errstream << "Not all iata's are unique." << std::endl;
+                break;
+            case 2:
+                errstream << "Not all airplane numbers are unique." << std::endl;
+                break;
+            case 3:
+                errstream << "Not all runway names are unique." << std::endl;
+                break;
+        }
+        endResult = PartialImport;
+    }
+    if (endResult != PartialImport && !setSquawkCodes(airplanes)){
+        errstream << "One or more airplanes do not contain a possible combination of properties." << std::endl;
+        endResult = PartialImport;
+    }
+    if (endResult != PartialImport && !enoughTaxipoints(airports)){
+        errstream << "The number of taxipoints does not match the number of runways." << std::endl;
+        endResult = PartialImport;
+    }
+    if (endResult != PartialImport && !planesCanLand(airports, airplanes)){
+        errstream << "Not all planes can land on a runway." << std::endl;
+        endResult = PartialImport;
+    }
+    if (endResult != PartialImport && !correctCrossings(airports, crossings)){
+        errstream << "One or more crossings don't match a runway." << std::endl;
+        endResult = PartialImport;
+    }
+    if (endResult != PartialImport && !runwaysNotAddedToAirport.empty()){
+        errstream << "The following runways have not been added to an airport:" << std::endl;
+        for (unsigned int i = 0; i < runwaysNotAddedToAirport.size(); ++i) {
+            errstream << runwaysNotAddedToAirport[i]->getName() << std::endl;
+        }
+        endResult = PartialImport;
     }
     else if (endResult != PartialImport){
-        errstream << "Simulation has not been properly initialized." << std::endl;
-        endResult = PartialImport;
+        std::cout << "Simulation has been properly initialized, simulation will start now." << std::endl;
     }
     std::ofstream output;
     output.open("../output.txt", std::fstream::out);        //Write simple output to stream
@@ -281,12 +316,146 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
     return endResult;
 }
 
-bool importer::properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes){
+int importer::namesAreUnique(const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes){
+    // Verify unique airport iata's
+    std::vector<std::string> iatas;
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        if (std::find(iatas.begin(), iatas.end(), airports[i]->getIata()) != iatas.end()){
+            return 1;
+        }
+        iatas.push_back(airports[i]->getIata());
+    }
+
+    // Verify unique airplane numbers
+    std::vector<std::string> numbers;
+    for (unsigned int i = 0; i < airplanes.size(); ++i) {
+        if (std::find(numbers.begin(), numbers.end(), airplanes[i]->getNumber()) != numbers.end()){
+            return 2;
+        }
+        numbers.push_back(airplanes[i]->getNumber());
+    }
+
+    // Verify unique runway names per airport
+    std::vector<std::string> runwayidentifiers;
+    for (unsigned int i = 0; i < airports.size(); ++i) {
+        for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
+            if (std::find(runwayidentifiers.begin(), runwayidentifiers.end(), airports[i]->getRunways()[j]->getName()) != runwayidentifiers.end()){
+                return 3;
+            }
+            runwayidentifiers.push_back(airports[i]->getRunways()[j]->getName());
+        }
+        runwayidentifiers.clear();
+    }
+    return 0;
+}
+
+bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
+    std::vector<int> squawks;
+    for (unsigned int i = 0; i < airplanes.size(); ++i) {
+        if ((airplanes[i]->getType() == "private" &&
+             airplanes[i]->getSize() == "small" &&
+             (airplanes[i]->getEngine() == "propeller" ||
+              airplanes[i]->getEngine() == "jet"))){
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 1;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "private" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "jet")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 1001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 2001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "medium" &&
+             airplanes[i]->getEngine() == "jet")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 3001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "airline" &&
+             airplanes[i]->getSize() == "large" &&
+             airplanes[i]->getEngine() == "jet")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 4001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "military" &&
+             airplanes[i]->getSize() == "small" &&
+             airplanes[i]->getEngine() == "jet")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 5001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "military" &&
+             airplanes[i]->getSize() == "large" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 5001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        if ((airplanes[i]->getType() == "emergency" &&
+             airplanes[i]->getSize() == "small" &&
+             airplanes[i]->getEngine() == "propeller")) {
+            do {
+                srand(time(NULL));
+                int random_number = std::rand() % 777 + 6001;
+                airplanes[i]->setSquawk(random_number);
+            } while(std::find(squawks.begin(), squawks.end(), airplanes[i]->getSquawk()) != squawks.end());
+            squawks.push_back(airplanes[i]->getSquawk());
+            continue;
+        }
+        return false;
+    }
+    return true;
+}
+
+bool importer::enoughTaxipoints(const std::vector<Airport*> &airports){
     for (unsigned int i = 0; i < airports.size(); ++i) {
         if (airports[i]->getRunways().size() != airports[i]->getTaxipoints().size()){
             return false;
         }
     }
+    return true;
+}
+
+bool importer::planesCanLand(const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes){
     bool canLand = true;
     for (unsigned int i = 0; i < airports.size(); ++i) {
         for (unsigned int k = 0; k < airplanes.size(); ++k) {
@@ -296,80 +465,10 @@ bool importer::properlyInitialized(const std::vector<Airport*> &airports, const 
             canLand = false;
         }
     }
-    if (!canLand){
-        return false;
-    }
-    if (!runwaysNotAddedToPlane.empty()){
-        return false;
-    }
-    for (unsigned int i = 0; i < airplanes.size(); ++i) {
-        if ((airplanes[i]->getType() == "private" &&
-            airplanes[i]->getSize() == "small" &&
-                (airplanes[i]->getEngine() == "propeller" ||
-                airplanes[i]->getEngine() == "jet"))){
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 1;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "private" &&
-             airplanes[i]->getSize() == "medium" &&
-             airplanes[i]->getEngine() == "jet")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 1001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "medium" &&
-             airplanes[i]->getEngine() == "propeller")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 2001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "medium" &&
-             airplanes[i]->getEngine() == "jet")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 3001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "large" &&
-             airplanes[i]->getEngine() == "jet")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 4001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "military" &&
-             airplanes[i]->getSize() == "small" &&
-             airplanes[i]->getEngine() == "jet")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 5001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "military" &&
-             airplanes[i]->getSize() == "large" &&
-             airplanes[i]->getEngine() == "propeller")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 5001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        if ((airplanes[i]->getType() == "emergency" &&
-             airplanes[i]->getSize() == "small" &&
-             airplanes[i]->getEngine() == "propeller")) {
-            srand(time(NULL));
-            int random_number = std::rand() % 777 + 6001;
-            airplanes[i]->setSquawk(random_number);
-            continue;
-        }
-        return false;
-    }
+    return canLand;
+}
+
+bool importer::correctCrossings(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings){
     for (unsigned int i = 0; i < airports.size(); ++i) {
         for (unsigned int j = 0; j < airports[i]->getRunways().size(); ++j) {
             for (unsigned int k = 0; k < crossings.size(); ++k) {

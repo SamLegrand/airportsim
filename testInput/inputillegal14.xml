@@ -1,3 +1,12 @@
+#Duplicate airport iata's
+<AIRPORT>
+	<name>Antwerp International Airport</name>
+	<iata>ANR</iata>
+	<callsign>Antwerp Tower</callsign>
+	<gates>10</gates>
+	<passengers>890</passengers>
+</AIRPORT>
+
 <AIRPORT>
 	<name>Antwerp International Airport</name>
 	<iata>ANR</iata>
@@ -10,7 +19,7 @@
 	<name>11R</name>
 	<airport>ANR</airport>
 	<type>asphalt</type>
-	<length>1510</length>
+	<length>3010</length>
 	<TAXIROUTE>
 		<taxipoint>Alpha</taxipoint>
 	</TAXIROUTE>

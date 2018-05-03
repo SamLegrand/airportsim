@@ -1,1 +1,1 @@
-Simulation has not been properly initialized.
+The number of taxipoints does not match the number of runways.

@@ -6,6 +6,7 @@
 #define AIRPORTSIM_IMPORTER_H
 
 #include <iostream>
+#include <sys/param.h>
 #include "AirportSim.h"
 
 enum SuccessEnum {ImportAborted, PartialImport, Success};
@@ -15,7 +16,11 @@ private:
     importer* initCheck;
 public:
     static SuccessEnum importAirport(const char* inputfilename, std::ostream& errstream, AirportSim& simulation);
-    static bool properlyInitialized(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings, const std::vector<Runway*> runwaysNotAddedToPlane, const std::vector<Airplane*> &airplanes);
+    static int namesAreUnique(const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes);
+    static bool setSquawkCodes(const std::vector<Airplane*> &airplanes);
+    static bool enoughTaxipoints(const std::vector<Airport*> &airports);
+    static bool planesCanLand(const std::vector<Airport*> &airports, const std::vector<Airplane*> &airplanes);
+    static bool correctCrossings(const std::vector<Airport*> &airports, const std::vector<std::string> &crossings);
 };
 
 
