@@ -6,6 +6,9 @@
 #include "tinystr.h"
 #include "tinyxml.h"
 #include "Exporter.h"
+#include "smallairplane.h"
+#include "mediumairplane.h"
+#include "largeairplane.h"
 #include <sstream>
 #include <cstdlib>
 #include <algorithm>
@@ -239,7 +242,16 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     if(elemName == "size"){
-                        airplane->setSize(text->Value());
+                        std::string size = text->Value();
+                        if (size == "small"){
+                            airplane = new SmallAirplane(airplane);
+                        }
+                        if (size == "medium"){
+                            airplane = new MediumAirplane(airplane);
+                        }
+                        if (size == "large"){
+                            airplane = new LargeAirplane(airplane);
+                        }
                         continue;
                     }
                     if (!isInt(text->Value())){     //Check if input is of type int
@@ -356,7 +368,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
     std::vector<int> squawks;
     for (unsigned int i = 0; i < airplanes.size(); ++i) {
         if ((airplanes[i]->getType() == "private" &&
-             airplanes[i]->getSize() == "small" &&
+             dynamic_cast<SmallAirplane*>(airplanes[i]) &&
              (airplanes[i]->getEngine() == "propeller" ||
               airplanes[i]->getEngine() == "jet"))){
             do {
@@ -368,7 +380,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "private" &&
-             airplanes[i]->getSize() == "medium" &&
+             dynamic_cast<MediumAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "jet")) {
             do {
                 srand(time(NULL));
@@ -379,7 +391,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "medium" &&
+             dynamic_cast<MediumAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "propeller")) {
             do {
                 srand(time(NULL));
@@ -390,7 +402,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "medium" &&
+             dynamic_cast<MediumAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "jet")) {
             do {
                 srand(time(NULL));
@@ -401,7 +413,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "airline" &&
-             airplanes[i]->getSize() == "large" &&
+             dynamic_cast<LargeAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "jet")) {
             do {
                 srand(time(NULL));
@@ -412,7 +424,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "military" &&
-             airplanes[i]->getSize() == "small" &&
+             dynamic_cast<SmallAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "jet")) {
             do {
                 srand(time(NULL));
@@ -423,7 +435,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "military" &&
-             airplanes[i]->getSize() == "large" &&
+             dynamic_cast<LargeAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "propeller")) {
             do {
                 srand(time(NULL));
@@ -434,7 +446,7 @@ bool importer::setSquawkCodes(const std::vector<Airplane *> &airplanes) {
             continue;
         }
         if ((airplanes[i]->getType() == "emergency" &&
-             airplanes[i]->getSize() == "small" &&
+             dynamic_cast<SmallAirplane*>(airplanes[i]) &&
              airplanes[i]->getEngine() == "propeller")) {
             do {
                 srand(time(NULL));

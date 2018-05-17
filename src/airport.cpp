@@ -3,6 +3,9 @@
 //
 
 #include "airport.h"
+#include "smallairplane.h"
+#include "mediumairplane.h"
+#include "largeairplane.h"
 
 void Airport::setName(const std::string &name) {
     REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
@@ -158,7 +161,7 @@ Runway *Airport::getRunwayByAirplane(Airplane* airplane) {
     REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (unsigned int i = 0; i < runways.size(); i++) {
         if(runways[i]->getAirplane() == NULL){
-            if (airplane->getSize() == "small" && airplane->getEngine() == "propeller"){
+            if (dynamic_cast<SmallAirplane*>(airplane) && airplane->getEngine() == "propeller"){
                 if (runways[i]->getLength() >= 500){
                     return runways[i];
                 }
@@ -167,12 +170,12 @@ Runway *Airport::getRunwayByAirplane(Airplane* airplane) {
                 if (runways[i]->getType() == "grass"){
                     continue;
                 }
-                if (airplane->getSize() == "small"){
+                if (dynamic_cast<SmallAirplane*>(airplane)){
                     if (runways[i]->getLength() >= 1000){
                         return runways[i];
                     }
                 }
-                if (airplane->getSize() == "medium"){
+                if (dynamic_cast<MediumAirplane*>(airplane)){
                     if (airplane->getEngine() == "propeller"){
                         if (runways[i]->getLength() >= 1000){
                             return runways[i];
@@ -184,7 +187,7 @@ Runway *Airport::getRunwayByAirplane(Airplane* airplane) {
                         }
                     }
                 }
-                if (airplane->getSize() == "large"){
+                if (dynamic_cast<LargeAirplane*>(airplane)){
                     if (airplane->getEngine() == "propeller"){
                         if (runways[i]->getLength() >= 1500){
                             return runways[i];
@@ -346,7 +349,7 @@ Runway *Airport::findNearestAvailableRunway(Airplane* airplane) {
     REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     for (int i = runways.size()-1; i > -1; i--) {
         if(runways[i]->getAirplane() == NULL){
-            if (airplane->getSize() == "small" && airplane->getEngine() == "propeller"){
+            if (dynamic_cast<SmallAirplane*>(airplane) && airplane->getEngine() == "propeller"){
                 if (runways[i]->getLength() >= 500){
                     return runways[i];
                 }
@@ -355,12 +358,12 @@ Runway *Airport::findNearestAvailableRunway(Airplane* airplane) {
                 if (runways[i]->getType() == "grass"){
                     continue;
                 }
-                if (airplane->getSize() == "small"){
+                if (dynamic_cast<SmallAirplane*>(airplane)){
                     if (runways[i]->getLength() >= 1000){
                         return runways[i];
                     }
                 }
-                if (airplane->getSize() == "medium"){
+                if (dynamic_cast<MediumAirplane*>(airplane)){
                     if (airplane->getEngine() == "propeller"){
                         if (runways[i]->getLength() >= 1000){
                             return runways[i];
@@ -372,7 +375,7 @@ Runway *Airport::findNearestAvailableRunway(Airplane* airplane) {
                         }
                     }
                 }
-                if (airplane->getSize() == "large"){
+                if (dynamic_cast<LargeAirplane*>(airplane)){
                     if (airplane->getEngine() == "propeller"){
                         if (runways[i]->getLength() >= 1500){
                             return runways[i];

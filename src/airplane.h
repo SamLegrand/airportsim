@@ -13,25 +13,33 @@
 class Runway;
 
 class Airplane {
+protected:  //Protected variables for inherited classes
     Airplane* initCheck;
     std::string number;
-    std::string callsign;
     std::string model;
-    std::string status;
     std::string type;
     std::string engine;
-    std::string size;
-    int passengers;
     int fuel;
     int height;
     int squawk;
-    int time;
     bool communicating;
+    int time;
+    int passengers;
+    std::string callsign;
+    std::string status;
 public:
     /**
      * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      */
     Airplane();
+    /**
+     * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+     */
+    Airplane(Airplane* airplane);
+    /**
+     * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+     */
+    virtual ~Airplane();
     /**
      *
      * @return
@@ -179,17 +187,6 @@ public:
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    const std::string &getSize();
-    /**
-     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * @param size
-     */
-    void setSize(const std::string &size);
-
-    /**
-     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-     * @return
-     */
     bool isAtGate();
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -277,7 +274,7 @@ public:
      * @param airport
      * @param gate
      */
-    void unboardPlane(std::ostream &output, const std::string& airport, int gate);
+    virtual void unboardPlane(std::ostream &output, const std::string& airport, int gate){};
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -285,7 +282,7 @@ public:
      * ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane should be set to the correct state.");
      * @param output
      */
-    void checkPlane(std::ostream &output);
+    virtual void checkPlane(std::ostream &output){};
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -303,7 +300,7 @@ public:
      * @param airport
      * @param gate
      */
-    void boardPlane(std::ostream &output, const std::string& airport, int gate);
+    virtual void boardPlane(std::ostream &output, const std::string& airport, int gate){};
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -320,7 +317,7 @@ public:
      * ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
      * @param output
      */
-    void pushBack(std::ostream &output);
+    virtual void pushBack(std::ostream &output){};
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");

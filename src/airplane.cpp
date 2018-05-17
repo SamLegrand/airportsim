@@ -12,7 +12,30 @@ Airplane::Airplane(){
     ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
 }
 
-bool Airplane::properlyInitialized(){
+Airplane::Airplane(Airplane* airplane){
+    REQUIRE(airplane->properlyInitialized(), "Plane wasn't properly initialized.");
+    number = airplane->getNumber();
+    model = airplane->getModel();
+    type = airplane->getType();
+    engine = airplane->getEngine();
+    fuel = airplane->getFuel();
+    height = airplane->getHeight();
+    squawk = airplane->getSquawk();
+    communicating = airplane->isCommunicating();
+    time = airplane->getTime();
+    passengers = airplane->getPassengers();
+    callsign = airplane->getCallsign();
+    status = airplane->getStatus();
+    initCheck = this;
+    delete airplane;
+    ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+}
+
+Airplane::~Airplane(){
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+}
+
+bool Airplane::properlyInitialized() {
     return initCheck == this;
 }
 
@@ -183,34 +206,6 @@ void Airplane::taxiToGate(std::ostream &output, int gate) {
     ENSURE(this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
 }
 
-void Airplane::unboardPlane(std::ostream &output, const std::string& airport, int gate) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Unboarding Plane", "Plane has to the be in correct state.");
-    time += 1;
-    if (time == 1) {
-        output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << std::endl;
-    }
-    else if ((time == 5 && size == "small") || (time == 10 && size == "medium") || time == 15) {
-        status = "Checking Plane";
-        time = 0;
-    }
-    ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
-}
-
-void Airplane::checkPlane(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Checking Plane", "Plane has to the be in correct state.");
-    time += 1;
-    if (time == 1) {
-        output << callsign << " has been checked for technical malfunctions" << std::endl;
-    }
-    if (size == "small" || (time == 2 && size == "medium") || time == 3) {
-        status = "Refueling Plane";
-        time = 0;
-    }
-    ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane should be set to the correct state.");
-}
-
 void Airplane::refuelPlane(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
@@ -219,40 +214,12 @@ void Airplane::refuelPlane(std::ostream &output) {
     ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
 }
 
-void Airplane::boardPlane(std::ostream &output, const std::string& airport, int gate) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Boarding Plane", "Plane has to the be in correct state.");
-    time += 1;
-    if (time == 1) {
-        output << passengers << " passengers boarded " << callsign << " at gate " << gate << " of " << airport << std::endl;
-    }
-    else if ((time == 5 && size == "small") || (time == 10 && size == "medium") || time == 15) {
-        status = "Standing at Gate";
-        time = 0;
-    }
-    ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
-}
-
 void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Standing at Gate", "Plane has to the be in correct state.");
     height = 0;
     output << callsign << " is standing at gate " << gate << std::endl;
     ENSURE(this->getStatus() == "Standing at Gate", "Plane should be set to the correct state.");
-}
-
-void Airplane::pushBack(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Pushing back", "Plane has to the be in correct state.");
-    time += 1;
-    if (time == 1) {
-        output << callsign << " starting pushback" << std::endl;
-    }
-    if (size == "small" || (time == 2 && size == "medium") || time == 3) {
-        time = 0;
-        status = "Taxiing to Runway";
-    }
-    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
 }
 
 void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
@@ -328,16 +295,6 @@ const std::string &Airplane::getEngine() {
 void Airplane::setEngine(const std::string &engine) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::engine = engine;
-}
-
-const std::string &Airplane::getSize() {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    return size;
-}
-
-void Airplane::setSize(const std::string &size) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    Airplane::size = size;
 }
 
 bool Airplane::isAtGate() {
