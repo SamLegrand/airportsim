@@ -118,6 +118,7 @@ void Airplane::printInfo(std::ofstream &output) {
 void Airplane::approach(std::ostream &output, const std::string& airport) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Approaching", "Plane has to the be in correct state.");
+    consumeFuel();
     height = 10000;
     output << callsign << " is approaching " << airport << " at " << height << " ft." << std::endl;
     status = "Descending to 5k";
@@ -127,6 +128,7 @@ void Airplane::approach(std::ostream &output, const std::string& airport) {
 void Airplane::flyWaitPattern(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Flying wait pattern", "Plane has to the be in correct state.");
+    consumeFuel();
     output << callsign << " is flying wait pattern at " << height << " ft." << std::endl;
     ENSURE(this->getStatus() == "Flying wait pattern", "Plane should be set to the correct state.");
 }
@@ -134,6 +136,7 @@ void Airplane::flyWaitPattern(std::ostream &output) {
 void Airplane::descendTo5k(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Descending to 5k", "Plane has to the be in correct state.");
+    consumeFuel();
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -149,6 +152,7 @@ void Airplane::descendTo5k(std::ostream &output) {
 void Airplane::descendTo3k(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Descending to 3k", "Plane has to the be in correct state.");
+    consumeFuel();
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -164,6 +168,7 @@ void Airplane::descendTo3k(std::ostream &output) {
 void Airplane::finalapproach(std::ostream &output, const std::string &airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Final Approach", "Plane has to the be in correct state.");
+    consumeFuel();
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height - 1000;
@@ -179,6 +184,7 @@ void Airplane::finalapproach(std::ostream &output, const std::string &airport, c
 void Airplane::land(std::ostream &output, const std::string& airport, const std::string& runway) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Landing", "Plane has to the be in correct state.");
+    consumeFuel();
     time += 1;
     if (time == 1) {
         output << callsign << " is landing at " << airport << " on runway " << runway << std::endl;
@@ -256,6 +262,7 @@ void Airplane::takeOff(std::ostream &output, const std::string& airport, const s
 void Airplane::ascend(std::ostream &output) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Ascending", "Plane has to the be in correct state.");
+    consumeFuel();
     time += 1;
     if (engine == "jet" || time == 2) {
         height = height + 1000;
@@ -271,6 +278,7 @@ void Airplane::ascend(std::ostream &output) {
 void Airplane::leaveAirport(std::ostream &output, const std::string& airport) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     REQUIRE(this->getStatus() == "Leaving Airport", "Plane has to the be in correct state.");
+    consumeFuel();
     output << callsign << " has left " << airport << std::endl;
     height = 10000;
     status = "Travelling";
@@ -342,4 +350,36 @@ int Airplane::getSquawk() {
 void Airplane::setSquawk(int squawk) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::squawk = squawk;
+}
+
+const std::string &Airplane::getDestination() const {
+    return destination;
+}
+
+void Airplane::setDestination(const std::string &destination) {
+    Airplane::destination = destination;
+}
+
+int Airplane::getDeparture() const {
+    return departure;
+}
+
+void Airplane::setDeparture(int departure) {
+    Airplane::departure = departure;
+}
+
+int Airplane::getArrival() const {
+    return arrival;
+}
+
+void Airplane::setArrival(int arrival) {
+    Airplane::arrival = arrival;
+}
+
+int Airplane::getInterval() const {
+    return interval;
+}
+
+void Airplane::setInterval(int interval) {
+    Airplane::interval = interval;
 }

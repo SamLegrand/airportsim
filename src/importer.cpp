@@ -121,6 +121,11 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                             std::string elemName2 = elem2->Value();
                             for (TiXmlNode *e2 = elem2->FirstChild(); e2 != NULL; e2 = e2->NextSibling()) {
                                 TiXmlText *text2 = e2->ToText();
+                                if (text2 == NULL) {     //Check for empty text container
+                                    errstream << elemName2 << " does not contain any text." << std::endl;
+                                    endResult = PartialImport;
+                                    continue;
+                                }
                                 if(!isString(text2->Value())){       //Check if input is of type string
                                     errstream << elemName2 << " does not contain a string." << std::endl;
                                     endResult = PartialImport;
@@ -133,7 +138,6 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                                 }
                                 if (elemName2 == "crossing"){
                                     crossings.push_back(text2->Value());
-//                                    runway->addCrossing(text2->Value());
                                     continue;
                                 }
                             }
@@ -203,6 +207,47 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
             for (TiXmlElement *elem = object->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement()) {
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
+                    if (elemName == "FLIGHTPLAN"){
+                        std::vector<std::string> taxipoints;
+                        for (TiXmlElement *elem2 = elem->FirstChildElement(); elem2 != NULL; elem2 = elem2->NextSiblingElement()) {
+                            std::string elemName2 = elem2->Value();
+                            for (TiXmlNode *e2 = elem2->FirstChild(); e2 != NULL; e2 = e2->NextSibling()) {
+                                TiXmlText *text2 = e2->ToText();
+                                if (text2 == NULL) {     //Check for empty text container
+                                    errstream << elemName2 << " does not contain any text." << std::endl;
+                                    endResult = PartialImport;
+                                    continue;
+                                }
+                                if(!isString(text2->Value())){       //Check if input is of type string
+                                    errstream << elemName2 << " does not contain a string." << std::endl;
+                                    endResult = PartialImport;
+                                    continue;
+                                }
+                                if (elemName2 == "destination"){
+                                    airplane->setDestination(text2->Value());
+                                    continue;
+                                }
+                                if (!isInt(text2->Value())){     //Check if input is of type int
+                                    errstream << elemName << " does not contain a number." << std::endl;
+                                    endResult = PartialImport;
+                                    continue;
+                                }
+                                if (elemName2 == "departure"){
+                                    airplane->setDeparture(stoi(text2->Value()));
+                                    continue;
+                                }
+                                if (elemName2 == "arrival"){
+                                    airplane->setArrival(stoi(text2->Value()));
+                                    continue;
+                                }
+                                if (elemName2 == "interval"){
+                                    airplane->setInterval(stoi(text2->Value()));
+                                    continue;
+                                }
+                            }
+                        }
+                        break;
+                    }
                     TiXmlText *text = e->ToText();
                     if (text == NULL) {     //Check for empty text container
                         errstream << elemName << " does not contain any text." << std::endl;

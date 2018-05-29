@@ -27,6 +27,28 @@ protected:  //Protected variables for inherited classes
     int passengers;
     std::string callsign;
     std::string status;
+    std::string destination;
+    int departure;
+public:
+    const std::string &getDestination() const;
+
+    void setDestination(const std::string &destination);
+
+    int getDeparture() const;
+
+    void setDeparture(int departure);
+
+    int getArrival() const;
+
+    void setArrival(int arrival);
+
+    int getInterval() const;
+
+    void setInterval(int interval);
+
+protected:
+    int arrival;
+    int interval;
 public:
     /**
      * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -364,6 +386,8 @@ public:
      * @param airport
      */
     void leaveAirport(std::ostream &output, const std::string& airport);
+
+    virtual void consumeFuel(){};
 };
 
 

@@ -49,3 +49,11 @@ void SmallAirplane::pushBack(std::ostream &output) {
     status = "Taxiing to Runway";
     ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
 }
+
+void SmallAirplane::consumeFuel() {
+    if (engine == "propeller"){
+        fuel -= 10;
+        return;
+    }
+    fuel -= 25;
+}

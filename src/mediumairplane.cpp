@@ -59,3 +59,11 @@ void MediumAirplane::pushBack(std::ostream &output) {
     }
     ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
 }
+
+void MediumAirplane::consumeFuel() {
+    if (engine == "propeller"){
+        fuel -= 50;
+        return;
+    }
+    fuel -= 175;
+}
