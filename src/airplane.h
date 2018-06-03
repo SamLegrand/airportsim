@@ -11,6 +11,8 @@
 #include "runway.h"
 
 class Runway;
+class Exporter;
+class Airport;
 
 class Airplane {
 protected:  //Protected variables for inherited classes
@@ -388,6 +390,16 @@ public:
     void leaveAirport(std::ostream &output, const std::string& airport);
 
     virtual void consumeFuel(){};
+
+    void executeTaxiingToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
+
+    void executeWaitingToCrossToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
+
+    void executeTaxiingToRunway(Runway* runway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
+
+    void executeWaitingToCrossToRunway(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
+
+    void executeFlyingWaitPattern(Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 };
 
 

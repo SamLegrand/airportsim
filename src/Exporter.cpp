@@ -201,7 +201,7 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
             figureinfo << "[Figure" << figNum << "]\n" << cubeinfo << "center = (" << -4*(int)j-2 << ", 2, 0)\n" << reflectiontaxipoint << std::endl;
             figureinfo << "[Figure" << figNum + 1 << "]\n" << cubeinfo << "center = (" << -4*(int)j-2 << ", 4, 0)\n" << reflectiontaxipoint << std::endl;
             figNum += 2;
-            if (airports[i]->getRunways()[j]->getTaxipointToRunway() != NULL){
+            if (airports[i]->getRunways()[j]->getTaxipointToRunway() != NULL && !airports[i]->getRunways()[j]->getTaxipointToRunway()->isAtGate()){
                 figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*(int)j-2.5 << ", 2, 1)\n" << reflectionairplane << std::endl;
                 figNum += 1;
             }

@@ -3,9 +3,6 @@
 //
 
 #include "airport.h"
-#include "smallairplane.h"
-#include "mediumairplane.h"
-#include "largeairplane.h"
 
 void Airport::setName(const std::string &name) {
     REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");

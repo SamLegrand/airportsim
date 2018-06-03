@@ -65,6 +65,8 @@ public:
      * @return
      */
     bool checkSimEnd();
+
+    void useGraphicsExporter(int &filecounter, Exporter &exporter, bool use);
 };
 
 

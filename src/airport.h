@@ -10,7 +10,9 @@
 #include <fstream>
 #include <map>
 #include "runway.h"
-
+#include "smallairplane.h"
+#include "mediumairplane.h"
+#include "largeairplane.h"
 
 class Airport {
     Airport* initCheck;
