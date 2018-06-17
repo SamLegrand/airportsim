@@ -32,8 +32,13 @@ protected:  //Protected variables for inherited classes
     std::string destination;
     int departure;
     bool skipGateSteps;
+    int originalSquawk;
 
 public:
+    int getOriginalSquawk() const;
+
+    void setOriginalSquawk(int originalSquawk);
+
     bool getSkipGateSteps() const;
 
     void setSkipGateSteps(bool skipGateSteps);

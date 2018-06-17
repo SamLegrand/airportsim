@@ -572,3 +572,11 @@ bool Airplane::getSkipGateSteps() const {
 void Airplane::setSkipGateSteps(bool skipGateSteps) {
     Airplane::skipGateSteps = skipGateSteps;
 }
+
+int Airplane::getOriginalSquawk() const {
+    return originalSquawk;
+}
+
+void Airplane::setOriginalSquawk(int originalSquawk) {
+    Airplane::originalSquawk = originalSquawk;
+}
