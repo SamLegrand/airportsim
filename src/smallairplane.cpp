@@ -57,3 +57,44 @@ void SmallAirplane::consumeFuel() {
     }
     fuel -= 25;
 }
+
+void SmallAirplane::unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Unboarding", "Plane has to the be in correct state.");
+    time += 1;
+    if (time == 1) {
+        output << passengers << " passengers exited " << callsign << " at runway " << runway << " of " << airport << " due to an emergency landing"<< std::endl;
+    }
+    if (time == 5) {
+        status = "Emergency Checking";
+        time = 0;
+    }
+    ENSURE(this->getStatus() == "Emergency Checking" || this->getStatus() == "Emergency Unboarding", "Plane should be set to the correct state.");
+}
+
+void SmallAirplane::checkAtRunway(std::ostream &output) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Checking", "Plane has to the be in correct state.");
+    output << callsign << " has been checked for technical malfunctions" << std::endl;
+    status = "Emergency Refueling";
+    time = 0;
+    ENSURE(this->getStatus() == "Emergency Refueling" || this->getStatus() == "Emergency Checking", "Plane should be set to the correct state.");
+}
+
+void SmallAirplane::refuelAtRunway(std::ostream &output) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Refueling", "Plane has to the be in correct state.");
+    fuel += 10000;
+    output << callsign << " has been refueled" << std::endl;
+    status = "Landed";
+    ENSURE(this->getStatus() == "Landed", "Plane should be set to the correct state.");
+}
+
+void SmallAirplane::refuelPlane(std::ostream &output) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
+    fuel += 10000;
+    output << callsign << " has been refueled" << std::endl;
+    status = "Boarding Plane";
+    ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
+}

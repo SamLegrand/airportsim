@@ -214,13 +214,13 @@ void Airplane::taxiToGate(std::ostream &output, int gate) {
     ENSURE(this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
 }
 
-void Airplane::refuelPlane(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
-    output << callsign << " has been refueled" << std::endl;
-    status = "Boarding Plane";
-    ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
-}
+//void Airplane::refuelPlane(std::ostream &output) {
+//    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+//    REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
+//    output << callsign << " has been refueled" << std::endl;
+//    status = "Boarding Plane";
+//    ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
+//}
 
 void Airplane::stand(std::ostream &output, int gate) {
     REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -525,7 +525,7 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
                                         unsigned int &simTime) {
     if (getTime() == 1 && getHeight() == 10000 && airport->getH5000() == NULL) {
         airport->setH5000(this);
-        exporter.printAirleaderMessage(time, airport->getIata(), getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + to_string(getSquawk()) + ".");
+        exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + to_string(getSquawk()) + ".");
         setTime(2);
         setStatus("Approaching");
         return;
@@ -554,4 +554,21 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
     flyWaitPattern(SimOutput);
     setTime(0);
     exporter.printAirleaderMessage(simTime, getNumber(), "Holding south on the one eighty radial, " + getCallsign() + ".");
+}
+
+void Airplane::landImmediately() {
+    if (height > 0){
+        height -= 500;
+        return;
+    }
+    time = 0;
+    status = "Emergency Unboarding";
+}
+
+bool Airplane::getSkipGateSteps() const {
+    return skipGateSteps;
+}
+
+void Airplane::setSkipGateSteps(bool skipGateSteps) {
+    Airplane::skipGateSteps = skipGateSteps;
 }

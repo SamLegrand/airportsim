@@ -61,11 +61,53 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     while (!checkSimEnd()) {
 //        std::string min = "0" + to_string(time%60);
 //        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
-        useGraphicsExporter(filecounter, exporter, true);
+        useGraphicsExporter(filecounter, exporter, false);
 
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
             Airplane* airplane = airplanes[i];
             if (airplane->getStatus() == "Travelling") {
+                continue;
+            }
+            if (airplane->getStatus() == "Immediate Landing"){
+                if (!airport->findPlaneInRunway(airplane)){
+                    Runway* runway = airport->findNearestAvailableRunway(airplane);
+                    if (runway){
+                        runway->setAirplane(airplane);
+                        exporter.printAirleaderMessage(time, airport->getName(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, cleared ILS landing runway " + runway->getName() + ".");
+                    }
+                    continue;
+                }
+                airplane->landImmediately();
+                continue;
+            }
+            if (airplane->getStatus() == "Emergency Unboarding"){
+                airplane->unboardAtRunway(SimOutput, airport->getName(), airport->findPlaneInRunway(airplane)->getName());
+                continue;
+            }
+            if (airplane->getStatus() == "Emergency Checking"){
+                airplane->checkAtRunway(SimOutput);
+                continue;
+            }
+            if (airplane->getStatus() == "Emergency Refueling"){
+                airplane->refuelAtRunway(SimOutput);
+                airplane->setSkipGateSteps(true);
+                continue;
+            }
+            if (airplane->getStatus() == "Emergency Landing"){
+                exporter.printAirleaderMessage(time, airport->getName(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, emergency personal on standby, good luck!");
+                airplane->setStatus("Travelling");
+                continue;
+            }
+            if (airplane->getFuel() <= 0){
+                airplane->setSquawk(7700);
+                if (airplane->getHeight() >= 3000){
+                    exporter.printAirleaderMessage(time, airplane->getNumber(), "Mayday mayday mayday, " + airport->getCallsign() + ", " + airplane->getCallsign() + ", out of fuel, request immediate landing, " + to_string(airplane->getPassengers()) + " persons on board.");
+                    airplane->setStatus("Immediate Landing");
+                }
+                else{
+                    exporter.printAirleaderMessage(time, airplane->getNumber(), "Mayday mayday mayday, " + airport->getCallsign() + ", " + airplane->getCallsign() + ", out of fuel, performing emergency landing, " + to_string(airplane->getPassengers()) + " persons on board.");
+                    airplane->setStatus("Emergency Landing");
+                }
                 continue;
             }
             if (airplane->getStatus() == "Leaving Airport") {
@@ -170,8 +212,12 @@ void AirportSim::simulate(std::ostream& SimOutput) {
                 airplane->setTime(5);
                 continue;
             }
-            if (airplane->getStatus() == "Boarding Plane") {
+            if (airplane->getStatus() == "Boarding Plane" || (airplane->getSkipGateSteps() && airplane->getStatus() == "Unboarding Plane")) {
+                airplane->setStatus("Boarding Plane");
                 airplane->boardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
+                if (airplane->getSkipGateSteps()){
+                    airplane->setSkipGateSteps(false);
+                }
                 continue;
             }
             if (airplane->getStatus() == "Refueling Plane") {

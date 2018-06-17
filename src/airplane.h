@@ -31,7 +31,13 @@ protected:  //Protected variables for inherited classes
     std::string status;
     std::string destination;
     int departure;
+    bool skipGateSteps;
+
 public:
+    bool getSkipGateSteps() const;
+
+    void setSkipGateSteps(bool skipGateSteps);
+
     const std::string &getDestination() const;
 
     void setDestination(const std::string &destination);
@@ -314,7 +320,7 @@ public:
      * ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
      * @param output
      */
-    void refuelPlane(std::ostream &output);
+    virtual void refuelPlane(std::ostream &output){};
 
     /**
      * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
@@ -400,6 +406,14 @@ public:
     void executeWaitingToCrossToRunway(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     void executeFlyingWaitPattern(Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
+
+    void landImmediately();
+
+    virtual void unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway){};
+
+    virtual void checkAtRunway(std::ostream &output){};
+
+    virtual void refuelAtRunway(std::ostream &output){};
 };
 
 

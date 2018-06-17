@@ -16,6 +16,10 @@ public:
     virtual void boardPlane(std::ostream &output, const std::string& airport, int gate);
     virtual void pushBack(std::ostream &output);
     virtual void consumeFuel();
+    virtual void unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway);
+    virtual void checkAtRunway(std::ostream &output);
+    virtual void refuelAtRunway(std::ostream &output);
+    virtual void refuelPlane(std::ostream &output);
 };
 
 
