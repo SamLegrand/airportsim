@@ -69,6 +69,8 @@ public:
     void useGraphicsExporter(int &filecounter, Exporter &exporter, bool use);
 
     bool handleEmergency(Airplane* airplane, Exporter &exporter, Airport* airport, const int &SimTime, std::ostream &output);
+
+    void airplaneExcecute(Airplane* airplane, Airport* airport, Exporter& exporter, unsigned int &time, std::ostream &SimOutput);
 };
 
 

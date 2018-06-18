@@ -25,6 +25,13 @@ protected:  //Protected variables for inherited classes
     int height;
     int squawk;
     bool communicating;
+    bool awaitingLeader;
+public:
+    bool isAwaitingLeader() const;
+
+    void setAwaitingLeader(bool awaitingLeader);
+
+protected:
     int time;
     int passengers;
     std::string callsign;

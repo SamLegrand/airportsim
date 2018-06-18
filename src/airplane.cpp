@@ -11,6 +11,7 @@ Airplane::Airplane(){
     communicating = true;
     squawk = 0;
     initCheck = this;
+    awaitingLeader = false;
     ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
 }
 
@@ -235,6 +236,7 @@ void Airplane::taxiToRunway(std::ostream &output, const std::string& runway) {
     REQUIRE(this->getStatus() == "Taxiing to Runway", "Plane has to the be in correct state.");
     output << callsign << " is waiting at runway " << runway << std::endl;
     status = "Ready for Takeoff";
+    awaitingLeader = true;
     ENSURE(this->getStatus() == "Ready for Takeoff", "Plane should be set to the correct state.");
 }
 
@@ -393,6 +395,7 @@ void Airplane::executeTaxiingToGate(Runway *runway, Runway *nextrunway, Airport 
         if (!nextrunway) {
             if (getTime() == 1) {
                 exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", taxi to gate " + to_string(airport->findPlaneInGate(this)) + " via " + runway->getTaxipoint() + ".");
+                awaitingLeader = false;
                 return;
             }
             exporter.printAirleaderMessage(simTime, getNumber(), "Taxi to gate " + to_string(airport->findPlaneInGate(this)) + " via " + runway->getTaxipoint() + ", " + getCallsign() + ".");
@@ -402,6 +405,7 @@ void Airplane::executeTaxiingToGate(Runway *runway, Runway *nextrunway, Airport 
         }
         if (getTime() == 1) {
             exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", taxi to holding point " + nextrunway->getName() + " via " + runway->getTaxipoint() + ".");
+            awaitingLeader = false;
             return;
         }
         exporter.printAirleaderMessage(simTime, getNumber(), "Taxi to holding point " + nextrunway->getName() + " via " + runway->getTaxipoint() + ", " + getCallsign() + ".");
@@ -428,6 +432,7 @@ void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, A
                                            std::ostream &SimOutput, unsigned int &simTime) {
     if (getTime() == 1) {
         exporter.printAirleaderMessage(simTime, getNumber(), airport->getCallsign() + ", " + getCallsign() + ", holding short at " + runway->getName() + ".");
+        awaitingLeader = true;
         return;
     }
     if (getTime() == 3) {
@@ -436,14 +441,17 @@ void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, A
         exporter.printAirleaderMessage(simTime, getNumber(), "Cleared to cross " + runway->getName() + " to holding point " + runway->getTaxipoint() + ".");
         setTime(0);
         setStatus("Crossing to Gate");
+        awaitingLeader = true;
         return;
     }
     if (getTime() == 6) {
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", hold position.");
+        awaitingLeader = false;
         return;
     }
     if (getTime() == 7) {
         exporter.printAirleaderMessage(simTime, getNumber(), "Holding position, " + getCallsign() + ".");
+        awaitingLeader = true;
         return;
     }
     if (nextrunway->ableToCross() && !nextrunway->getTaxipointToGate()) {
@@ -451,6 +459,7 @@ void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, A
         nextrunway->setAirplaneCrossing(this);
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", cleared to cross " + nextrunway->getName() + ", to holding point " + nextrunway->getTaxipoint() + ".");
         setTime(2);
+        awaitingLeader = false;
         return;
     }
     setTime(5);
@@ -461,6 +470,7 @@ void Airplane::executeTaxiingToRunway(Runway *runway, Airport *airport, Exporter
     if (isCommunicating()) {
         if (getTime() == 1) {
             exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", taxi to holding point " + runway->getName() + " via " + runway->getTaxipoint() + ".");
+            awaitingLeader = false;
             return;
         }
         exporter.printAirleaderMessage(simTime, getNumber(), "Taxi to holding point " + runway->getName() + " via " + runway->getTaxipoint() + ", " + getCallsign() + ".");
@@ -479,6 +489,7 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
                                              std::ostream &SimOutput, unsigned int &simTime) {
     if (getTime() == 1) {
         exporter.printAirleaderMessage(simTime, getNumber(), airport->getCallsign() + ", " + getCallsign() + ", holding short at " + runway->getName() + ".");
+        awaitingLeader = true;
         return;
     }
     if (getTime() == 3) {
@@ -488,6 +499,7 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
         exporter.printAirleaderMessage(simTime, getNumber(), "Cleared to cross " + runway->getName() + " to holding point " + nextrunway->getTaxipoint() + ".");
         setTime(0);
         setStatus("Crossing to Runway");
+        awaitingLeader = true;
         return;
     }
     if (getTime() == 4) {
@@ -499,16 +511,19 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
     }
     if (getTime() == 6) {
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", hold position.");
+        awaitingLeader = false;
         return;
     }
     if (getTime() == 7) {
         exporter.printAirleaderMessage(simTime, getNumber(), "Holding position, " + getCallsign() + ".");
+        awaitingLeader = true;
         return;
     }
     if (runway->getAirplane() == this) {
         runway->setTaxipointToRunway(NULL);
-        exporter.printAirleaderMessage(time, airport->getIata(), getCallsign() + ", line-up runway " + runway->getName() + " and wait.");
+        exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", line-up runway " + runway->getName() + " and wait.");
         setTime(3);
+        awaitingLeader = false;
         return;
     }
     if (runway->ableToCross() && !nextrunway->getTaxipointToRunway()) {
@@ -516,6 +531,7 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
         runway->setAirplaneCrossing(this);
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", cleared to cross " + runway->getName() + ", to holding point " + nextrunway->getTaxipoint() + ".");
         setTime(2);
+        awaitingLeader = false;
         return;
     }
     setTime(5);
@@ -528,6 +544,7 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + to_string(getSquawk()) + ".");
         setTime(2);
         setStatus("Approaching");
+        awaitingLeader = false;
         return;
     }
     if (getTime() == 1 && getHeight() == 5000 && airport->getH3000() == NULL) {
@@ -536,6 +553,7 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", descend and maintain three thousand feet.");
         setStatus("Descending to 3k");
         setTime(0);
+        awaitingLeader = false;
         return;
     }
     if (getTime() == 1 && getHeight() == 3000 && airport->getRunwayByAirplane(this)) {
@@ -545,10 +563,12 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
         setStatus("Final Approach");
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", cleared ILS approach runway " + runway->getName() + ".");
         setTime(0);
+        awaitingLeader = false;
         return;
     }
     if (getTime() == 1) {
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", hold south on the one eighty radial, expect further clearance at " + "TODO");
+        awaitingLeader = false;
         return;
     }
     flyWaitPattern(SimOutput);
@@ -579,4 +599,12 @@ int Airplane::getOriginalSquawk() const {
 
 void Airplane::setOriginalSquawk(int originalSquawk) {
     Airplane::originalSquawk = originalSquawk;
+}
+
+bool Airplane::isAwaitingLeader() const {
+    return awaitingLeader;
+}
+
+void Airplane::setAwaitingLeader(bool awaitingLeader) {
+    Airplane::awaitingLeader = awaitingLeader;
 }
