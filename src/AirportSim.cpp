@@ -261,7 +261,6 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         Runway* runway = airport->getRunways().back();
         if (airplane->getTime() == 1) {
             airplane->stand(SimOutput, airport->findPlaneInGate(airplane));
-            airplane->setAwaitingLeader(true);
         }
         if (airplane->getTime() == 2) {
             dest = airport->findPlaneInRunway(airplane);
@@ -282,6 +281,7 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
             exporter.printAirleaderMessage(time, airplane->getNumber(), airport->getCallsign() + ", " + airplane->getCallsign() + ", requesting IFR clearancy to " + dest->getName() + ".");
             runway->setTaxipointToRunway(airplane);
             airplane->setTime(1);
+            airplane->setAwaitingLeader(true);
             return;
         }
         airplane->setTime(5);
