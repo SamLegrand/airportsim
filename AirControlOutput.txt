@@ -5,10 +5,10 @@ $ Antwerp Tower, Cessna 842, arriving at Antwerp International Airport.
 $ Antwerp Tower, Speedbird 466, arriving at Antwerp International Airport.
 
 [12:01] [ANR]
-$ Speedbird 466, radar contact, descend and maintain five thousand feet, squawk 4573.
+$ Speedbird 466, radar contact, descend and maintain five thousand feet, squawk 4297.
 
 [12:02] [BAW466]
-$ Descend and maintain five thousand feet, squawking 4573, Speedbird 466.
+$ Descend and maintain five thousand feet, squawking 4297, Speedbird 466.
 
 [12:02] [ANR]
 $ Cessna 842, hold south on the one eighty radial, expect further clearance at TODO
@@ -20,30 +20,30 @@ $ Holding south on the one eighty radial, Cessna 842.
 $ Mayday mayday mayday, Antwerp Tower, Speedbird 466, out of fuel, request immediate landing, 60 persons on board.
 
 [12:04] [ANR]
-$ Cessna 842, hold south on the one eighty radial, expect further clearance at TODO
-
-[12:04] [ANR]
 $ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 11R.
 
-[12:05] [N11842]
-$ Holding south on the one eighty radial, Cessna 842.
+[12:05] [ANR]
+$ Cessna 842, hold south on the one eighty radial, expect further clearance at TODO
 
 [12:06] [N11842]
+$ Holding south on the one eighty radial, Cessna 842.
+
+[12:07] [N11842]
 $ Mayday mayday mayday, Antwerp Tower, Cessna 842, out of fuel, request immediate landing, 60 persons on board.
 
-[12:07] [ANR]
+[12:08] [ANR]
 $ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 11L.
 
-[12:36] [N11842]
+[12:37] [N11842]
 $ Antwerp Tower, Cessna 842, runway 11L vacated.
 
-[12:37] [ANR]
+[12:38] [ANR]
 $ Cessna 842, taxi to holding point 11R via Bravo.
 
-[12:38] [N11842]
+[12:39] [N11842]
 $ Taxi to holding point 11R via Bravo, Cessna 842.
 
-[12:44] [N11842]
+[12:45] [N11842]
 $ Antwerp Tower, Cessna 842, holding short at 11L.
 
 [12:45] [BAW466]
@@ -52,135 +52,42 @@ $ Antwerp Tower, Speedbird 466, runway 11R vacated.
 [12:46] [ANR]
 $ Speedbird 466, taxi to gate 2 via Alpha.
 
-[12:46] [ANR]
-$ Cessna 842, hold position.
-
-[12:47] [N11842]
-$ Holding position, Cessna 842.
-
 [12:47] [BAW466]
 $ Taxi to gate 2 via Alpha, Speedbird 466.
 
-[12:49] [ANR]
+[12:47] [ANR]
 $ Cessna 842, hold position.
 
-[12:50] [N11842]
+[12:48] [N11842]
+$ Holding position, Cessna 842.
+
+[12:50] [ANR]
+$ Cessna 842, hold position.
+
+[12:51] [N11842]
 $ Holding position, Cessna 842.
 
 [12:52] [ANR]
-$ Cessna 842, hold position.
-
-[12:53] [N11842]
-$ Holding position, Cessna 842.
-
-[12:54] [ANR]
 $ Cessna 842, cleared to cross 11R, to holding point Alpha.
 
-[12:55] [N11842]
+[12:53] [N11842]
 $ Cleared to cross 11R to holding point Alpha.
 
-[12:57] [ANR]
+[12:55] [ANR]
 $ Cessna 842, taxi to gate 1 via Alpha.
 
-[12:58] [N11842]
+[12:56] [N11842]
 $ Taxi to gate 1 via Alpha, Cessna 842.
 
-[13:08] [BAW466]
-$ Antwerp Tower, Speedbird 466, requesting IFR clearancy to 11R.
-
-[13:09] [ANR]
-$ Speedbird 466, Antwerp Tower, cleared to 11R, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 4573.
-
-[13:10] [BAW466]
-$ Cleared to 11R, initial altitude five thousand, expecting one zero zero in ten, squawking 4573, Speedbird 466.
-
-[13:11] [BAW466]
-$ Antwerp Tower, Speedbird 466 at gate 2, requesting pushback.
-
-[13:12] [ANR]
-$ Speedbird 466, Antwerp Tower, pushback approved.
-
-[13:13] [BAW466]
-$ Pushback approved, Speedbird 466.
-
-[13:16] [BAW466]
-$ Speedbird 466, ready to taxi.
-
-[13:17] [ANR]
-$ Speedbird 466, taxi to holding point 11R via Alpha.
-
-[13:18] [BAW466]
-$ Taxi to holding point 11R via Alpha, Speedbird 466.
-
-[13:24] [BAW466]
-$ Antwerp Tower, Speedbird 466, holding short at 11R.
-
-[13:25] [ANR]
-$ Speedbird 466, line-up runway 11R and wait.
-
-[13:26] [BAW466]
-$ Lining up runway 11R and wait, Speedbird 466.
-
-[13:26] [N11842]
+[13:07] [N11842]
 $ Antwerp Tower, Cessna 842, requesting IFR clearancy to 11L.
 
-[13:27] [ANR]
-$ Speedbird 466, runway 11R cleared for take-off.
+[13:08] [ANR]
+$ Cessna 842, Antwerp Tower, cleared to 11L, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 297.
 
-[13:27] [ANR]
-$ Cessna 842, Antwerp Tower, cleared to 11L, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 573.
+[13:09] [N11842]
+$ Cleared to 11L, initial altitude five thousand, expecting one zero zero in ten, squawking 297, Cessna 842.
 
-[13:28] [N11842]
-$ Cleared to 11L, initial altitude five thousand, expecting one zero zero in ten, squawking 573, Cessna 842.
-
-[13:28] [BAW466]
-$ Runway 11R cleared for take-off, Speedbird 466.
-
-[13:29] [N11842]
+[13:10] [N11842]
 $ Antwerp Tower, Cessna 842 at gate 1, requesting pushback.
-
-[13:30] [ANR]
-$ Cessna 842, Antwerp Tower, pushback approved.
-
-[13:31] [N11842]
-$ Pushback approved, Cessna 842.
-
-[13:32] [N11842]
-$ Cessna 842, ready to taxi.
-
-[13:33] [ANR]
-$ Cessna 842, taxi to holding point 11R via Alpha.
-
-[13:34] [N11842]
-$ Taxi to holding point 11R via Alpha, Cessna 842.
-
-[13:40] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 11R.
-
-[13:41] [ANR]
-$ Cessna 842, cleared to cross 11R, to holding point Bravo.
-
-[13:42] [N11842]
-$ Cleared to cross 11R to holding point Bravo.
-
-[13:44] [ANR]
-$ Cessna 842, taxi to holding point 11L via Bravo.
-
-[13:45] [N11842]
-$ Taxi to holding point 11L via Bravo, Cessna 842.
-
-[13:51] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 11L.
-
-[13:52] [ANR]
-$ Cessna 842, line-up runway 11L and wait.
-
-[13:53] [N11842]
-$ Lining up runway 11L and wait, Cessna 842.
-
-[13:54] [ANR]
-$ Cessna 842, runway 11L cleared for take-off.
-
-[13:55] [N11842]
-$ Runway 11L cleared for take-off, Cessna 842.
 

@@ -574,6 +574,7 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
     flyWaitPattern(SimOutput);
     setTime(0);
     exporter.printAirleaderMessage(simTime, getNumber(), "Holding south on the one eighty radial, " + getCallsign() + ".");
+    awaitingLeader = true;
 }
 
 void Airplane::landImmediately() {
