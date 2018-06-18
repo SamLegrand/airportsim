@@ -22,7 +22,7 @@ $ Mayday mayday mayday, Antwerp Tower, Speedbird 466, out of fuel, request immed
 [12:04] [ANR]
 $ Cessna 842, hold south on the one eighty radial, expect further clearance at TODO
 
-[12:04] [Antwerp International Airport]
+[12:04] [ANR]
 $ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 11R.
 
 [12:05] [N11842]
@@ -31,7 +31,7 @@ $ Holding south on the one eighty radial, Cessna 842.
 [12:06] [N11842]
 $ Mayday mayday mayday, Antwerp Tower, Cessna 842, out of fuel, request immediate landing, 60 persons on board.
 
-[12:07] [Antwerp International Airport]
+[12:07] [ANR]
 $ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 11L.
 
 [12:36] [N11842]

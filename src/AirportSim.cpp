@@ -128,7 +128,8 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
             Runway* runway = airport->findNearestAvailableRunway(airplane);
             if (runway){
                 runway->setAirplane(airplane);
-                exporter.printAirleaderMessage(SimTime, airport->getName(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, cleared ILS landing runway " + runway->getName() + ".");
+                exporter.printAirleaderMessage(SimTime, airport->getIata(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, cleared ILS landing runway " + runway->getName() + ".");
+                airplane->setAwaitingLeader(false);
             }
             return true;
         }
@@ -136,7 +137,7 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
         return true;
     }
     if (airplane->getStatus() == "Emergency Unboarding"){
-        airplane->unboardAtRunway(output, airport->getName(), airport->findPlaneInRunway(airplane)->getName());
+        airplane->unboardAtRunway(output, airport->getIata(), airport->findPlaneInRunway(airplane)->getName());
         return true;
     }
     if (airplane->getStatus() == "Emergency Checking"){
@@ -150,7 +151,8 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
         return true;
     }
     if (airplane->getStatus() == "Emergency Landing"){
-        exporter.printAirleaderMessage(SimTime, airport->getName(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, emergency personal on standby, good luck!");
+        exporter.printAirleaderMessage(SimTime, airport->getIata(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, emergency personal on standby, good luck!");
+        airplane->setAwaitingLeader(false);
         airplane->setStatus("Travelling");
         return true;
     }
@@ -159,10 +161,12 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
         airplane->setSquawk(7700);
         if (airplane->getHeight() >= 3000){
             exporter.printAirleaderMessage(SimTime, airplane->getNumber(), "Mayday mayday mayday, " + airport->getCallsign() + ", " + airplane->getCallsign() + ", out of fuel, request immediate landing, " + to_string(airplane->getPassengers()) + " persons on board.");
+            airplane->setAwaitingLeader(true);
             airplane->setStatus("Immediate Landing");
         }
         else{
             exporter.printAirleaderMessage(SimTime, airplane->getNumber(), "Mayday mayday mayday, " + airport->getCallsign() + ", " + airplane->getCallsign() + ", out of fuel, performing emergency landing, " + to_string(airplane->getPassengers()) + " persons on board.");
+            airplane->setAwaitingLeader(true);
             airplane->setStatus("Emergency Landing");
         }
         return true;
