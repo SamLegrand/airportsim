@@ -26,7 +26,13 @@ protected:  //Protected variables for inherited classes
     int squawk;
     bool communicating;
     bool awaitingLeader;
+    bool hasFlightPlan;
+
 public:
+    bool useFlightPlan() const;
+
+    void setHasFlightPlan(bool hasFlightPlan);
+
     bool isAwaitingLeader() const;
 
     void setAwaitingLeader(bool awaitingLeader);

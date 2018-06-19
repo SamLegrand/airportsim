@@ -60,8 +60,8 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     airport->sortRunways();
     int filecounter = -1;
     while (!checkSimEnd()) {
-//        std::string min = "0" + to_string(time%60);
-//        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
+        std::string min = "0" + to_string(time%60);
+        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
         useGraphicsExporter(filecounter, exporter, false);
 
         for (unsigned int i = 0; i<airplanes.size(); ++i) {
@@ -190,8 +190,10 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         return;
     }
     if (airplane->getStatus() == "Taking Off") {
-        Runway *runway = airport->findPlaneInRunway(airplane);
-        airplane->takeOff(SimOutput, airport->getName(), runway->getName());
+        if (!airplane->useFlightPlan() || time%60 == (unsigned int)airplane->getDeparture()){
+            Runway *runway = airport->findPlaneInRunway(airplane);
+            airplane->takeOff(SimOutput, airport->getName(), runway->getName());
+        }
         return;
     }
     if (airplane->getStatus() == "Ready for Takeoff"){
@@ -288,6 +290,9 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         return;
     }
     if (airplane->getStatus() == "Boarding Plane" || (airplane->getSkipGateSteps() && airplane->getStatus() == "Unboarding Plane")) {
+        if (airplane->useFlightPlan()){
+            if (checkDepartureTime(airplane, airport, time)) return;
+        }
         airplane->setStatus("Boarding Plane");
         airplane->boardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
         if (airplane->getSkipGateSteps()){
@@ -405,4 +410,41 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         airplane->setAwaitingLeader(false);
         return;
     }
+}
+
+int AirportSim::getNumberOfAirplanesInGate(std::vector<Airplane*> &airplanes){
+    int counter = 0;
+    for (unsigned int i = 0; i < airplanes.size(); ++i) {
+        Airplane* airplane = airplanes[i];
+        if (airplane->isAtGate()){
+            counter++;
+        }
+    }
+    return counter;
+}
+
+bool AirportSim::checkDepartureTime(Airplane* airplane, Airport* airport, const int &SimTime){
+    if (airport->getRunwayByAirplane(airplane)){
+        int runwayIndex = airport->getRunwayIndex(airport->getRunwayByAirplane(airplane));
+        int nrTaxipoints = runwayIndex;
+        int nrCrossings = runwayIndex - 1;
+        int totalTime = 0;
+        if (dynamic_cast<SmallAirplane*>(airplane)){
+            totalTime += 5;
+            totalTime += 1;
+        }
+        if (dynamic_cast<MediumAirplane*>(airplane)){
+            totalTime += 10;
+            totalTime += 2;
+        }
+        if (dynamic_cast<LargeAirplane*>(airplane)){
+            totalTime += 15;
+            totalTime += 3;
+        }
+        totalTime += (2*getNumberOfAirplanesInGate(airplanes)) + (getNumberOfAirplanesInGate(airplanes) + 4) + (nrCrossings) + (5*nrTaxipoints) + 2 + 10;
+        if ((SimTime + totalTime)%60 == airplane->getDeparture()){
+            return true;
+        }
+    }
+    return false;
 }

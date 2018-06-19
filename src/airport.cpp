@@ -389,3 +389,15 @@ Runway *Airport::findNearestAvailableRunway(Airplane* airplane) {
     }
     return NULL;
 }
+
+int Airport::getRunwayIndex(Runway *_runway) {
+    int counter = 0;
+    for (int i = runways.size() - 1; i >= 0; --i) {
+        Runway* runway = runways[i];
+        if (runway == _runway){
+            return counter + 1;
+        }
+        counter++;
+    }
+    return -1;
+}

@@ -71,6 +71,10 @@ public:
     bool handleEmergency(Airplane* airplane, Exporter &exporter, Airport* airport, const int &SimTime, std::ostream &output);
 
     void airplaneExcecute(Airplane* airplane, Airport* airport, Exporter& exporter, unsigned int &time, std::ostream &SimOutput);
+
+    int getNumberOfAirplanesInGate(std::vector<Airplane*> &airplanes);
+
+    bool checkDepartureTime(Airplane* airplane, Airport* airport, const int &SimTime);
 };
 
 

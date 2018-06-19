@@ -12,6 +12,7 @@ Airplane::Airplane(){
     squawk = 0;
     initCheck = this;
     awaitingLeader = false;
+    hasFlightPlan = false;
     ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
 }
 
@@ -608,4 +609,12 @@ bool Airplane::isAwaitingLeader() const {
 
 void Airplane::setAwaitingLeader(bool awaitingLeader) {
     Airplane::awaitingLeader = awaitingLeader;
+}
+
+bool Airplane::useFlightPlan() const {
+    return hasFlightPlan;
+}
+
+void Airplane::setHasFlightPlan(bool hasFlightPlan) {
+    Airplane::hasFlightPlan = hasFlightPlan;
 }

@@ -34,10 +34,16 @@
 	<model>Cessna 340</model>
 	<status>Approaching</status>
 	<passengers>60</passengers>
-	<fuel>20</fuel>
+	<fuel>10000</fuel>
 	<type>private</type>
 	<engine>propeller</engine>
 	<size>small</size>
+	<FLIGHTPLAN>
+		<destination>LCY</destination>
+		<departure>15</departure>
+		<arrival>45</arrival>
+		<interval>1</interval>
+	</FLIGHTPLAN>
 </AIRPLANE>
 
 <AIRPLANE>
@@ -46,7 +52,7 @@
 	<model>Boeing 747</model>
 	<status>Approaching</status>
 	<passengers>60</passengers>
-	<fuel>20</fuel>
+	<fuel>10000</fuel>
 	<type>airline</type>
 	<engine>jet</engine>
 	<size>large</size>

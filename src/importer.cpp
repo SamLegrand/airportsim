@@ -208,6 +208,7 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                 std::string elemName = elem->Value();
                 for (TiXmlNode *e = elem->FirstChild(); e != NULL; e = e->NextSibling()) {
                     if (elemName == "FLIGHTPLAN"){
+                        airplane->setHasFlightPlan(true);
                         std::vector<std::string> taxipoints;
                         for (TiXmlElement *elem2 = elem->FirstChildElement(); elem2 != NULL; elem2 = elem2->NextSiblingElement()) {
                             std::string elemName2 = elem2->Value();
