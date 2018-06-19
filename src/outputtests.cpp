@@ -30,25 +30,39 @@ TEST_F(AirportSimOutputTest, OutputSimpleScenario){     //Testing output for sim
 
     std::ofstream filestream;
     std::ofstream errstream;
-    importer::importAirport("../testInput/inputlegal.xml", errstream, simulator);
+    ASSERT_TRUE(DirectoryExists("../testInput/"));
+    int counter = 1;        //Counter for looping over different files
+    std::string filename = "../testInput/inputlegal" + to_string(counter) + ".xml";
 
-    //Test graphical impression
-    filestream.open("../testOutput/simplescenariographicalimpression.txt");
-    exporter.exportGraphicalImpression(filestream, simulator.getAirports());
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/simplescenariographicalimpressionexpected.txt", "../testOutput/simplescenariographicalimpression.txt"));
+    while(FileExists(filename)){        //Loop over different files
+        importer::importAirport(filename.c_str(), errstream, simulator);
 
-    //Test simulation output
-    filestream.open("../testOutput/simplescenario.txt");
-    simulator.simulate(filestream);
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/simplescenarioexpected.txt", "../testOutput/simplescenario.txt"));
+        //Test graphical impression
+        std::string output = "../testOutput/simplescenario" + to_string(counter) + "graphicalimpression.txt";
+        filestream.open(output.c_str());
+        exporter.exportGraphicalImpression(filestream, simulator.getAirports());
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/simplescenario" + to_string(counter) + "graphicalimpressionexpected.txt", "../testOutput/simplescenario" + to_string(counter) + "graphicalimpression.txt"));
 
-    //Test simple output
-    filestream.open("../testOutput/simplescenariosimpleoutput.txt");
-    exporter.exportSimpleOutput(filestream, simulator.getAirports(), simulator.getAirplanes());
-    filestream.close();
-    EXPECT_TRUE(FileCompare("../testOutput/simplescenariosimpleoutputexpected.txt", "../testOutput/simplescenariosimpleoutput.txt"));
+        //Test simulation output
+        output = "../testOutput/simplescenario" + to_string(counter) + ".txt";
+        filestream.open(output.c_str());
+        simulator.simulate(filestream);
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/simplescenario" + to_string(counter) + "expected.txt", "../testOutput/simplescenario" + to_string(counter) + ".txt"));
+
+        //Test simple output
+        output = "../testOutput/simplescenario" + to_string(counter) + "simpleoutput.txt";
+        filestream.open(output.c_str());
+        exporter.exportSimpleOutput(filestream, simulator.getAirports(), simulator.getAirplanes());
+        filestream.close();
+        EXPECT_TRUE(FileCompare("../testOutput/simplescenario" + to_string(counter) + "simpleoutputexpected.txt", "../testOutput/simplescenario" + to_string(counter) + "simpleoutput.txt"));
+
+        counter++;
+        filename = "../testInput/inputlegal" + to_string(counter) + ".xml";
+    };
+
+    EXPECT_TRUE(counter == 4);      //Expect that all files have been tested
 }
 
 TEST_F(AirportSimOutputTest, OutputComplexScenarios){    //Testing correct output for more complex scenario (multiple planes in different states)
@@ -76,7 +90,7 @@ TEST_F(AirportSimOutputTest, OutputComplexScenarios){    //Testing correct outpu
         //Test simulation output
         output = "../testOutput/complexscenario" + to_string(counter) + ".txt";
         filestream.open(output.c_str());
-        simulator.simulate(std::cout);
+        simulator.simulate(filestream);
         filestream.close();
         EXPECT_TRUE(FileCompare("../testOutput/complexscenario" + to_string(counter) + "expected.txt", "../testOutput/complexscenario" + to_string(counter) + ".txt"));
 
@@ -91,5 +105,5 @@ TEST_F(AirportSimOutputTest, OutputComplexScenarios){    //Testing correct outpu
         filename = "../testInput/inputlegalcomplex" + to_string(counter) + ".xml";
     };
 
-    EXPECT_TRUE(counter == 3);      //Expect that all files have been tested
+    EXPECT_TRUE(counter == 4);      //Expect that all files have been tested
 }

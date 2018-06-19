@@ -37,7 +37,7 @@ TEST_F(AirportSimDomainTest, DefaultConstructorSim){
 TEST_F(AirportSimDomainTest, FunctionsSim){
     std::ofstream errstream;
     ASSERT_TRUE(DirectoryExists("../testInput"));
-    importer::importAirport("../testInput/inputlegal.xml", errstream, simulation);
+    importer::importAirport("../testInput/inputlegal1.xml", errstream, simulation);
 
     // Verify checkSimEnd()
     EXPECT_EQ(simulation.checkSimEnd(), false);
@@ -163,7 +163,6 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airplane.takeOff(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.ascend(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.leaveAirport(stream, ""), "Assertion.*failed");
-
 }
 
 //TEST_F(AirportSimDomainTest, LandingScenario){      //Testing landing scenario

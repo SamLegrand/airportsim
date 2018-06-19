@@ -130,10 +130,10 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
     if (airplane->getStatus() == "Immediate Landing"){
         if (!airport->findPlaneInRunway(airplane)){
             Runway* runway = airport->findNearestAvailableRunway(airplane);
+            airplane->setAwaitingLeader(false);
             if (runway){
                 runway->setAirplane(airplane);
                 exporter.printAirleaderMessage(SimTime, airport->getIata(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, cleared ILS landing runway " + runway->getName() + ".");
-                airplane->setAwaitingLeader(false);
             }
             return true;
         }

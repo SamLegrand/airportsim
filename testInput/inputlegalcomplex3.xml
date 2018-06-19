@@ -46,7 +46,7 @@
     <model>Cessna 340</model>
     <status>Approaching</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>private</type>
     <size>small</size>
     <engine>propeller</engine>
@@ -57,7 +57,7 @@
     <model>ABG 240</model>
     <status>Approaching</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>airline</type>
     <size>medium</size>
     <engine>propeller</engine>
@@ -68,7 +68,7 @@
     <model>Pearl 145</model>
     <status>Approaching</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>private</type>
     <size>medium</size>
     <engine>jet</engine>
@@ -79,7 +79,7 @@
     <model>Aeroecom 15</model>
     <status>Standing at Gate</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>airline</type>
     <size>large</size>
     <engine>jet</engine>
@@ -90,7 +90,7 @@
     <model>Fokker 5</model>
     <status>Standing at Gate</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>airline</type>
     <size>medium</size>
     <engine>propeller</engine>
@@ -101,7 +101,7 @@
     <model>F16</model>
     <status>Standing at Gate</status>
     <passengers>60</passengers>
-    <fuel>10000</fuel>
+    <fuel>20</fuel>
     <type>military</type>
     <size>small</size>
     <engine>jet</engine>
