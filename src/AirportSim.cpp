@@ -151,6 +151,9 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
         return true;
     }
     if (airplane->getStatus() == "Emergency Landing"){
+        if (airport->findPlaneInRunway(airplane)){
+            airport->removePlaneFromRunway(airplane);
+        }
         exporter.printAirleaderMessage(SimTime, airport->getIata(), airport->getCallsign() + ", roger mayday, squawk seven seven zero zero, emergency personal on standby, good luck!");
         airplane->setAwaitingLeader(false);
         airplane->setStatus("Travelling");

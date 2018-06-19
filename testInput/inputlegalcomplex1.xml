@@ -74,10 +74,10 @@
 	<engine>jet</engine>
 </AIRPLANE>
 <AIRPLANE>
-	<status>Standing at Gate</status>
 	<number>N11845</number>
 	<callsign>Aeroecom 905</callsign>
 	<model>Aeroecom 15</model>
+	<status>Standing at Gate</status>
 	<passengers>60</passengers>
 	<fuel>20</fuel>
 	<type>airline</type>

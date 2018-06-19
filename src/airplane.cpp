@@ -438,7 +438,7 @@ void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, A
     }
     if (getTime() == 3) {
         runway = airport->findPlaneInCrossing(this);
-        //SimOutput << airplane->getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
+//        SimOutput << getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
         exporter.printAirleaderMessage(simTime, getNumber(), "Cleared to cross " + runway->getName() + " to holding point " + runway->getTaxipoint() + ".");
         setTime(0);
         setStatus("Crossing to Gate");
@@ -496,7 +496,7 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
     if (getTime() == 3) {
         runway = airport->findPlaneInCrossing(this);
         nextrunway = airport->findNextRunwayToRunway(runway);
-        //SimOutput << airplane->getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
+//        SimOutput << getCallsign() << " is taxiing to runway " << nextrunway->getName() << " via " << runway->getTaxipoint() << std::endl;
         exporter.printAirleaderMessage(simTime, getNumber(), "Cleared to cross " + runway->getName() + " to holding point " + nextrunway->getTaxipoint() + ".");
         setTime(0);
         setStatus("Crossing to Runway");
