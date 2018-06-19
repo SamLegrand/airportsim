@@ -5,8 +5,8 @@
 #include "mediumairplane.h"
 
 void MediumAirplane::unboardPlane(std::ostream &output, const std::string &airport, int gate) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Unboarding Plane", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Unboarding Plane", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << passengers << " passengers exited " << callsign << " at gate " << gate << " of " << airport << std::endl;
@@ -15,12 +15,12 @@ void MediumAirplane::unboardPlane(std::ostream &output, const std::string &airpo
         status = "Checking Plane";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Checking Plane" || this->getStatus() == "Unboarding Plane", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::checkPlane(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Checking Plane", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Checking Plane", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " has been checked for technical malfunctions" << std::endl;
@@ -29,12 +29,12 @@ void MediumAirplane::checkPlane(std::ostream &output) {
         status = "Refueling Plane";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Refueling Plane" || this->getStatus() == "Checking Plane", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::boardPlane(std::ostream &output, const std::string& airport, int gate) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Boarding Plane", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Boarding Plane", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << passengers << " passengers boarded " << callsign << " at gate " << gate << " of " << airport << std::endl;
@@ -43,12 +43,12 @@ void MediumAirplane::boardPlane(std::ostream &output, const std::string& airport
         status = "Standing at Gate";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Standing at Gate" || this->getStatus() == "Boarding Plane", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::pushBack(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Pushing back", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Pushing back", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " starting pushback" << std::endl;
@@ -57,10 +57,11 @@ void MediumAirplane::pushBack(std::ostream &output) {
         time = 0;
         status = "Taxiing to Runway";
     }
-    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Taxiing to Runway" || this->getStatus() == "Pushing back", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::consumeFuel() {
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
     if (engine == "propeller"){
         fuel -= 50;
         return;
@@ -69,8 +70,8 @@ void MediumAirplane::consumeFuel() {
 }
 
 void MediumAirplane::unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Emergency Unboarding", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Unboarding", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << passengers << " passengers exited " << callsign << " at runway " << runway << " of " << airport << " due to an emergency landing."<< std::endl;
@@ -79,12 +80,12 @@ void MediumAirplane::unboardAtRunway(std::ostream &output, const std::string &ai
         status = "Emergency Checking";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Emergency Checking" || this->getStatus() == "Emergency Unboarding", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Emergency Checking" || this->getStatus() == "Emergency Unboarding", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::checkAtRunway(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Emergency Checking", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Checking", "Medium plane has to the be in correct state.");
     time += 1;
     if (time == 1) {
         output << callsign << " has been checked for technical malfunctions" << std::endl;
@@ -93,12 +94,12 @@ void MediumAirplane::checkAtRunway(std::ostream &output) {
         status = "Emergency Refueling";
         time = 0;
     }
-    ENSURE(this->getStatus() == "Emergency Refueling" || this->getStatus() == "Emergency Checking", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Emergency Refueling" || this->getStatus() == "Emergency Checking", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::refuelAtRunway(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Emergency Refueling", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Emergency Refueling", "Medium plane has to the be in correct state.");
     if (engine == "propeller"){
         fuel += 10000;
         output << callsign << " has been refueled" << std::endl;
@@ -114,12 +115,12 @@ void MediumAirplane::refuelAtRunway(std::ostream &output) {
         }
         time++;
     }
-    ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Emergency Refueling", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Emergency Refueling", "Medium plane should be set to the correct state.");
 }
 
 void MediumAirplane::refuelPlane(std::ostream &output) {
-    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
-    REQUIRE(this->getStatus() == "Refueling Plane", "Plane has to the be in correct state.");
+    REQUIRE(this->properlyInitialized(), "Medium plane wasn't properly initialized.");
+    REQUIRE(this->getStatus() == "Refueling Plane", "Medium plane has to the be in correct state.");
     if (engine == "propeller"){
         fuel += 10000;
         output << callsign << " has been refueled" << std::endl;
@@ -136,5 +137,5 @@ void MediumAirplane::refuelPlane(std::ostream &output) {
             time = 0;
         }
     }
-    ENSURE(this->getStatus() == "Boarding Plane" || this->getStatus() == "Refueling Plane", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Boarding Plane" || this->getStatus() == "Refueling Plane", "Medium plane should be set to the correct state.");
 }

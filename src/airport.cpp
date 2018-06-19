@@ -391,6 +391,8 @@ Runway *Airport::findNearestAvailableRunway(Airplane* airplane) {
 }
 
 int Airport::getRunwayIndex(Runway *_runway) {
+    REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
+    REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
     int counter = 0;
     for (int i = runways.size() - 1; i >= 0; --i) {
         Runway* runway = runways[i];

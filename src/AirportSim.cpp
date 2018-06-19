@@ -48,6 +48,7 @@ const std::string &AirportSim::getAirleaderoutput() const {
 }
 
 void AirportSim::setAirleaderoutput(const std::string &airleaderoutput) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     AirportSim::airleaderoutput = airleaderoutput;
 }
 
@@ -103,6 +104,7 @@ bool AirportSim::checkSimEnd() {
 }
 
 void AirportSim::useGraphicsExporter(int &filecounter, Exporter &exporter, bool use){
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     if (use){
         filecounter++;
         std::stringstream iniFileNameStream;
@@ -124,6 +126,7 @@ void AirportSim::useGraphicsExporter(int &filecounter, Exporter &exporter, bool 
 }
 
 bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport* airport, const int &SimTime, std::ostream &output) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     if (airplane->getStatus() == "Immediate Landing"){
         if (!airport->findPlaneInRunway(airplane)){
             Runway* runway = airport->findNearestAvailableRunway(airplane);
@@ -180,6 +183,7 @@ bool AirportSim::handleEmergency(Airplane* airplane, Exporter &exporter, Airport
 
 void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter &exporter, unsigned int &time,
                                   std::ostream &SimOutput) {
+    REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
     if (airplane->getStatus() == "Travelling") {
         return;
     }

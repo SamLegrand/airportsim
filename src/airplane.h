@@ -40,96 +40,97 @@ protected:  //Protected variables for inherited classes
 
 public:
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    bool useFlightPlan() const;
+    bool useFlightPlan();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
+     * @param hasFlightPlan
      */
     void setHasFlightPlan(bool hasFlightPlan);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    bool isAwaitingLeader() const;
+    bool isAwaitingLeader();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param awaitingLeader
      */
     void setAwaitingLeader(bool awaitingLeader);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    int getOriginalSquawk() const;
+    int getOriginalSquawk();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param originalSquawk
      */
     void setOriginalSquawk(int originalSquawk);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    bool getSkipGateSteps() const;
+    bool getSkipGateSteps();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param skipGateSteps
      */
     void setSkipGateSteps(bool skipGateSteps);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    const std::string &getDestination() const;
+    const std::string &getDestination();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param destination
      */
     void setDestination(const std::string &destination);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    int getDeparture() const;
+    int getDeparture();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param departure
      */
     void setDeparture(int departure);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    int getArrival() const;
+    int getArrival();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param arrival
      */
     void setArrival(int arrival);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @return
      */
-    int getInterval() const;
+    int getInterval();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param interval
      */
     void setInterval(int interval);
@@ -473,12 +474,12 @@ public:
     void leaveAirport(std::ostream &output, const std::string& airport);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      */
     virtual void consumeFuel(){};
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param runway
      * @param nextrunway
      * @param airport
@@ -489,7 +490,7 @@ public:
     void executeTaxiingToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param runway
      * @param nextrunway
      * @param airport
@@ -500,7 +501,7 @@ public:
     void executeWaitingToCrossToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param runway
      * @param airport
      * @param exporter
@@ -510,7 +511,7 @@ public:
     void executeTaxiingToRunway(Runway* runway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param runway
      * @param nextrunway
      * @param airport
@@ -521,7 +522,7 @@ public:
     void executeWaitingToCrossToRunway(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param airport
      * @param exporter
      * @param SimOutput
@@ -530,12 +531,12 @@ public:
     void executeFlyingWaitPattern(Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      */
     void landImmediately();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param output
      * @param airport
      * @param runway
@@ -543,13 +544,13 @@ public:
     virtual void unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway){};
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param output
      */
     virtual void checkAtRunway(std::ostream &output){};
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      * @param output
      */
     virtual void refuelAtRunway(std::ostream &output){};

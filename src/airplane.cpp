@@ -361,40 +361,49 @@ void Airplane::setSquawk(int squawk) {
     Airplane::squawk = squawk;
 }
 
-const std::string &Airplane::getDestination() const {
+const std::string &Airplane::getDestination() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return destination;
 }
 
 void Airplane::setDestination(const std::string &destination) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::destination = destination;
 }
 
-int Airplane::getDeparture() const {
+int Airplane::getDeparture() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return departure;
 }
 
 void Airplane::setDeparture(int departure) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::departure = departure;
 }
 
-int Airplane::getArrival() const {
+int Airplane::getArrival() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return arrival;
 }
 
 void Airplane::setArrival(int arrival) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::arrival = arrival;
 }
 
-int Airplane::getInterval() const {
+int Airplane::getInterval() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return interval;
 }
 
 void Airplane::setInterval(int interval) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::interval = interval;
 }
 
 void Airplane::executeTaxiingToGate(Runway *runway, Runway *nextrunway, Airport *airport, Exporter &exporter,
                                     std::ostream &SimOutput, unsigned int &simTime) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     if (isCommunicating()) {
         if (!nextrunway) {
             if (getTime() == 1) {
@@ -434,6 +443,7 @@ void Airplane::executeTaxiingToGate(Runway *runway, Runway *nextrunway, Airport 
 
 void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, Airport *airport, Exporter &exporter,
                                            std::ostream &SimOutput, unsigned int &simTime) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     if (getTime() == 1) {
         exporter.printAirleaderMessage(simTime, getNumber(), airport->getCallsign() + ", " + getCallsign() + ", holding short at " + runway->getName() + ".");
         awaitingLeader = true;
@@ -471,6 +481,7 @@ void Airplane::executeWaitingToCrossToGate(Runway *runway, Runway *nextrunway, A
 
 void Airplane::executeTaxiingToRunway(Runway *runway, Airport *airport, Exporter &exporter, std::ostream &SimOutput,
                                       unsigned int &simTime) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     if (isCommunicating()) {
         if (getTime() == 1) {
             exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", taxi to holding point " + runway->getName() + " via " + runway->getTaxipoint() + ".");
@@ -491,6 +502,7 @@ void Airplane::executeTaxiingToRunway(Runway *runway, Airport *airport, Exporter
 
 void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway, Airport *airport, Exporter &exporter,
                                              std::ostream &SimOutput, unsigned int &simTime) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     if (getTime() == 1) {
         exporter.printAirleaderMessage(simTime, getNumber(), airport->getCallsign() + ", " + getCallsign() + ", holding short at " + runway->getName() + ".");
         awaitingLeader = true;
@@ -543,6 +555,7 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
 
 void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, std::ostream &SimOutput,
                                         unsigned int &simTime) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     consumeFuel();
     time += 1;
     if (getTime() == 1 && getHeight() == 10000 && airport->getH5000() == NULL) {
@@ -584,6 +597,7 @@ void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, st
 }
 
 void Airplane::landImmediately() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     if (height > 0){
         height -= 500;
         return;
@@ -592,34 +606,42 @@ void Airplane::landImmediately() {
     status = "Emergency Unboarding";
 }
 
-bool Airplane::getSkipGateSteps() const {
+bool Airplane::getSkipGateSteps() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return skipGateSteps;
 }
 
 void Airplane::setSkipGateSteps(bool skipGateSteps) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::skipGateSteps = skipGateSteps;
 }
 
-int Airplane::getOriginalSquawk() const {
+int Airplane::getOriginalSquawk() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return originalSquawk;
 }
 
 void Airplane::setOriginalSquawk(int originalSquawk) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::originalSquawk = originalSquawk;
 }
 
-bool Airplane::isAwaitingLeader() const {
+bool Airplane::isAwaitingLeader() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return awaitingLeader;
 }
 
 void Airplane::setAwaitingLeader(bool awaitingLeader) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::awaitingLeader = awaitingLeader;
 }
 
-bool Airplane::useFlightPlan() const {
+bool Airplane::useFlightPlan() {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     return hasFlightPlan;
 }
 
 void Airplane::setHasFlightPlan(bool hasFlightPlan) {
+    REQUIRE(this->properlyInitialized(), "Plane wasn't properly initialized.");
     Airplane::hasFlightPlan = hasFlightPlan;
 }

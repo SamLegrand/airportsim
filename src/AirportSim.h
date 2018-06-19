@@ -58,7 +58,7 @@ public:
     const std::string &getAirleaderoutput() const;
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param airleaderoutput
      */
     void setAirleaderoutput(const std::string &airleaderoutput);
@@ -75,7 +75,7 @@ public:
     bool checkSimEnd();
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param filecounter
      * @param exporter
      * @param use
@@ -83,7 +83,7 @@ public:
     void useGraphicsExporter(int &filecounter, Exporter &exporter, bool use);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param airplane
      * @param exporter
      * @param airport
@@ -94,7 +94,7 @@ public:
     bool handleEmergency(Airplane* airplane, Exporter &exporter, Airport* airport, const int &SimTime, std::ostream &output);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param airplane
      * @param airport
      * @param exporter
@@ -104,14 +104,14 @@ public:
     void airplaneExcecute(Airplane* airplane, Airport* airport, Exporter& exporter, unsigned int &time, std::ostream &SimOutput);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param airplanes
      * @return
      */
     int getNumberOfAirplanesInGate(std::vector<Airplane*> &airplanes);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Simulation wasn't properly initialized.");
      * @param airplane
      * @param airport
      * @param SimTime

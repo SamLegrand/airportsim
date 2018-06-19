@@ -279,7 +279,8 @@ public:
     Runway* findNearestAvailableRunway(Airplane* airplane);
 
     /**
-     *
+     * REQUIRE(this->properlyInitialized(), "Airport wasn't properly initialized.");
+     * REQUIRE(!this->getRunways().empty(), "There haven't been any runways added.");
      * @param runway
      * @return
      */
