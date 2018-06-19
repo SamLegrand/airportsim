@@ -169,7 +169,8 @@ void Exporter::exportIni(std::ofstream &output, const std::vector<Airport *> &ai
                 }
             }
             if (airports[i]->getRunways()[j]->getAirplaneCrossing() != NULL){
-                if (airports[i]->getRunways()[j]->getAirplaneCrossing()->getStatus() == "Crossing to Runway"){
+                if (airports[i]->getRunways()[j]->getAirplaneCrossing()->getStatus() == "Crossing to Runway" ||
+                        airports[i]->getRunways()[j]->getAirplaneCrossing()->getStatus() == "Waiting to cross to Runway"){
                     figureinfo << "[Figure" << figNum << "]\n" << coneinfo << airplanetorunway << "center = (" << -4*(int)j-0.5 << ", 2, 1)\n" << reflectionairplane << std::endl;
                     figNum += 1;
                 }
