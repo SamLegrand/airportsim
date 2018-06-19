@@ -36,8 +36,8 @@ Cessna 842 has been checked for technical malfunctions
 Cessna 842 has been refueled
 60 passengers boarded Cessna 842 at gate 2 of Antwerp International Airport
 Cessna 842 is standing at gate 2
-Speedbird 466 is standing at gate 1
 Cessna 842 starting pushback
+Speedbird 466 is standing at gate 1
 Cessna 842 is crossing 11R
 Speedbird 466 starting pushback
 Cessna 842 is ready for takeoff at Antwerp International Airport on runway 11L

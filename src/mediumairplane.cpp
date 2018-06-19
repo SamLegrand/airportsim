@@ -108,12 +108,12 @@ void MediumAirplane::refuelAtRunway(std::ostream &output) {
     else{
         if (time <= 1){
             fuel += 10000;
+            time++;
         }
-        if (time == 1){
+        if (time == 2){
             output << callsign << " has been refueled" << std::endl;
             status = "Landed";
         }
-        time++;
     }
     ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Emergency Refueling", "Medium plane should be set to the correct state.");
 }
@@ -131,7 +131,7 @@ void MediumAirplane::refuelPlane(std::ostream &output) {
             fuel += 10000;
             time++;
         }
-        if (time == 1){
+        if (time == 2){
             output << callsign << " has been refueled" << std::endl;
             status = "Boarding Plane";
             time = 0;

@@ -20,6 +20,8 @@ protected:
     }
     Airplane airplane;
     SmallAirplane smallairplane;
+    MediumAirplane mediumairplane;
+    LargeAirplane largeairplane;
     Airport airport;
     Runway runway;
     AirportSim simulation;
@@ -152,10 +154,6 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airplane.land(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.landed(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToGate(stream, 1), "Assertion.*failed");
-    EXPECT_DEATH(smallairplane.unboardPlane(stream, "", 1), "Assertion.*failed");
-    EXPECT_DEATH(smallairplane.checkPlane(stream), "Assertion.*failed");
-    EXPECT_DEATH(smallairplane.refuelPlane(stream), "Assertion.*failed");
-    EXPECT_DEATH(smallairplane.boardPlane(stream, "", 1), "Assertion.*failed");
     EXPECT_DEATH(airplane.stand(stream, 1), "Assertion.*failed");
     EXPECT_DEATH(smallairplane.pushBack(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToRunway(stream, ""), "Assertion.*failed");
@@ -163,137 +161,60 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airplane.takeOff(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.ascend(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.leaveAirport(stream, ""), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.unboardPlane(stream, "", 1), "Assertion.*failed");   //Check for inherited functions
+    EXPECT_DEATH(smallairplane.checkPlane(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.refuelPlane(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.boardPlane(stream, "", 1), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.checkAtRunway(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.refuelAtRunway(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.unboardAtRunway(stream, "", ""), "Assertion.*failed");
 }
 
-//TEST_F(AirportSimDomainTest, LandingScenario){      //Testing landing scenario
-//    airplane_.setNumber("N11842");
-//    airplane_.setCallsign("Cessna 842");
-//    airplane_.setModel("Cessna 340");
-//    airplane_.setStatus("Approaching");
-//    airplane_.setPassengers(60);
-//    airplane_.setFuel(20);
-//    airplane_.setEngine("jet");
-//    airplane_.setType("airline");
-//    airplane_.setSize("large");
-//    EXPECT_EQ(airplane_.getStatus(), "Approaching");
-//    std::ostringstream stream;      //Using stream to check output
-//    airplane_.approach(stream, "Antwerp International Airport");    //Check for correct output for approach
-//    EXPECT_EQ(stream.str(), "Cessna 842 is approaching Antwerp International Airport at 10000 ft.\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Descending to 5k");
-//    EXPECT_EQ(airplane_.getHeight(), 10000);
-//    stream.str(std::string());      //Clear stream
-//    airplane_.descendTo5k(stream);      //Check for correct output for descendTo5k
-//    EXPECT_EQ(stream.str(), "Cessna 842 descended to 9000 ft.\n");
-//    EXPECT_EQ(airplane_.getHeight(), 9000);
-//    while(airplane_.getHeight() > 5000){
-//        airplane_.descendTo5k(stream);
-//    }
-//    stream.str(std::string());
-//    EXPECT_EQ(airplane_.getStatus(), "Flying wait pattern");
-//    airplane_.setStatus("Descending to 3k");
-//    while(airplane_.getHeight() > 3000){
-//        airplane_.descendTo3k(stream);
-//    }
-//    stream.str(std::string());
-//    airplane_.setStatus("Final Approach");
-//    airplane_.finalapproach(stream, "Antwerp International Airport", "11R");
-//    stream.str(std::string());
-//    airplane_.setStatus("Landing");
-//    EXPECT_EQ(airplane_.getStatus(), "Landing");
-//    airplane_.land(stream, "Antwerp International Airport", "11R");
-//    EXPECT_EQ(stream.str(), "Cessna 842 is landing at Antwerp International Airport on runway 11R\n");
-//    EXPECT_EQ(airplane_.getHeight(), 0);
-//    EXPECT_EQ(airplane_.getStatus(), "Landed");
-//    stream.str(std::string());
-//    airplane_.landed(stream, "Antwerp International Airport", "11R");   //Check for correct output for landed
-//    EXPECT_EQ(stream.str(), "Cessna 842 has landed at Antwerp International Airport on runway 11R\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Taxiing to Gate");
-//    stream.str(std::string());
-//    airplane_.taxiToGate(stream, 1);    //Check for correct output for taxiToGate
-//    EXPECT_EQ(stream.str(), "Cessna 842 is taxiing to Gate 1\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Unboarding Plane");
-//}
-//
-//TEST_F(AirportSimDomainTest, ArrivalAtGateScenario){        //Testing arrival at gate scenario
-//    airplane_.setNumber("N11842");
-//    airplane_.setCallsign("Cessna 842");
-//    airplane_.setModel("Cessna 340");
-//    airplane_.setStatus("Unboarding Plane");
-//    airplane_.setPassengers(60);
-//    airplane_.setFuel(20);
-//    EXPECT_EQ(airplane_.getStatus(), "Unboarding Plane");
-//    std::ostringstream stream;
-//    airplane_.unboardPlane(stream, "Antwerp International Airport", 1);     //Check for correct output for unboardPlane
-//    EXPECT_EQ(stream.str(), "60 passengers exited Cessna 842 at gate 1 of Antwerp International Airport\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Checking Plane");
-//    stream.str(std::string());
-//    airplane_.checkPlane(stream);       //Check for correct output for checkPlane
-//    EXPECT_EQ(stream.str(), "Cessna 842 has been checked for technical malfunctions\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Refueling Plane");
-//    stream.str(std::string());
-//    airplane_.refuelPlane(stream);      //Check for correct output for refuelPlane
-//    EXPECT_EQ(stream.str(), "Cessna 842 has been refueled\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Boarding Plane");
-//    stream.str(std::string());
-//    airplane_.boardPlane(stream, "Antwerp International Airport", 1);       //Check for correct output for boardPlane
-//    EXPECT_EQ(stream.str(), "60 passengers boarded Cessna 842 at gate 1 of Antwerp International Airport\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Standing at Gate");
-//}
-//
-//TEST_F(AirportSimDomainTest, TakeOffScenario){      //Testing takeoff scenario
-//    airplane_.setNumber("N11842");
-//    airplane_.setCallsign("Cessna 842");
-//    airplane_.setModel("Cessna 340");
-//    airplane_.setStatus("Standing at Gate");
-//    airplane_.setPassengers(60);
-//    airplane_.setFuel(20);
-//    EXPECT_EQ(airplane_.getStatus(), "Standing at Gate");
-//    std::ostringstream stream;
-//    airplane_.stand(stream, 1);     //Check for correct output for stand
-//    EXPECT_EQ(stream.str(), "Cessna 842 is standing at Gate 1\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Taxiing to Runway");
-//    EXPECT_EQ(airplane_.getHeight(), 0);
-//    stream.str(std::string());
-//    airplane_.taxiToRunway(stream, "11R");      //Check for correct output for taxiToRunway
-//    EXPECT_EQ(stream.str(), "Cessna 842 is taxiing to runway 11R\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Taking Off");
-//    stream.str(std::string());
-//    airplane_.takeOff(stream, "Antwerp International Airport", "11R");
-//    EXPECT_EQ(stream.str(), "Cessna 842 is taking off at Antwerp International Airport on runway 11R\n");
-//    EXPECT_EQ(airplane_.getStatus(), "Ascending");
-//    stream.str(std::string());
-//    airplane_.ascend(stream);       //Check for correct output for ascend
-//    EXPECT_EQ(stream.str(), "Cessna 842 ascended to 1000 ft.\n");
-//    while(airplane_.getHeight() <= 4000){
-//        airplane_.ascend(stream);
-//    }
-//    EXPECT_EQ(airplane_.getStatus(), "Leaving Airport");
-//    stream.str(std::string());
-//    airplane_.leaveAirport(stream, "Antwerp International Airport");    //Check for correct output for leaveAirport
-//    EXPECT_EQ(airplane_.getStatus(), "Travelling");
-//}
-//
-//TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various contract violations
-//    airport_.setGates(0);   //set gate amount to 0
-//    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 1), "Assertion.*failed");      //Impossible to add because there are no gates
-//    airport_.setGates(1);
-//    EXPECT_DEATH(airport_.addPlaneToGate(&airplane_, 0), "Assertion.*failed");      //Impossible to add (gates start at 1)
-//    airplane_.setStatus("Unknown");
-//    std::ostringstream stream;
-//    EXPECT_DEATH(airplane_.approach(stream, ""), "Assertion.*failed");      //Checking for current state violations for all airplane functions
-//    EXPECT_DEATH(airplane_.descendTo5k(stream), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.land(stream, "", ""), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.landed(stream, "", ""), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.taxiToGate(stream, 1), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.unboardPlane(stream, "", 1), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.checkPlane(stream), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.refuelPlane(stream), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.boardPlane(stream, "", 1), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.stand(stream, 1), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.taxiToRunway(stream, ""), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.takeOff(stream, "", ""), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.ascend(stream), "Assertion.*failed");
-//    EXPECT_DEATH(airplane_.leaveAirport(stream, ""), "Assertion.*failed");
-//}
-//
-
+TEST_F(AirportSimDomainTest, FuelTest){
+    std::ostringstream stream;
+    smallairplane.setFuel(250); // Test small propeller
+    smallairplane.setEngine("propeller");
+    smallairplane.consumeFuel();
+    EXPECT_EQ(smallairplane.getFuel(), 240);
+    smallairplane.setStatus("Refueling Plane");
+    smallairplane.refuelPlane(stream);
+    EXPECT_EQ(smallairplane.getFuel(), 10240);
+    smallairplane.setFuel(250); // Test small jet
+    smallairplane.setEngine("jet");
+    smallairplane.consumeFuel();
+    EXPECT_EQ(smallairplane.getFuel(), 225);
+    smallairplane.setStatus("Refueling Plane");
+    smallairplane.refuelPlane(stream);
+    EXPECT_EQ(smallairplane.getFuel(), 10225);
+    mediumairplane.setFuel(250); // Test medium propeller
+    mediumairplane.setEngine("propeller");
+    mediumairplane.consumeFuel();
+    EXPECT_EQ(mediumairplane.getFuel(), 200);
+    mediumairplane.setStatus("Refueling Plane");
+    mediumairplane.refuelPlane(stream);
+    EXPECT_EQ(mediumairplane.getFuel(), 10200);
+    mediumairplane.setFuel(250); // Test medium jet
+    mediumairplane.setEngine("jet");
+    mediumairplane.consumeFuel();
+    EXPECT_EQ(mediumairplane.getFuel(), 75);
+    mediumairplane.setStatus("Refueling Plane");
+    mediumairplane.refuelPlane(stream);
+    mediumairplane.refuelPlane(stream);
+    EXPECT_EQ(mediumairplane.getFuel(), 20075);
+    largeairplane.setFuel(250); // Test large propeller
+    largeairplane.setEngine("propeller");
+    largeairplane.consumeFuel();
+    EXPECT_EQ(largeairplane.getFuel(), 150);
+    largeairplane.setStatus("Refueling Plane");
+    largeairplane.refuelPlane(stream);
+    largeairplane.refuelPlane(stream);
+    EXPECT_EQ(largeairplane.getFuel(), 20150);
+    largeairplane.setFuel(250); // Test large jet
+    largeairplane.setEngine("jet");
+    largeairplane.consumeFuel();
+    EXPECT_EQ(largeairplane.getFuel(), 0);
+    largeairplane.setStatus("Refueling Plane");
+    largeairplane.refuelPlane(stream);
+    largeairplane.refuelPlane(stream);
+    EXPECT_EQ(largeairplane.getFuel(), 20000);
+}

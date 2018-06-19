@@ -83,8 +83,8 @@ ABG 740 has been refueled
 60 passengers boarded ABG 740 at gate 1 of Antwerp International Airport
 Pearl 250 has been checked for technical malfunctions
 Cessna 842 is crossing 13T
-Pearl 250 has been refueled
 ABG 740 is standing at gate 1
+Pearl 250 has been refueled
 60 passengers boarded Pearl 250 at gate 3 of Antwerp International Airport
 ABG 740 starting pushback
 Pearl 250 is standing at gate 3

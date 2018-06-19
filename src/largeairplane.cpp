@@ -104,7 +104,7 @@ void LargeAirplane::refuelAtRunway(std::ostream &output) {
         fuel += 10000;
         time++;
     }
-    if (time == 1){
+    if (time == 2){
         output << callsign << " has been refueled" << std::endl;
         status = "Landed";
         time = 0;
@@ -119,7 +119,7 @@ void LargeAirplane::refuelPlane(std::ostream &output) {
         fuel += 10000;
         time++;
     }
-    if (time == 1){
+    if (time == 2){
         output << callsign << " has been refueled" << std::endl;
         status = "Boarding Plane";
         time = 0;
