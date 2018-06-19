@@ -190,7 +190,7 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         return;
     }
     if (airplane->getStatus() == "Taking Off") {
-        if (!airplane->useFlightPlan() || time%60 == (unsigned int)airplane->getDeparture()){
+        if (airplane->getTime() != 0 || !airplane->useFlightPlan() || time%60 == (unsigned int)airplane->getDeparture()){
             Runway *runway = airport->findPlaneInRunway(airplane);
             airplane->takeOff(SimOutput, airport->getName(), runway->getName());
         }
@@ -290,8 +290,8 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         return;
     }
     if (airplane->getStatus() == "Boarding Plane" || (airplane->getSkipGateSteps() && airplane->getStatus() == "Unboarding Plane")) {
-        if (airplane->useFlightPlan()){
-            if (checkDepartureTime(airplane, airport, time)) return;
+        if (airplane->useFlightPlan() && airplane->getTime() == 0){
+            if (!checkDepartureTime(airplane, airport, time)) return;
         }
         airplane->setStatus("Boarding Plane");
         airplane->boardPlane(SimOutput, airport->getName(), airport->findPlaneInGate(airplane));
@@ -440,7 +440,7 @@ bool AirportSim::checkDepartureTime(Airplane* airplane, Airport* airport, const 
             totalTime += 15;
             totalTime += 3;
         }
-        totalTime += (2*getNumberOfAirplanesInGate(airplanes)) + (getNumberOfAirplanesInGate(airplanes) + 4) + (nrCrossings) + (5*nrTaxipoints) + 2 + 10;
+        totalTime += (2*getNumberOfAirplanesInGate(airplanes)) + (getNumberOfAirplanesInGate(airplanes) + 4) + (nrCrossings) + (5*nrTaxipoints) + 2 + 15;
         if ((SimTime + totalTime)%60 == airplane->getDeparture()){
             return true;
         }
