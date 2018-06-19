@@ -19,6 +19,7 @@ protected:
 
     }
     Airplane airplane;
+    SmallAirplane smallairplane;
     Airport airport;
     Runway runway;
     AirportSim simulation;
@@ -151,12 +152,12 @@ TEST_F(AirportSimDomainTest, ContractViolations){       //Testing for various co
     EXPECT_DEATH(airplane.land(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.landed(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToGate(stream, 1), "Assertion.*failed");
-    EXPECT_DEATH(airplane.unboardPlane(stream, "", 1), "Assertion.*failed");
-    EXPECT_DEATH(airplane.checkPlane(stream), "Assertion.*failed");
-    EXPECT_DEATH(airplane.refuelPlane(stream), "Assertion.*failed");
-    EXPECT_DEATH(airplane.boardPlane(stream, "", 1), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.unboardPlane(stream, "", 1), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.checkPlane(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.refuelPlane(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.boardPlane(stream, "", 1), "Assertion.*failed");
     EXPECT_DEATH(airplane.stand(stream, 1), "Assertion.*failed");
-    EXPECT_DEATH(airplane.pushBack(stream), "Assertion.*failed");
+    EXPECT_DEATH(smallairplane.pushBack(stream), "Assertion.*failed");
     EXPECT_DEATH(airplane.taxiToRunway(stream, ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.readyForTakeoff(stream, "", ""), "Assertion.*failed");
     EXPECT_DEATH(airplane.takeOff(stream, "", ""), "Assertion.*failed");

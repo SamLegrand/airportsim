@@ -288,6 +288,9 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         continue;
                     }
                     if(elemName == "size"){
+                        if (airplane->getStatus() == "Standing at Gate"){
+                            airports[0]->removePlaneFromGate(airplane);
+                        }
                         std::string size = text->Value();
                         if (size == "small"){
                             airplane = new SmallAirplane(airplane);
@@ -297,6 +300,9 @@ SuccessEnum importer::importAirport(const char *inputfilename, std::ostream &err
                         }
                         if (size == "large"){
                             airplane = new LargeAirplane(airplane);
+                        }
+                        if (airplane->getStatus() == "Standing at Gate"){
+                            airports[0]->addPlaneToGate(airplane, airports[0]->getAvailableGate());
                         }
                         continue;
                     }

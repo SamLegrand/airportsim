@@ -10,6 +10,7 @@
 
 class LargeAirplane: public Airplane {
 public:
+    LargeAirplane(): Airplane(){}
     explicit LargeAirplane(Airplane* airplane): Airplane(airplane){}
     virtual void unboardPlane(std::ostream &output, const std::string& airport, int gate);
     virtual void checkPlane(std::ostream &output);

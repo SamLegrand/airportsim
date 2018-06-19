@@ -60,8 +60,8 @@ void AirportSim::simulate(std::ostream& SimOutput) {
     airport->sortRunways();
     int filecounter = -1;
     while (!checkSimEnd()) {
-        std::string min = "0" + to_string(time%60);
-        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
+//        std::string min = "0" + to_string(time%60);
+//        std::cout << time/60 << ":" << min.substr(min.size()-2) << std::endl;
         useGraphicsExporter(filecounter, exporter, false);
 
         for (unsigned int i = 0; i<airplanes.size(); ++i) {

@@ -114,7 +114,7 @@ void MediumAirplane::refuelAtRunway(std::ostream &output) {
         }
         time++;
     }
-    ENSURE(this->getStatus() == "Landed", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Landed" || this->getStatus() == "Emergency Refueling", "Plane should be set to the correct state.");
 }
 
 void MediumAirplane::refuelPlane(std::ostream &output) {
@@ -136,5 +136,5 @@ void MediumAirplane::refuelPlane(std::ostream &output) {
             time = 0;
         }
     }
-    ENSURE(this->getStatus() == "Boarding Plane", "Plane should be set to the correct state.");
+    ENSURE(this->getStatus() == "Boarding Plane" || this->getStatus() == "Refueling Plane", "Plane should be set to the correct state.");
 }
