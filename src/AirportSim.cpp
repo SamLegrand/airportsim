@@ -365,7 +365,6 @@ void AirportSim::airplaneExcecute(Airplane *airplane, Airport *airport, Exporter
         return;
     }
     if (airplane->getStatus() == "Flying wait pattern") {
-        airplane->setTime(airplane->getTime() + 1);
         airplane->executeFlyingWaitPattern(airport, exporter, SimOutput, time);
         return;
     }

@@ -540,6 +540,8 @@ void Airplane::executeWaitingToCrossToRunway(Runway *runway, Runway *nextrunway,
 
 void Airplane::executeFlyingWaitPattern(Airport *airport, Exporter &exporter, std::ostream &SimOutput,
                                         unsigned int &simTime) {
+    consumeFuel();
+    time += 1;
     if (getTime() == 1 && getHeight() == 10000 && airport->getH5000() == NULL) {
         airport->setH5000(this);
         exporter.printAirleaderMessage(simTime, airport->getIata(), getCallsign() + ", radar contact, descend and maintain five thousand feet, squawk " + to_string(getSquawk()) + ".");
