@@ -76,7 +76,7 @@ TEST_F(AirportSimOutputTest, OutputComplexScenarios){    //Testing correct outpu
         //Test simulation output
         output = "../testOutput/complexscenario" + to_string(counter) + ".txt";
         filestream.open(output.c_str());
-        simulator.simulate(filestream);
+        simulator.simulate(std::cout);
         filestream.close();
         EXPECT_TRUE(FileCompare("../testOutput/complexscenario" + to_string(counter) + "expected.txt", "../testOutput/complexscenario" + to_string(counter) + ".txt"));
 

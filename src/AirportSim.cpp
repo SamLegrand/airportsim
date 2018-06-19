@@ -95,6 +95,7 @@ bool AirportSim::checkSimEnd() {
     for (unsigned int i = 0; i<airplanes.size(); ++i) {
         Airplane* airplane = airplanes[i];
         if (airplane->getStatus() != "Travelling") {
+//            std::cout << airplane->getCallsign() << ", " << airplane->getStatus() <<  std::endl;
             return false;
         }
     }

@@ -9,3 +9,7 @@ Airplane: Pearl 250 (N11844)
  -> model: Pearl 145
 Airplane: Aeroecom 905 (N11845)
  -> model: Aeroecom 15
+Airplane: Fokker 50 (N11846)
+ -> model: Fokker 5
+Airplane: F16 (N11847)
+ -> model: F16

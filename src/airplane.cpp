@@ -13,6 +13,7 @@ Airplane::Airplane(){
     initCheck = this;
     awaitingLeader = false;
     hasFlightPlan = false;
+    skipGateSteps = false;
     ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
 }
 
@@ -30,6 +31,8 @@ Airplane::Airplane(Airplane* airplane){
     passengers = airplane->getPassengers();
     callsign = airplane->getCallsign();
     status = airplane->getStatus();
+    hasFlightPlan = airplane->useFlightPlan();
+    skipGateSteps = airplane->getSkipGateSteps();
     initCheck = this;
     delete airplane;
     ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");

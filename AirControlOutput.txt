@@ -1,360 +1,156 @@
-[12:00] [N11843]
-$ Antwerp Tower, ABG 740, arriving at Antwerp International Airport.
-
-[12:00] [N11844]
-$ Antwerp Tower, Pearl 250, arriving at Antwerp International Airport.
-
-[12:00] [N11845]
-$ Antwerp Tower, Aeroecom 905, requesting IFR clearancy to 13T.
-
 [12:00] [N11842]
 $ Antwerp Tower, Cessna 842, arriving at Antwerp International Airport.
 
+[12:00] [N11843]
+$ Antwerp Tower, ABG 740, arriving at Antwerp International Airport.
+
+[12:00] [N11847]
+$ Antwerp Tower, F16, requesting IFR clearancy to 12S.
+
 [12:01] [ANR]
-$ Aeroecom 905, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 4754.
+$ F16, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 5349.
 
-[12:02] [N11845]
-$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 4754, Aeroecom 905.
+[12:02] [N11847]
+$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 5349, F16.
 
-[12:02] [ANR]
-$ ABG 740, radar contact, descend and maintain five thousand feet, squawk 2754.
-
-[12:03] [N11843]
-$ Descend and maintain five thousand feet, squawking 2754, ABG 740.
-
-[12:03] [N11845]
-$ Antwerp Tower, Aeroecom 905 at gate 1, requesting pushback.
-
-[12:03] [ANR]
-$ Pearl 250, hold south on the one eighty radial, expect further clearance at TODO
-
-[12:04] [N11843]
-$ Mayday mayday mayday, Antwerp Tower, ABG 740, out of fuel, request immediate landing, 60 persons on board.
-
-[12:04] [N11844]
-$ Holding south on the one eighty radial, Pearl 250.
+[12:03] [N11847]
+$ Antwerp Tower, F16 at gate 3, requesting pushback.
 
 [12:04] [ANR]
-$ Aeroecom 905, Antwerp Tower, pushback approved.
+$ F16, Antwerp Tower, pushback approved.
 
-[12:05] [N11845]
-$ Pushback approved, Aeroecom 905.
+[12:05] [N11847]
+$ Pushback approved, F16.
 
-[12:05] [ANR]
-$ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 12S.
+[12:06] [N11847]
+$ F16, ready to taxi.
 
-[12:06] [N11844]
-$ Mayday mayday mayday, Antwerp Tower, Pearl 250, out of fuel, request immediate landing, 60 persons on board.
+[12:07] [ANR]
+$ F16, taxi to holding point 13T via Alpha.
 
-[12:08] [N11845]
-$ Aeroecom 905, ready to taxi.
+[12:08] [N11847]
+$ Taxi to holding point 13T via Alpha, F16.
 
-[12:09] [ANR]
-$ Aeroecom 905, taxi to holding point 13T via Alpha.
+[12:14] [N11847]
+$ Antwerp Tower, F16, holding short at 13T.
 
-[12:10] [N11845]
-$ Taxi to holding point 13T via Alpha, Aeroecom 905.
+[12:15] [ANR]
+$ F16, cleared to cross 13T, to holding point Bravo.
+
+[12:16] [N11847]
+$ Cleared to cross 13T to holding point Bravo.
 
 [12:16] [N11845]
+$ Antwerp Tower, Aeroecom 905, requesting IFR clearancy to 13T.
+
+[12:18] [ANR]
+$ F16, taxi to holding point 12S via Bravo.
+
+[12:19] [N11847]
+$ Taxi to holding point 12S via Bravo, F16.
+
+[12:19] [ANR]
+$ Aeroecom 905, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 4100.
+
+[12:20] [N11845]
+$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 4100, Aeroecom 905.
+
+[12:21] [N11845]
+$ Antwerp Tower, Aeroecom 905 at gate 1, requesting pushback.
+
+[12:22] [ANR]
+$ Aeroecom 905, Antwerp Tower, pushback approved.
+
+[12:23] [N11845]
+$ Pushback approved, Aeroecom 905.
+
+[12:25] [N11847]
+$ Antwerp Tower, F16, holding short at 12S.
+
+[12:26] [N11845]
+$ Aeroecom 905, ready to taxi.
+
+[12:26] [ANR]
+$ F16, line-up runway 12S and wait.
+
+[12:27] [ANR]
+$ Aeroecom 905, taxi to holding point 13T via Alpha.
+
+[12:27] [N11847]
+$ Lining up runway 12S and wait, F16.
+
+[12:28] [N11845]
+$ Taxi to holding point 13T via Alpha, Aeroecom 905.
+
+[12:28] [ANR]
+$ F16, runway 12S cleared for take-off.
+
+[12:29] [N11847]
+$ Runway 12S cleared for take-off, F16.
+
+[12:33] [N11847]
+$ Mayday mayday mayday, Antwerp Tower, F16, out of fuel, performing emergency landing, 60 persons on board.
+
+[12:34] [N11845]
 $ Antwerp Tower, Aeroecom 905, holding short at 13T.
 
-[12:40] [N11843]
-$ Antwerp Tower, ABG 740, runway 12S vacated.
-
-[12:40] [ANR]
-$ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 12S.
-
-[12:41] [ANR]
-$ ABG 740, taxi to holding point 13T via Bravo.
-
-[12:41] [ANR]
-$ Aeroecom 905, line-up runway 13T and wait.
-
-[12:42] [N11843]
-$ Taxi to holding point 13T via Bravo, ABG 740.
-
-[12:42] [N11845]
-$ Lining up runway 13T and wait, Aeroecom 905.
-
-[12:42] [ANR]
-$ Cessna 842, hold south on the one eighty radial, expect further clearance at TODO
-
-[12:43] [N11842]
-$ Holding south on the one eighty radial, Cessna 842.
-
-[12:43] [ANR]
-$ Aeroecom 905, runway 13T cleared for take-off.
-
-[12:44] [N11845]
-$ Runway 13T cleared for take-off, Aeroecom 905.
-
-[12:44] [N11842]
-$ Mayday mayday mayday, Antwerp Tower, Cessna 842, out of fuel, request immediate landing, 60 persons on board.
-
-[12:45] [ANR]
-$ Antwerp Tower, roger mayday, squawk seven seven zero zero, cleared ILS landing runway 11R.
-
-[12:48] [N11843]
-$ Antwerp Tower, ABG 740, holding short at 12S.
-
-[12:48] [N11845]
-$ Mayday mayday mayday, Antwerp Tower, Aeroecom 905, out of fuel, performing emergency landing, 60 persons on board.
-
-[12:49] [ANR]
+[12:34] [ANR]
 $ Antwerp Tower, roger mayday, squawk seven seven zero zero, emergency personal on standby, good luck!
 
-[12:50] [ANR]
-$ ABG 740, cleared to cross 13T, to holding point Alpha.
+[12:35] [ANR]
+$ Aeroecom 905, line-up runway 13T and wait.
 
-[12:51] [N11843]
-$ Cleared to cross 13T to holding point Alpha.
+[12:36] [N11845]
+$ Lining up runway 13T and wait, Aeroecom 905.
 
-[12:53] [ANR]
-$ ABG 740, taxi to gate 1 via Alpha.
+[12:36] [N11846]
+$ Antwerp Tower, Fokker 50, requesting IFR clearancy to 12S.
 
-[12:54] [N11843]
-$ Taxi to gate 1 via Alpha, ABG 740.
+[12:37] [ANR]
+$ Aeroecom 905, runway 13T cleared for take-off.
 
-[13:10] [N11843]
-$ Antwerp Tower, ABG 740, requesting IFR clearancy to 13T.
+[12:37] [ANR]
+$ Fokker 50, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2349.
 
-[13:11] [ANR]
-$ ABG 740, Antwerp Tower, cleared to 13T, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 2754.
+[12:38] [N11845]
+$ Runway 13T cleared for take-off, Aeroecom 905.
 
-[13:12] [N11843]
-$ Cleared to 13T, initial altitude five thousand, expecting one zero zero in ten, squawking 2754, ABG 740.
+[12:38] [N11846]
+$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 2349, Fokker 50.
 
-[13:13] [N11843]
-$ Antwerp Tower, ABG 740 at gate 1, requesting pushback.
+[12:38] [ANR]
+$ ABG 740, radar contact, descend and maintain five thousand feet, squawk 2100.
 
-[13:14] [N11842]
-$ Antwerp Tower, Cessna 842, runway 11R vacated.
+[12:39] [N11843]
+$ Descend and maintain five thousand feet, squawking 2100, ABG 740.
 
-[13:14] [ANR]
-$ ABG 740, Antwerp Tower, pushback approved.
+[12:39] [N11846]
+$ Antwerp Tower, Fokker 50 at gate 2, requesting pushback.
 
-[13:15] [ANR]
-$ Cessna 842, taxi to holding point 12S via Charlie.
+[12:39] [N11844]
+$ Antwerp Tower, Pearl 250, arriving at Antwerp International Airport.
 
-[13:15] [N11843]
-$ Pushback approved, ABG 740.
+[12:40] [N11843]
+$ Mayday mayday mayday, Antwerp Tower, ABG 740, out of fuel, request immediate landing, 60 persons on board.
 
-[13:16] [N11842]
-$ Taxi to holding point 12S via Charlie, Cessna 842.
+[12:40] [ANR]
+$ Fokker 50, Antwerp Tower, pushback approved.
 
-[13:16] [N11844]
-$ Antwerp Tower, Pearl 250, runway 12S vacated.
+[12:41] [N11846]
+$ Pushback approved, Fokker 50.
 
-[13:17] [N11843]
-$ ABG 740, ready to taxi.
+[12:42] [N11845]
+$ Mayday mayday mayday, Antwerp Tower, Aeroecom 905, out of fuel, performing emergency landing, 60 persons on board.
 
-[13:17] [N11844]
-$ Taxi to holding point 13T via Bravo, Pearl 250.
+[12:43] [N11846]
+$ Fokker 50, ready to taxi.
 
-[13:18] [ANR]
-$ ABG 740, taxi to holding point 13T via Alpha.
+[12:44] [ANR]
+$ Fokker 50, taxi to holding point 13T via Alpha.
 
-[13:19] [N11843]
-$ Taxi to holding point 13T via Alpha, ABG 740.
+[12:45] [N11846]
+$ Taxi to holding point 13T via Alpha, Fokker 50.
 
-[13:22] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 11R.
-
-[13:23] [N11844]
-$ Antwerp Tower, Pearl 250, holding short at 12S.
-
-[13:24] [ANR]
-$ Pearl 250, cleared to cross 13T, to holding point Alpha.
-
-[13:25] [N11843]
-$ Antwerp Tower, ABG 740, holding short at 13T.
-
-[13:25] [N11844]
-$ Cleared to cross 13T to holding point Alpha.
-
-[13:25] [ANR]
-$ Cessna 842, hold position.
-
-[13:26] [N11842]
-$ Holding position, Cessna 842.
-
-[13:26] [ANR]
-$ ABG 740, line-up runway 13T and wait.
-
-[13:27] [N11843]
-$ Lining up runway 13T and wait, ABG 740.
-
-[13:28] [ANR]
-$ ABG 740, runway 13T cleared for take-off.
-
-[13:28] [ANR]
-$ Pearl 250, taxi to gate 1 via Alpha.
-
-[13:29] [N11843]
-$ Runway 13T cleared for take-off, ABG 740.
-
-[13:29] [N11844]
-$ Taxi to gate 1 via Alpha, Pearl 250.
-
-[13:29] [ANR]
-$ Cessna 842, cleared to cross 12S, to holding point Bravo.
-
-[13:30] [N11842]
-$ Cleared to cross 12S to holding point Bravo.
-
-[13:32] [ANR]
-$ Cessna 842, taxi to holding point 13T via Bravo.
-
-[13:33] [N11842]
-$ Taxi to holding point 13T via Bravo, Cessna 842.
-
-[13:39] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 12S.
-
-[13:41] [ANR]
-$ Cessna 842, hold position.
-
-[13:42] [N11842]
-$ Holding position, Cessna 842.
-
-[13:43] [ANR]
-$ Cessna 842, cleared to cross 13T, to holding point Alpha.
-
-[13:44] [N11842]
-$ Cleared to cross 13T to holding point Alpha.
-
-[13:45] [N11844]
-$ Antwerp Tower, Pearl 250, requesting IFR clearancy to 12S.
-
-[13:46] [ANR]
-$ Pearl 250, Antwerp Tower, cleared to 12S, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 1754.
-
-[13:47] [N11844]
-$ Cleared to 12S, initial altitude five thousand, expecting one zero zero in ten, squawking 1754, Pearl 250.
-
-[13:47] [ANR]
-$ Cessna 842, taxi to gate 2 via Alpha.
-
-[13:48] [N11842]
-$ Taxi to gate 2 via Alpha, Cessna 842.
-
-[13:48] [N11844]
-$ Antwerp Tower, Pearl 250 at gate 1, requesting pushback.
-
-[13:49] [ANR]
-$ Pearl 250, Antwerp Tower, pushback approved.
-
-[13:50] [N11844]
-$ Pushback approved, Pearl 250.
-
-[13:52] [N11844]
-$ Pearl 250, ready to taxi.
-
-[13:53] [ANR]
-$ Pearl 250, taxi to holding point 13T via Alpha.
-
-[13:54] [N11844]
-$ Taxi to holding point 13T via Alpha, Pearl 250.
-
-[14:00] [N11844]
-$ Antwerp Tower, Pearl 250, holding short at 13T.
-
-[14:01] [ANR]
-$ Pearl 250, cleared to cross 13T, to holding point Bravo.
-
-[14:02] [N11844]
-$ Cleared to cross 13T to holding point Bravo.
-
-[14:04] [ANR]
-$ Pearl 250, taxi to holding point 12S via Bravo.
-
-[14:05] [N11844]
-$ Taxi to holding point 12S via Bravo, Pearl 250.
-
-[14:11] [N11844]
-$ Antwerp Tower, Pearl 250, holding short at 12S.
-
-[14:12] [ANR]
-$ Pearl 250, line-up runway 12S and wait.
-
-[14:13] [N11844]
-$ Lining up runway 12S and wait, Pearl 250.
-
-[14:14] [ANR]
-$ Pearl 250, runway 12S cleared for take-off.
-
-[14:15] [N11842]
-$ Antwerp Tower, Cessna 842, requesting IFR clearancy to 11R.
-
-[14:15] [N11844]
-$ Runway 12S cleared for take-off, Pearl 250.
-
-[14:16] [ANR]
-$ Cessna 842, Antwerp Tower, cleared to 11R, maintain five thousand, expect flight level one zero zero - ten minutes after departure, squawk 754.
-
-[14:17] [N11842]
-$ Cleared to 11R, initial altitude five thousand, expecting one zero zero in ten, squawking 754, Cessna 842.
-
-[14:18] [N11842]
-$ Antwerp Tower, Cessna 842 at gate 2, requesting pushback.
-
-[14:19] [ANR]
-$ Cessna 842, Antwerp Tower, pushback approved.
-
-[14:20] [N11842]
-$ Pushback approved, Cessna 842.
-
-[14:21] [N11842]
-$ Cessna 842, ready to taxi.
-
-[14:22] [ANR]
-$ Cessna 842, taxi to holding point 13T via Alpha.
-
-[14:23] [N11842]
-$ Taxi to holding point 13T via Alpha, Cessna 842.
-
-[14:29] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 13T.
-
-[14:30] [ANR]
-$ Cessna 842, cleared to cross 13T, to holding point Bravo.
-
-[14:31] [N11842]
-$ Cleared to cross 13T to holding point Bravo.
-
-[14:33] [ANR]
-$ Cessna 842, taxi to holding point 12S via Bravo.
-
-[14:34] [N11842]
-$ Taxi to holding point 12S via Bravo, Cessna 842.
-
-[14:40] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 12S.
-
-[14:41] [ANR]
-$ Cessna 842, cleared to cross 12S, to holding point Charlie.
-
-[14:42] [N11842]
-$ Cleared to cross 12S to holding point Charlie.
-
-[14:44] [ANR]
-$ Cessna 842, taxi to holding point 11R via Charlie.
-
-[14:45] [N11842]
-$ Taxi to holding point 11R via Charlie, Cessna 842.
-
-[14:51] [N11842]
-$ Antwerp Tower, Cessna 842, holding short at 11R.
-
-[14:52] [ANR]
-$ Cessna 842, line-up runway 11R and wait.
-
-[14:53] [N11842]
-$ Lining up runway 11R and wait, Cessna 842.
-
-[14:54] [ANR]
-$ Cessna 842, runway 11R cleared for take-off.
-
-[14:55] [N11842]
-$ Runway 11R cleared for take-off, Cessna 842.
+[12:51] [N11846]
+$ Antwerp Tower, Fokker 50, holding short at 13T.
 
