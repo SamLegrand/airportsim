@@ -27,17 +27,6 @@ protected:  //Protected variables for inherited classes
     bool communicating;
     bool awaitingLeader;
     bool hasFlightPlan;
-
-public:
-    bool useFlightPlan() const;
-
-    void setHasFlightPlan(bool hasFlightPlan);
-
-    bool isAwaitingLeader() const;
-
-    void setAwaitingLeader(bool awaitingLeader);
-
-protected:
     int time;
     int passengers;
     std::string callsign;
@@ -46,36 +35,106 @@ protected:
     int departure;
     bool skipGateSteps;
     int originalSquawk;
-
-public:
-    int getOriginalSquawk() const;
-
-    void setOriginalSquawk(int originalSquawk);
-
-    bool getSkipGateSteps() const;
-
-    void setSkipGateSteps(bool skipGateSteps);
-
-    const std::string &getDestination() const;
-
-    void setDestination(const std::string &destination);
-
-    int getDeparture() const;
-
-    void setDeparture(int departure);
-
-    int getArrival() const;
-
-    void setArrival(int arrival);
-
-    int getInterval() const;
-
-    void setInterval(int interval);
-
-protected:
     int arrival;
     int interval;
+
 public:
+    /**
+     *
+     * @return
+     */
+    bool useFlightPlan() const;
+
+    /**
+     *
+     */
+    void setHasFlightPlan(bool hasFlightPlan);
+
+    /**
+     *
+     * @return
+     */
+    bool isAwaitingLeader() const;
+
+    /**
+     *
+     * @param awaitingLeader
+     */
+    void setAwaitingLeader(bool awaitingLeader);
+
+    /**
+     *
+     * @return
+     */
+    int getOriginalSquawk() const;
+
+    /**
+     *
+     * @param originalSquawk
+     */
+    void setOriginalSquawk(int originalSquawk);
+
+    /**
+     *
+     * @return
+     */
+    bool getSkipGateSteps() const;
+
+    /**
+     *
+     * @param skipGateSteps
+     */
+    void setSkipGateSteps(bool skipGateSteps);
+
+    /**
+     *
+     * @return
+     */
+    const std::string &getDestination() const;
+
+    /**
+     *
+     * @param destination
+     */
+    void setDestination(const std::string &destination);
+
+    /**
+     *
+     * @return
+     */
+    int getDeparture() const;
+
+    /**
+     *
+     * @param departure
+     */
+    void setDeparture(int departure);
+
+    /**
+     *
+     * @return
+     */
+    int getArrival() const;
+
+    /**
+     *
+     * @param arrival
+     */
+    void setArrival(int arrival);
+
+    /**
+     *
+     * @return
+     */
+    int getInterval() const;
+
+    /**
+     *
+     * @param interval
+     */
+    void setInterval(int interval);
+
+
     /**
      * ENSURE(this->properlyInitialized(), "Plane wasn't properly initialized.");
      */
@@ -413,24 +472,86 @@ public:
      */
     void leaveAirport(std::ostream &output, const std::string& airport);
 
+    /**
+     *
+     */
     virtual void consumeFuel(){};
 
+    /**
+     *
+     * @param runway
+     * @param nextrunway
+     * @param airport
+     * @param exporter
+     * @param SimOutput
+     * @param simTime
+     */
     void executeTaxiingToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
+    /**
+     *
+     * @param runway
+     * @param nextrunway
+     * @param airport
+     * @param exporter
+     * @param SimOutput
+     * @param simTime
+     */
     void executeWaitingToCrossToGate(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
+    /**
+     *
+     * @param runway
+     * @param airport
+     * @param exporter
+     * @param SimOutput
+     * @param simTime
+     */
     void executeTaxiingToRunway(Runway* runway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
+    /**
+     *
+     * @param runway
+     * @param nextrunway
+     * @param airport
+     * @param exporter
+     * @param SimOutput
+     * @param simTime
+     */
     void executeWaitingToCrossToRunway(Runway* runway, Runway* nextrunway, Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
+    /**
+     *
+     * @param airport
+     * @param exporter
+     * @param SimOutput
+     * @param simTime
+     */
     void executeFlyingWaitPattern(Airport* airport, Exporter &exporter, std::ostream &SimOutput, unsigned int &simTime);
 
+    /**
+     *
+     */
     void landImmediately();
 
+    /**
+     *
+     * @param output
+     * @param airport
+     * @param runway
+     */
     virtual void unboardAtRunway(std::ostream &output, const std::string &airport, const std::string &runway){};
 
+    /**
+     *
+     * @param output
+     */
     virtual void checkAtRunway(std::ostream &output){};
 
+    /**
+     *
+     * @param output
+     */
     virtual void refuelAtRunway(std::ostream &output){};
 };
 

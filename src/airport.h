@@ -278,6 +278,11 @@ public:
      */
     Runway* findNearestAvailableRunway(Airplane* airplane);
 
+    /**
+     *
+     * @param runway
+     * @return
+     */
     int getRunwayIndex(Runway* runway);
 };
 
